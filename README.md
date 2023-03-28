@@ -14,8 +14,8 @@
  
  2. Chọn SQL Server Network Configuration
 
- 3.Chọn Protocols for ...
+ 3. Chọn Protocols for ...
 
- 4.Kiểm tra giá trị của TCP/IP Port trong tab IP Addresses.
+ 4. Kiểm tra giá trị của TCP/IP Port trong tab IP Addresses.
   
  Chạy đồ án bằng công cụ NetBeans. Đồ án được tạo với categories là "java with Maven", Projects là "Java Application".
