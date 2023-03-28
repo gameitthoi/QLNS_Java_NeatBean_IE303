@@ -1,4 +1,4 @@
-﻿# QLNS_Java_NeatBean_IE303
+﻿# QLNS_Java_NetBeans_IE303
  
  Chạy file .sql trên SQL Server để tạo CSDL.
  
