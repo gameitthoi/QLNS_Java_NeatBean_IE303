@@ -30,6 +30,7 @@ import Connect.Sach_Connect;
 import Model.NXB;
 import Model.NhanVien;
 import Model.Sach;
+import javax.swing.ImageIcon;
 
 
 public class QuanLySachUI extends JDialog {
@@ -288,6 +289,7 @@ public class QuanLySachUI extends JDialog {
 		btnThemMoi = new JButton("Thêm Sách Mới");
 		btnThemMoi.setPreferredSize(new Dimension(150, 40));
 		btnChinhSua = new JButton("Chỉnh sửa Sách");
+                btnChinhSua.setIcon(new ImageIcon("images/edit.png"));
 		btnChinhSua.setPreferredSize(new Dimension(150, 40));
 		btnXoa = new JButton("Xóa");
 		btnXoa.setPreferredSize(new Dimension(150, 40));
@@ -307,6 +309,7 @@ public class QuanLySachUI extends JDialog {
 		cboNXB = new JComboBox<NXB>();
 		cboNXB.setPreferredSize(new Dimension(200, 40));
 		btnTim = new JButton("Tìm Kiếm");
+                btnTim.setIcon(new ImageIcon("images/search.png"));
 		btnTim.setPreferredSize(new Dimension(150, 40));
 		JLabel lblKhoangTrang1 =new JLabel("") ;
 		lblKhoangTrang1.setPreferredSize(new Dimension(50, 40));

@@ -25,6 +25,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Connect.NXB_Connect;
 import Model.NXB;
+import javax.swing.ImageIcon;
 
 public class QuanLyNXB_UI extends JDialog {
 	private JButton btnThemMoi , btnChinhSua , btnXoa , btnTim , btnThoat;
@@ -193,6 +194,7 @@ public class QuanLyNXB_UI extends JDialog {
 		btnThemMoi = new JButton("Thêm NXB");
 		btnThemMoi.setPreferredSize(new Dimension(150, 40));
 		btnChinhSua = new JButton("Chỉnh sửa NXB");
+                btnChinhSua.setIcon(new ImageIcon("images/edit.png"));
 		btnChinhSua.setPreferredSize(new Dimension(150, 40));
 		btnXoa = new JButton("Xóa");
 		btnXoa.setPreferredSize(new Dimension(150, 40));
@@ -213,6 +215,7 @@ public class QuanLyNXB_UI extends JDialog {
 		btnThoat = new JButton("Thoát");
 		btnThoat.setPreferredSize(new Dimension(150, 40));
 		btnTim = new JButton("Tìm Kiếm");
+                btnTim.setIcon(new ImageIcon("images/search.png"));
 		btnTim.setPreferredSize(new Dimension(150, 40));
 		JLabel lblKhoangTrang1 =new JLabel("") ;
 		lblKhoangTrang1.setPreferredSize(new Dimension(50, 40));

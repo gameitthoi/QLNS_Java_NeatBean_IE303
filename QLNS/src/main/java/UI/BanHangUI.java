@@ -665,7 +665,9 @@ btnThanhToan.addActionListener(new ActionListener(){
 		
 		btnThanhToan = new JButton("Thanh Toán");
 		btnThanhToan.setPreferredSize(new Dimension(160, 40));
-		btnHuy = new JButton("Hủy Hóa Đơn");
+		btnHuy = new JButton("Hủy Hóa Đơn");		
+                btnHuy.setIcon(new ImageIcon("images/cancel.png"));
+
 		btnHuy.setPreferredSize(new Dimension(160, 40));
 		btnXoaSach = new JButton("Xóa Sản phẩm");
 		btnXoaSach.setPreferredSize(new Dimension(160, 40));	

@@ -36,6 +36,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Connect.NhanVien_Connect;
 import Model.NhanVien;
+import javax.swing.ImageIcon;
 
 public class QuanLyNhanVienUI extends JDialog {
 	
@@ -441,6 +442,7 @@ public class QuanLyNhanVienUI extends JDialog {
 		JPanel pnBtn = new JPanel();
 		pnBtn.setLayout(new FlowLayout());
 		btnThemMoi = new JButton("Thêm mới");
+                btnThemMoi.setIcon(new ImageIcon("images/plus.png"));
 		btnThemMoi.setPreferredSize(new Dimension(100, 40));
 		btnXoa = new JButton("Xóa");
 		btnXoa.setPreferredSize(new Dimension(100, 40));
@@ -492,6 +494,7 @@ public class QuanLyNhanVienUI extends JDialog {
 		JPanel pnBtnTim = new JPanel();
 		pnBtnTim.setLayout(new FlowLayout());
 		btnTim = new JButton("Tìm Kiếm");
+                btnTim.setIcon(new ImageIcon("images/search.png"));
 		btnTim.setPreferredSize(new Dimension(100, 40));
 		btnToanBo =new JButton("Tất cả");
 		btnToanBo.setPreferredSize(new Dimension(100, 40));
