@@ -81,7 +81,7 @@ public class Sach_Connect extends Connect_sqlServer{
 		ArrayList<Sach> dss3 = new ArrayList<Sach>();
 		
 		try {
-			String sql = "select * from SACH where IsDelete=?  and TenSach like ? " ;
+			String sql = "select * from SACH where IsDelete=? and TenSach like ? " ;
 			PreparedStatement pre1 = conn.prepareStatement(sql);
 			pre1.setInt(1, 0);
 			pre1.setString(2, "%"+maten+"%");

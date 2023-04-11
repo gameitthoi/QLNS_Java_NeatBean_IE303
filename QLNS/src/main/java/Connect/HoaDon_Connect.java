@@ -41,7 +41,8 @@ public class HoaDon_Connect extends Connect_sqlServer{
 	
 	public String LastMaHD(){
         try{
-            String sql = "select * from hoadon ORDER BY mahd DESC LIMIT 1" ;
+            //String sql = "select * from hoadon ORDER BY mahd DESC LIMIT 1" ;
+            String sql = "SELECT TOP 1 * FROM hoadon ORDER BY mahd DESC";
             Statement statement = conn.createStatement();
             ResultSet result = statement.executeQuery(sql);
             while(result.next())
@@ -90,5 +91,17 @@ public class HoaDon_Connect extends Connect_sqlServer{
         }
         return -1;
     }
-	
+    
+    public int HuyHoaDon(String MaHD){
+        try{
+            String sql="DELETE FROM HOADON WHERE MaHD=? AND IsDelete = 0" ;
+            PreparedStatement pre =conn.prepareStatement(sql);
+            pre.setString(1,MaHD);
+            return pre.executeUpdate();
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return -1;
+    }
 }
