@@ -23,6 +23,7 @@ import Connect.NXB_Connect;
 import Connect.Sach_Connect;
 import Model.NXB;
 import Model.Sach;
+import javax.swing.ImageIcon;
 
 public class ThemMoiSachUI extends JDialog {
 	
@@ -201,6 +202,7 @@ public class ThemMoiSachUI extends JDialog {
 		pnBtn.setLayout(new FlowLayout());
 		btnThemMoi = new JButton("Thêm mới");
 		btnThemMoi.setPreferredSize(new Dimension(120, 40));
+                btnThemMoi.setIcon(new ImageIcon("images/plus.png"));
 		btnNhapLai = new JButton("Nhập lại");
 		btnNhapLai.setPreferredSize(new Dimension(120, 40));
 		pnBtn.add(btnThemMoi);

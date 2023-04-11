@@ -9,6 +9,7 @@ import UI.QuanLyNhanVienUI;
 import UI.QuanLySachUI;
 import UI.ThongKeUI;
 import UI.BanHangUI;
+import UI.Login;
 /**
  *
  * @author dat
@@ -16,7 +17,9 @@ import UI.BanHangUI;
 public class QLNS {
 
     public static void main(String[] args) {
-        LoginUI ui = new LoginUI("Đăng Nhập");
+//        LoginUI ui = new LoginUI("Đăng Nhập");
+//		ui.showWindow();
+        Login ui = new Login("Đăng Nhập");
 		ui.showWindow();
     }
 }
