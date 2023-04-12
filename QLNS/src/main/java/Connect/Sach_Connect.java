@@ -146,14 +146,15 @@ public class Sach_Connect extends Connect_sqlServer{
 		
 		return dss2;
 	}
+
         public ArrayList<Sach> laySachBanChay(String top, String thang, String nam ){
             ArrayList<Sach> dsSBC = new ArrayList<Sach>();
             String sql = "";
             try {
                 if ("0".equals(thang))  
-                    sql =" SELECT TOP " +top +" SACH.MaSach,TenSach,CTHD.SoLuong FROM SACH,HOADON,CTHD WHERE SACH.MaSach=CTHD.MaSach AND CTHD.MaHD=HOADON.MaHD AND YEAR(NgayLap)=? AND HOADON.IsDelete=1 AND CTHD.IsDelete=0 AND SACH.IsDelete=0 ORDER BY CTHD.SoLuong DESC ";
+                    sql ="SELECT TOP " +top +" A.MaSach,TenSach, SUM(A.SoLuong) as SL FROM (SELECT SACH.MaSach,TenSach,CTHD.SoLuong FROM SACH,HOADON,CTHD WHERE SACH.MaSach=CTHD.MaSach AND CTHD.MaHD=HOADON.MaHD AND YEAR(NgayLap)=? AND HOADON.IsDelete=1 AND CTHD.IsDelete=0 AND SACH.IsDelete=0) AS A GROUP BY MaSach, TenSach ORDER BY SL DESC ";
                 else 
-                    sql =" SELECT TOP " +top +" SACH.MaSach,TenSach,CTHD.SoLuong FROM SACH,HOADON,CTHD WHERE SACH.MaSach=CTHD.MaSach AND CTHD.MaHD=HOADON.MaHD AND MONTH(NgayLap)=? AND YEAR(NgayLap)=? AND HOADON.IsDelete=1 AND CTHD.IsDelete=0 AND SACH.IsDelete=0 ORDER BY CTHD.SoLuong DESC ";
+                    sql ="SELECT TOP " +top +" A.MaSach,TenSach, SUM(A.SoLuong) as SL FROM (SELECT SACH.MaSach,TenSach,CTHD.SoLuong FROM SACH,HOADON,CTHD WHERE SACH.MaSach=CTHD.MaSach AND CTHD.MaHD=HOADON.MaHD AND MONTH(NgayLap)=? AND YEAR(NgayLap)=? AND HOADON.IsDelete=1 AND CTHD.IsDelete=0 AND SACH.IsDelete=0) AS A GROUP BY MaSach, TenSach ORDER BY SL DESC";
                 
                 PreparedStatement pre = conn.prepareStatement(sql);
                 
