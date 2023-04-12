@@ -10,7 +10,7 @@ public class Connect_sqlServer {
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			//String connectionUrl="jdbc:sqlserver://"+"LAPTOP-C560D797\dat"+":1433;databaseName="+"dbQLNS"+";integratedSecurity=true;";
-                        String connectionUrl="jdbc:sqlserver://"+"LAPTOP-C560D797\\dat"+":1433;databaseName="+"dbQLNS"+";user=sa;password=lamquocdat3302;";
+                        String connectionUrl="jdbc:sqlserver://"+"LAPTOP-C560D797\\dat"+":1433;databaseName="+"dbQLNS"+";user=sa;password=<password>;";
 			conn= DriverManager.getConnection(connectionUrl);
 		            } 
 		
