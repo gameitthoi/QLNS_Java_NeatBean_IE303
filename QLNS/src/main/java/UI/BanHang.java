@@ -39,6 +39,7 @@ public class BanHang extends javax.swing.JFrame {
     public BanHang(String title,String maNV) {
         initComponents();
         this.setTitle(title);
+        this.setLocationRelativeTo(null);
         MaNV=maNV;
         hienThiToanBoSach();
         hienThiToanBoNhaXuatBan();
@@ -102,8 +103,7 @@ public class BanHang extends javax.swing.JFrame {
         hd.setMaHD(MaHD);
         hd.setMaNV(MaNV);
         Date date = new Date();
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
-
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String currentTime = sdf.format(date);
         hd.setNgaylap(currentTime);
         hd.setIsDelete(0);
@@ -188,14 +188,9 @@ public class BanHang extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        SeparatorLine.setBackground(new java.awt.Color(0, 0, 255));
         SeparatorLine.setForeground(new java.awt.Color(51, 51, 255));
         SeparatorLine.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
-        NXBInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NXBInputActionPerformed(evt);
-            }
-        });
 
         TKBtn.setText("Tìm kiếm");
         TKBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -336,24 +331,26 @@ public class BanHang extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(ScrollPaneTable, javax.swing.GroupLayout.PREFERRED_SIZE, 727, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(24, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(TKInput, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(NXBInput, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                                .addGap(129, 129, 129)
+                                .addComponent(SLLabel)
+                                .addGap(38, 38, 38)
+                                .addComponent(SLInput, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(30, 30, 30)
+                                .addComponent(addHDBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(TKInput, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(NXBInput, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(TKBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(143, 143, 143)
-                        .addComponent(SLLabel)
-                        .addGap(38, 38, 38)
-                        .addComponent(SLInput, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(addHDBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ScrollPaneTable, javax.swing.GroupLayout.PREFERRED_SIZE, 727, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addComponent(SeparatorLine, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(layout.createSequentialGroup()
@@ -391,13 +388,15 @@ public class BanHang extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(SeparatorLine, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(TKInput)
-                    .addComponent(NXBInput)
-                    .addComponent(TKBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE))
-                .addGap(43, 43, 43)
-                .addComponent(ScrollPaneTable, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TKInput, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(TKBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(NXBInput))
+                .addGap(18, 18, 18)
+                .addComponent(ScrollPaneTable, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SLInput, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -445,17 +444,13 @@ public class BanHang extends javax.swing.JFrame {
         nhanVienui.showWindow();
     }//GEN-LAST:event_QLNVActionPerformed
 
-    private void NXBInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NXBInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_NXBInputActionPerformed
-
     private void ThoatBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThoatBtnMouseClicked
         int ret =JOptionPane.showConfirmDialog(null, "Bạn chắc chắn muôn thoát chương trình?", "Xác Nhận Thoát", JOptionPane.OK_CANCEL_OPTION);
         if(ret==JOptionPane.OK_OPTION) System.exit(0);
     }//GEN-LAST:event_ThoatBtnMouseClicked
 
     private void TKMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TKMenuMouseClicked
-        ThongKeUI thongkeui = new ThongKeUI("Thống kê");
+        ThongKe thongkeui = new ThongKe("Thống kê");
         thongkeui.showWindow();
     }//GEN-LAST:event_TKMenuMouseClicked
 
@@ -467,8 +462,12 @@ public class BanHang extends javax.swing.JFrame {
     private void addHDBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addHDBtnActionPerformed
         if ((TableSach.getSelectedRow()<0))
             JOptionPane.showMessageDialog(null, "Bạn chưa chọn loại sách muốn thêm vào hóa đơn");
+//        nếu sách cần lấy có giá trị là 0 thì không cho lấy
+        else if("0".equals(TableSach.getValueAt(TableSach.getSelectedRow(), TableSach.getSelectedColumn()).toString()) ){
+            JOptionPane.showMessageDialog(null, "Sách bạn muốn chọn đã hết");
+        }
         else {
-        if (MaHD==null) TaoHD();
+            if (MaHD==null) TaoHD();
             ThemCTHD();
         }
     }//GEN-LAST:event_addHDBtnActionPerformed
@@ -555,10 +554,10 @@ public class BanHang extends javax.swing.JFrame {
                 }
             }
             cthd.clear();
-            while(dtmHoaDon.getRowCount() > 0) dtmHoaDon.removeRow(0);  
-            TotalInput.setText("");
+            while(dtmHoaDon.getRowCount() > 0) dtmHoaDon.removeRow(0);
             HoaDon_Connect HD = new HoaDon_Connect();
-            HD.ThanhToan(MaHD);
+            HD.ThanhToan(MaHD, TotalInput.getText());
+            TotalInput.setText("");
             MaHD = null;
             hienThiToanBoSach();
         }
