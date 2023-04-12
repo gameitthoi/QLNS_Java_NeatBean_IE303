@@ -16,7 +16,7 @@ public class Sach_Connect extends Connect_sqlServer{
 	{
 		ArrayList<Sach> dss = new ArrayList<Sach>() ;
 		try {
-			String sql ="select * from SACH where IsDelete =0" ;
+			String sql ="select * from SACH where IsDelete =0 " ;
 			Statement statement = conn.createStatement();
 			ResultSet result = statement.executeQuery(sql);
 			while(result.next())
@@ -146,6 +146,40 @@ public class Sach_Connect extends Connect_sqlServer{
 		
 		return dss2;
 	}
+        public ArrayList<Sach> laySachBanChay(String top, String thang, String nam ){
+            ArrayList<Sach> dsSBC = new ArrayList<Sach>();
+            String sql = "";
+            try {
+                if ("0".equals(thang))  
+                    sql =" SELECT TOP " +top +" SACH.MaSach,TenSach,CTHD.SoLuong FROM SACH,HOADON,CTHD WHERE SACH.MaSach=CTHD.MaSach AND CTHD.MaHD=HOADON.MaHD AND YEAR(NgayLap)=? AND HOADON.IsDelete=1 AND CTHD.IsDelete=0 AND SACH.IsDelete=0 ORDER BY CTHD.SoLuong DESC ";
+                else 
+                    sql =" SELECT TOP " +top +" SACH.MaSach,TenSach,CTHD.SoLuong FROM SACH,HOADON,CTHD WHERE SACH.MaSach=CTHD.MaSach AND CTHD.MaHD=HOADON.MaHD AND MONTH(NgayLap)=? AND YEAR(NgayLap)=? AND HOADON.IsDelete=1 AND CTHD.IsDelete=0 AND SACH.IsDelete=0 ORDER BY CTHD.SoLuong DESC ";
+                
+                PreparedStatement pre = conn.prepareStatement(sql);
+                
+                if ("0".equals(thang)) {
+                    pre.setString(1, nam);
+                }
+                else {
+                    pre.setString(1, thang);
+                    pre.setString(2, nam);
+                }		
+                ResultSet result = pre.executeQuery();
+                while(result.next())
+                {
+                    Sach s = new Sach();
+                    s.setMaSach(result.getString(1));
+                    s.setTenSach(result.getString(2));
+                    s.setSoLuong(result.getInt(3));
+                    dsSBC.add(s);
+                }
+			
+			
+            } catch (Exception e) {
+                    e.printStackTrace();
+            }
+            return dsSBC;
+        }
 	// ham them moi vao csdl
 	public int  themSachMoi(Sach s)
 	{
@@ -228,18 +262,17 @@ public class Sach_Connect extends Connect_sqlServer{
 	return -1;
     }
 	//Hàm Lấy danh sách sách có số lượng còn dưới 5
-	public ArrayList<Sach> laySachConDuoiTon()
+	public ArrayList<Sach> laySachConDuoiTon(int SL)
 	{
 		ArrayList<Sach> dssTon = new ArrayList<Sach>();
 		try {
 			String sql ="select SACH.MaSach , SACH.TenSach , SACH.SoLuong , NXB.TenNXB from SACH,NXB where SACH.MaNXB = NXB.MaNXB and SACH.IsDelete=? and SACH.SoLuong<?" ;
 			PreparedStatement pre = conn.prepareStatement(sql);
 			pre.setInt(1, 0);
-			pre.setInt(2, 10);
+			pre.setInt(2, SL);
 			ResultSet result = pre.executeQuery();
 			while (result.next())
-			{
-				JOptionPane.showMessageDialog(null	, "ss");	
+			{	
 				Sach s = new Sach();				
 				s.setMaSach(result.getString(1));
 				s.setTenSach(result.getString(2));

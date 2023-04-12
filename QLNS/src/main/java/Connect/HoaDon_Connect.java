@@ -10,32 +10,62 @@ import javax.swing.JOptionPane;
 import Model.HoaDon;
 
 public class HoaDon_Connect extends Connect_sqlServer{
-	
-	public ArrayList<HoaDon> layToanBoHoaDonTheoThangNam(String dauThang , String CuoiThang)
-	{
-		ArrayList<HoaDon> dshd = new ArrayList<HoaDon>();
+    
+	public ArrayList<HoaDon> LayTatCaHoaDon(){
+            ArrayList<HoaDon> dshd = new ArrayList<HoaDon>();
 		try {
-			String sql = "select * from HOADON where NgayLap between CAST(? as date) and CAST(? as date) and IsDelete=?" ;
+			String sql = "select * from HOADON where IsDelete=1" ;
 			PreparedStatement pre = conn.prepareStatement(sql);
-			pre.setString(1,dauThang);
-			pre.setString(2, CuoiThang);
-			pre.setInt(3, 0);
 			ResultSet result  = pre.executeQuery();
 			while(result.next())
 			{
-//				JOptionPane.showMessageDialog(null, result.getString(3));
-				HoaDon hd = new HoaDon();
-				hd.setMaHD(result.getString(1));
-				hd.setMaNV(result.getString(2));
-				hd.setNgaylap(result.getDate(3)+"");
-				hd.setTongTien(result.getDouble(4));
-				dshd.add(hd);
+                            HoaDon hd = new HoaDon();
+                            hd.setMaHD(result.getString(1));
+                            hd.setMaNV(result.getString(2));
+                            hd.setNgaylap(result.getDate(3)+"");
+                            hd.setTongTien(result.getDouble(4));
+                            dshd.add(hd);
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
+		return dshd ;
+        }
+        
+	public ArrayList<HoaDon> layToanBoHoaDonTheoThangNam(String month , String year)
+	{
+		ArrayList<HoaDon> dshd = new ArrayList<HoaDon>();
+                String sql = "";
+		try {
+                    if("0".equals(month))
+                        sql = "select * from HOADON where Year(NgayLap) = ? and IsDelete = 1" ;
+                    else
+                        sql = "select * from HOADON where MONTH(NgayLap) = ? and Year(NgayLap) = ? and IsDelete = 1" ;
+                    
+                    PreparedStatement pre = conn.prepareStatement(sql);
+                    
+                    if ("0".equals(month))
+                        pre.setString(1, year);
+                    else {
+                        pre.setString(1,month);
+                        pre.setString(2, year);
+                    }
+                    ResultSet result  = pre.executeQuery();
+                    while(result.next())
+                    {
+                        HoaDon hd = new HoaDon();
+                        hd.setMaHD(result.getString(1));
+                        hd.setMaNV(result.getString(2));
+                        hd.setNgaylap(result.getDate(3)+"");
+                        hd.setTongTien(result.getDouble(4));
+                        dshd.add(hd);
+                    }
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return dshd ;
 	}
 	
@@ -79,11 +109,12 @@ public class HoaDon_Connect extends Connect_sqlServer{
 		return -1 ;
     }
     
-    public int ThanhToan(String MaHD){
+    public int ThanhToan(String MaHD, String total){
         try{
-            String sql="update hoadon set IsDelete = 1 where MaHD=? " ;
+            String sql="update hoadon set IsDelete = 1, TongTien = ? where MaHD=? " ;
             PreparedStatement pre =conn.prepareStatement(sql);
-            pre.setString(1,MaHD+"");
+            pre.setString(1,total);
+            pre.setString(2,MaHD+"");
             return pre.executeUpdate();
         }
         catch (Exception e){
