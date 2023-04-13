@@ -107,6 +107,7 @@ public class BanHang extends javax.swing.JFrame {
         String currentTime = sdf.format(date);
         hd.setNgaylap(currentTime);
         hd.setIsDelete(0);
+        hd.setNhapSach(0);
         tHD.TaoHD(hd); 
     }
     

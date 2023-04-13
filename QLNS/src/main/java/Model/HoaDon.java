@@ -8,6 +8,7 @@ public class HoaDon {
 	private String ngaylap ;
 	private double tongTien;
 	private int isDelete ;
+        private int nhapSach ;
 	public HoaDon() {
 		super();
 	}
@@ -41,7 +42,11 @@ public class HoaDon {
 	public void setIsDelete(int isDelete) {
 		this.isDelete = isDelete;
 	}
-	
-	
+	public int getNhapSach() {
+		return nhapSach;
+	}
+	public void setNhapSach(int nhapSach) {
+		this.nhapSach = nhapSach;
+	}
 
 }

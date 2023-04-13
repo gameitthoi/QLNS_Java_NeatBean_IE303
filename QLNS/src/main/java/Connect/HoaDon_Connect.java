@@ -14,7 +14,7 @@ public class HoaDon_Connect extends Connect_sqlServer{
 	public ArrayList<HoaDon> LayTatCaHoaDon(){
             ArrayList<HoaDon> dshd = new ArrayList<HoaDon>();
 		try {
-			String sql = "select * from HOADON where IsDelete=1" ;
+			String sql = "select * from HOADON where IsDelete=1 and NhapSach=0" ;
 			PreparedStatement pre = conn.prepareStatement(sql);
 			ResultSet result  = pre.executeQuery();
 			while(result.next())
@@ -40,9 +40,9 @@ public class HoaDon_Connect extends Connect_sqlServer{
                 String sql = "";
 		try {
                     if("0".equals(month))
-                        sql = "select * from HOADON where Year(NgayLap) = ? and IsDelete = 1" ;
+                        sql = "select * from HOADON where Year(NgayLap) = ? and IsDelete = 1 and NhapSach=0" ;
                     else
-                        sql = "select * from HOADON where MONTH(NgayLap) = ? and Year(NgayLap) = ? and IsDelete = 1" ;
+                        sql = "select * from HOADON where MONTH(NgayLap) = ? and Year(NgayLap) = ? and IsDelete = 1 and NhapSach=0" ;
                     
                     PreparedStatement pre = conn.prepareStatement(sql);
                     
@@ -91,27 +91,24 @@ public class HoaDon_Connect extends Connect_sqlServer{
 
     public int TaoHD(HoaDon hd) {
         try {
-			
-			String sql="insert into hoadon values(?,?,?,?,?) " ;
-			PreparedStatement pre =conn.prepareStatement(sql);
-			pre.setString(1, hd.getMaHD()+"");
-			pre.setString(2, hd.getMaNV()+"");
-			pre.setString(3, hd.getNgaylap()+"");
-			pre.setString(4, hd.getTongTien()+"");
-			pre.setString(5, hd.getIsDelete()+"");
-			
-			return pre.executeUpdate();
-		
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return -1 ;
+            String sql="insert into hoadon values(?,?,?,?,?,?) " ;
+            PreparedStatement pre =conn.prepareStatement(sql);
+            pre.setString(1, hd.getMaHD()+"");
+            pre.setString(2, hd.getMaNV()+"");
+            pre.setString(3, hd.getNgaylap()+"");
+            pre.setString(4, hd.getTongTien()+"");
+            pre.setString(5, hd.getIsDelete()+"");
+            pre.setString(6, hd.getNhapSach()+"");
+            return pre.executeUpdate();
+        } catch (Exception e) {
+                e.printStackTrace();
+        }
+        return -1 ;
     }
     
     public int ThanhToan(String MaHD, String total){
         try{
-            String sql="update hoadon set IsDelete = 1, TongTien = ? where MaHD=? " ;
+            String sql="update hoadon set IsDelete = 1, TongTien = ? where MaHD=? and NhapSach=0" ;
             PreparedStatement pre =conn.prepareStatement(sql);
             pre.setString(1,total);
             pre.setString(2,MaHD+"");
@@ -125,7 +122,7 @@ public class HoaDon_Connect extends Connect_sqlServer{
     
     public int HuyHoaDon(String MaHD){
         try{
-            String sql="DELETE FROM HOADON WHERE MaHD=? AND IsDelete = 0" ;
+            String sql="DELETE FROM HOADON WHERE MaHD=? AND IsDelete = 0 AND NhapSach=0" ;
             PreparedStatement pre =conn.prepareStatement(sql);
             pre.setString(1,MaHD);
             return pre.executeUpdate();

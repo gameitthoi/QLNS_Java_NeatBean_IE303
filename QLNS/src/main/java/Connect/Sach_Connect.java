@@ -9,6 +9,9 @@ import javax.swing.JOptionPane;
 
 import Model.NXB;
 import Model.Sach;
+import Model.TonKho;
+import java.sql.CallableStatement;
+import java.util.Calendar;
 
 public class Sach_Connect extends Connect_sqlServer{
 	
@@ -152,9 +155,9 @@ public class Sach_Connect extends Connect_sqlServer{
             String sql = "";
             try {
                 if ("0".equals(thang))  
-                    sql ="SELECT TOP " +top +" A.MaSach,TenSach, SUM(A.SoLuong) as SL FROM (SELECT SACH.MaSach,TenSach,CTHD.SoLuong FROM SACH,HOADON,CTHD WHERE SACH.MaSach=CTHD.MaSach AND CTHD.MaHD=HOADON.MaHD AND YEAR(NgayLap)=? AND HOADON.IsDelete=1 AND CTHD.IsDelete=0 AND SACH.IsDelete=0) AS A GROUP BY MaSach, TenSach ORDER BY SL DESC ";
+                    sql ="SELECT TOP " +top +" A.MaSach,TenSach, SUM(A.SoLuong) as SL FROM (SELECT SACH.MaSach,TenSach,CTHD.SoLuong FROM SACH,HOADON,CTHD WHERE SACH.MaSach=CTHD.MaSach AND CTHD.MaHD=HOADON.MaHD AND YEAR(NgayLap)=? AND HOADON.IsDelete=1 AND HOADON.NhapSach=0 AND CTHD.IsDelete=0 AND SACH.IsDelete=0) AS A GROUP BY MaSach, TenSach ORDER BY SL DESC ";
                 else 
-                    sql ="SELECT TOP " +top +" A.MaSach,TenSach, SUM(A.SoLuong) as SL FROM (SELECT SACH.MaSach,TenSach,CTHD.SoLuong FROM SACH,HOADON,CTHD WHERE SACH.MaSach=CTHD.MaSach AND CTHD.MaHD=HOADON.MaHD AND MONTH(NgayLap)=? AND YEAR(NgayLap)=? AND HOADON.IsDelete=1 AND CTHD.IsDelete=0 AND SACH.IsDelete=0) AS A GROUP BY MaSach, TenSach ORDER BY SL DESC";
+                    sql ="SELECT TOP " +top +" A.MaSach,TenSach, SUM(A.SoLuong) as SL FROM (SELECT SACH.MaSach,TenSach,CTHD.SoLuong FROM SACH,HOADON,CTHD WHERE SACH.MaSach=CTHD.MaSach AND CTHD.MaHD=HOADON.MaHD AND MONTH(NgayLap)=? AND YEAR(NgayLap)=? AND HOADON.IsDelete=1 AND HOADON.NhapSach=0 AND CTHD.IsDelete=0 AND SACH.IsDelete=0) AS A GROUP BY MaSach, TenSach ORDER BY SL DESC";
                 
                 PreparedStatement pre = conn.prepareStatement(sql);
                 
@@ -180,6 +183,56 @@ public class Sach_Connect extends Connect_sqlServer{
                     e.printStackTrace();
             }
             return dsSBC;
+        }
+        
+        public ArrayList<TonKho> laySachTonKho(int thang, int nam ){
+            ArrayList<TonKho> dsTK = new ArrayList<TonKho>();
+            String sql = "";
+            Calendar cal = Calendar.getInstance();
+            try {
+                sql ="{call GetTonKhoThangHienTai("+nam+","+thang+")}";
+                CallableStatement  stmt  = conn.prepareCall(sql);		
+                ResultSet result = stmt.executeQuery();
+                while(result.next()){
+                    TonKho tk = new TonKho();
+                    tk.setMaSach(result.getString(1));
+                    tk.setTenSach(result.getString(2));
+                    tk.setTonDau(result.getInt(3));
+                    tk.setNhap(result.getInt(4));
+                    tk.setXuat(result.getInt(5));
+                    tk.setTonCuoi(result.getInt(6));
+
+                    dsTK.add(tk);  
+                }	
+            } catch (Exception e) {
+                    e.printStackTrace();
+            }
+            return dsTK;
+        }
+
+        public ArrayList<TonKho> layThongTinNhapXuat(int thang, int nam ){
+            ArrayList<TonKho> dsTK = new ArrayList<TonKho>();
+            String sql = "";
+            try {
+                if(thang==0)
+                    sql ="SELECT S.MaSach, S.TenSach, SUM(CASE WHEN H.NhapSach=1 THEN C.SoLuong ELSE 0 END) AS NHAP, SUM(CASE WHEN H.NhapSach=0 THEN C.SoLuong ELSE 0 END) AS XUAT FROM SACH AS S, CTHD AS C, HOADON AS H WHERE S.MaSach=C.MaSach AND C.MaHD=H.MaHD AND S.IsDelete=0 AND YEAR(H.NgayLap)="+nam+" AND H.IsDelete=1 GROUP BY S.MaSach, S.TenSach";
+                else
+                    sql ="SELECT S.MaSach, S.TenSach, SUM(CASE WHEN H.NhapSach=1 THEN C.SoLuong ELSE 0 END) AS NHAP, SUM(CASE WHEN H.NhapSach=0 THEN C.SoLuong ELSE 0 END) AS XUAT FROM SACH AS S, CTHD AS C, HOADON AS H WHERE S.MaSach=C.MaSach AND C.MaHD=H.MaHD AND S.IsDelete=0 AND YEAR(H.NgayLap)="+nam+" AND MONTH(NgayLap)="+thang+" AND H.IsDelete=1 GROUP BY S.MaSach, S.TenSach";
+                PreparedStatement pre = conn.prepareStatement(sql);	
+                ResultSet result = pre.executeQuery();
+                while(result.next()){
+                    TonKho tk = new TonKho();
+                    tk.setMaSach(result.getString(1));
+                    tk.setTenSach(result.getString(2));
+                    tk.setNhap(result.getInt(3));
+                    tk.setXuat(result.getInt(4));
+
+                    dsTK.add(tk);  
+                }	
+            } catch (Exception e) {
+                    e.printStackTrace();
+            }
+            return dsTK;
         }
 	// ham them moi vao csdl
 	public int  themSachMoi(Sach s)
