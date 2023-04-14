@@ -106,7 +106,7 @@ public class BanHang extends javax.swing.JFrame {
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String currentTime = sdf.format(date);
         hd.setNgaylap(currentTime);
-        hd.setIsDelete(0);
+        hd.setTrangThai(0);
         hd.setNhapSach(0);
         tHD.TaoHD(hd); 
     }
@@ -117,7 +117,6 @@ public class BanHang extends javax.swing.JFrame {
         vec1.setMaHD(MaHD);
         vec1.setMaSach(TableSach.getValueAt(TableSach.getSelectedRow(), 0).toString());
         vec1.setDonGia(Double.parseDouble(TableSach.getValueAt(TableSach.getSelectedRow(), 5).toString()));
-        vec1.setIsDelete(0);
         int vitriSach=-1;
 //        tính giá tiền
         double tien = Long.parseLong(SLInput.getValue().toString())*Double.parseDouble(TableSach.getValueAt(TableSach.getSelectedRow(), 5).toString()); 
@@ -441,7 +440,7 @@ public class BanHang extends javax.swing.JFrame {
     }//GEN-LAST:event_QLNXBActionPerformed
 
     private void QLNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QLNVActionPerformed
-        QuanLyNhanVienUI nhanVienui = new QuanLyNhanVienUI("Quản lý nhân viên");
+        QuanLyNhanVien nhanVienui = new QuanLyNhanVien("Quản lý nhân viên");
         nhanVienui.showWindow();
     }//GEN-LAST:event_QLNVActionPerformed
 

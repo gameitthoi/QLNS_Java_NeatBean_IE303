@@ -8,7 +8,6 @@ public class Sach {
 	private double giaBan ;
 	private String theLoai ;
 	private int soLuong ;
-	private int isDelete ;
 	public Sach() {
 		super();
 	}
@@ -68,14 +67,6 @@ public class Sach {
 
 	public void setSoLuong(int soLuong) {
 		this.soLuong = soLuong;
-	}
-
-	public int getIsDelete() {
-		return isDelete;
-	}
-
-	public void setIsDelete(int isDelete) {
-		this.isDelete = isDelete;
 	}
 
 		@Override

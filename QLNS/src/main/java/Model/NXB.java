@@ -6,7 +6,6 @@ public class NXB {
 	private String SDT ;
 	private String diaChi ;
 	private String email ;
-	private int isDelete ;
 	public NXB() {
 		super();
 	}
@@ -39,12 +38,6 @@ public class NXB {
 	}
 	public void setEmail(String email) {
 		this.email = email;
-	}
-	public int getIsDelete() {
-		return isDelete;
-	}
-	public void setIsDelete(int isDelete) {
-		this.isDelete = isDelete;
 	}
 	@Override
 	public String toString() {

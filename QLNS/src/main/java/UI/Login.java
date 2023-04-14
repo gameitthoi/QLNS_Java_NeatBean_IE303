@@ -51,12 +51,6 @@ public class Login extends javax.swing.JFrame {
         LoginLabel.setMaximumSize(new java.awt.Dimension(90, 48));
         LoginLabel.setName(""); // NOI18N
 
-        TKInput.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TKInputActionPerformed(evt);
-            }
-        });
-
         TKLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         TKLabel.setText("Tài khoản");
 
@@ -67,16 +61,6 @@ public class Login extends javax.swing.JFrame {
         LoginBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 LoginBtnMouseClicked(evt);
-            }
-        });
-        LoginBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LoginBtnActionPerformed(evt);
-            }
-        });
-        LoginBtn.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                LoginBtnKeyPressed(evt);
             }
         });
 
@@ -122,43 +106,31 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TKInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TKInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TKInputActionPerformed
-
-    private void LoginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_LoginBtnActionPerformed
-
     private void LoginBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginBtnMouseClicked
         if(TKInput.getText()==null || MKInput.getText()==null) return ;
             xuLyDangNhap();
     }//GEN-LAST:event_LoginBtnMouseClicked
 
     // nhấn Enter thì cho đăng nhập lun
-    private void LoginBtnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LoginBtnKeyPressed
-        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER)
-            {
-                    if(TKInput.getText()==null || MKInput.getText()==null) return ;
-                    xuLyDangNhap();
-            }
-    }//GEN-LAST:event_LoginBtnKeyPressed
+    private void LoginBtnKeyPressed(java.awt.event.KeyEvent evt) {                                    
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+            if(TKInput.getText()==null || MKInput.getText()==null) return ;
+            xuLyDangNhap();
+        }
+    }                                   
     
     protected void xuLyDangNhap() {
-		login_sql login = new login_sql();
-		TaiKhoan active = login.login(TKInput.getText(), MKInput.getText());
-		if(active == null) 
-		{
-			JOptionPane.showMessageDialog(null, "Đăng nhập thất bại ");
-		}
-		else
-		{
-                    dispose();	
-                    BanHang ui = new BanHang("Bán hàng",active.getMaNV());
-                    ui.showWindow();
-			
-		}	
-	}
+        login_sql login = new login_sql();
+        TaiKhoan active = login.login(TKInput.getText(), MKInput.getText());
+        if(active == null){
+            JOptionPane.showMessageDialog(null, "Đăng nhập thất bại ");
+        }
+        else{
+            dispose();	
+            BanHang ui = new BanHang("Bán hàng",active.getMaNV());
+            ui.showWindow();
+        }	
+    }
     /**
      * @param args the command line arguments
      */
