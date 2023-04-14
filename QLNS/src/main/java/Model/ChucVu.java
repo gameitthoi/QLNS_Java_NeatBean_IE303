@@ -10,9 +10,8 @@ package Model;
  */
 public class ChucVu {
 	private String maCV;
-	private String chuVu;
+	private String chucVu;
 	private String dinhDoanh;
-	private int isDelete ;
 	public ChucVu() {
 		super();
 	}
@@ -23,10 +22,10 @@ public class ChucVu {
 		this.maCV = maCV;
 	}
 	public String getChuVu() {
-		return chuVu;
+		return chucVu;
 	}
-	public void setChuVu(String chuVu) {
-		this.chuVu = chuVu;
+	public void setChucVu(String chucVu) {
+		this.chucVu = chucVu;
 	}
 	public String getDinhDoanh() {
 		return dinhDoanh;
@@ -34,14 +33,8 @@ public class ChucVu {
 	public void setDinhDoanh(String dinhDoanh) {
 		this.dinhDoanh = dinhDoanh;
 	}
-	public int getIsDelete() {
-		return isDelete;
-	}
-	public void setIsDelete(int isDelete) {
-		this.isDelete = isDelete;
-	}
 	@Override
 	public String toString() {
-		return this.chuVu;
+		return this.chucVu;
 	}	
 }

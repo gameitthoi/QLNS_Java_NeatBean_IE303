@@ -20,6 +20,6 @@ public class QLNS {
 //        LoginUI ui = new LoginUI("Đăng Nhập");
 //		ui.showWindow();
         Login ui = new Login("Đăng Nhập");
-		ui.showWindow();
+            ui.showWindow();
     }
 }

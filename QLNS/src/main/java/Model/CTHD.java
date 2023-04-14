@@ -6,7 +6,6 @@ public class CTHD {
 	private double donGia ;
 	private int soLuong ;
 	private double thanhTien;
-	private int isDelete ;
 	public CTHD() {
 		super();
 	}
@@ -39,11 +38,5 @@ public class CTHD {
 	}
 	public void setThanhTien(double thanhTien) {
 		this.thanhTien = thanhTien;
-	}
-	public int getIsDelete() {
-		return isDelete;
-	}
-	public void setIsDelete(int isDelete) {
-		this.isDelete = isDelete;
 	}
 }

@@ -7,7 +7,7 @@ public class HoaDon {
 	private String maNV ;
 	private String ngaylap ;
 	private double tongTien;
-	private int isDelete ;
+	private int ThanhCong ;
         private int nhapSach ;
 	public HoaDon() {
 		super();
@@ -36,11 +36,11 @@ public class HoaDon {
 	public void setTongTien(double tongTien) {
 		this.tongTien = tongTien;
 	}
-	public int getIsDelete() {
-		return isDelete;
+	public int getTrangThai() {
+		return ThanhCong;
 	}
-	public void setIsDelete(int isDelete) {
-		this.isDelete = isDelete;
+	public void setTrangThai(int ThanhCong) {
+		this.ThanhCong = ThanhCong;
 	}
 	public int getNhapSach() {
 		return nhapSach;

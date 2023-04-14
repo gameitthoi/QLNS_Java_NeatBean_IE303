@@ -11,14 +11,13 @@ import java.sql.PreparedStatement;
 public class CTHD_Connect extends Connect_sqlServer{
     public int ThemCT(CTHD cthd) {
         try {	
-            String sql="insert into CTHD values(?,?,?,?,?,?) " ;
+            String sql="insert into CTHD values(?,?,?,?,?) " ;
             PreparedStatement pre =conn.prepareStatement(sql);
             pre.setString(1, cthd.getMaHD()+"");
             pre.setString(2, cthd.getMaSach()+"");
             pre.setString(3, cthd.getDonGia()+"");
             pre.setString(4, cthd.getSoLuong()+"");
             pre.setString(5, cthd.getThanhTien()+"");
-            pre.setString(6, cthd.getIsDelete()+"");
 
             return pre.executeUpdate();	
             } 

@@ -11,9 +11,7 @@ public class NhanVien {
 	private String soChungMinh;
 	private String maCV;
 	private String SDT ;
-	private String trangThai ;
 	private String email ;
-	private int isDelete ;
 	public NhanVien() {
 		super();
 	}
@@ -64,19 +62,6 @@ public class NhanVien {
 	}
 	public void setEmail(String email) {
 		this.email = email;
-	}
-	public int getIsDelete() {
-		return isDelete;
-	}
-	public void setIsDelete(int isDelete) {
-		this.isDelete = isDelete;
-	}
-	
-	public String getTrangThai() {
-		return trangThai;
-	}
-	public void setTrangThai(String trangThai) {
-		this.trangThai = trangThai;
 	}
 	@Override
 	public String toString() {

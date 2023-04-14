@@ -5,7 +5,6 @@ public class TaiKhoan {
 	private String userName;
 	private String passWord;
 	private String maNV ;
-	private int isDelete ;
 	public TaiKhoan() {
 		super();
 	}
@@ -34,13 +33,4 @@ public class TaiKhoan {
 	public void setMaNV(String maNV) {
 		this.maNV = maNV;
 	}
-	public int getIsDelete() {
-		return isDelete;
-	}
-	public void setIsDelete(int isDelete) {
-		this.isDelete = isDelete;
-	}
-	
-	
-
 }
