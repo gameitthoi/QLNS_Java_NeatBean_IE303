@@ -558,6 +558,8 @@ public class BanHang extends javax.swing.JFrame {
             HoaDon_Connect HD = new HoaDon_Connect();
             HD.ThanhToan(MaHD, TotalInput.getText());
             TotalInput.setText("");
+            ReceiveInput.setText("");
+            ChangeInput.setText("");
             MaHD = null;
             hienThiToanBoSach();
         }
