@@ -232,10 +232,11 @@ public class Sach_Connect extends Connect_sqlServer{
         return -1 ;
     }
     // ham xoa 
+    //sửa SACH set -> SACH 
     public int XoaSach(String maSach)
     {
         try {
-            String sql ="update SACH set where MaSach=?" ;
+            String sql ="delete SACH where MaSach=?" ;
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setString(1,maSach);
 

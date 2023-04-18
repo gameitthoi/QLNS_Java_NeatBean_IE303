@@ -455,7 +455,7 @@ public class BanHang extends javax.swing.JFrame {
     }//GEN-LAST:event_TKMenuMouseClicked
 
     private void QLSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QLSachActionPerformed
-        QuanLySachUI sachui = new QuanLySachUI("Quản lý sách");
+        QuanLySach sachui = new QuanLySach("Quản lý sách");
         sachui.showWindow();
     }//GEN-LAST:event_QLSachActionPerformed
 
