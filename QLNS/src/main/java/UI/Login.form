@@ -6,6 +6,9 @@
     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="ff" green="ff" red="ff" type="rgb"/>
     </Property>
+    <Property name="location" type="java.awt.Point" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+      <Connection code="null" type="code"/>
+    </Property>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -92,9 +95,6 @@
       </AuxValues>
     </Component>
     <Component class="javax.swing.JTextField" name="TKInput">
-      <Events>
-        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TKInputKeyPressed"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="TKLabel">
       <Properties>
@@ -121,9 +121,6 @@
       </Events>
     </Component>
     <Component class="javax.swing.JPasswordField" name="MKInput">
-      <Events>
-        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="MKInputKeyPressed"/>
-      </Events>
     </Component>
   </SubComponents>
 </Form>
