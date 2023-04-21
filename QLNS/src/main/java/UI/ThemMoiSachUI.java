@@ -86,7 +86,7 @@ public class ThemMoiSachUI extends JDialog {
 				s.setGiaBan(Double.parseDouble(txtGiaBan.getText()));
 				s.setTheLoai(txtTheLoai.getText());
 				s.setSoLuong(Integer.parseInt(txtSoLuong.getText()));
-				s.setIsDelete(0);
+				//s.setIsDelete(0);
 				int x =JOptionPane.showConfirmDialog(null, "Bạn chắc chắn muôn thêm sách", "Xác nhận thêm",JOptionPane.OK_CANCEL_OPTION);
 				if(x==JOptionPane.OK_OPTION)
 				{
