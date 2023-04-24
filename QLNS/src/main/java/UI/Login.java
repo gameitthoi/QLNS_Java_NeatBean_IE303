@@ -7,7 +7,6 @@ package UI;
 import Connect.login_sql;
 import Model.TaiKhoan;
 import java.awt.Font;
-import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 
 /**
@@ -52,12 +51,6 @@ public class Login extends javax.swing.JFrame {
         LoginLabel.setMaximumSize(new java.awt.Dimension(90, 48));
         LoginLabel.setName(""); // NOI18N
 
-        TKInput.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TKInputKeyPressed(evt);
-            }
-        });
-
         TKLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         TKLabel.setText("Tài khoản");
 
@@ -68,12 +61,6 @@ public class Login extends javax.swing.JFrame {
         LoginBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 LoginBtnMouseClicked(evt);
-            }
-        });
-
-        MKInput.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                MKInputKeyPressed(evt);
             }
         });
 
@@ -125,20 +112,12 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_LoginBtnMouseClicked
 
     // nhấn Enter thì cho đăng nhập lun
-    private void TKInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKInputKeyPressed
+    private void LoginBtnKeyPressed(java.awt.event.KeyEvent evt) {                                    
         if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
             if(TKInput.getText()==null || MKInput.getText()==null) return ;
             xuLyDangNhap();
         }
-    }//GEN-LAST:event_TKInputKeyPressed
-
-    // nhấn Enter thì cho đăng nhập lun
-    private void MKInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MKInputKeyPressed
-        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
-            if(TKInput.getText()==null || MKInput.getText()==null) return ;
-            xuLyDangNhap();
-        }
-    }//GEN-LAST:event_MKInputKeyPressed
+    }                                   
     
     protected void xuLyDangNhap() {
         login_sql login = new login_sql();

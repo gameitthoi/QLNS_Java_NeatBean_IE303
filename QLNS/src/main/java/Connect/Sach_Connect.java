@@ -1,5 +1,6 @@
 package Connect;
 
+import Model.ChucVu;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -98,34 +99,89 @@ public class Sach_Connect extends Connect_sqlServer{
         }
         return dss3;
     }
+    
+     public ArrayList<Sach> laySachTheoTenTacGia(String tenTacGia)
+    {
+        ArrayList<Sach> dss2 = new ArrayList<Sach>();
+
+        try {
+            String sql = "select * from SACH where TacGia like ? " ;
+            PreparedStatement pre1 = conn.prepareStatement(sql);
+            pre1.setString(1, "%"+tenTacGia+"%");
+            ResultSet result = pre1.executeQuery();
+            while (result.next()){
+                Sach s = new Sach();
+                s.setMaSach(result.getString(1));
+                s.setTenSach(result.getString(2));
+                s.setMaNXB(result.getString(3));
+                s.setTacGia(result.getString(4));
+                s.setGiaBan(result.getDouble(5));
+                s.setTheLoai(result.getString(6));
+                s.setSoLuong(result.getInt(7));
+
+                dss2.add(s);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return dss2;
+    }
+     
+     public ArrayList<Sach> laySachTheoMaTenVaTenTacGia(String maten, String tenTacGia)
+    {
+        ArrayList<Sach> dss4 = new ArrayList<Sach>();
+
+        try {
+            String sql = "select * from SACH where TenSach like ? and TacGia like ?" ;
+            PreparedStatement pre1 = conn.prepareStatement(sql);
+            pre1.setString(1, "%"+maten+"%");
+            pre1.setString(2, "%"+tenTacGia+"%");
+            ResultSet result = pre1.executeQuery();
+            while (result.next()){
+                Sach s = new Sach();
+                s.setMaSach(result.getString(1));
+                s.setTenSach(result.getString(2));
+                s.setMaNXB(result.getString(3));
+                s.setTacGia(result.getString(4));
+                s.setGiaBan(result.getDouble(5));
+                s.setTheLoai(result.getString(6));
+                s.setSoLuong(result.getInt(7));
+
+                dss4.add(s);
+            }
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return dss4;
+    }
 
     // lay doanh sach theo ma nha xuat ban
-    public ArrayList<Sach> laySachTheoNXB(String keyWord )
-    {
-            ArrayList<Sach> dss2 = new ArrayList<Sach>();
-            try {
-                String sql =" select * from SACH where MaNXB=? ";
-                PreparedStatement pre = conn.prepareStatement(sql);
-                pre.setString(1, keyWord);			
-                ResultSet result = pre.executeQuery();
-                while(result.next()){
-                    Sach s = new Sach();
-                    s.setMaSach(result.getString(1));
-                    s.setTenSach(result.getString(2));
-                    s.setMaNXB(result.getString(3));
-                    s.setTacGia(result.getString(4));
-                    s.setGiaBan(result.getDouble(5));
-                    s.setTheLoai(result.getString(6));
-                    s.setSoLuong(result.getInt(7));
-
-                    dss2.add(s);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-            return dss2;
-    }
+//    public ArrayList<Sach> laySachTheoNXB(String keyWord )
+//    {
+//            ArrayList<Sach> dss2 = new ArrayList<Sach>();
+//            try {
+//                String sql =" select * from SACH where MaNXB=? ";
+//                PreparedStatement pre = conn.prepareStatement(sql);
+//                pre.setString(1, keyWord);			
+//                ResultSet result = pre.executeQuery();
+//                while(result.next()){
+//                    Sach s = new Sach();
+//                    s.setMaSach(result.getString(1));
+//                    s.setTenSach(result.getString(2));
+//                    s.setMaNXB(result.getString(3));
+//                    s.setTacGia(result.getString(4));
+//                    s.setGiaBan(result.getDouble(5));
+//                    s.setTheLoai(result.getString(6));
+//                    s.setSoLuong(result.getInt(7));
+//
+//                    dss2.add(s);
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+//
+//            return dss2;
+//    }
 
     public ArrayList<Sach> laySachBanChay(String top, String thang, String nam ){
         ArrayList<Sach> dsSBC = new ArrayList<Sach>();
@@ -160,6 +216,8 @@ public class Sach_Connect extends Connect_sqlServer{
         }
         return dsSBC;
     }
+    
+    
 
     public ArrayList<TonKho> laySachTonKho(int thang, int nam ){
         ArrayList<TonKho> dsTK = new ArrayList<TonKho>();
@@ -231,11 +289,29 @@ public class Sach_Connect extends Connect_sqlServer{
 
         return -1 ;
     }
+    
+//    public NXB TimTenNXB(String nxb){
+//        NXB cv = new NXB();
+//        try{
+//            String sql ="select top 1 * from NXB where TenNXB=?" ;
+//            PreparedStatement pre = conn.prepareStatement(sql);
+//            pre.setString(1, nxb);
+//            ResultSet result = pre.executeQuery();
+//            while (result.next()) {
+//                cv.setMaNXB(result.getString(1));
+//                cv.setTenNXB(result.getString(2));
+//            }
+//        }catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        return cv;
+//    }
     // ham xoa 
+    //sửa SACH set -> SACH 
     public int XoaSach(String maSach)
     {
         try {
-            String sql ="update SACH set where MaSach=?" ;
+            String sql ="delete SACH where MaSach=?" ;
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setString(1,maSach);
 
