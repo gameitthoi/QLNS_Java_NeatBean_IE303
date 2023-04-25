@@ -156,32 +156,32 @@ public class Sach_Connect extends Connect_sqlServer{
     }
 
     // lay doanh sach theo ma nha xuat ban
-//    public ArrayList<Sach> laySachTheoNXB(String keyWord )
-//    {
-//            ArrayList<Sach> dss2 = new ArrayList<Sach>();
-//            try {
-//                String sql =" select * from SACH where MaNXB=? ";
-//                PreparedStatement pre = conn.prepareStatement(sql);
-//                pre.setString(1, keyWord);			
-//                ResultSet result = pre.executeQuery();
-//                while(result.next()){
-//                    Sach s = new Sach();
-//                    s.setMaSach(result.getString(1));
-//                    s.setTenSach(result.getString(2));
-//                    s.setMaNXB(result.getString(3));
-//                    s.setTacGia(result.getString(4));
-//                    s.setGiaBan(result.getDouble(5));
-//                    s.setTheLoai(result.getString(6));
-//                    s.setSoLuong(result.getInt(7));
-//
-//                    dss2.add(s);
-//                }
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
-//
-//            return dss2;
-//    }
+    public ArrayList<Sach> laySachTheoNXB(String keyWord )
+    {
+            ArrayList<Sach> dss2 = new ArrayList<Sach>();
+            try {
+                String sql =" select * from SACH where MaNXB=? ";
+                PreparedStatement pre = conn.prepareStatement(sql);
+                pre.setString(1, keyWord);			
+                ResultSet result = pre.executeQuery();
+                while(result.next()){
+                    Sach s = new Sach();
+                    s.setMaSach(result.getString(1));
+                    s.setTenSach(result.getString(2));
+                    s.setMaNXB(result.getString(3));
+                    s.setTacGia(result.getString(4));
+                    s.setGiaBan(result.getDouble(5));
+                    s.setTheLoai(result.getString(6));
+                    s.setSoLuong(result.getInt(7));
+
+                    dss2.add(s);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return dss2;
+    }
 
     public ArrayList<Sach> laySachBanChay(String top, String thang, String nam ){
         ArrayList<Sach> dsSBC = new ArrayList<Sach>();
