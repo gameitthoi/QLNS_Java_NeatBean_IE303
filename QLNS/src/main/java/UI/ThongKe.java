@@ -9,11 +9,13 @@ import Connect.Sach_Connect;
 import Model.HoaDon;
 import Model.Sach;
 import Model.TonKho;
+import java.sql.PreparedStatement;
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
@@ -113,22 +115,26 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
     
     private void hienThiNhapXuat(){
         Calendar cal = Calendar.getInstance();
-        NhapXuatMonthInput.setSelectedIndex(cal.get(Calendar.MONTH) + 1); // Tháng bắt đầu từ 0 nên cần +1 để lấy tháng thực tế
+        NhapXuatMonthInput.setSelectedIndex(cal.get(Calendar.MONTH)-1);
         NhapXuatYearInput.setText(Integer.toString(cal.get(Calendar.YEAR)) );
         Sach_Connect sach_conn = new Sach_Connect();
-        dsnx = sach_conn.layThongTinNhapXuat(cal.get(Calendar.MONTH) + 1,cal.get(Calendar.YEAR));
+        dsnx = sach_conn.layThongTinNhapXuat(cal.get(Calendar.MONTH),cal.get(Calendar.YEAR));
         dtmNhapXuat = new DefaultTableModel();
         dtmNhapXuat.addColumn("Mã sách");
         dtmNhapXuat.addColumn("Tên sách");
+        dtmNhapXuat.addColumn("Tồn đầu");
         dtmNhapXuat.addColumn("Nhập vào");
         dtmNhapXuat.addColumn("Bán ra");
+        dtmNhapXuat.addColumn("Tồn cuối");
         dtmNhapXuat.setRowCount(0);
         for(TonKho tk : dsnx){
             Vector<Object> vec = new Vector<Object>();
             vec.add(tk.getMaSach());
             vec.add(tk.getTenSach());
+            vec.add(tk.getTonDau());
             vec.add(tk.getNhap());
             vec.add(tk.getXuat());
+            vec.add(tk.getTonCuoi());
 
             dtmNhapXuat.addRow(vec);
         }
@@ -144,6 +150,21 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        TonKhoPane = new javax.swing.JPanel();
+        PrintTonKhoBtn = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        TonKhoTable = new javax.swing.JTable();
+        TonKhoLabel = new javax.swing.JLabel();
+        SaveBtn = new javax.swing.JButton();
+        NhapXuatPane = new javax.swing.JPanel();
+        NhapXuatMonthLabel = new javax.swing.JLabel();
+        NhapXuatMonthInput = new javax.swing.JComboBox<>();
+        NhapXuatYearLabel = new javax.swing.JLabel();
+        NhapXuatYearInput = new javax.swing.JTextField();
+        NhapXuatBtn = new javax.swing.JButton();
+        PrintNhapXuatBtn = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        NhapXuatTable = new javax.swing.JTable();
         NeedBookPane = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         NeedBookTable = new javax.swing.JTable(dtmSach);
@@ -162,24 +183,131 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
         PrintBanChayBtn = new javax.swing.JButton();
         TopBanChayInput = new javax.swing.JSpinner(new SpinnerNumberModel(10, 0, 100, 1));
         BanChayTopLabel = new javax.swing.JLabel();
-        TonKhoPane = new javax.swing.JPanel();
-        PrintTonKhoBtn = new javax.swing.JButton();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        TonKhoTable = new javax.swing.JTable();
-        TonKhoLabel = new javax.swing.JLabel();
-        NhapXuatPane = new javax.swing.JPanel();
-        NhapXuatMonthLabel = new javax.swing.JLabel();
-        NhapXuatMonthInput = new javax.swing.JComboBox<>();
-        NhapXuatYearLabel = new javax.swing.JLabel();
-        NhapXuatYearInput = new javax.swing.JTextField();
-        NhapXuatBtn = new javax.swing.JButton();
-        PrintNhapXuatBtn = new javax.swing.JButton();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        NhapXuatTable = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         TKLable = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        PrintTonKhoBtn.setText("In bảng thống kê");
+        PrintTonKhoBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PrintTonKhoBtnActionPerformed(evt);
+            }
+        });
+
+        jScrollPane4.setViewportView(TonKhoTable);
+
+        TonKhoLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        TonKhoLabel.setForeground(new java.awt.Color(0, 0, 255));
+        TonKhoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        TonKhoLabel.setText("SỐ LƯỢNG HÀNG TỒN TRONG THÁNG NÀY");
+
+        SaveBtn.setText("Lưu");
+        SaveBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SaveBtnMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout TonKhoPaneLayout = new javax.swing.GroupLayout(TonKhoPane);
+        TonKhoPane.setLayout(TonKhoPaneLayout);
+        TonKhoPaneLayout.setHorizontalGroup(
+            TonKhoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 844, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TonKhoPaneLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(SaveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(PrintTonKhoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TonKhoPaneLayout.createSequentialGroup()
+                .addComponent(TonKhoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        TonKhoPaneLayout.setVerticalGroup(
+            TonKhoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TonKhoPaneLayout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(TonKhoLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(TonKhoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(PrintTonKhoBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                    .addComponent(SaveBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Tồn kho", TonKhoPane);
+
+        NhapXuatMonthLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        NhapXuatMonthLabel.setText("Tháng");
+
+        NhapXuatMonthInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+
+        NhapXuatYearLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        NhapXuatYearLabel.setText("Năm");
+
+        NhapXuatBtn.setBackground(new java.awt.Color(51, 153, 255));
+        NhapXuatBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        NhapXuatBtn.setForeground(new java.awt.Color(255, 255, 255));
+        NhapXuatBtn.setText("Thống kê");
+        NhapXuatBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                NhapXuatBtnMouseClicked(evt);
+            }
+        });
+
+        PrintNhapXuatBtn.setText("In bảng thống kê");
+        PrintNhapXuatBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PrintNhapXuatBtnActionPerformed(evt);
+            }
+        });
+
+        jScrollPane5.setViewportView(NhapXuatTable);
+
+        javax.swing.GroupLayout NhapXuatPaneLayout = new javax.swing.GroupLayout(NhapXuatPane);
+        NhapXuatPane.setLayout(NhapXuatPaneLayout);
+        NhapXuatPaneLayout.setHorizontalGroup(
+            NhapXuatPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 844, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NhapXuatPaneLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(NhapXuatPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NhapXuatPaneLayout.createSequentialGroup()
+                        .addComponent(NhapXuatMonthLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(NhapXuatMonthInput, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(NhapXuatYearLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(NhapXuatYearInput, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(NhapXuatBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NhapXuatPaneLayout.createSequentialGroup()
+                        .addComponent(PrintNhapXuatBtn)
+                        .addGap(14, 14, 14))))
+        );
+        NhapXuatPaneLayout.setVerticalGroup(
+            NhapXuatPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(NhapXuatPaneLayout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(NhapXuatPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(NhapXuatMonthLabel)
+                    .addComponent(NhapXuatMonthInput, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NhapXuatYearLabel)
+                    .addComponent(NhapXuatYearInput, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(NhapXuatBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(PrintNhapXuatBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Nhập xuất kho", NhapXuatPane);
 
         jScrollPane3.setViewportView(NeedBookTable);
 
@@ -241,7 +369,7 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(PrintNeedBookBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Sách cần nhập", NeedBookPane);
@@ -320,120 +448,10 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(PrintBanChayBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(16, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Bán chạy", BanChayPane);
-
-        PrintTonKhoBtn.setText("In bảng thống kê");
-        PrintTonKhoBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PrintTonKhoBtnActionPerformed(evt);
-            }
-        });
-
-        jScrollPane4.setViewportView(TonKhoTable);
-
-        TonKhoLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        TonKhoLabel.setForeground(new java.awt.Color(0, 0, 255));
-        TonKhoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        TonKhoLabel.setText("SỐ LƯỢNG HÀNG TỒN TRONG THÁNG NÀY");
-
-        javax.swing.GroupLayout TonKhoPaneLayout = new javax.swing.GroupLayout(TonKhoPane);
-        TonKhoPane.setLayout(TonKhoPaneLayout);
-        TonKhoPaneLayout.setHorizontalGroup(
-            TonKhoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 844, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TonKhoPaneLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(PrintTonKhoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TonKhoPaneLayout.createSequentialGroup()
-                .addComponent(TonKhoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        TonKhoPaneLayout.setVerticalGroup(
-            TonKhoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TonKhoPaneLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(TonKhoLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(PrintTonKhoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Tồn kho", TonKhoPane);
-
-        NhapXuatMonthLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        NhapXuatMonthLabel.setText("Tháng");
-
-        NhapXuatMonthInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-
-        NhapXuatYearLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        NhapXuatYearLabel.setText("Năm");
-
-        NhapXuatBtn.setBackground(new java.awt.Color(51, 153, 255));
-        NhapXuatBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        NhapXuatBtn.setForeground(new java.awt.Color(255, 255, 255));
-        NhapXuatBtn.setText("Thống kê");
-        NhapXuatBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                NhapXuatBtnMouseClicked(evt);
-            }
-        });
-
-        PrintNhapXuatBtn.setText("In bảng thống kê");
-        PrintNhapXuatBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PrintNhapXuatBtnActionPerformed(evt);
-            }
-        });
-
-        jScrollPane5.setViewportView(NhapXuatTable);
-
-        javax.swing.GroupLayout NhapXuatPaneLayout = new javax.swing.GroupLayout(NhapXuatPane);
-        NhapXuatPane.setLayout(NhapXuatPaneLayout);
-        NhapXuatPaneLayout.setHorizontalGroup(
-            NhapXuatPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 844, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NhapXuatPaneLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(NhapXuatPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NhapXuatPaneLayout.createSequentialGroup()
-                        .addComponent(NhapXuatMonthLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(NhapXuatMonthInput, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(NhapXuatYearLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(NhapXuatYearInput, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(NhapXuatBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(16, 16, 16))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NhapXuatPaneLayout.createSequentialGroup()
-                        .addComponent(PrintNhapXuatBtn)
-                        .addGap(14, 14, 14))))
-        );
-        NhapXuatPaneLayout.setVerticalGroup(
-            NhapXuatPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(NhapXuatPaneLayout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(NhapXuatPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(NhapXuatMonthLabel)
-                    .addComponent(NhapXuatMonthInput, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NhapXuatYearLabel)
-                    .addComponent(NhapXuatYearInput, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(NhapXuatBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(PrintNhapXuatBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Nhập xuất kho", NhapXuatPane);
+        jTabbedPane1.addTab("Bán chạy", BanChayPane);
 
         TKLable.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         TKLable.setForeground(new java.awt.Color(0, 0, 255));
@@ -544,14 +562,16 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
     private void NhapXuatBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NhapXuatBtnMouseClicked
         Calendar cal = Calendar.getInstance();
         Sach_Connect sach_conn = new Sach_Connect();
-        dsnx = sach_conn.layThongTinNhapXuat(NhapXuatMonthInput.getSelectedIndex(), Integer.parseInt(NhapXuatYearInput.getText()));
+        dsnx = sach_conn.layThongTinNhapXuat(NhapXuatMonthInput.getSelectedIndex()+1, Integer.parseInt(NhapXuatYearInput.getText()));
         dtmNhapXuat.setRowCount(0);
         for(TonKho tk : dsnx){
             Vector<Object> vec = new Vector<Object>();
             vec.add(tk.getMaSach());
             vec.add(tk.getTenSach());
+            vec.add(tk.getTonDau());
             vec.add(tk.getNhap());
             vec.add(tk.getXuat());
+            vec.add(tk.getTonCuoi());
 
             dtmNhapXuat.addRow(vec);
         }
@@ -562,11 +582,26 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
         try {
             MessageFormat header = new MessageFormat("Danh sách tồn kho");
             MessageFormat footer = new MessageFormat("Page{1,number,interger}");
-            TonKhoTable.print(JTable.PrintMode.FIT_WIDTH, header, footer);
+            NhapXuatTable.print(JTable.PrintMode.FIT_WIDTH, header, footer);
         } catch (Exception e2) {
                 e2.printStackTrace();
         }
     }//GEN-LAST:event_PrintNhapXuatBtnActionPerformed
+
+    private void SaveBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SaveBtnMouseClicked
+        int dialogResult = JOptionPane.showConfirmDialog (null, "Bạn có chắc chắn muốn lưu vào Cơ sở dữ liệu?","Warning",JOptionPane.YES_NO_OPTION);
+        if(dialogResult == JOptionPane.YES_OPTION){
+            if(TonKhoTable.getModel().getRowCount() != 0){
+                Sach_Connect sach_conn = new Sach_Connect();
+                Calendar cal = Calendar.getInstance();
+                int result = sach_conn.luuDuLieuVaoTonKho(TonKhoTable, cal.get(Calendar.MONTH)+1, cal.get(Calendar.YEAR));
+                if (result == 1) JOptionPane.showMessageDialog(null, "Thêm thành công!");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Bảng tồn kho rỗng!");
+            }
+        }
+    }//GEN-LAST:event_SaveBtnMouseClicked
 
     /**
      * @param args the command line arguments
@@ -627,6 +662,7 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
     private javax.swing.JButton PrintTonKhoBtn;
     private javax.swing.JSpinner SLBaoDongInput;
     private javax.swing.JLabel SLBaoDongLabel;
+    private javax.swing.JButton SaveBtn;
     private javax.swing.JLabel TKLable;
     private javax.swing.JButton TKNeedBookBtn;
     private javax.swing.JLabel TonKhoLabel;

@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
-
+import javax.swing.JTable;
 import Model.NXB;
 import Model.Sach;
 import Model.TonKho;
@@ -249,25 +249,52 @@ public class Sach_Connect extends Connect_sqlServer{
         ArrayList<TonKho> dsTK = new ArrayList<TonKho>();
         String sql = "";
         try {
-            if(thang==0)
-                sql ="SELECT S.MaSach, S.TenSach, SUM(CASE WHEN H.NhapSach=1 THEN C.SoLuong ELSE 0 END) AS NHAP, SUM(CASE WHEN H.NhapSach=0 THEN C.SoLuong ELSE 0 END) AS XUAT FROM SACH AS S, CTHD AS C, HOADON AS H WHERE S.MaSach=C.MaSach AND C.MaHD=H.MaHD AND YEAR(H.NgayLap)="+nam+" AND H.ThanhCong=1 GROUP BY S.MaSach, S.TenSach";
-            else
-                sql ="SELECT S.MaSach, S.TenSach, SUM(CASE WHEN H.NhapSach=1 THEN C.SoLuong ELSE 0 END) AS NHAP, SUM(CASE WHEN H.NhapSach=0 THEN C.SoLuong ELSE 0 END) AS XUAT FROM SACH AS S, CTHD AS C, HOADON AS H WHERE S.MaSach=C.MaSach AND C.MaHD=H.MaHD AND YEAR(H.NgayLap)="+nam+" AND MONTH(NgayLap)="+thang+" AND H.ThanhCong=1 GROUP BY S.MaSach, S.TenSach";
+            sql ="select T.MaSach, S.TenSach, TonDau, Nhap, Xuat, TonCuoi from TONKHO as T, SACH as S where T.MaSach=S.MaSach and Thang="+thang+" and Nam="+nam+"";
             PreparedStatement pre = conn.prepareStatement(sql);	
             ResultSet result = pre.executeQuery();
             while(result.next()){
                 TonKho tk = new TonKho();
                 tk.setMaSach(result.getString(1));
                 tk.setTenSach(result.getString(2));
-                tk.setNhap(result.getInt(3));
-                tk.setXuat(result.getInt(4));
-
+                tk.setTonDau(result.getInt(3));
+                tk.setNhap(result.getInt(4));
+                tk.setXuat(result.getInt(5));
+                tk.setTonCuoi(result.getInt(6));
                 dsTK.add(tk);  
             }	
         } catch (Exception e) {
                 e.printStackTrace();
         }
         return dsTK;
+    }
+    
+    public int luuDuLieuVaoTonKho(JTable jTable1, int thang, int nam){
+        try{
+            int matk = 0;
+            String sql = "SELECT TOP 1 MaTK FROM TONKHO ORDER BY MaTK DESC";
+            PreparedStatement pre = conn.prepareStatement(sql);	
+            ResultSet result = pre.executeQuery();
+            while(result.next()){
+                matk = Integer.parseInt(result.getString(1).substring(2))+1;
+            }
+            sql = "INSERT INTO TONKHO(MaTK, MaSach, TonDau, Nhap, Xuat, TonCuoi, Thang, Nam) VALUES ( ?, ?, ?, ?, ?, ?, "+thang+", "+nam+")";
+            for (int row = 0; row < jTable1.getRowCount(); row++) {
+                PreparedStatement statement = conn.prepareStatement(sql);
+                statement.setString(1, "TK"+matk);
+                statement.setString(2, jTable1.getValueAt(row, 0).toString());
+                statement.setInt(3, Integer.parseInt(jTable1.getValueAt(row, 2).toString()));
+                statement.setInt(4, Integer.parseInt(jTable1.getValueAt(row, 3).toString()));
+                statement.setInt(5, Integer.parseInt(jTable1.getValueAt(row, 4).toString()));
+                statement.setInt(6, Integer.parseInt(jTable1.getValueAt(row, 5).toString()));
+
+                statement.executeUpdate();
+            }
+            return 1;
+        }
+        catch (Exception e) {
+                e.printStackTrace();
+        }
+        return 0;
     }
     // ham them moi vao csdl
     public int  themSachMoi(Sach s)
@@ -283,7 +310,7 @@ public class Sach_Connect extends Connect_sqlServer{
             pre.setString(6, s.getTheLoai());
             pre.setInt(7, s.getSoLuong());
 
-             return pre.executeUpdate();
+            return pre.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }

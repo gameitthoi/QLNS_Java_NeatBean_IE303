@@ -499,15 +499,15 @@ public class BanHang extends javax.swing.JFrame {
         if (TableCTHD.getSelectedRow()<0) 
         JOptionPane.showMessageDialog(null, "Bạn chưa chọn sách muốn xóa!");
         else{
-            int dialogResult = JOptionPane.showConfirmDialog (null, "Bạn có chắc chắn muôn xóa?","Warning",JOptionPane.YES_NO_OPTION);
-                if(dialogResult == JOptionPane.YES_OPTION){
-                    cthd.remove(TableCTHD.getSelectedRow());
-                    double tien = Double.parseDouble(TableCTHD.getValueAt(TableCTHD.getSelectedRow(), 2).toString());
-                    dtmHoaDon.removeRow(TableCTHD.getSelectedRow());                                                                      
-                    tien = Double.parseDouble(TotalInput.getText())-tien;
-                    if (tien==0) TotalInput.setText("");
-                    else
-                    TotalInput.setText(String.valueOf(tien)); 
+            int dialogResult = JOptionPane.showConfirmDialog (null, "Bạn có chắc chắn muốn xóa?","Warning",JOptionPane.YES_NO_OPTION);
+            if(dialogResult == JOptionPane.YES_OPTION){
+                cthd.remove(TableCTHD.getSelectedRow());
+                double tien = Double.parseDouble(TableCTHD.getValueAt(TableCTHD.getSelectedRow(), 2).toString());
+                dtmHoaDon.removeRow(TableCTHD.getSelectedRow());                                                                      
+                tien = Double.parseDouble(TotalInput.getText())-tien;
+                if (tien==0) TotalInput.setText("");
+                else
+                TotalInput.setText(String.valueOf(tien)); 
             }
         }
     }//GEN-LAST:event_DeleteBtnActionPerformed
