@@ -184,6 +184,7 @@ public class BanHang extends javax.swing.JFrame {
         QLSach = new javax.swing.JMenuItem();
         QLNXB = new javax.swing.JMenuItem();
         QLNV = new javax.swing.JMenuItem();
+        QLHD = new javax.swing.JMenuItem();
         TKMenu = new javax.swing.JMenu();
         ThoatBtn = new javax.swing.JMenu();
 
@@ -327,6 +328,14 @@ public class BanHang extends javax.swing.JFrame {
             }
         });
         QLMenu.add(QLNV);
+
+        QLHD.setText("Quản lý hóa đơn");
+        QLHD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                QLHDActionPerformed(evt);
+            }
+        });
+        QLMenu.add(QLHD);
 
         NavBar.add(QLMenu);
 
@@ -599,6 +608,11 @@ public class BanHang extends javax.swing.JFrame {
         else ChangeInput.setText("");
     }//GEN-LAST:event_ReceiveInputKeyReleased
 
+    private void QLHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QLHDActionPerformed
+        QuanLyHoaDon hdUI = new QuanLyHoaDon("Quản Lý Hóa Đơn");
+        hdUI.showWindow();
+    }//GEN-LAST:event_QLHDActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -642,6 +656,7 @@ public class BanHang extends javax.swing.JFrame {
     private javax.swing.JComboBox<NXB> NXBInput;
     private javax.swing.JMenuBar NavBar;
     private javax.swing.JButton PaymentBtn;
+    private javax.swing.JMenuItem QLHD;
     private javax.swing.JMenu QLMenu;
     private javax.swing.JMenuItem QLNV;
     private javax.swing.JMenuItem QLNXB;

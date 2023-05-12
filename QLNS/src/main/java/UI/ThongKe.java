@@ -36,7 +36,6 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
         initComponents();
         this.setTitle(title);
         this.setLocationRelativeTo(null);
-        hienThiHoaDon();
         hienThiSachTonKho();
         hienThiSachBanChay();
         hienThiTonKho();
@@ -62,33 +61,6 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
             dtmSach.addRow(vec);
         }
         NeedBookTable.setModel(dtmSach);
-    }
-    
-    private void hienThiHoaDon() {
-        Calendar cal = Calendar.getInstance();
-        MonthInput.setSelectedIndex(cal.get(Calendar.MONTH) + 1); // Tháng bắt đầu từ 0 nên cần +1 để lấy tháng thực tế
-        YearInput.setText(Integer.toString(cal.get(Calendar.YEAR)) );
-        
-        dtmHoaDon = new DefaultTableModel();
-        dtmHoaDon.addColumn("Mã hóa Đơn");
-        dtmHoaDon.addColumn("Mã Nhân Viên");
-        dtmHoaDon.addColumn("Ngày lập");
-        dtmHoaDon.addColumn("Tổng tiền");
-        dtmHoaDon.setRowCount(0);
-        HoaDon_Connect hd_connect = new HoaDon_Connect();
-        dshd_thongke = hd_connect.layToanBoHoaDonTheoThangNam(Integer.toString(MonthInput.getSelectedIndex()), YearInput.getText());
-        tongTien = 0;
-        for(HoaDon hd : dshd_thongke){
-            tongTien = tongTien + hd.getTongTien();
-            Vector<Object> vec = new Vector<Object>();
-            vec.add(hd.getMaHD());
-            vec.add(hd.getMaNV());
-            vec.add(hd.getNgaylap());
-            vec.add(df.format(hd.getTongTien()));
-            dtmHoaDon.addRow(vec);
-        }
-        HDTable.setModel(dtmHoaDon);
-        TotalOutput.setText(df.format(tongTien) + " vnđ");
     }
     
     private void hienThiSachBanChay() {
@@ -172,17 +144,6 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        HDPane = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        HDTable = new javax.swing.JTable(dtmHoaDon);
-        MonthInput = new javax.swing.JComboBox<>();
-        YearInput = new javax.swing.JTextField();
-        TKBtn = new javax.swing.JButton();
-        MonthLabel = new javax.swing.JLabel();
-        YearLabel = new javax.swing.JLabel();
-        PrintHDBtn = new javax.swing.JButton();
-        TotalLabel = new javax.swing.JLabel();
-        TotalOutput = new javax.swing.JLabel();
         NeedBookPane = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         NeedBookTable = new javax.swing.JTable(dtmSach);
@@ -219,87 +180,6 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
         TKLable = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jScrollPane2.setViewportView(HDTable);
-
-        MonthInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-
-        TKBtn.setBackground(new java.awt.Color(51, 153, 255));
-        TKBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        TKBtn.setForeground(new java.awt.Color(255, 255, 255));
-        TKBtn.setText("Thống kê");
-        TKBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                TKBtnMouseClicked(evt);
-            }
-        });
-
-        MonthLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        MonthLabel.setText("Tháng");
-
-        YearLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        YearLabel.setText("Năm");
-
-        PrintHDBtn.setText("In bảng thông kê");
-        PrintHDBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PrintHDBtnActionPerformed(evt);
-            }
-        });
-
-        TotalLabel.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        TotalLabel.setText("Tổng tiền bán được của tháng :");
-
-        TotalOutput.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        TotalOutput.setText("0 vnđ");
-
-        javax.swing.GroupLayout HDPaneLayout = new javax.swing.GroupLayout(HDPane);
-        HDPane.setLayout(HDPaneLayout);
-        HDPaneLayout.setHorizontalGroup(
-            HDPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane2)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HDPaneLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(MonthLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(MonthInput, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(YearLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(YearInput, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(46, 46, 46)
-                .addComponent(TKBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HDPaneLayout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(TotalLabel)
-                .addGap(18, 18, 18)
-                .addComponent(TotalOutput, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(PrintHDBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
-        );
-        HDPaneLayout.setVerticalGroup(
-            HDPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HDPaneLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(HDPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TKBtn)
-                    .addComponent(YearInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(YearLabel)
-                    .addComponent(MonthInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(MonthLabel))
-                .addGap(23, 23, 23)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(HDPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TotalLabel)
-                    .addComponent(TotalOutput)
-                    .addComponent(PrintHDBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE))
-                .addContainerGap(36, Short.MAX_VALUE))
-        );
-
-        jTabbedPane1.addTab("Hóa đơn", HDPane);
 
         jScrollPane3.setViewportView(NeedBookTable);
 
@@ -600,36 +480,6 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void TKBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TKBtnMouseClicked
-        HoaDon_Connect hd_connect = new HoaDon_Connect();
-        String thang  = MonthInput.getSelectedItem().toString();
-        String nam = YearInput.getText();
-        dshd_thongke = hd_connect.layToanBoHoaDonTheoThangNam(thang, nam);
-        tongTien = 0;
-        dtmHoaDon.setRowCount(0);
-        for(HoaDon hd : dshd_thongke){
-            tongTien = tongTien + hd.getTongTien();
-            Vector<Object> vec = new Vector<Object>();
-            vec.add(hd.getMaHD());
-            vec.add(hd.getMaNV());
-            vec.add(hd.getNgaylap());
-            vec.add(df.format(hd.getTongTien()));
-            dtmHoaDon.addRow(vec);
-        }
-        HDTable.setModel(dtmHoaDon);
-        TotalOutput.setText(df.format(tongTien) + " vnđ");
-    }//GEN-LAST:event_TKBtnMouseClicked
-
-    private void PrintHDBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintHDBtnActionPerformed
-        try {
-            MessageFormat header = new MessageFormat("Danh sách hóa đơn tháng")  ;
-            MessageFormat footer = new MessageFormat("Page{1,number,interger} ")  ;
-            HDTable.print(JTable.PrintMode.FIT_WIDTH, header, footer);
-        } catch (Exception e2) {
-                e2.printStackTrace();
-        }
-    }//GEN-LAST:event_PrintHDBtnActionPerformed
-
     private void TKNeedBookBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TKNeedBookBtnMouseClicked
         Sach_Connect sach_conn = new Sach_Connect();
         dss = sach_conn.laySachConDuoiTon((int)SLBaoDongInput.getValue());
@@ -762,10 +612,6 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
     private javax.swing.JLabel BanChayTopLabel;
     private javax.swing.JTextField BanChayYearInput;
     private javax.swing.JLabel BanChayYearLabel;
-    private javax.swing.JPanel HDPane;
-    private javax.swing.JTable HDTable;
-    private javax.swing.JComboBox<String> MonthInput;
-    private javax.swing.JLabel MonthLabel;
     private javax.swing.JPanel NeedBookPane;
     private javax.swing.JTable NeedBookTable;
     private javax.swing.JButton NhapXuatBtn;
@@ -776,26 +622,19 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
     private javax.swing.JTextField NhapXuatYearInput;
     private javax.swing.JLabel NhapXuatYearLabel;
     private javax.swing.JButton PrintBanChayBtn;
-    private javax.swing.JButton PrintHDBtn;
     private javax.swing.JButton PrintNeedBookBtn;
     private javax.swing.JButton PrintNhapXuatBtn;
     private javax.swing.JButton PrintTonKhoBtn;
     private javax.swing.JSpinner SLBaoDongInput;
     private javax.swing.JLabel SLBaoDongLabel;
-    private javax.swing.JButton TKBtn;
     private javax.swing.JLabel TKLable;
     private javax.swing.JButton TKNeedBookBtn;
     private javax.swing.JLabel TonKhoLabel;
     private javax.swing.JPanel TonKhoPane;
     private javax.swing.JTable TonKhoTable;
     private javax.swing.JSpinner TopBanChayInput;
-    private javax.swing.JLabel TotalLabel;
-    private javax.swing.JLabel TotalOutput;
-    private javax.swing.JTextField YearInput;
-    private javax.swing.JLabel YearLabel;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
