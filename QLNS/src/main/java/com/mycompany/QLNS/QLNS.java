@@ -17,8 +17,6 @@ import UI.Login;
 public class QLNS {
 
     public static void main(String[] args) {
-//        LoginUI ui = new LoginUI("Đăng Nhập");
-//		ui.showWindow();
         Login ui = new Login("Đăng Nhập");
             ui.showWindow();
     }

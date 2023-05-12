@@ -8,6 +8,7 @@ public class Sach {
 	private double giaBan ;
 	private String theLoai ;
 	private int soLuong ;
+        private int discount;
 	public Sach() {
 		super();
 	}
@@ -74,7 +75,14 @@ public class Sach {
 		return this.tenSach;
 	}
 	
-	
+        public int getDiscount(){
+            return this.discount;
+        }
+        
+	public void setDiscount(int dis){
+            this.discount = dis;
+        }
+        
 	
 
 }

@@ -32,6 +32,7 @@ public class Sach_Connect extends Connect_sqlServer{
                 s.setGiaBan(result.getDouble(5));
                 s.setTheLoai(result.getString(6));
                 s.setSoLuong(result.getInt(7));
+                s.setDiscount(result.getInt(8));
                 dss.add(s);
             }
         } 
@@ -61,7 +62,7 @@ public class Sach_Connect extends Connect_sqlServer{
                 s.setGiaBan(result.getDouble(5));
                 s.setTheLoai(result.getString(6));
                 s.setSoLuong(result.getInt(7));
-
+                s.setDiscount(result.getInt(8));
                 dss2.add(s);
             }
 
@@ -91,7 +92,7 @@ public class Sach_Connect extends Connect_sqlServer{
                 s.setGiaBan(result.getDouble(5));
                 s.setTheLoai(result.getString(6));
                 s.setSoLuong(result.getInt(7));
-
+                s.setDiscount(result.getInt(8));
                 dss3.add(s);
             }
         } catch (Exception e){
@@ -118,7 +119,7 @@ public class Sach_Connect extends Connect_sqlServer{
                 s.setGiaBan(result.getDouble(5));
                 s.setTheLoai(result.getString(6));
                 s.setSoLuong(result.getInt(7));
-
+                s.setDiscount(result.getInt(8));
                 dss2.add(s);
             }
         } catch (Exception e){
@@ -146,7 +147,7 @@ public class Sach_Connect extends Connect_sqlServer{
                 s.setGiaBan(result.getDouble(5));
                 s.setTheLoai(result.getString(6));
                 s.setSoLuong(result.getInt(7));
-
+                s.setDiscount(result.getInt(8));
                 dss4.add(s);
             }
         } catch (Exception e){
@@ -173,7 +174,7 @@ public class Sach_Connect extends Connect_sqlServer{
                     s.setGiaBan(result.getDouble(5));
                     s.setTheLoai(result.getString(6));
                     s.setSoLuong(result.getInt(7));
-
+                    s.setDiscount(result.getInt(8));
                     dss2.add(s);
                 }
             } catch (Exception e) {
