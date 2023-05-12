@@ -362,6 +362,22 @@ BEGIN
 	GROUP BY S.MaSach, S.TenSach, S.SoLuong
 END
 GO
+CREATE PROCEDURE DoanhThuCacThang
+AS
+BEGIN
+	SELECT MONTH(months.Thang) AS Thang, COALESCE(SUM(CTHD.ThanhTien), 0) AS DoanhThu
+	FROM (
+        SELECT DATEADD(month, number - 1, DATEFROMPARTS(YEAR(GETDATE()), 1, 1)) AS Thang
+		FROM master.dbo.spt_values
+		WHERE type = 'P' AND number BETWEEN 1 AND 12) AS months
+	LEFT JOIN 
+		HOADON ON MONTH(HOADON.NgayLap) = MONTH(months.Thang) AND YEAR(HOADON.NgayLap) = YEAR(months.Thang) AND HOADON.NhapSach = 0
+	LEFT JOIN 
+		CTHD ON HOADON.MaHD = CTHD.MaHD
+	GROUP BY 
+		MONTH(months.Thang)
+END
+GO
 USE [master]
 GO
 ALTER DATABASE [dbQLNS] SET  READ_WRITE 

@@ -9,6 +9,8 @@ import Connect.Sach_Connect;
 import Model.HoaDon;
 import Model.Sach;
 import Model.TonKho;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.sql.PreparedStatement;
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
@@ -19,6 +21,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
@@ -38,10 +46,33 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
         initComponents();
         this.setTitle(title);
         this.setLocationRelativeTo(null);
+        showThongKe();
         hienThiSachTonKho();
         hienThiSachBanChay();
         hienThiTonKho();
         hienThiNhapXuat();
+    }
+    
+    private JFreeChart chart;
+    private DefaultCategoryDataset dataset;
+    private CategoryPlot categoryPlot;
+    private ChartPanel chartPanel;
+    public void showThongKe(){
+        //dữ liệu đổ vào bảng thông kê
+        dataset = new DefaultCategoryDataset();
+        HoaDon_Connect hd_conn = new HoaDon_Connect();
+        dataset = hd_conn.DoanhThuCacThang();
+        
+        //tạo bảng thống kê
+        chart = ChartFactory.createBarChart("Doanh thu năm nay","Tháng","VNĐ",dataset, PlotOrientation.VERTICAL, true, true, false);
+        
+        categoryPlot = chart.getCategoryPlot();
+        //thay đổi màu nền
+        //categoryPlot.setBackgroundPaint(new Color(255,255,255));
+        chartPanel = new ChartPanel(chart);
+        ThongKePane.removeAll();
+        ThongKePane.add(chartPanel, BorderLayout.CENTER);
+        ThongKePane.validate();
     }
     
     private void hienThiSachTonKho() {
@@ -150,6 +181,7 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        ThongKePane = new javax.swing.JPanel();
         TonKhoPane = new javax.swing.JPanel();
         PrintTonKhoBtn = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -187,6 +219,9 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
         TKLable = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        ThongKePane.setLayout(new java.awt.BorderLayout());
+        jTabbedPane1.addTab("Thống kê", ThongKePane);
 
         PrintTonKhoBtn.setText("In bảng thống kê");
         PrintTonKhoBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -238,7 +273,7 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
                 .addContainerGap(58, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Tồn kho", TonKhoPane);
+        jTabbedPane1.addTab("Tồn kho tháng này", TonKhoPane);
 
         NhapXuatMonthLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         NhapXuatMonthLabel.setText("Tháng");
@@ -665,6 +700,7 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
     private javax.swing.JButton SaveBtn;
     private javax.swing.JLabel TKLable;
     private javax.swing.JButton TKNeedBookBtn;
+    private javax.swing.JPanel ThongKePane;
     private javax.swing.JLabel TonKhoLabel;
     private javax.swing.JPanel TonKhoPane;
     private javax.swing.JTable TonKhoTable;
