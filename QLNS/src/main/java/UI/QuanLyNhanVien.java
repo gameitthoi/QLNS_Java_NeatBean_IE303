@@ -25,7 +25,7 @@ import javax.swing.table.DefaultTableModel;
  * @author dat
  */
 public class QuanLyNhanVien extends javax.swing.JFrame {
-private DefaultTableModel dtmNhanVien ;
+private DefaultTableModel dtmNhanVien;
 private ArrayList<NhanVien> nhanViens =null;
 private ArrayList<NhanVien> dsnv_tim = null;
 private ArrayList<ChucVu> dscv = null;
@@ -52,7 +52,6 @@ private ArrayList<ChucVu> dscv = null;
         dtmNhanVien.addColumn("Chức vụ");
         dtmNhanVien.addColumn("Số điện thoại");
         dtmNhanVien.addColumn("Email");
-        dtmNhanVien.addColumn("Trạng thái");
         dtmNhanVien.setRowCount(0);
         for(NhanVien nv : nhanViens){
             Vector<Object> vec = new Vector<Object>();
@@ -559,7 +558,7 @@ private ArrayList<ChucVu> dscv = null;
             nv.setMaCV("CV"+(CVInput.getSelectedIndex()+1));
         nv.setSDT(SDTInput.getText());
         nv.setEmail(EmailInput.getText());
-        int ret=JOptionPane.showConfirmDialog(null, "Bạn muốn chỉnh sửa nhân viên?", "xác nhận chỉnh sửa", JOptionPane.OK_CANCEL_OPTION);
+        int ret=JOptionPane.showConfirmDialog(null, "Bạn muốn chỉnh sửa nhân viên?", "Xác nhận chỉnh sửa", JOptionPane.OK_CANCEL_OPTION);
         if(ret==JOptionPane.OK_OPTION){
             int activeUpdate = nv_conn.updateNhanVien(nv);
             if(activeUpdate>0){

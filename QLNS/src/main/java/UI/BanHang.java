@@ -179,6 +179,7 @@ public class BanHang extends javax.swing.JFrame {
         SLLabel = new javax.swing.JLabel();
         SLInput = new javax.swing.JSpinner();
         addHDBtn = new javax.swing.JButton();
+        BookNameLabel = new javax.swing.JLabel();
         NavBar = new javax.swing.JMenuBar();
         QLMenu = new javax.swing.JMenu();
         QLSach = new javax.swing.JMenuItem();
@@ -186,6 +187,7 @@ public class BanHang extends javax.swing.JFrame {
         QLNV = new javax.swing.JMenuItem();
         QLHD = new javax.swing.JMenuItem();
         TKMenu = new javax.swing.JMenu();
+        TaiKhoanMenu = new javax.swing.JMenu();
         ThoatBtn = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -303,6 +305,10 @@ public class BanHang extends javax.swing.JFrame {
                 .addGap(14, 14, 14))
         );
 
+        BookNameLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        BookNameLabel.setForeground(new java.awt.Color(0, 0, 255));
+        BookNameLabel.setText("Tên sách:");
+
         QLMenu.setText("Quản lý");
 
         QLSach.setText("Quản lý sách");
@@ -347,6 +353,14 @@ public class BanHang extends javax.swing.JFrame {
         });
         NavBar.add(TKMenu);
 
+        TaiKhoanMenu.setText("Tài khoản");
+        TaiKhoanMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TaiKhoanMenuMouseClicked(evt);
+            }
+        });
+        NavBar.add(TaiKhoanMenu);
+
         ThoatBtn.setForeground(new java.awt.Color(255, 0, 51));
         ThoatBtn.setText("Thoát");
         ThoatBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -365,16 +379,19 @@ public class BanHang extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ScrollPaneTable)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 18, Short.MAX_VALUE)
-                        .addComponent(TKInput, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(NXBInput, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(TKBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 2, Short.MAX_VALUE))
-                    .addComponent(ScrollPaneTable)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BookNameLabel)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(TKInput, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(NXBInput, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TKBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 2, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(SeparatorLine, javax.swing.GroupLayout.PREFERRED_SIZE, 6, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -415,7 +432,9 @@ public class BanHang extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
+                        .addContainerGap()
+                        .addComponent(BookNameLabel)
+                        .addGap(9, 9, 9)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(TKInput, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
@@ -613,6 +632,11 @@ public class BanHang extends javax.swing.JFrame {
         hdUI.showWindow();
     }//GEN-LAST:event_QLHDActionPerformed
 
+    private void TaiKhoanMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TaiKhoanMenuMouseClicked
+        QuanLyTaiKhoan tkUI = new QuanLyTaiKhoan("Tài khoản");
+        tkUI.showWindow();
+    }//GEN-LAST:event_TaiKhoanMenuMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -649,6 +673,7 @@ public class BanHang extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel BookNameLabel;
     private javax.swing.JButton CancleBtn;
     private javax.swing.JTextField ChangeInput;
     private javax.swing.JLabel ChangeLabel;
@@ -672,6 +697,7 @@ public class BanHang extends javax.swing.JFrame {
     private javax.swing.JMenu TKMenu;
     private javax.swing.JTable TableCTHD;
     private javax.swing.JTable TableSach;
+    private javax.swing.JMenu TaiKhoanMenu;
     private javax.swing.JMenu ThoatBtn;
     private javax.swing.JTextField TotalInput;
     private javax.swing.JLabel TotalLabel;
