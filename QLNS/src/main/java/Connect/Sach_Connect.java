@@ -286,7 +286,7 @@ public class Sach_Connect extends Connect_sqlServer{
                 statement.setInt(4, Integer.parseInt(jTable1.getValueAt(row, 3).toString()));
                 statement.setInt(5, Integer.parseInt(jTable1.getValueAt(row, 4).toString()));
                 statement.setInt(6, Integer.parseInt(jTable1.getValueAt(row, 5).toString()));
-
+                matk++;
                 statement.executeUpdate();
             }
             return 1;
