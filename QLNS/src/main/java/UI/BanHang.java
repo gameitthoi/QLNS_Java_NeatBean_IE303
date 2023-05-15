@@ -188,6 +188,7 @@ public class BanHang extends javax.swing.JFrame {
         QLHD = new javax.swing.JMenuItem();
         TKMenu = new javax.swing.JMenu();
         TaiKhoanMenu = new javax.swing.JMenu();
+        BarcodeMenu = new javax.swing.JMenu();
         ThoatBtn = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -360,6 +361,14 @@ public class BanHang extends javax.swing.JFrame {
             }
         });
         NavBar.add(TaiKhoanMenu);
+
+        BarcodeMenu.setText("In mã vạch");
+        BarcodeMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BarcodeMenuMouseClicked(evt);
+            }
+        });
+        NavBar.add(BarcodeMenu);
 
         ThoatBtn.setForeground(new java.awt.Color(255, 0, 51));
         ThoatBtn.setText("Thoát");
@@ -637,6 +646,11 @@ public class BanHang extends javax.swing.JFrame {
         tkUI.showWindow();
     }//GEN-LAST:event_TaiKhoanMenuMouseClicked
 
+    private void BarcodeMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BarcodeMenuMouseClicked
+        InMaVach mvUI = new InMaVach("In mã vạch");
+        mvUI.showWindow();
+    }//GEN-LAST:event_BarcodeMenuMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -667,12 +681,13 @@ public class BanHang extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new BanHang("Bán hàng",MaNV).setVisible(true);
+                new BanHang("Bán hàng - Tạo hóa đơn",MaNV).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu BarcodeMenu;
     private javax.swing.JLabel BookNameLabel;
     private javax.swing.JButton CancleBtn;
     private javax.swing.JTextField ChangeInput;

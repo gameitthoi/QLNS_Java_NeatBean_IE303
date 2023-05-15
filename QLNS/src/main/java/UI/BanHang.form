@@ -59,6 +59,14 @@
             <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="TaiKhoanMenuMouseClicked"/>
           </Events>
         </Menu>
+        <Menu class="javax.swing.JMenu" name="BarcodeMenu">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="In m&#xe3; v&#x1ea1;ch"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BarcodeMenuMouseClicked"/>
+          </Events>
+        </Menu>
         <Menu class="javax.swing.JMenu" name="ThoatBtn">
           <Properties>
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
