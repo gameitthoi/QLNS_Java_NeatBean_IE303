@@ -18,7 +18,7 @@ public class NhanVien_Connect extends Connect_sqlServer{
     public ArrayList<NhanVien> layToanBoNhanVien(){
         ArrayList<NhanVien> dsnv = new ArrayList<NhanVien>();
         try {
-            String sql ="select MaNV, TenNV, NgaySinh, NgayVaoLam, SoChungMinh, ChucVu, SDT, Email from NHANVIEN,CHUCVU where NHANVIEN.MaCV = CHUCVU.MaCV" ;
+            String sql ="select MaNV, TenNV, NgaySinh, NgayVaoLam, SoChungMinh, ChucVu, SDT, Email, Luong from NHANVIEN,CHUCVU where NHANVIEN.MaCV = CHUCVU.MaCV" ;
             PreparedStatement pre = conn.prepareStatement(sql);
             ResultSet result = pre.executeQuery();
             while(result.next())
@@ -32,6 +32,7 @@ public class NhanVien_Connect extends Connect_sqlServer{
                 nv.setMaCV(result.getString(6));
                 nv.setSDT(result.getString(7));
                 nv.setEmail(result.getString(8));
+                nv.setLuong(result.getDouble(9));
                 dsnv.add(nv);
             }
         } catch (Exception e) {
@@ -43,7 +44,7 @@ public class NhanVien_Connect extends Connect_sqlServer{
     // theem moi nv 
     public int themNhanVien(NhanVien nv){
         try {
-            String sql ="INSERT INTO NHANVIEN (MaNV, TenNV, NgaySinh, NgayVaoLam, SoChungMinh, MaCV, SDT, Email) values (?,?,?,?,?,?,?,?) ";
+            String sql ="INSERT INTO NHANVIEN (MaNV, TenNV, NgaySinh, NgayVaoLam, SoChungMinh, MaCV, SDT, Email, Luong) values (?,?,?,?,?,?,?,?,?) ";
             PreparedStatement pre  =  conn.prepareStatement(sql);
             pre.setString(1, nv.getMaNV());
             pre.setString(2, nv.getTenNV());
@@ -53,6 +54,7 @@ public class NhanVien_Connect extends Connect_sqlServer{
             pre.setString(6, nv.getMaCV());
             pre.setString(7, nv.getSDT());
             pre.setString(8, nv.getEmail());
+            pre.setDouble(9, nv.getLuong());
             return pre.executeUpdate();			
 
         } catch (Exception e) {
@@ -64,7 +66,7 @@ public class NhanVien_Connect extends Connect_sqlServer{
     //update nhân viên
     public int updateNhanVien(NhanVien nv){
         try {
-            String sql ="update NHANVIEN set TenNV=?, NgaySinh=CONVERT(DATE, ?, 103), NgayVaoLam=CONVERT(DATE, ?, 103), SoChungMinh=?, MaCV=?, SDT=?, Email=? where MaNV=?" ;
+            String sql ="update NHANVIEN set TenNV=?, NgaySinh=CONVERT(DATE, ?, 103), NgayVaoLam=CONVERT(DATE, ?, 103), SoChungMinh=?, MaCV=?, SDT=?, Email=?, Luong=? where MaNV=?" ;
             PreparedStatement pre =conn.prepareStatement(sql);
             pre.setString(1, nv.getTenNV());
             pre.setString(2,  nv.getNgaySinh()+"");
@@ -73,7 +75,9 @@ public class NhanVien_Connect extends Connect_sqlServer{
             pre.setString(5, nv.getMaCV());
             pre.setString(6, nv.getSDT());
             pre.setString(7, nv.getEmail());
-            pre.setString(8, nv.getMaNV());
+            pre.setDouble(8, nv.getLuong());
+            pre.setString(9, nv.getMaNV());
+
             return pre.executeUpdate();	
         } catch (Exception e) {
                 e.printStackTrace();

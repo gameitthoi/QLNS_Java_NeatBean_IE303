@@ -164,6 +164,7 @@ CREATE TABLE [dbo].[NHANVIEN](
 	[MaCV] [nvarchar](50) NULL,
 	[SDT] [nvarchar](50) NULL,
 	[Email] [nvarchar](50) NULL,
+	[Luong] [money] NULL
  CONSTRAINT [PK_NHANVIEN] PRIMARY KEY CLUSTERED 
 (
 	[MaNV] ASC
@@ -291,15 +292,15 @@ INSERT [dbo].CHUCVU ([MaCV], [ChucVu], [DinhDoanh]) VALUES ('CV05', N'Nhân viê
 INSERT [dbo].CHUCVU ([MaCV], [ChucVu], [DinhDoanh]) VALUES ('CV06', N'Nhân viên an ninh', N'Bảo đảm an ninh')
 INSERT [dbo].CHUCVU ([MaCV], [ChucVu], [DinhDoanh]) VALUES ('CV07', N'Nhân viên kế toán', N'Chịu trách nhiệm về các vấn đề liên quan đến tài chính, dòng tiền')
 
-INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email]) VALUES (N'NV01',N'Nguyên Văn A', '1/1/2002', '10/12/2021' ,N'012356789',N'CV01',N'012356789',N'anguyenvan@gmai.com')
-INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email]) VALUES (N'NV02',N'Nguyên Văn B', '1/2/2002', '21/12/2022' ,N'012356789',N'CV02',N'012356789',N'bnguyenvan@gmai.com')
-INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email]) VALUES (N'NV03',N'Nguyên Văn C', '1/3/2002', '31/12/2023' ,N'012356789',N'CV03',N'012356789',N'cnguyenvan@gmai.com')
-INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email]) VALUES (N'NV04',N'Nguyên Văn D', '1/4/2002', '20/01/2019' ,N'012356789',N'CV04',N'012356789',N'dnguyenvan@gmai.com')
-INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email]) VALUES (N'NV05',N'Nguyên Văn E', '1/5/2002', '11/08/2018' ,N'012356789',N'CV05',N'012356789',N'enguyenvan@gmai.com')
-INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email]) VALUES (N'NV06',N'Nguyên Văn F', '1/6/2002', '01/03/2017' ,N'012356789',N'CV06',N'012356789',N'fnguyenvan@gmai.com')
-INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email]) VALUES (N'NV07',N'Nguyên Văn G', '1/7/2002', '22/12/2020' ,N'012356789',N'CV07',N'012356789',N'gnguyenvan@gmai.com')
-INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email]) VALUES (N'NV08',N'Nguyên Văn H', '1/8/2002', '23/11/2021' ,N'012356789',N'CV02',N'012356789',N'hnguyenvan@gmai.com')
-INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email]) VALUES (N'NV09',N'Nguyên Văn J', '1/9/2002', '24/02/2022' ,N'012356789',N'CV03',N'012356789',N'jnguyenvan@gmai.com')
+INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email], [Luong]) VALUES (N'NV01',N'Nguyên Văn A', '1/1/2002', '10/12/2021' ,N'012356789',N'CV01',N'012356789',N'anguyenvan@gmai.com', 10000000.000)
+INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email], [Luong]) VALUES (N'NV02',N'Nguyên Văn B', '1/2/2002', '21/12/2022' ,N'012356789',N'CV02',N'012356789',N'bnguyenvan@gmai.com', 10000000.000)
+INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email], [Luong]) VALUES (N'NV03',N'Nguyên Văn C', '1/3/2002', '31/12/2023' ,N'012356789',N'CV03',N'012356789',N'cnguyenvan@gmai.com', 10000000.000)
+INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email], [Luong]) VALUES (N'NV04',N'Nguyên Văn D', '1/4/2002', '20/01/2019' ,N'012356789',N'CV04',N'012356789',N'dnguyenvan@gmai.com', 10000000.000)
+INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email], [Luong]) VALUES (N'NV05',N'Nguyên Văn E', '1/5/2002', '11/08/2018' ,N'012356789',N'CV05',N'012356789',N'enguyenvan@gmai.com', 10000000.000)
+INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email], [Luong]) VALUES (N'NV06',N'Nguyên Văn F', '1/6/2002', '01/03/2017' ,N'012356789',N'CV06',N'012356789',N'fnguyenvan@gmai.com', 10000000.000)
+INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email], [Luong]) VALUES (N'NV07',N'Nguyên Văn G', '1/7/2002', '22/12/2020' ,N'012356789',N'CV07',N'012356789',N'gnguyenvan@gmai.com', 10000000.000)
+INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email], [Luong]) VALUES (N'NV08',N'Nguyên Văn H', '1/8/2002', '23/11/2021' ,N'012356789',N'CV02',N'012356789',N'hnguyenvan@gmai.com', 10000000.000)
+INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email], [Luong]) VALUES (N'NV09',N'Nguyên Văn J', '1/9/2002', '24/02/2022' ,N'012356789',N'CV03',N'012356789',N'jnguyenvan@gmai.com', 10000000.000)
 
 INSERT [dbo].[TONKHO]([MaTK], [MaSach], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK01', N's01', 0, 50, 1, 49, 1, 2023)
 

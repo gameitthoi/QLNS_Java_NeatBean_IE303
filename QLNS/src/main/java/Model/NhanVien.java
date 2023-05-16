@@ -12,6 +12,7 @@ public class NhanVien {
 	private String maCV;
 	private String SDT ;
 	private String email ;
+        private double luong;
 	public NhanVien() {
 		super();
 	}
@@ -63,11 +64,14 @@ public class NhanVien {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+        public double getLuong(){
+            return this.luong;
+        }
+        public void setLuong(double luong){
+            this.luong = luong;
+        }
 	@Override
 	public String toString() {
 		return this.tenNV;
 	}
-	
-	
-	
 }
