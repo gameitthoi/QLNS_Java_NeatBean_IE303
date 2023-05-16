@@ -11,6 +11,9 @@ import Model.Sach;
 import Model.TonKho;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.sql.PreparedStatement;
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
@@ -21,6 +24,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.hssf.usermodel.*;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
@@ -171,6 +177,59 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
         }
         NhapXuatTable.setModel(dtmNhapXuat);
     }
+    
+    private void XuatFileExcel(DefaultTableModel dtm, String sheetName, String excelFilePath){
+        try{
+            TableModel model = dtm;
+            Workbook workbook = new HSSFWorkbook();
+            Sheet sheet = workbook.createSheet(sheetName);
+
+            // Ghi tiêu đề cột
+            Row headerRow = sheet.createRow(0);
+            for (int col = 0; col < model.getColumnCount(); col++) {
+                Cell cell = headerRow.createCell(col);
+                cell.setCellValue(model.getColumnName(col));
+            }
+
+            // Ghi dữ liệu từ JTable vào Sheet
+            for (int row = 0; row < model.getRowCount(); row++) {
+                Row sheetRow = sheet.createRow(row + 1);
+                for (int col = 0; col < model.getColumnCount(); col++) {
+                    Object value = model.getValueAt(row, col);
+                    Cell cell = sheetRow.createCell(col);
+
+                    // Xác định kiểu dữ liệu của ô dữ liệu
+                    if (value instanceof Number) cell.setCellValue(((Number) value).doubleValue());
+                    else cell.setCellValue(value.toString());
+                }
+            }
+
+            // Tự động điều chỉnh kích thước các cột trong Excel
+            for (int col = 0; col < model.getColumnCount(); col++) {
+                sheet.autoSizeColumn(col);
+            }
+
+            //tạo file .xls
+            FileOutputStream outputStream = new FileOutputStream(excelFilePath);
+            workbook.write(outputStream);
+            workbook.close();
+            outputStream.close();
+            //mở file pdf đó ra
+            File pdfFile = new File(excelFilePath);
+            if (pdfFile.exists()) {
+                if (Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().open(pdfFile);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Máy tính không hỗ trợ!");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "File không tồn tại!");
+            }
+        }
+        catch (Exception e2) {
+                e2.printStackTrace();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -223,7 +282,7 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
         ThongKePane.setLayout(new java.awt.BorderLayout());
         jTabbedPane1.addTab("Thống kê", ThongKePane);
 
-        PrintTonKhoBtn.setText("In bảng thống kê");
+        PrintTonKhoBtn.setText("Xuất bảng báo cáo");
         PrintTonKhoBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PrintTonKhoBtnActionPerformed(evt);
@@ -293,7 +352,7 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
             }
         });
 
-        PrintNhapXuatBtn.setText("In bảng thống kê");
+        PrintNhapXuatBtn.setText("Xuất bảng báo cáo");
         PrintNhapXuatBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PrintNhapXuatBtnActionPerformed(evt);
@@ -359,7 +418,7 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
             }
         });
 
-        PrintNeedBookBtn.setText("In bảng thống kê");
+        PrintNeedBookBtn.setText("Xuất bảng báo cáo");
         PrintNeedBookBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PrintNeedBookBtnActionPerformed(evt);
@@ -429,7 +488,7 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
 
         jScrollPane1.setViewportView(BanChayTable);
 
-        PrintBanChayBtn.setText("In bảng thống kê");
+        PrintBanChayBtn.setText("Xuất bảng báo cáo");
         PrintBanChayBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PrintBanChayBtnActionPerformed(evt);
@@ -491,7 +550,7 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
         TKLable.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         TKLable.setForeground(new java.awt.Color(0, 0, 255));
         TKLable.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        TKLable.setText("THỐNG KÊ");
+        TKLable.setText("BÁO CÁO");
         TKLable.setRequestFocusEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -550,13 +609,9 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
     }//GEN-LAST:event_TKNeedBookBtnMouseClicked
 
     private void PrintNeedBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintNeedBookBtnActionPerformed
-        try {
-            MessageFormat header = new MessageFormat("Danh sách loại sách cần nhập");
-            MessageFormat footer = new MessageFormat("Page{1,number,interger}");
-            NeedBookTable.print(JTable.PrintMode.FIT_WIDTH, header, footer);
-        } catch (Exception e2) {
-                e2.printStackTrace();
-        }
+        int dialogResult = JOptionPane.showConfirmDialog (null, "Xuất file excel?","Warning",JOptionPane.YES_NO_OPTION);
+        if(dialogResult == JOptionPane.YES_OPTION)
+            XuatFileExcel(dtmSach, "Sách cần nhập", "C:\\Users\\dat\\Downloads\\SachCanNhap.xls" );
     }//GEN-LAST:event_PrintNeedBookBtnActionPerformed
 
     private void BanChayBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BanChayBtnMouseClicked
@@ -575,23 +630,15 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
     }//GEN-LAST:event_BanChayBtnMouseClicked
 
     private void PrintBanChayBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintBanChayBtnActionPerformed
-        try {
-            MessageFormat header = new MessageFormat("Danh sách loại sách bán chạy");
-            MessageFormat footer = new MessageFormat("Page{1,number,interger}");
-            BanChayTable.print(JTable.PrintMode.FIT_WIDTH, header, footer);
-        } catch (Exception e2) {
-                e2.printStackTrace();
-        }
+        int dialogResult = JOptionPane.showConfirmDialog (null, "Xuất file excel?","Warning",JOptionPane.YES_NO_OPTION);
+        if(dialogResult == JOptionPane.YES_OPTION)
+            XuatFileExcel(dtmBanChay, "Sách bán chạy", "C:\\Users\\dat\\Downloads\\BanChay.xls" );
     }//GEN-LAST:event_PrintBanChayBtnActionPerformed
 
     private void PrintTonKhoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintTonKhoBtnActionPerformed
-        try {
-            MessageFormat header = new MessageFormat("Danh sách tồn kho");
-            MessageFormat footer = new MessageFormat("Page{1,number,interger}");
-            TonKhoTable.print(JTable.PrintMode.FIT_WIDTH, header, footer);
-        } catch (Exception e2) {
-                e2.printStackTrace();
-        }
+        int dialogResult = JOptionPane.showConfirmDialog (null, "Xuất file excel?","Warning",JOptionPane.YES_NO_OPTION);
+        if(dialogResult == JOptionPane.YES_OPTION)
+            XuatFileExcel(dtmTonKho, "Tồn kho tháng này", "C:\\Users\\dat\\Downloads\\TonKho.xls" );
     }//GEN-LAST:event_PrintTonKhoBtnActionPerformed
 
     private void NhapXuatBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NhapXuatBtnMouseClicked
@@ -614,13 +661,9 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
     }//GEN-LAST:event_NhapXuatBtnMouseClicked
 
     private void PrintNhapXuatBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintNhapXuatBtnActionPerformed
-        try {
-            MessageFormat header = new MessageFormat("Danh sách tồn kho");
-            MessageFormat footer = new MessageFormat("Page{1,number,interger}");
-            NhapXuatTable.print(JTable.PrintMode.FIT_WIDTH, header, footer);
-        } catch (Exception e2) {
-                e2.printStackTrace();
-        }
+        int dialogResult = JOptionPane.showConfirmDialog (null, "Xuất file excel?","Warning",JOptionPane.YES_NO_OPTION);
+        if(dialogResult == JOptionPane.YES_OPTION)
+            XuatFileExcel(dtmNhapXuat, "Nhập xuất tháng "+(NhapXuatMonthInput.getSelectedIndex()+1)+" năm "+NhapXuatYearInput.getText(), "C:\\Users\\dat\\Downloads\\NhapXuat.xls" );
     }//GEN-LAST:event_PrintNhapXuatBtnActionPerformed
 
     private void SaveBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SaveBtnMouseClicked

@@ -352,16 +352,17 @@ int total = 0;
                 }
                 document.add(table);
                 document.close();
-
+                
+                //mở file pdf đó ra
                 File pdfFile = new File("C:\\Users\\dat\\Downloads\\"+filename+".pdf");
                 if (pdfFile.exists()) {
                     if (Desktop.isDesktopSupported()) {
                         Desktop.getDesktop().open(pdfFile);
                     } else {
-                        System.out.println("Desktop is not supported.");
+                        JOptionPane.showMessageDialog(null, "Máy tính không hỗ trợ!");
                     }
                 } else {
-                    System.out.println("PDF file does not exist.");
+                    JOptionPane.showMessageDialog(null, "File không tồn tại!");
                 }
             } catch (DocumentException e) {
                 e.printStackTrace();
