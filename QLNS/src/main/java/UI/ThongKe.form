@@ -105,7 +105,7 @@
           <SubComponents>
             <Component class="javax.swing.JButton" name="PrintTonKhoBtn">
               <Properties>
-                <Property name="text" type="java.lang.String" value="In b&#x1ea3;ng th&#x1ed1;ng k&#xea;"/>
+                <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t b&#x1ea3;ng b&#xe1;o c&#xe1;o"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PrintTonKhoBtnActionPerformed"/>
@@ -248,7 +248,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="PrintNhapXuatBtn">
               <Properties>
-                <Property name="text" type="java.lang.String" value="In b&#x1ea3;ng th&#x1ed1;ng k&#xea;"/>
+                <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t b&#x1ea3;ng b&#xe1;o c&#xe1;o"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PrintNhapXuatBtnActionPerformed"/>
@@ -374,7 +374,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="PrintNeedBookBtn">
               <Properties>
-                <Property name="text" type="java.lang.String" value="In b&#x1ea3;ng th&#x1ed1;ng k&#xea;"/>
+                <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t b&#x1ea3;ng b&#xe1;o c&#xe1;o"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PrintNeedBookBtnActionPerformed"/>
@@ -508,7 +508,7 @@
             </Container>
             <Component class="javax.swing.JButton" name="PrintBanChayBtn">
               <Properties>
-                <Property name="text" type="java.lang.String" value="In b&#x1ea3;ng th&#x1ed1;ng k&#xea;"/>
+                <Property name="text" type="java.lang.String" value="Xu&#x1ea5;t b&#x1ea3;ng b&#xe1;o c&#xe1;o"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PrintBanChayBtnActionPerformed"/>
@@ -562,7 +562,7 @@
               <Color blue="ff" green="0" red="0" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="TH&#x1ed0;NG K&#xca;"/>
+            <Property name="text" type="java.lang.String" value="B&#xc1;O C&#xc1;O"/>
             <Property name="requestFocusEnabled" type="boolean" value="false"/>
           </Properties>
         </Component>

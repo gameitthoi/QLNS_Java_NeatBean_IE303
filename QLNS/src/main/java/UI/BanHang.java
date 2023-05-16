@@ -346,7 +346,7 @@ public class BanHang extends javax.swing.JFrame {
 
         NavBar.add(QLMenu);
 
-        TKMenu.setText("Thống kê");
+        TKMenu.setText("Báo cáo");
         TKMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TKMenuMouseClicked(evt);
