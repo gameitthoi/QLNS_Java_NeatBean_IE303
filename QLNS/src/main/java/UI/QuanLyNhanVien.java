@@ -44,9 +44,29 @@ private ArrayList<ChucVu> dscv = null;
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setTitle(title);
-        hienThiToanBoNhanVien();
         hienThiChucVu();
+        hienThiToanBoNhanVien();
     }
+    
+    private void hienThiChucVu () {
+        ChucVu_Connect cvconn = new ChucVu_Connect();
+        dscv=cvconn.layToanBoChucVu();
+        CVInput.removeAllItems();
+        for(ChucVu s : dscv) CVInput.addItem(s);
+    }
+    
+    private void ResetForm(){
+        MaNVInput.setText("");
+        TenNVInput.setText("");
+        NSInput.setText("");
+        NVLInput.setText("");
+        CCCDInput.setText("");
+        CVInput.setSelectedIndex(1);
+        SDTInput.setText("");
+        EmailInput.setText("");
+        LuongInput.setText("");
+    }
+    
     private void hienThiToanBoNhanVien() {
         NhanVien_Connect nv_conn = new NhanVien_Connect();
         nhanViens = nv_conn.layToanBoNhanVien();
@@ -75,13 +95,8 @@ private ArrayList<ChucVu> dscv = null;
             dtmNhanVien.addRow(vec);
         }
         NVTable.setModel(dtmNhanVien);
-    }   
-    
-    private void hienThiChucVu () {
-        ChucVu_Connect cvconn = new ChucVu_Connect();
-        dscv=cvconn.layToanBoChucVu();
-        CVInput.removeAllItems();
-        for(ChucVu s : dscv) CVInput.addItem(s);
+        AddFromExcelBtn.setEnabled(false);
+        ResetForm();
     }
     
     private void xuLyThemMoi(String maNV) throws ParseException {
@@ -106,17 +121,16 @@ private ArrayList<ChucVu> dscv = null;
         NhanVien_Connect nv_conn = new NhanVien_Connect();
         if(nv_conn.kiemTraTonTai(maNV)==true) JOptionPane.showMessageDialog(null, "Mã nhân viên này đã tồn tại!");
         else{
-            int ret=JOptionPane.showConfirmDialog(null, "Bạn muốn thêm nhân viên mới?", "xác nhận xác nhận để thêm", JOptionPane.OK_CANCEL_OPTION);
-            if(ret==JOptionPane.OK_OPTION){
-                int activeLuu = nv_conn.themNhanVien(nv);
-                if(activeLuu>0){
-                    JOptionPane.showMessageDialog(null, "Thêm mới thành công!");
-                    hienThiToanBoNhanVien();
-                }
-                else JOptionPane.showMessageDialog(null, "Thêm mới thất bại!");	
-            } 
+            int activeLuu = nv_conn.themNhanVien(nv);
+            if(activeLuu>0){
+                JOptionPane.showMessageDialog(null, "Thêm mới thành công!");
+                hienThiToanBoNhanVien();
+            }
+            else JOptionPane.showMessageDialog(null, "Thêm mới thất bại!");
         } 
-    }   
+    }  
+    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -159,6 +173,7 @@ private ArrayList<ChucVu> dscv = null;
         ResetBtn = new javax.swing.JButton();
         DeleteBtn = new javax.swing.JButton();
         ImportExcelBtn = new javax.swing.JButton();
+        AddFromExcelBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         NVTable = new javax.swing.JTable();
         TimNhanVienLabel = new javax.swing.JLabel();
@@ -398,6 +413,14 @@ private ArrayList<ChucVu> dscv = null;
             }
         });
 
+        AddFromExcelBtn.setText("Thêm tất cả");
+        AddFromExcelBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddFromExcelBtnActionPerformed(evt);
+            }
+        });
+        AddFromExcelBtn.setEnabled(false);
+
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
@@ -413,18 +436,23 @@ private ArrayList<ChucVu> dscv = null;
                 .addComponent(DeleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(ImportExcelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(AddFromExcelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AddBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(UpdateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ResetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DeleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ImportExcelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(AddBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(UpdateBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ResetBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(DeleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(ImportExcelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(AddFromExcelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
@@ -514,14 +542,22 @@ private ArrayList<ChucVu> dscv = null;
 
     private void AllNVBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AllNVBtnActionPerformed
         hienThiToanBoNhanVien();
+        AddFromExcelBtn.setEnabled(false);
     }//GEN-LAST:event_AllNVBtnActionPerformed
 
     private void AddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnActionPerformed
-        String maNV = MaNVInput.getText();				
-        try {
-            xuLyThemMoi(maNV);
-        } catch (ParseException e1) {
-            e1.printStackTrace();
+        int ret=JOptionPane.showConfirmDialog(null, "Bạn muốn thêm nhân viên này?", "xác nhận xác nhận để thêm", JOptionPane.OK_CANCEL_OPTION);
+        if(ret==JOptionPane.OK_OPTION){
+            if(MaNVInput.getText().equals("") || TenNVInput.getText().equals("") || NSInput.getText().equals("") || NVLInput.getText().equals("") || CCCDInput.getText().equals("") || SDTInput.getText().equals("") || EmailInput.getText().equals("") || LuongInput.getText().equals("") )
+                JOptionPane.showMessageDialog(null, "Dữ liệu còn thiếu");
+            else {
+                String maNV = MaNVInput.getText();				
+                try {
+                    xuLyThemMoi(maNV);
+                } catch (ParseException e1) {
+                    e1.printStackTrace();
+                }
+            }
         }
     }//GEN-LAST:event_AddBtnActionPerformed
 
@@ -544,66 +580,68 @@ private ArrayList<ChucVu> dscv = null;
             vec.add(String.format("%.0f", nv.getLuong()));
             dtmNhanVien.addRow(vec);
         }
-	NVTable.setModel(dtmNhanVien);			
+	NVTable.setModel(dtmNhanVien);
+        AddFromExcelBtn.setEnabled(false);
     }//GEN-LAST:event_TKNVBtnActionPerformed
 
     private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
-        String manv = MaNVInput.getText();
-        NhanVien_Connect nv_conn = new NhanVien_Connect();
-        int ret = JOptionPane.showConfirmDialog(null, "Bạn chắc chắn muốn xóa?", "Xác nhận xóa", JOptionPane.OK_CANCEL_OPTION);
+        int ret=JOptionPane.showConfirmDialog(null, "Bạn muốn xóa nhân viên này?", "xác nhận xác nhận để thêm", JOptionPane.OK_CANCEL_OPTION);
         if(ret==JOptionPane.OK_OPTION){
-            int active = nv_conn.xoaNhanVien(manv);
-            if(active>0){
-                    JOptionPane.showMessageDialog(null, "Xóa thành công!");
-                    hienThiToanBoNhanVien();
+            if(MaNVInput.getText().equals(""))
+                JOptionPane.showMessageDialog(null, "Dữ liệu còn thiếu");
+            else {
+                String manv = MaNVInput.getText();
+                NhanVien_Connect nv_conn = new NhanVien_Connect();
+                int active = nv_conn.xoaNhanVien(manv);
+                if(active>0){
+                        JOptionPane.showMessageDialog(null, "Xóa thành công!");
+                        hienThiToanBoNhanVien();
+                }
+                else JOptionPane.showMessageDialog(null, "Xóa thất bại!");
             }
-            else JOptionPane.showMessageDialog(null, "Xóa thất bại!");
         }
     }//GEN-LAST:event_DeleteBtnActionPerformed
 
     private void ResetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetBtnActionPerformed
-        MaNVInput.setText("");
-        TenNVInput.setText("");
-        NSInput.setText("");
-        NVLInput.setText("");
-        CCCDInput.setText("");
-        CVInput.setSelectedIndex(1);
-        SDTInput.setText("");
-        EmailInput.setText("");
-        LuongInput.setText("");
+        ResetForm();
     }//GEN-LAST:event_ResetBtnActionPerformed
 
     private void UpdateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateBtnActionPerformed
-        NhanVien_Connect nv_conn = new NhanVien_Connect();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        NhanVien nv = new NhanVien();
-        nv.setMaNV(MaNVInput.getText());
-        nv.setTenNV(TenNVInput.getText());
-        nv.setNgaySinh(NSInput.getText());
-        try {
-            nv.setNgaySinh(dateFormat.format(dateFormat.parse(NSInput.getText())));
-            nv.setNgayVaolam(dateFormat.format(dateFormat.parse(NVLInput.getText())));
-        } catch (ParseException ex) {
-            Logger.getLogger(QuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        nv.setNgaySinh(NSInput.getText());
-        nv.setNgayVaolam(NVLInput.getText());
-        nv.setSoChungMinh(CCCDInput.getText());
-        if(CVInput.getSelectedIndex()<10)
-            nv.setMaCV("CV0"+(CVInput.getSelectedIndex()+1));
-        else
-            nv.setMaCV("CV"+(CVInput.getSelectedIndex()+1));
-        nv.setSDT(SDTInput.getText());
-        nv.setEmail(EmailInput.getText());
-        nv.setLuong(Double.parseDouble(LuongInput.getText()));
-        int ret=JOptionPane.showConfirmDialog(null, "Bạn muốn chỉnh sửa nhân viên?", "Xác nhận chỉnh sửa", JOptionPane.OK_CANCEL_OPTION);
+        int ret=JOptionPane.showConfirmDialog(null, "Bạn muốn chỉnh sửa nhân viên này?", "xác nhận xác nhận để thêm", JOptionPane.OK_CANCEL_OPTION);
         if(ret==JOptionPane.OK_OPTION){
-            int activeUpdate = nv_conn.updateNhanVien(nv);
-            if(activeUpdate>0){
-                JOptionPane.showMessageDialog(null, "Chỉnh sửa thành công!");
-                hienThiToanBoNhanVien();
+            if(MaNVInput.getText().equals("") || TenNVInput.getText().equals("") || NSInput.getText().equals("") || NVLInput.getText().equals("") || CCCDInput.getText().equals("") || SDTInput.getText().equals("") || EmailInput.getText().equals("") || LuongInput.getText().equals("") ){
+                JOptionPane.showMessageDialog(null, "Dữ liệu còn thiếu");
             }
-            else JOptionPane.showMessageDialog(null, "Chỉnh sửa thất bại!"+ nv.getNgaySinh()+" "+nv.getNgayVaolam());
+            else {
+                NhanVien_Connect nv_conn = new NhanVien_Connect();
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+                NhanVien nv = new NhanVien();
+                nv.setMaNV(MaNVInput.getText());
+                nv.setTenNV(TenNVInput.getText());
+                nv.setNgaySinh(NSInput.getText());
+                try {
+                    nv.setNgaySinh(dateFormat.format(dateFormat.parse(NSInput.getText())));
+                    nv.setNgayVaolam(dateFormat.format(dateFormat.parse(NVLInput.getText())));
+                } catch (ParseException ex) {
+                    Logger.getLogger(QuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                nv.setNgaySinh(NSInput.getText());
+                nv.setNgayVaolam(NVLInput.getText());
+                nv.setSoChungMinh(CCCDInput.getText());
+                if(CVInput.getSelectedIndex()<10)
+                    nv.setMaCV("CV0"+(CVInput.getSelectedIndex()+1));
+                else
+                    nv.setMaCV("CV"+(CVInput.getSelectedIndex()+1));
+                nv.setSDT(SDTInput.getText());
+                nv.setEmail(EmailInput.getText());
+                nv.setLuong(Double.parseDouble(LuongInput.getText()));
+                int activeUpdate = nv_conn.updateNhanVien(nv);
+                if(activeUpdate>0){
+                    JOptionPane.showMessageDialog(null, "Chỉnh sửa thành công!");
+                    hienThiToanBoNhanVien();
+                }
+                else JOptionPane.showMessageDialog(null, "Chỉnh sửa thất bại!"+ nv.getNgaySinh()+" "+nv.getNgayVaolam()); 
+            }
         }
     }//GEN-LAST:event_UpdateBtnActionPerformed
 
@@ -700,7 +738,43 @@ private ArrayList<ChucVu> dscv = null;
                 e.printStackTrace();
             }
         }
+        AddFromExcelBtn.setEnabled(true);
     }//GEN-LAST:event_ImportExcelBtnActionPerformed
+
+    private void AddFromExcelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddFromExcelBtnActionPerformed
+        int ret=JOptionPane.showConfirmDialog(null, "Bạn muốn thêm tất cả nhân viên có trong bảng?", "xác nhận xác nhận để thêm", JOptionPane.OK_CANCEL_OPTION);
+        if(ret==JOptionPane.OK_OPTION){
+            int dem = 0;
+            NhanVien_Connect nv_conn = new NhanVien_Connect();
+            ChucVu_Connect cvconn = new ChucVu_Connect();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+            //lặp qua tất cả các dòng của bảng
+            for (int i=0; i< NVTable.getRowCount(); i++){
+                NhanVien nv = new NhanVien();
+                nv.setMaNV(NVTable.getValueAt(i, 0).toString());
+                nv.setTenNV(NVTable.getValueAt(i, 1).toString());
+                try {
+                    nv.setNgaySinh(dateFormat.format(dateFormat.parse(NVTable.getValueAt(i, 2).toString())));
+                    nv.setNgayVaolam(dateFormat.format(dateFormat.parse(NVTable.getValueAt(i, 3).toString())));
+                } catch (ParseException ex) {
+                    Logger.getLogger(QuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                nv.setSoChungMinh(NVTable.getValueAt(i, 4).toString());
+                ChucVu cv = cvconn.TimChucVu(NVTable.getValueAt(i, 5).toString());
+                nv.setMaCV(cv.getMaCV());
+                nv.setSDT(NVTable.getValueAt(i, 6).toString());
+                nv.setEmail(NVTable.getValueAt(i, 7).toString());
+                nv.setLuong(Double.parseDouble(NVTable.getValueAt(i, 8).toString()));
+                if(nv_conn.kiemTraTonTai(nv.getMaNV())==true) JOptionPane.showMessageDialog(null, "Mã nhân viên "+nv.getMaNV()+" đã tồn tại!");
+                else{
+                    int activeLuu = nv_conn.themNhanVien(nv);
+                    if(activeLuu<=0) JOptionPane.showMessageDialog(null, "Thêm mới "+nv.getMaNV()+" thất bại!");
+                    else dem++;
+                }
+            }
+            if(dem == NVTable.getRowCount()) hienThiToanBoNhanVien();
+        }
+    }//GEN-LAST:event_AddFromExcelBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -739,6 +813,7 @@ private ArrayList<ChucVu> dscv = null;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddBtn;
+    private javax.swing.JButton AddFromExcelBtn;
     private javax.swing.JButton AllNVBtn;
     private javax.swing.JTextField CCCDInput;
     private javax.swing.JLabel CCCDLabel;
