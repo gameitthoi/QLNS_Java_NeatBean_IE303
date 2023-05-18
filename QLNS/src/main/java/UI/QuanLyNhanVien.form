@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -467,19 +467,26 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="ImportExcelBtn" min="-2" pref="107" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="AddFromExcelBtn" min="-2" pref="107" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="AddBtn" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="UpdateBtn" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="ResetBtn" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="DeleteBtn" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="ImportExcelBtn" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="AddBtn" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                              <Component id="UpdateBtn" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                              <Component id="ResetBtn" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                              <Component id="DeleteBtn" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                              <Component id="ImportExcelBtn" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                              <Component id="AddFromExcelBtn" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace pref="14" max="32767" attributes="0"/>
                   </Group>
@@ -526,6 +533,17 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ImportExcelBtnActionPerformed"/>
               </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="AddFromExcelBtn">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Th&#xea;m t&#x1ea5;t c&#x1ea3;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AddFromExcelBtnActionPerformed"/>
+              </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_ListenersCodePost" type="java.lang.String" value="AddFromExcelBtn.setEnabled(false);"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

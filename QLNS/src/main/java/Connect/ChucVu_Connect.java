@@ -35,7 +35,7 @@ public class ChucVu_Connect extends Connect_sqlServer{
     public ChucVu TimChucVu(String Chucvu){
         ChucVu cv = new ChucVu();
         try{
-            String sql ="select top 1 * from CHUCVU where ChucVu=?" ;
+            String sql ="select top 1 MaCV, ChucVu, DinhDoanh from CHUCVU where ChucVu=?" ;
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setString(1, Chucvu);
             ResultSet result = pre.executeQuery();
