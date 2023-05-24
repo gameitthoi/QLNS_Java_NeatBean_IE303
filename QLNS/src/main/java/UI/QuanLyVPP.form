@@ -41,14 +41,14 @@
                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       <Component id="jLabel_Top" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jButton_ThemSach" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButton_ThemVPP" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="69" max="-2" attributes="0"/>
                       <Component id="jButton_ChinhSua" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="66" max="-2" attributes="0"/>
                       <Component id="jButton_NhapLai" min="-2" pref="100" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="72" max="-2" attributes="0"/>
-                      <Component id="jButton_XoaSach" min="-2" pref="134" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="jButton_XoaVPP" min="-2" pref="115" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jPanel_Data" alignment="1" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
@@ -63,9 +63,9 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jButton_ThemSach" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButton_ThemVPP" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButton_ChinhSua" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton_XoaSach" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButton_XoaVPP" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel_Top" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
                           <Component id="jButton_NhapLai" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
@@ -101,7 +101,7 @@
                 <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jButton_ChinhSua.setIcon(new ImageIcon(&quot;images/book_and_pencil_25px.png&quot;));"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton_XoaSach">
+            <Component class="javax.swing.JButton" name="jButton_XoaVPP">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="66" green="66" red="ff" type="rgb"/>
@@ -121,13 +121,13 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_XoaSachActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_XoaVPPActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jButton_XoaSach.setIcon(new ImageIcon(&quot;images/remove_book_25px.png&quot;));"/>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jButton_XoaVPP.setIcon(new ImageIcon(&quot;images/remove_book_25px.png&quot;));"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton_ThemSach">
+            <Component class="javax.swing.JButton" name="jButton_ThemVPP">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="99" green="ff" red="33" type="rgb"/>
@@ -147,10 +147,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_ThemSachActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_ThemVPPActionPerformed"/>
               </Events>
               <AuxValues>
-                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jButton_ThemSach.setIcon(new ImageIcon(&quot;images/add_book_25px.png&quot;));"/>
+                <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jButton_ThemVPP.setIcon(new ImageIcon(&quot;images/add_book_25px.png&quot;));"/>
               </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel_Top">
@@ -183,12 +183,9 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="TKInput_TenVPP" min="-2" pref="258" max="-2" attributes="0"/>
                                       <Group type="102" attributes="0">
-                                          <Component id="TKInput_TenSach" min="-2" pref="258" max="-2" attributes="0"/>
-                                          <EmptySpace min="50" max="32767" attributes="0"/>
-                                      </Group>
-                                      <Group type="102" attributes="0">
-                                          <Component id="NXBInput" min="-2" pref="258" max="-2" attributes="0"/>
+                                          <Component id="NCCInput" min="-2" pref="258" max="-2" attributes="0"/>
                                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
@@ -198,7 +195,7 @@
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="jLabel_TheLoai" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" attributes="0">
-                                      <Component id="TKInput_MaSach" min="-2" pref="258" max="-2" attributes="0"/>
+                                      <Component id="TKInput_MaVPP" min="-2" pref="258" max="-2" attributes="0"/>
                                       <EmptySpace min="-2" pref="92" max="-2" attributes="0"/>
                                       <Component id="jLabel_GiaBan" min="-2" max="-2" attributes="0"/>
                                   </Group>
@@ -207,7 +204,7 @@
                           <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="TKInput_SoLuong" min="-2" pref="258" max="-2" attributes="0"/>
-                              <Component id="TKInput_TheLoai" min="-2" pref="258" max="-2" attributes="0"/>
+                              <Component id="TKInput_DoanhMuc" min="-2" pref="258" max="-2" attributes="0"/>
                               <Component id="TKInput_GiaBan" min="-2" pref="258" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="65" max="32767" attributes="0"/>
@@ -224,7 +221,7 @@
                           <EmptySpace pref="28" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="jLabel_MaSach" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="TKInput_MaSach" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
+                              <Component id="TKInput_MaVPP" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
                               <Group type="103" alignment="1" groupAlignment="3" attributes="0">
                                   <Component id="jLabel_GiaBan" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="TKInput_GiaBan" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
@@ -233,9 +230,9 @@
                           <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel_MaNXB" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="NXBInput" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                              <Component id="NCCInput" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                               <Component id="jLabel_TheLoai" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="TKInput_TheLoai" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                              <Component id="TKInput_DoanhMuc" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                               <Component id="jLabel_Discount" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="TKInput_Discount" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                           </Group>
@@ -243,7 +240,7 @@
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel_TenSach" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="TKInput_TenSach" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
+                                  <Component id="TKInput_TenVPP" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="TKInput_SoLuong" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
@@ -322,25 +319,25 @@
                     <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jLabel_SoLuong.setIcon(new ImageIcon(&quot;images/how_many_quest_28px.png&quot;));"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="NXBInput">
+                <Component class="javax.swing.JComboBox" name="NCCInput">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="14" style="0"/>
                     </Property>
                   </Properties>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;NXB&gt;()"/>
-                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;NXB&gt;"/>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;NhaCungCap_VPP&gt;()"/>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;NhaCungCap_VPP&gt;"/>
                   </AuxValues>
                 </Component>
-                <Component class="javax.swing.JTextField" name="TKInput_MaSach">
+                <Component class="javax.swing.JTextField" name="TKInput_MaVPP">
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TKInput_MaSachActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TKInput_MaVPPActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JTextField" name="TKInput_TenSach">
+                <Component class="javax.swing.JTextField" name="TKInput_TenVPP">
                 </Component>
-                <Component class="javax.swing.JTextField" name="TKInput_TheLoai">
+                <Component class="javax.swing.JTextField" name="TKInput_DoanhMuc">
                 </Component>
                 <Component class="javax.swing.JTextField" name="TKInput_SoLuong">
                 </Component>
@@ -481,7 +478,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="jTable_Books">
+            <Component class="javax.swing.JTable" name="jTable_VPP">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="f3" green="f3" red="f4" type="rgb"/>
@@ -491,7 +488,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable_BooksMouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTable_VPPMouseClicked"/>
               </Events>
             </Component>
           </SubComponents>
