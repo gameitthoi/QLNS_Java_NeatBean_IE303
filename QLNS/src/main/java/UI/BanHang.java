@@ -15,9 +15,12 @@ import Model.Sach;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.NumberFormatter;
 
 /**
  *
@@ -238,9 +241,6 @@ public class BanHang extends javax.swing.JFrame {
 
         ChangeInput.setEnabled(false);
 
-        PaymentBtn.setBackground(new java.awt.Color(0, 153, 51));
-        PaymentBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        PaymentBtn.setForeground(new java.awt.Color(255, 255, 255));
         PaymentBtn.setText("Thanh toán");
         PaymentBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -248,9 +248,6 @@ public class BanHang extends javax.swing.JFrame {
             }
         });
 
-        CancleBtn.setBackground(new java.awt.Color(255, 0, 0));
-        CancleBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        CancleBtn.setForeground(new java.awt.Color(255, 255, 255));
         CancleBtn.setText("Hủy hóa đơn");
         CancleBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,8 +255,6 @@ public class BanHang extends javax.swing.JFrame {
             }
         });
 
-        DeleteBtn.setBackground(new java.awt.Color(255, 255, 0));
-        DeleteBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         DeleteBtn.setText("Xóa sản phẩm");
         DeleteBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -273,10 +268,9 @@ public class BanHang extends javax.swing.JFrame {
 
         SLInput.setModel(new SpinnerNumberModel(1, 1, 100, 1));
         SLInput.setRequestFocusEnabled(false);
+        JFormattedTextField txtField = ((JSpinner.DefaultEditor) SLInput.getEditor()).getTextField();
+        ((NumberFormatter) txtField.getFormatter()).setAllowsInvalid(false); // Chỉ cho phép giá trị hợp lệ là số
 
-        addHDBtn.setBackground(new java.awt.Color(0, 102, 255));
-        addHDBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        addHDBtn.setForeground(new java.awt.Color(255, 255, 255));
         addHDBtn.setText("Thêm vào hóa đơn");
         addHDBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -647,8 +641,12 @@ public class BanHang extends javax.swing.JFrame {
     }//GEN-LAST:event_CancleBtnActionPerformed
 
     private void ReceiveInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ReceiveInputKeyReleased
-        if (!ReceiveInput.getText().isEmpty()){
-            double tienthua = Double.parseDouble(ReceiveInput.getText())-Double.parseDouble(TotalInput.getText());
+        String text = ReceiveInput.getText();
+        String total = TotalInput.getText();
+
+        //tính tiền thối lại cho khách
+        if (!text.isEmpty() && !total.isEmpty()){
+            double tienthua = Double.parseDouble(text)-Double.parseDouble(total);
             ChangeInput.setText(String.valueOf(tienthua));
         }
         else ChangeInput.setText("");
