@@ -208,6 +208,42 @@ CREATE TABLE [dbo].[SACH](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+/****** Object:  Table [dbo].[NCC_VPP]     ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[NCCVPP](
+	[MaNCCVPP] [nvarchar](50) NOT NULL,
+	[TenNCCVPP] [nvarchar](250) NULL,
+	[SDT] [nvarchar](50) NULL,
+	[DiaChi] [nvarchar](50) NULL,
+	[Email] [nvarchar](50) NULL,
+ CONSTRAINT [PK_NCCVPP] PRIMARY KEY CLUSTERED 
+(
+	[MaNCCVPP] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[VPP]     ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[VPP](
+	[MaVPP] [nvarchar](50) NOT NULL,
+	[TenVPP] [nvarchar](250) NULL,
+	[MaNCCVPP] [nvarchar](50) NULL,
+	[GiaBanVPP] [money] NULL,
+	[DanhMuc] [nvarchar](150) NULL,
+	[SoLuong] [int] NULL,
+	[Discount] [int] NULL,
+ CONSTRAINT [PK_VPP] PRIMARY KEY CLUSTERED 
+(
+	[MaVPP] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
 /****** Object:  Table [dbo].[TAIKHOAN]    Script Date: 09-Dec-17 9:46:27 AM ******/
 SET ANSI_NULLS ON
 GO
@@ -318,6 +354,13 @@ INSERT [dbo].[TONKHO]([MaTK], [MaSach], [TonDau], [Nhap], [Xuat], [TonCuoi], [Th
 INSERT [dbo].[TONKHO]([MaTK], [MaSach], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK11', N's05', 0, 100, 1, 99, 4, 2023)
 INSERT [dbo].[TONKHO]([MaTK], [MaSach], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK12', N's06', 0, 10, 1, 9, 4, 2023)
 
+INSERT [dbo].[NCCVPP] ([MaNCCVPP], [TenNCCVPP], [SDT], [DiaChi], [Email]) VALUES (N'ncc01', N'Thiên Long', N'1900 866 819', N'Tp HCM', N'salesonline@thienlongvn.com')
+INSERT [dbo].[NCCVPP] ([MaNCCVPP], [TenNCCVPP], [SDT], [DiaChi], [Email]) VALUES (N'ncc02', N'Huyền Anh', N'0903317294', N'Tp HCM', N'vpphuyenanh2020@gmail.com')
+
+
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v01', N'Bút bi Thiên Long TL027 - xanh', N'ncc01', 5000.0000, N'Bút', 15, 10)
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v02', N'BÌA GIẤY MÀU A4 180 GSM', N'ncc02', 50000.0000, N'Bìa giấy', 10, 5)
+
 ALTER TABLE [dbo].[CTHD]  WITH CHECK ADD  CONSTRAINT [fk_cthd_Sach] FOREIGN KEY([MaSach])
 REFERENCES [dbo].[SACH] ([MaSach])
 GO
@@ -340,6 +383,9 @@ ALTER TABLE [dbo].[NHANVIEN] CHECK CONSTRAINT [fk_ChucVu]
 GO
 ALTER TABLE [dbo].[SACH]  WITH CHECK ADD  CONSTRAINT [fk_NXB] FOREIGN KEY([MaNXB])
 REFERENCES [dbo].[NXB] ([MaNXB])
+GO
+ALTER TABLE [dbo].[VPP]  WITH CHECK ADD  CONSTRAINT [fk_NCCVPP] FOREIGN KEY([MaNCCVPP])
+REFERENCES [dbo].[NCCVPP] ([MaNCCVPP])
 GO
 ALTER TABLE [dbo].[SACH] CHECK CONSTRAINT [fk_NXB]
 GO
