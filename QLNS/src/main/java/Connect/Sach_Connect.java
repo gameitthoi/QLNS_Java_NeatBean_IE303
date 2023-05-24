@@ -300,7 +300,7 @@ public class Sach_Connect extends Connect_sqlServer{
     public int  themSachMoi(Sach s)
     {
         try {
-            String sql = "insert into SACH values (?,?,?,?,?,?,?)"  ;
+            String sql = "insert into SACH values (?,?,?,?,?,?,?,?)"  ;
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setString(1, s.getMaSach());
             pre.setString(2, s.getTenSach());
@@ -309,7 +309,7 @@ public class Sach_Connect extends Connect_sqlServer{
             pre.setDouble(5, s.getGiaBan());
             pre.setString(6, s.getTheLoai());
             pre.setInt(7, s.getSoLuong());
-
+            pre.setInt(8, s.getDiscount());
             return pre.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -355,7 +355,7 @@ public class Sach_Connect extends Connect_sqlServer{
     public int update (Sach s)
     {
             try {
-                String sql = "update SACH set TenSach=? ,MaNXB=? ,TacGia=? ,GiaBan=? ,TheLoai=?,SoLuong=? where MaSach=? " ;
+                String sql = "update SACH set TenSach=? ,MaNXB=? ,TacGia=? ,GiaBan=? ,TheLoai=?,SoLuong=?, Discount=? where MaSach=? " ;
                 PreparedStatement pre = conn.prepareStatement(sql);
                 pre.setString(1, s.getTenSach());
                 pre.setString(2, s.getMaNXB());
@@ -363,7 +363,9 @@ public class Sach_Connect extends Connect_sqlServer{
                 pre.setDouble(4, s.getGiaBan());
                 pre.setString(5, s.getTheLoai());
                 pre.setInt(6, s.getSoLuong());
-                pre.setString(7, s.getMaSach());
+                pre.setInt(7, s.getDiscount());
+                pre.setString(8, s.getMaSach());
+                
                 return pre.executeUpdate();
 
             } catch (Exception e) {

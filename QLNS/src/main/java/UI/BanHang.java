@@ -186,6 +186,7 @@ public class BanHang extends javax.swing.JFrame {
         QLNXB = new javax.swing.JMenuItem();
         QLNV = new javax.swing.JMenuItem();
         QLHD = new javax.swing.JMenuItem();
+        QL_NCCVPP = new javax.swing.JMenuItem();
         TKMenu = new javax.swing.JMenu();
         TaiKhoanMenu = new javax.swing.JMenu();
         BarcodeMenu = new javax.swing.JMenu();
@@ -343,6 +344,14 @@ public class BanHang extends javax.swing.JFrame {
             }
         });
         QLMenu.add(QLHD);
+
+        QL_NCCVPP.setText("Quản lý nhà cung cấp VPP");
+        QL_NCCVPP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                QL_NCCVPPActionPerformed(evt);
+            }
+        });
+        QLMenu.add(QL_NCCVPP);
 
         NavBar.add(QLMenu);
 
@@ -651,6 +660,12 @@ public class BanHang extends javax.swing.JFrame {
         mvUI.showWindow();
     }//GEN-LAST:event_BarcodeMenuMouseClicked
 
+    private void QL_NCCVPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QL_NCCVPPActionPerformed
+        // TODO add your handling code here:
+        QuanLyNCCVPP np = new QuanLyNCCVPP("Quản lý nhà cung cấp văn phòng mẫu");
+        np.showWindow();
+    }//GEN-LAST:event_QL_NCCVPPActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -701,6 +716,7 @@ public class BanHang extends javax.swing.JFrame {
     private javax.swing.JMenuItem QLNV;
     private javax.swing.JMenuItem QLNXB;
     private javax.swing.JMenuItem QLSach;
+    private javax.swing.JMenuItem QL_NCCVPP;
     private javax.swing.JTextField ReceiveInput;
     private javax.swing.JLabel ReceiveLabel;
     private javax.swing.JSpinner SLInput;
