@@ -18,7 +18,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,3,-21,0,0,5,51"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-5,0,0,5,60"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -61,7 +61,7 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jButton_ThemVPP" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jButton_ChinhSua" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -69,10 +69,11 @@
                           <Component id="jLabel_Top" alignment="3" min="-2" pref="51" max="-2" attributes="0"/>
                           <Component id="jButton_NhapLai" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="27" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="jSeparator2" min="-2" pref="15" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel_Data" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -184,12 +185,9 @@
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="TKInput_TenVPP" min="-2" pref="258" max="-2" attributes="0"/>
-                                      <Group type="102" attributes="0">
-                                          <Component id="NCCInput" min="-2" pref="258" max="-2" attributes="0"/>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                      </Group>
+                                      <Component id="NCCInput" min="-2" pref="258" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                                  <EmptySpace min="24" max="32767" attributes="0"/>
                                   <Component id="jLabel_SoLuong" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="103" groupAlignment="1" attributes="0">
@@ -218,7 +216,7 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace pref="28" max="32767" attributes="0"/>
+                          <EmptySpace pref="24" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="jLabel_MaSach" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="TKInput_MaVPP" alignment="1" min="-2" pref="35" max="-2" attributes="0"/>
@@ -227,7 +225,7 @@
                                   <Component id="TKInput_GiaBan" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel_MaNXB" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="NCCInput" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
@@ -236,7 +234,7 @@
                               <Component id="jLabel_Discount" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="TKInput_Discount" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel_TenSach" alignment="1" min="-2" max="-2" attributes="0"/>
@@ -247,7 +245,7 @@
                                   <Component id="jLabel_SoLuong" alignment="3" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -422,16 +420,16 @@
                                   <EmptySpace min="-2" pref="78" max="-2" attributes="0"/>
                                   <Component id="jLabel_Loc" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="TKInput" min="-2" pref="348" max="-2" attributes="0"/>
+                                  <Component id="TK_TenVPPInput" min="-2" pref="348" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
                                   <Component id="jLabel_Loc1" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="TKInput1" min="-2" pref="348" max="-2" attributes="0"/>
+                                  <Component id="TK_DanhMucInput" min="-2" pref="348" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jButton_Search" min="-2" pref="150" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="0" pref="85" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="87" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
@@ -444,18 +442,18 @@
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="344" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                   <Component id="NhanTenLabel" min="-2" pref="37" max="-2" attributes="0"/>
-                  <EmptySpace pref="30" max="32767" attributes="0"/>
+                  <EmptySpace pref="10" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel_Loc" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
-                      <Component id="TKInput" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="TK_TenVPPInput" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="jLabel_Loc1" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="TKInput1" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                      <Component id="TK_DanhMucInput" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="jButton_Search" alignment="3" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -508,7 +506,7 @@
             <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jLabel_Loc.setIcon(new ImageIcon(&quot;images/filter_48px.png&quot;));"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="TKInput">
+        <Component class="javax.swing.JTextField" name="TK_TenVPPInput">
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="T&#xea;n S&#xe1;ch"/>
           </Properties>
@@ -548,7 +546,7 @@
             <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="jLabel_Loc.setIcon(new ImageIcon(&quot;images/filter_48px.png&quot;));"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="TKInput1">
+        <Component class="javax.swing.JTextField" name="TK_DanhMucInput">
           <Properties>
             <Property name="toolTipText" type="java.lang.String" value="T&#xea;n S&#xe1;ch"/>
           </Properties>

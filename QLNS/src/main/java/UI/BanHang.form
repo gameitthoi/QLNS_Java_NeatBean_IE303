@@ -51,7 +51,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="QL_VPP">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd;  VPP"/>
+                <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; VPP"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="QL_VPPActionPerformed"/>

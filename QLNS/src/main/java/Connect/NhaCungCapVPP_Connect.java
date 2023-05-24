@@ -65,6 +65,24 @@ public class NhaCungCapVPP_Connect extends Connect_sqlServer {
         return dsNCC;
     }
     
+    //for VPP page
+    public NhaCungCap_VPP TimTenNCC(String tenNCC){
+        NhaCungCap_VPP ncc = new NhaCungCap_VPP();
+        try{
+            String sql ="select top 1 * from NCCVPP where MaNCCVPP=?" ;
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setString(1, tenNCC);
+            ResultSet result = pre.executeQuery();
+            while (result.next()) {
+                ncc.setMaNCCVPP(result.getString(1));
+                ncc.setTenNCCVPP(result.getString(2));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return ncc;
+    }
+    
     //add NCCVPP
      public int  themMoi(NhaCungCap_VPP ncc)
     {

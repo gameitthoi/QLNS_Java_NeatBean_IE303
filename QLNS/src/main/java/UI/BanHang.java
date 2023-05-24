@@ -354,7 +354,7 @@ public class BanHang extends javax.swing.JFrame {
         });
         QLMenu.add(QL_NCCVPP);
 
-        QL_VPP.setText("Quản lý  VPP");
+        QL_VPP.setText("Quản lý VPP");
         QL_VPP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 QL_VPPActionPerformed(evt);
