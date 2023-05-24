@@ -53,7 +53,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
         dtmVPP = new DefaultTableModel();
         dtmVPP.addColumn("Mã VPP");     
         dtmVPP.addColumn("Tên VPP");
-        dtmVPP.addColumn("Mã NCC");
+        dtmVPP.addColumn("Mã NCCVPP");
         dtmVPP.addColumn("Danh Mục");      
         dtmVPP.addColumn("Số lượng");
         dtmVPP.addColumn("Giá Bán (VNĐ)");
