@@ -92,6 +92,10 @@ public class QuanLySach extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel_Discount1 = new javax.swing.JLabel();
+        TKInput_UpdateAllPrice = new javax.swing.JTextField();
+        jButton_Accpet = new javax.swing.JButton();
+        jButton_Cancel = new javax.swing.JButton();
         jPanel_Top = new javax.swing.JPanel();
         jPanel_TopFunction = new javax.swing.JPanel();
         jButton_ChinhSua = new javax.swing.JButton();
@@ -115,6 +119,11 @@ public class QuanLySach extends javax.swing.JFrame {
         TKInput_GiaBan = new javax.swing.JTextField();
         jLabel_Discount = new javax.swing.JLabel();
         TKInput_Discount = new javax.swing.JTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel_Discount2 = new javax.swing.JLabel();
+        TKInput_UpdateAllPrice1 = new javax.swing.JTextField();
+        jButton_Accpet1 = new javax.swing.JButton();
+        jButton_Cancel1 = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jButton_NhapLai = new javax.swing.JButton();
         jPanel_Center = new javax.swing.JPanel();
@@ -127,6 +136,18 @@ public class QuanLySach extends javax.swing.JFrame {
         jLabel_Loc1 = new javax.swing.JLabel();
         TKInput1 = new javax.swing.JTextField();
         NhanTenLabel = new javax.swing.JLabel();
+
+        jLabel_Discount1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel_Discount1.setText("Tăng giá đồng loạt");
+
+        jButton_Accpet.setText("OK");
+
+        jButton_Cancel.setText("X");
+        jButton_Cancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_CancelActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -171,6 +192,8 @@ public class QuanLySach extends javax.swing.JFrame {
         jLabel_Top.setForeground(new java.awt.Color(0, 153, 204));
         jLabel_Top.setText("Quản Lý Sách");
 
+        jPanel_Data.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+
         jLabel_MaSach.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel_MaSach.setText("Mã Sách");
 
@@ -203,6 +226,56 @@ public class QuanLySach extends javax.swing.JFrame {
         jLabel_Discount.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel_Discount.setText("Giảm Giá");
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel_Discount2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel_Discount2.setText("Tăng giá đồng loạt");
+
+        jButton_Accpet1.setText("OK");
+        jButton_Accpet1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_Accpet1ActionPerformed(evt);
+            }
+        });
+
+        jButton_Cancel1.setText("X");
+        jButton_Cancel1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_Cancel1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel_Discount2)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(TKInput_UpdateAllPrice1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton_Accpet1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(jButton_Cancel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel_Discount2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TKInput_UpdateAllPrice1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_Accpet1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton_Cancel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel_Discount.setIcon(new ImageIcon("images/discount_28px.png"));
+
         javax.swing.GroupLayout jPanel_DataLayout = new javax.swing.GroupLayout(jPanel_Data);
         jPanel_Data.setLayout(jPanel_DataLayout);
         jPanel_DataLayout.setHorizontalGroup(
@@ -221,7 +294,7 @@ public class QuanLySach extends javax.swing.JFrame {
                                 .addComponent(TKInput_MaSach, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(53, 53, 53)
                                 .addComponent(jLabel_TacGia)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE))
                             .addGroup(jPanel_DataLayout.createSequentialGroup()
                                 .addComponent(TKInput_TenSach, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -236,17 +309,20 @@ public class QuanLySach extends javax.swing.JFrame {
                     .addComponent(TKInput_TacGia, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TKInput_SoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TKInput_TheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
-                .addGroup(jPanel_DataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel_GiaBan)
-                    .addComponent(jLabel_Discount))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
                 .addGroup(jPanel_DataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_DataLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(TKInput_GiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel_DataLayout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(TKInput_Discount, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel_DataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel_GiaBan)
+                            .addComponent(jLabel_Discount))
+                        .addGroup(jPanel_DataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_DataLayout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(TKInput_GiaBan, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel_DataLayout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(TKInput_Discount, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(55, 55, 55))
         );
         jPanel_DataLayout.setVerticalGroup(
@@ -268,15 +344,21 @@ public class QuanLySach extends javax.swing.JFrame {
                     .addComponent(TKInput_TheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_Discount)
                     .addComponent(TKInput_Discount, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
                 .addGroup(jPanel_DataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel_DataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel_TenSach, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(TKInput_TenSach, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel_DataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(TKInput_SoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel_SoLuong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGap(25, 25, 25))
+                    .addGroup(jPanel_DataLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(jPanel_DataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel_DataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel_TenSach, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(TKInput_TenSach, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel_DataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(TKInput_SoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel_SoLuong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(25, 25, 25))
+                    .addGroup(jPanel_DataLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
 
         jLabel_MaSach.setIcon(new ImageIcon("images/repository_28px.png"));
@@ -438,7 +520,7 @@ public class QuanLySach extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(NhanTenLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel_CenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel_Loc, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TKInput, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -682,6 +764,27 @@ NXB manxb = (NXB) NXBInput.getSelectedItem();
     private void TKInput_MaSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TKInput_MaSachActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TKInput_MaSachActionPerformed
+
+    private void jButton_CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CancelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_CancelActionPerformed
+
+    private void jButton_Cancel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Cancel1ActionPerformed
+        // TODO add your handling code here:
+        TKInput_UpdateAllPrice1.setText("");
+    }//GEN-LAST:event_jButton_Cancel1ActionPerformed
+
+    private void jButton_Accpet1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Accpet1ActionPerformed
+        // TODO add your handling code here:
+         double extraMoney = (Double.parseDouble(TKInput_UpdateAllPrice1.getText().trim()));
+        //System.out.println(extraMoney);
+       
+        Sach_Connect sc = new Sach_Connect();
+        for (Sach s: dss){
+            sc.updateAllPrice(s.getMaSach(), (s.getGiaBan()+extraMoney));
+        }
+       hienThiToanBoSach();
+    }//GEN-LAST:event_jButton_Accpet1ActionPerformed
 protected void xuLyXoa(String maSach) {
 		Sach_Connect sachXoa = new Sach_Connect();
 		int active= sachXoa.XoaSach(maSach);
@@ -717,12 +820,20 @@ protected void xuLyXoa(String maSach) {
     private javax.swing.JTextField TKInput_TacGia;
     private javax.swing.JTextField TKInput_TenSach;
     private javax.swing.JTextField TKInput_TheLoai;
+    private javax.swing.JTextField TKInput_UpdateAllPrice;
+    private javax.swing.JTextField TKInput_UpdateAllPrice1;
+    private javax.swing.JButton jButton_Accpet;
+    private javax.swing.JButton jButton_Accpet1;
+    private javax.swing.JButton jButton_Cancel;
+    private javax.swing.JButton jButton_Cancel1;
     private javax.swing.JButton jButton_ChinhSua;
     private javax.swing.JButton jButton_NhapLai;
     private javax.swing.JButton jButton_Search;
     private javax.swing.JButton jButton_ThemSach;
     private javax.swing.JButton jButton_XoaSach;
     private javax.swing.JLabel jLabel_Discount;
+    private javax.swing.JLabel jLabel_Discount1;
+    private javax.swing.JLabel jLabel_Discount2;
     private javax.swing.JLabel jLabel_GiaBan;
     private javax.swing.JLabel jLabel_Loc;
     private javax.swing.JLabel jLabel_Loc1;
@@ -733,6 +844,7 @@ protected void xuLyXoa(String maSach) {
     private javax.swing.JLabel jLabel_TenSach;
     private javax.swing.JLabel jLabel_TheLoai;
     private javax.swing.JLabel jLabel_Top;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel_Center;
     private javax.swing.JPanel jPanel_Data;
     private javax.swing.JPanel jPanel_Top;

@@ -100,6 +100,22 @@ public class VanPhongPham_Connect extends Connect_sqlServer{
      }
         
      
+     public int updatePrice(String MaVPP, double extra){
+        try {
+            String sql ="update VPP set GiaBanVPP=? where MaVPP=?" ;
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setDouble(1, extra);
+            pre.setString(2,MaVPP);
+
+            return pre.executeUpdate();
+
+            } catch (Exception e) {
+                    e.printStackTrace();
+            }
+
+        return -1;
+    }
+     
      public ArrayList<VPP> laySachTheoTenVPP(String maten)
     {
         ArrayList<VPP> dsvpp = new ArrayList<VPP>();

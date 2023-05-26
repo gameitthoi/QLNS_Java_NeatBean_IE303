@@ -390,6 +390,23 @@ public class Sach_Connect extends Connect_sqlServer{
 
         return -1;
     }
+    
+    //update all price
+       public int updateAllPrice(String MaSach, double ex){
+        try {
+            String sql ="update SACH set GiaBan=? where MaSach=?" ;
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setDouble(1, ex);
+            pre.setString(2,MaSach);
+
+            return pre.executeUpdate();
+
+            } catch (Exception e) {
+                    e.printStackTrace();
+            }
+
+        return -1;
+    }
     //Hàm Lấy danh sách sách có số lượng còn dưới 5
     public ArrayList<Sach> laySachConDuoiTon(int SL)
     {
