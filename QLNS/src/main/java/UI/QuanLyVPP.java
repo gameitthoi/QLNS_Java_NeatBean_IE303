@@ -10,12 +10,26 @@ import Connect.Sach_Connect;
 import Connect.VanPhongPham_Connect;
 import Model.NhaCungCap_VPP;
 import Model.VPP;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Vector;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 
 /**
  *
@@ -128,6 +142,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
         jButton_Cancel = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
         jButton_NhapLai = new javax.swing.JButton();
+        jButton_ThemTuExcel = new javax.swing.JButton();
         jPanel_Center = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -355,6 +370,18 @@ public class QuanLyVPP extends javax.swing.JFrame {
             }
         });
 
+        jButton_ThemTuExcel.setBackground(new java.awt.Color(0, 204, 51));
+        jButton_ThemTuExcel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton_ThemTuExcel.setForeground(new java.awt.Color(255, 255, 255));
+        jButton_ThemTuExcel.setText("Excel +");
+        jButton_ThemTuExcel.setMaximumSize(new java.awt.Dimension(150, 40));
+        jButton_ThemTuExcel.setMinimumSize(new java.awt.Dimension(150, 40));
+        jButton_ThemTuExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_ThemTuExcelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel_TopFunctionLayout = new javax.swing.GroupLayout(jPanel_TopFunction);
         jPanel_TopFunction.setLayout(jPanel_TopFunctionLayout);
         jPanel_TopFunctionLayout.setHorizontalGroup(
@@ -363,6 +390,8 @@ public class QuanLyVPP extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addComponent(jLabel_Top)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton_ThemTuExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
                 .addComponent(jButton_ThemVPP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(69, 69, 69)
                 .addComponent(jButton_ChinhSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -386,7 +415,8 @@ public class QuanLyVPP extends javax.swing.JFrame {
                     .addComponent(jButton_ChinhSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_XoaVPP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_Top, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_NhapLai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton_NhapLai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_ThemTuExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -399,6 +429,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
         jButton_ThemVPP.setIcon(new ImageIcon("images/add_book_25px.png"));
         jLabel_Top.setIcon(new ImageIcon("images/add_book_40px.png"));
         jButton_ChinhSua.setIcon(new ImageIcon("images/hand_with_pen_25px.png"));
+        jButton_ThemVPP.setIcon(new ImageIcon("images/add_book_25px.png"));
 
         jPanel_Top.add(jPanel_TopFunction);
 
@@ -749,6 +780,87 @@ public class QuanLyVPP extends javax.swing.JFrame {
         }
        hienThiToanBoVPP();
     }//GEN-LAST:event_jButton_AccpetActionPerformed
+
+    private void jButton_ThemTuExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ThemTuExcelActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+
+        // Chỉ định bộ lọc để chỉ cho phép chọn các tệp Excel
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel Files", "xls");
+        fileChooser.setFileFilter(filter);
+
+        // Hiển thị cửa sổ Explorer và lấy tệp được chọn
+        int result = fileChooser.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            String filePath = selectedFile.getAbsolutePath();
+            //đọc file excel đó
+            try {
+                // Tạo đối tượng File từ đường dẫn
+                File file = new File(filePath);
+
+                // Đọc tệp Excel
+                FileInputStream fis = new FileInputStream(file);
+                Workbook workbook = new HSSFWorkbook(fis);
+
+                // Lấy ra sheet đầu tiên từ workbook
+                Sheet sheet = workbook.getSheetAt(0);
+                
+                //Xóa tất cả các dòng trong bảng nhân viên
+                dtmVPP.setRowCount(0);
+
+                // Duyệt qua các dòng trong sheet
+                for (int rowIndex = 0; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
+                    if (rowIndex == 0) {
+                        continue; // Bỏ qua dòng đầu tiên
+                    }
+                    
+                    Row row = sheet.getRow(rowIndex);
+                    
+                    String[] rowData = new String[dtmVPP.getColumnCount()];
+
+                    // Duyệt qua các ô trong dòng
+                    for (int columnIndex = 0; columnIndex < dtmVPP.getColumnCount(); columnIndex++) {
+                        Cell cell = row.getCell(columnIndex);
+                        
+                        // Chuyển đổi giá trị của ô thành kiểu String và lưu vào mảng rowData
+                        String cellValue = "";
+                        if (cell != null) {
+                            if (cell.getCellType() == CellType.STRING) {
+                                cellValue = cell.getStringCellValue();
+                            } else if (cell.getCellType() == CellType.NUMERIC) {
+                                if (DateUtil.isCellDateFormatted(cell)) {
+                                    // Kiểm tra nếu là giá trị ngày tháng
+                                    Date dateValue = cell.getDateCellValue();
+                                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                                    cellValue = dateFormat.format(dateValue);
+                                } else {
+                                    cellValue = String.format("%.0f",cell.getNumericCellValue()); 
+                                }
+                            } else if (cell.getCellType() == CellType.BLANK) {
+                                cellValue = "";
+                            }
+                        }
+
+                        rowData[columnIndex] = cellValue;
+                    }
+
+                    // Thêm dòng dữ liệu vào mô hình dtmNhanVien
+                    dtmVPP.addRow(rowData);
+                }
+
+                // Đóng FileInputStream và workbook
+                fis.close();
+                workbook.close();
+
+                // Cập nhật bảng NVTable với mô hình dtmNhanVien
+                jTable_VPP.setModel(dtmVPP);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        jButton_ThemTuExcel.setEnabled(true);
+    }//GEN-LAST:event_jButton_ThemTuExcelActionPerformed
 protected void xuLyXoa(String maVPP) {
 		VanPhongPham_Connect sachXoa = new VanPhongPham_Connect();
 		int active= sachXoa.Xoa(maVPP);
@@ -789,6 +901,7 @@ protected void xuLyXoa(String maVPP) {
     private javax.swing.JButton jButton_ChinhSua;
     private javax.swing.JButton jButton_NhapLai;
     private javax.swing.JButton jButton_Search;
+    private javax.swing.JButton jButton_ThemTuExcel;
     private javax.swing.JButton jButton_ThemVPP;
     private javax.swing.JButton jButton_XoaVPP;
     private javax.swing.JLabel jLabel_Discount;
