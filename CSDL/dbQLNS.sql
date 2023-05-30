@@ -323,7 +323,46 @@ INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai]
 INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's38', N'TÝ QUẬY - TẬP 2 (2021)', N'nxb02', 'Đào Hải', 36000.0000,  N'Truyện tranh',17, 30) --
 INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's39', N'ĐI TÌM BỐ MẸ HOÀN HẢO - "DẠY DỖ" BỐ MẸ THẬT MỆT! (SAI CÁCH - ĐÚNG CÁCH)', N'nxb02', 'Katharina Grossmann-Hensel', 31500.0000,  N'Truyện tranh',17, 30) --
 INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's40', N'SINH NHẬT CỦA CHUỘT TÍP (2020)', N'nxb02', 'Marco Campanella Anna Casalis', 14000.0000,  N'Truyện tranh',44, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's41', N'CÂY BÚT MÀU NHIỆM CỦA MALALA', N'nxb02', 'Malala Yousafzai Kerascoët', 405000.0000,  N'Truyện tranh',18, 10) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's41', N'CÂY BÚT MÀU NHIỆM CỦA MALALA', N'nxb02', 'Malala Yousafzai Kerascoët', 40500.0000,  N'Truyện tranh',18, 10) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's42', N'THƠ Ở NHÀ TRẺ (2021)', N'nxb02', 'Nhiều tác giả', 31500.0000,  N'Truyện tranh',19, 10) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's43', N'CÂY KHẾ (2021)', N'nxb02', 'Hồng Hà', 10500.0000,  N'Truyện tranh',28, 10) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's44', N'SỰ TÍCH DƯA HẤU (2021)', N'nxb02', 'Hiếu Minh', 14000.0000,  N'Truyện tranh',38, 10) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's45', N'SINH CON RỒI MỚI SINH CHA (2021)', N'nxb02', 'Phạm Ngọc Tuấn', 10500.0000,  N'Truyện tranh',28, 10) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's46', N'CHIẾC DÉP THẤT LẠC - THE LOST SANDAL (2021)', N'nxb02', 'Geralda De Vos', 42000.0000,  N'Truyện tranh',11, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's47', N'SỰ TÍCH CON DÃ TRÀNG', N'nxb02', 'Phương Thúy', 14000.0000,  N'Truyện tranh',18, 10) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's48', N'KHỦNG HOẢNG TUỔI ĐẾN TRƯỜNG', N'nxb02', 'Kim Do-ah', 31500.0000,  N'Truyện tranh',18, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's49', N'TỪ THỨC GẶP TIÊN', N'nxb02', 'Kim Ngọc', 14000.0000,  N'Truyện tranh',18, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's50', N'SỰ TÍCH QUẠ VÀ CÔNG (2021)', N'nxb02', 'Nguyễn Công Hoan', 10500.0000,  N'Truyện tranh',18, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's51', N'BẢY ĐIỀU ƯỚC', N'nxb02', 'Phạm Ngọc Tuấn', 10500.0000,  N'Truyện tranh',18, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's52', N'ĐI Ở HỌC THÀNH TÀI (2021)', N'nxb02', 'Phạm Ngọc Tuấn', 10500.0000,  N'Truyện tranh',20, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's53', N'NGƯỜI CHA VÀ BA CON TRAI (2021)', N'nxb02', 'Hồng Hà', 10500.0000,  N'Truyện tranh',28, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's54', N'HỘT ĐIỀU CỦA SÓC (2021)', N'nxb02', 'Nguyên Trang', 9100.0000,  N'Truyện tranh',38, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's55', N'SỰ TÍCH CON MUỖI (2021)', N'nxb02', 'Phạm Ngọc Tân', 10500.0000,  N'Truyện tranh',30, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's56', N'THIỆN VÀ ÁC VÀ CỔ TÍCH', N'nxb02', 'Thủy Nguyên', 149500.0000,  N'Truyện tranh',38, 50) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's57', N'CON NGƯỜI (2021)', N'nxb02', 'Hiếu Minh', 21000.0000,  N'Truyện tranh',20, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's58', N'HÀNH TRÌNH TRỞ VỀ CỦA ODYSSEUS (2019)', N'nxb02', 'Thomas Bulfinch', 54000.0000,  N'Truyện tranh', 35, 10) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's59', N'MẠNG LƯỚI ẤM ÁP', N'nxb02', 'Patrice Karst', 22500.0000,  N'Truyện tranh',27, 50) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's60', N'SỰ TÍCH HỒ BA BỂ (2021)', N'nxb02', 'Phạm Ngọc Tuấn', 10500.0000,  N'Truyện tranh',25, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's61', N'NHÓC KÌ LÂN MỌC SỪNG BÚA ĐẼO', N'nxb02', 'Nguyễn Hoàng Vũ', 38500.0000,  N'Truyện tranh',50, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's62', N'SỰ RA ĐỜI CỦA CÁC VỊ THẦN', N'nxb02', 'Gấu Mèo', 30000.0000,  N'Truyện tranh',20, 50) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's63', N'CON ĐƯỜNG KHÔNG DẪN TỚI ĐÂU', N'nxb02', 'Gianni Rodari', 20000.0000,  N'Truyện tranh',25, 50) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's64', N'KIỆN NGÀNH ĐA', N'nxb02', 'Hồng Hà', 10500.0000,  N'Truyện tranh',25, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's65', N'CÔ BÉ MÁC-TIN VÀ NGƯỜI HÀNG XÓM KÌ LẠ', N'nxb02', 'Gilbert Delahaye', 21000.0000,  N'Truyện tranh',20, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's66', N'CÔ BÉ LỌ LEM', N'nxb02', 'Peter Holeinone', 42000.0000,  N'Truyện tranh',20, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's67', N'CÂU THẦN CHÚ DIỆU KÌ', N'nxb02', 'Ha Neul ddang', 34000.0000,  N'Truyện tranh',27, 10) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's68', N'TỐNG TRÂN CÚC HOA', N'nxb02', 'Phạm Ngọc Tuấn', 10500.0000,  N'Truyện tranh',38, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's69', N'CƯỜNG BẠO CHỐNG TRỜI', N'nxb02', 'Trương Hiếu', 10500.0000,  N'Truyện tranh',40, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's70', N'CÁI KIẾN MÀY KIỆN CỦ KHOAI', N'nxb02', 'Lê Minh Hải', 10500.0000,  N'Truyện tranh',20, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's71', N'NÀNG RỒNG KHÈ RA TRÀ SỮA', N'nxb02', 'Nguyễn Hoàng Vũ', 27500.0000,  N'Truyện tranh',28, 50) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's72', N'VOI NGÀ VÀNG (2021)', N'nxb02', 'Phạm Ngọc Tuấn', 10500.0000,  N'Truyện tranh',20, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's73', N'SỰ TÍCH NÚI NGŨ HÀNH', N'nxb02', 'Hồng Hà', 10500.0000,  N'Truyện tranh',45, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's74', N'CHÀNG HỌC TRÒ VÀ CON CHÓ ĐÁ (2021)', N'nxb02', 'Hồng Hà', 10500.0000,  N'Truyện tranh',45, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's75', N'CHUYỆN ÔNG GIÓNG (2021)', N'nxb02', 'Hồng Hà', 10500.0000,  N'Truyện tranh',45, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's76', N'VIÊN NGỌC ƯỚC (2021)', N'nxb02', 'Phạm Ngọc Tuấn', 10500.0000,  N'Truyện tranh',40, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's77', N'TẤM CÁM', N'nxb02', 'Mai Long', 10500.0000,  N'Truyện tranh',40, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's78', N'SỰ TÍCH CON KỀN KỀN (2020)', N'nxb02', 'Phạm Ngọc Tuấn', 10500.0000,  N'Truyện tranh',45, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's79', N'CHA MẸ NUÔI CON BẰNG TRỜI BẰNG BỂ (2021)', N'nxb02', 'Hồng Hà', 10500.0000,  N'Truyện tranh',47, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's80', N'DŨNG SĨ ĐAM DÔNG (2021)', N'nxb02', 'Tạ Huy Long', 10500.0000,  N'Truyện tranh',40, 30) --
 
 
 INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD01', 'NV01', '01/01/2023', 7500000.0000, 1, 1)
@@ -392,10 +431,100 @@ INSERT [dbo].[TONKHO]([MaTK], [MaSach], [TonDau], [Nhap], [Xuat], [TonCuoi], [Th
 
 INSERT [dbo].[NCCVPP] ([MaNCCVPP], [TenNCCVPP], [SDT], [DiaChi], [Email]) VALUES (N'ncc01', N'Thiên Long', N'1900 866 819', N'Tp HCM', N'salesonline@thienlongvn.com')
 INSERT [dbo].[NCCVPP] ([MaNCCVPP], [TenNCCVPP], [SDT], [DiaChi], [Email]) VALUES (N'ncc02', N'Huyền Anh', N'0903317294', N'Tp HCM', N'vpphuyenanh2020@gmail.com')
+INSERT [dbo].[NCCVPP] ([MaNCCVPP], [TenNCCVPP], [SDT], [DiaChi], [Email]) VALUES (N'ncc03', N'An Lộc Việt', N'0899189499', N'Tp HCM', N'vppanlocviet@gmail.com')
+INSERT [dbo].[NCCVPP] ([MaNCCVPP], [TenNCCVPP], [SDT], [DiaChi], [Email]) VALUES (N'ncc04', N'Hoàng Hà', N'02838473239', N'Tp HCM', N'vpphoangha48@gmail.com')
 
 
 INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v01', N'Bút bi Thiên Long TL027 - xanh', N'ncc01', 5000.0000, N'Bút', 15, 10)
 INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v02', N'BÌA GIẤY MÀU A4 180 GSM', N'ncc02', 50000.0000, N'Bìa giấy', 10, 5)
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v03', N'Giấy A4 Uni Plus 80 gsm màng co', N'ncc03', 76000.0000, N'Giấy A4', 10, 10)
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v04', N'Giấy A4 Uni Plus 72 gsm màng co', N'ncc03', 69000.0000, N'Giấy A4', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v05', N'Giấy A4 Excel 70 gsm', N'ncc03', 54000.0000, N'Giấy A4', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v06', N'Giấy A4 Viva 70 gsm', N'ncc03', 67000.0000, N'Giấy A4', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v07', N'Giấy A4 Nano 68 gsm', N'ncc03', 64000.0000, N'Giấy A4', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v08', N'Giấy A4 Delight 70 gsm', N'ncc03', 66000.0000, N'Giấy A4', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v09', N'Giấy A4 PaperOne 70 gsm', N'ncc03', 73000.0000, N'Giấy A4', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v10', N'Giấy A4 PaperOne 80 gsm', N'ncc03', 85000.0000, N'Giấy A4', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v11', N'Giấy A4 PaperOne 100 gsm', N'ncc03', 114000.0000, N'Giấy A4', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v12', N'Giấy A4 Quality 70 gsm', N'ncc03', 68000.0000, N'Giấy A4', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v13', N'Giấy A4 IK Plus 70 gsm', N'ncc03', 114000.0000, N'Giấy A4', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v14', N'Giấy A4 Thái Lan màu 80 gsm', N'ncc03', 70000.0000, N'Giấy A4', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v15', N'Bút chì chuốt Staedtler 134', N'ncc03', 3300.0000, N'Bút chì', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v16', N'Bút chì chuốt Gstar P333 3B', N'ncc03', 2000.0000, N'Bút chì', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v17', N'Bút chì bấm Pentel AX105', N'ncc03', 7700.0000, N'Bút chì', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v18', N'Bút chì chuốt Tiệp Khắc KOH 2B,4B,6B', N'ncc03', 2400.0000, N'Bút chì', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v19', N'Bút chì xé Gstar 7600B', N'ncc03', 5100.0000, N'Bút chì', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v20', N'Chuốt chì Thiên Long S-01', N'ncc03', 2700.0000, N'Chuốt bút chì', 10, 10)--	
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v21', N'Ruột chì 2B Yoyo', N'ncc03', 3000.0000, N'Ruột bút chì', 10, 10)--	
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v22', N'Kim bấm số 3 Việt Đức', N'ncc03', 8000.0000, N'Kim bấm', 10, 10)--	
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v23', N'Bấm lỗ 9670', N'ncc03', 232000.0000, N'Bấm lỗ', 10, 10)--	
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v24', N'Máy bấm giá Hongsheng MX-5500EOS - có nắp', N'ncc03', 68000.0000, N'Máy bấm giá', 10, 10)--	
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v25', N'Kẹp nhựa màu C62', N'ncc03', 1500.0000, N'Kẹp nhựa', 10, 10)--	
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v26', N'Hộp đựng kim kẹp Deli nam châm 9881', N'ncc03', 22000.0000, N'Hộp đựng kim kẹp', 10, 10)--	
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v27', N'Ruột chì 2B Yoyo', N'ncc03', 3000.0000, N'Ruột bút chì', 10, 10)--	
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v28', N'Kẹp giấy C82', N'ncc03', 4800.0000, N'Kẹp giấy', 10, 10)--	
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v29', N'Bấm kim số 10 SDI', N'ncc03', 24400.0000, N'Bấm kim số', 10, 10)--	
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v30', N'Bấm kim nhựa số 10 Gstar 910', N'ncc03', 22100.0000, N'Bấm kim số', 10, 10)--	
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v31', N'Bấm kim số 10 KW.Trio 5270 chính hãng', N'ncc03', 27600.0000, N'Bấm kim số', 10, 10)--	
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v32', N'Bấm kim số 10 KW.Trio Pollex 5106 chính hãng', N'ncc03', 36100.0000, N'Bấm kim số', 10, 10)--	
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v33', N'Bấm kim số 10 Plus', N'ncc03', 35600.0000, N'Bấm kim số', 10, 10)--	
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v34', N'BÚT BI TL-095', N'ncc01', 8000.0000, N'Bút bi', 10, 20)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v35', N'BÚT BI TL-093', N'ncc01', 9000.0000, N'Bút bi', 10, 20)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v36', N'BÚT BI TL-048', N'ncc01', 8000.0000, N'Bút bi', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v37', N'BÚT BI TL-049', N'ncc01', 9000.0000, N'Bút bi', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v38', N'MỰC BÚT LÔNG BẢNG WBI-01', N'ncc01', 15000.0000, N'Bút lông bảng', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v39', N'BÚT LÔNG BẢNG WB-03', N'ncc01', 10000.0000, N'Bút lông bảng', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v40', N'BÚT LÔNG BẢNG WB-02', N'ncc01', 11000.0000, N'Bút lông bảng', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v41', N'BÚT DẠ QUANG HL-012', N'ncc01', 9000.0000, N'Bút dạ quang', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v42', N'BÚT DẠ QUANG HL-07', N'ncc01', 18000.0000, N'Bút bi', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v43', N'BÚT DẠ QUANG HL-03', N'ncc01', 1700.0000, N'Bút bi', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v44', N'BÚT LÔNG KIM FL-04', N'ncc01', 91000.0000, N'Bút lông kim', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v45', N'THƯỚC THẲNG SR-031', N'ncc01', 85000.0000, N'Thước thẳng', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v46', N'THƯỚC THẲNG SR-026', N'ncc01', 12000.0000, N'Thước thẳng', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v47', N'THƯỚC THẲNG SR-024', N'ncc01', 34000.0000, N'Thước thẳng', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v48', N'THƯỚC THẲNG SR-02', N'ncc01', 16000.0000, N'Thước thẳng', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v49', N'THƯỚC THẲNG SR-03', N'ncc01', 16000.0000, N'Thước thẳng', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v50', N'BÚT XÓA CP-06', N'ncc01', 27999.0000, N'Bút xoá', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v51', N'BÚT XÓA CP-05', N'ncc01', 20000.0000, N'Bút xoá', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v52', N'BÚT XÓA CP-02', N'ncc01', 22000.0000, N'Bút xoá', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v53', N'COMPA C-018', N'ncc01', 16000.0000, N'Compa', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v54', N'COMPA C-017', N'ncc01', 16000.0000, N'Compa', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v55', N'COMPA C-016', N'ncc01', 16000.0000, N'Compa', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v56', N'COMPA Y C-020', N'ncc01', 16000.0000, N'Compa', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v57', N'COMPA C-014', N'ncc01', 16000.0000, N'Compa', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v58', N'COMPA C-011', N'ncc01', 16000.0000, N'Compa', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v59', N'COMPA C-09', N'ncc01', 16000.0000, N'Compa', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v60', N'COMPA C-08', N'ncc01', 16000.0000, N'Compa', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v61', N'COMPA C-02', N'ncc01', 16000.0000, N'Compa', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v62', N'BĂNG KEO ĐỤC BKD-150', N'ncc04', 26000.0000, N'Băng keo đục', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v63', N'BĂNG KEO ĐỤC BKD-200', N'ncc04', 36000.0000, N'Băng keo đục', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v64', N'BĂNG KEO ĐỤC BKD-100', N'ncc04', 46000.0000, N'Băng keo đục', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v65', N'BĂNG KEO ĐỤC BKD-080', N'ncc04', 23000.0000, N'Băng keo đục', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v66', N'BĂNG KEO ĐỤC BKD-060', N'ncc04', 27000.0000, N'Băng keo đục', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v67', N'BĂNG KEO ĐỤC BKD-040', N'ncc04', 59000.0000, N'Băng keo đục', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v68', N'BĂNG KEO TRONG BKT-200', N'ncc04', 19000.0000, N'Băng keo đục', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v69', N'Giấy A5 Excel 70gsm', N'ncc04', 290000.0000, N'Giấy A5', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v70', N'Giấy A5 IK Plus 70 gsm', N'ncc04', 37000.0000, N'Giấy A5', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v71', N'Giấy A5 Double A 70gsm', N'ncc04', 39000.0000, N'Giấy A5', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v72', N'Bìa màu A5 định lượng 160gsm đủ màu', N'ncc04', 21000.0000, N'Giấy A5', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v73', N'Giấy A5 Supreme 70 gsm', N'ncc04', 38000.0000, N'Giấy A5', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v74', N'Giấy Excel A5 80gsm', N'ncc04', 33000.0000, N'Giấy A5', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v75', N'Bút lông bảng Thiên Long WB03', N'ncc04', 75000.0000, N'Bút lông', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v76', N'Bút lông bảng Thiên Long WB02', N'ncc04', 6000.0000, N'Bút lông', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v77', N'Bút lông dầu Thiên Long PM09', N'ncc04', 10500.0000, N'Bút lông', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v78', N'Bút lông bảng Thiên Long FO WB-015', N'ncc04', 6000.0000, N'Bút lông', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v79', N'Bút lông dầu Pilot', N'ncc04', 6000.0000, N'Bút lông', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v80', N'Mực bút lông viết bảng Thiên Long', N'ncc04', 6000.0000, N'Mực bút lông', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v81', N'Bút lông viết bảng Double A', N'ncc04', 6000.0000, N'Bút lông', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v82', N'Bút lông dầu Double A', N'ncc04', 6000.0000, N'Bút lông', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v83', N'Bút lông dầu Thiên Long FO-PM09', N'ncc04', 6000.0000, N'Bút lông', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v84', N'Bút lông bảng Queen LA-800', N'ncc04', 6000.0000, N'Bút lông', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v85', N'Bút lông dầu 2 đầu 1 màu Horse', N'ncc04', 6000.0000, N'Bút lông', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v86', N'Bút lông bảng Pentel Maxiflo', N'ncc04', 6000.0000, N'Bút lông', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v87', N'Bút lông bảng Stabilo WM641', N'ncc04', 6000.0000, N'Bút lông', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v88', N'Bút lông dầu 2 đầu Queen PM-01', N'ncc04', 6000.0000, N'Bút lông', 10, 10)--
+INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v89', N'Bút lông dầu sọc Horse H-110', N'ncc04', 6000.0000, N'Bút lông', 10, 10)--
+
 
 ALTER TABLE [dbo].[CTHD]  WITH CHECK ADD  CONSTRAINT [fk_cthd_Sach] FOREIGN KEY([MaSach])
 REFERENCES [dbo].[SACH] ([MaSach])
