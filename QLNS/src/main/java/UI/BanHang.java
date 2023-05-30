@@ -192,7 +192,7 @@ public class BanHang extends javax.swing.JFrame {
         QLHD = new javax.swing.JMenuItem();
         QL_NCCVPP = new javax.swing.JMenuItem();
         QL_VPP = new javax.swing.JMenuItem();
-        QLKH = new javax.swing.JMenu();
+        QLKH = new javax.swing.JMenuItem();
         TKMenu = new javax.swing.JMenu();
         TaiKhoanMenu = new javax.swing.JMenu();
         BarcodeMenu = new javax.swing.JMenu();
@@ -755,7 +755,7 @@ public class BanHang extends javax.swing.JFrame {
     private javax.swing.JMenuBar NavBar;
     private javax.swing.JButton PaymentBtn;
     private javax.swing.JMenuItem QLHD;
-    private javax.swing.JMenu QLKH;
+    private javax.swing.JMenuItem QLKH;
     private javax.swing.JMenu QLMenu;
     private javax.swing.JMenuItem QLNV;
     private javax.swing.JMenuItem QLNXB;
