@@ -498,7 +498,7 @@ public class BanHang extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void QLNXBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QLNXBActionPerformed
-        QuanLyNXB_UI nxbUi = new QuanLyNXB_UI("Quản lý nhà xuất bản");
+        QuanLyNXB nxbUi = new QuanLyNXB("Quản lý nhà xuất bản");
         nxbUi.showWindow();
     }//GEN-LAST:event_QLNXBActionPerformed
 

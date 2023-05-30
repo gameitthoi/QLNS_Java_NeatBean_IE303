@@ -6,19 +6,53 @@ package UI;
 
 import Connect.NXB_Connect;
 import Model.NXB;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Admin
  */
 public class QuanLyNXB extends javax.swing.JFrame {
-
+    private DefaultTableModel dtmNXB;
+    private ArrayList<NXB> dsnxbs = null;
+    private ArrayList<NXB> dsnxb_tim = null;
     /**
      * Creates new form QuanLyNXB
      */
-    public QuanLyNXB() {
+    public QuanLyNXB(String title) {
         initComponents();
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setLocationRelativeTo(null);
+        this.setTitle("Quản lý nhà xuất bản");
+        hienThiToanBoNhaXuatBan();
     }
+    private void hienThiToanBoNhaXuatBan() {
+                    NXB_Connect nxb_conn = new NXB_Connect();
+                    dsnxbs = nxb_conn.layToanBoNhaXuatBan();
+                    dtmNXB = new DefaultTableModel();
+                    dtmNXB.addColumn("Mã nhà xuất bản");
+                    dtmNXB.addColumn("Tên nhà xuất bản");
+                    dtmNXB.addColumn("Số điện thoại");
+                    dtmNXB.addColumn("Địa chỉ");
+                    dtmNXB.addColumn("Email");
+                    dsnxbs = nxb_conn.layToanBoNhaXuatBan();
+                    dtmNXB.setRowCount(0);
+                    for(NXB nxb : dsnxbs)
+                    {
+                            Vector<Object> vec = new Vector<Object>();
+                            vec.add(nxb.getMaNXB());
+                            vec.add(nxb.getTenNXB());
+                            vec.add(nxb.getSDT());
+                            vec.add(nxb.getDiaChi());
+                            vec.add(nxb.getEmail());
+                            dtmNXB.addRow(vec);
+                    }
+                NXBTable.setModel(dtmNXB);
 
+            }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,18 +63,18 @@ public class QuanLyNXB extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        NVTable = new javax.swing.JTable();
+        NXBTable = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         MaNVLabel = new javax.swing.JLabel();
-        MaNVInput = new javax.swing.JTextField();
+        MaNXBInput = new javax.swing.JTextField();
         TenNVLabel = new javax.swing.JLabel();
-        TenNVInput = new javax.swing.JTextField();
+        TenNXBInput = new javax.swing.JTextField();
         SDTLabel = new javax.swing.JLabel();
         SDTInput = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         CCCDLabel = new javax.swing.JLabel();
-        CCCDInput = new javax.swing.JTextField();
+        DiachiInput = new javax.swing.JTextField();
         EmailLabel = new javax.swing.JLabel();
         EmailInput = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
@@ -51,19 +85,19 @@ public class QuanLyNXB extends javax.swing.JFrame {
         TimNhanVienLabel = new javax.swing.JLabel();
         ThongTinNhanVienLabel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        TKNVBtn = new javax.swing.JButton();
-        AllNVBtn = new javax.swing.JButton();
+        TKNXBBtn = new javax.swing.JButton();
+        AllNXBBtn = new javax.swing.JButton();
         TimKiemInput = new javax.swing.JTextField();
         NhanTenLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        NVTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        NXBTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                NVTableMouseClicked(evt);
+                NXBTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(NVTable);
+        jScrollPane1.setViewportView(NXBTable);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -91,8 +125,8 @@ public class QuanLyNXB extends javax.swing.JFrame {
                     .addComponent(MaNVLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(MaNVInput, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
-                    .addComponent(TenNVInput)
+                    .addComponent(MaNXBInput, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                    .addComponent(TenNXBInput)
                     .addComponent(SDTInput))
                 .addContainerGap())
         );
@@ -102,11 +136,11 @@ public class QuanLyNXB extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(MaNVLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(MaNVInput, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(MaNXBInput, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TenNVLabel)
-                    .addComponent(TenNVInput, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TenNXBInput, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SDTLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -117,9 +151,9 @@ public class QuanLyNXB extends javax.swing.JFrame {
         CCCDLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         CCCDLabel.setText("Địa chỉ");
 
-        CCCDInput.addActionListener(new java.awt.event.ActionListener() {
+        DiachiInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CCCDInputActionPerformed(evt);
+                DiachiInputActionPerformed(evt);
             }
         });
 
@@ -131,31 +165,30 @@ public class QuanLyNXB extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGap(24, 24, 24)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(EmailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CCCDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(EmailInput)
-                    .addComponent(CCCDInput, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                    .addComponent(CCCDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(EmailLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(DiachiInput, javax.swing.GroupLayout.DEFAULT_SIZE, 199, Short.MAX_VALUE)
+                    .addComponent(EmailInput))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CCCDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DiachiInput, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(CCCDInput, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                        .addComponent(EmailInput, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(46, 46, 46))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(CCCDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(EmailLabel)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(EmailInput, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(EmailLabel))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         AddBtn.setText("Thêm");
@@ -248,17 +281,17 @@ public class QuanLyNXB extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        TKNVBtn.setText("Tìm kiếm");
-        TKNVBtn.addActionListener(new java.awt.event.ActionListener() {
+        TKNXBBtn.setText("Tìm kiếm");
+        TKNXBBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TKNVBtnActionPerformed(evt);
+                TKNXBBtnActionPerformed(evt);
             }
         });
 
-        AllNVBtn.setText("Tất cả");
-        AllNVBtn.addActionListener(new java.awt.event.ActionListener() {
+        AllNXBBtn.setText("Tất cả");
+        AllNXBBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AllNVBtnActionPerformed(evt);
+                AllNXBBtnActionPerformed(evt);
             }
         });
 
@@ -278,9 +311,9 @@ public class QuanLyNXB extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(TKNVBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TKNXBBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(AllNVBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(AllNXBBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25)))
                 .addContainerGap())
         );
@@ -293,8 +326,8 @@ public class QuanLyNXB extends javax.swing.JFrame {
                 .addComponent(TimKiemInput, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TKNVBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AllNVBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(TKNXBBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AllNXBBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27))
         );
 
@@ -314,7 +347,7 @@ public class QuanLyNXB extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ThongTinNhanVienLabel)
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(268, Short.MAX_VALUE))
+                .addContainerGap(260, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,121 +368,121 @@ public class QuanLyNXB extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void NVTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NVTableMouseClicked
-        int select = NVTable.getSelectedRow();
-        ChucVu_Connect cvconn = new ChucVu_Connect();
-        MaNVInput.setText(NVTable.getValueAt(select, 0)+"");
-        TenNVInput.setText(NVTable.getValueAt(select, 1)+"");
-        NSInput.setText(NVTable.getValueAt(select, 2)+"");
-        NVLInput.setText(NVTable.getValueAt(select, 3)+"");
-        CCCDInput.setText(NVTable.getValueAt(select, 4)+"");
+    private void NXBTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NXBTableMouseClicked
+        int select = NXBTable.getSelectedRow();
+        NXB_Connect nxbconn = new NXB_Connect();
+        MaNXBInput.setText(NXBTable.getValueAt(select, 0)+"");
+        TenNXBInput.setText(NXBTable.getValueAt(select, 1)+"");
+        DiachiInput.setText(NXBTable.getValueAt(select, 3)+"");
         //CVInput.setSelectedItem(cvconn.TimChucVu(NVTable.getValueAt(select, 5).toString()));
-        CVInput.setSelectedIndex(Integer.parseInt(cvconn.TimChucVu(NVTable.getValueAt(select, 5).toString()).getMaCV().substring(2))-1);
-        SDTInput.setText(NVTable.getValueAt(select, 6)+"");
-        EmailInput.setText(NVTable.getValueAt(select, 7)+"");
+        SDTInput.setText(NXBTable.getValueAt(select, 2)+"");
+        EmailInput.setText(NXBTable.getValueAt(select, 4)+"");
 
-    }//GEN-LAST:event_NVTableMouseClicked
+    }//GEN-LAST:event_NXBTableMouseClicked
 
-    private void TKNVBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TKNVBtnActionPerformed
+    private void TKNXBBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TKNXBBtnActionPerformed
         if(TimKiemInput.getText()==null ) return ;
         String key = TimKiemInput.getText();
-        NXB_Connect nv_conn = new NXB_Connect();
-        dsnxb_tim = nv_conn.timNhanVien(key);
-        dtmNhanVien.setRowCount(0);
-        for(NhanVien nv : dsnv_tim){
+        NXB_Connect nxbconn = new NXB_Connect();
+        dsnxb_tim = nxbconn.TimTenNXB(key);
+        dtmNXB.setRowCount(0);
+        for(NXB nxb : dsnxb_tim){
             Vector<Object> vec = new Vector<Object>();
-            vec.add(nv.getMaNV());
-            vec.add(nv.getTenNV());
-            vec.add(nv.getNgaySinh());
-            vec.add(nv.getNgayVaolam());
-            vec.add(nv.getSoChungMinh());
-            vec.add(nv.getMaCV());
-            vec.add(nv.getSDT());
-            vec.add(nv.getEmail());
-            dtmNhanVien.addRow(vec);
+            vec.add(nxb.getMaNXB());
+            vec.add(nxb.getTenNXB());
+            vec.add(nxb.getSDT());
+            vec.add(nxb.getDiaChi());
+            vec.add(nxb.getEmail());
+            dtmNXB.addRow(vec);
         }
-        NVTable.setModel(dtmNhanVien);
-    }//GEN-LAST:event_TKNVBtnActionPerformed
+        NXBTable.setModel(dtmNXB);
+    }//GEN-LAST:event_TKNXBBtnActionPerformed
 
-    private void AllNVBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AllNVBtnActionPerformed
-        hienThiToanBoNhanVien();
-    }//GEN-LAST:event_AllNVBtnActionPerformed
+    private void AllNXBBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AllNXBBtnActionPerformed
+        hienThiToanBoNhaXuatBan();
+    }//GEN-LAST:event_AllNXBBtnActionPerformed
 
     private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
-        String manv = MaNVInput.getText();
-        NhanVien_Connect nv_conn = new NhanVien_Connect();
+        String manv = MaNXBInput.getText();
+        NXB_Connect nxb_conn = new NXB_Connect();
         int ret = JOptionPane.showConfirmDialog(null, "Bạn chắc chắn muốn xóa?", "Xác nhận xóa", JOptionPane.OK_CANCEL_OPTION);
         if(ret==JOptionPane.OK_OPTION){
-            int active = nv_conn.xoaNhanVien(manv);
+            int active = nxb_conn.XoaNXB(manv);
             if(active>0){
                 JOptionPane.showMessageDialog(null, "Xóa thành công!");
-                hienThiToanBoNhanVien();
+                hienThiToanBoNhaXuatBan();
             }
             else JOptionPane.showMessageDialog(null, "Xóa thất bại!");
         }
     }//GEN-LAST:event_DeleteBtnActionPerformed
 
     private void ResetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetBtnActionPerformed
-        MaNVInput.setText("");
-        TenNVInput.setText("");
-        NSInput.setText("");
-        NVLInput.setText("");
-        CCCDInput.setText("");
-        CVInput.setSelectedIndex(1);
+        MaNXBInput.setText("");
+        TenNXBInput.setText(""); 
+        DiachiInput.setText("");
         SDTInput.setText("");
         EmailInput.setText("");
     }//GEN-LAST:event_ResetBtnActionPerformed
 
     private void UpdateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateBtnActionPerformed
-        NhanVien_Connect nv_conn = new NhanVien_Connect();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
-        NhanVien nv = new NhanVien();
-        nv.setMaNV(MaNVInput.getText());
-        nv.setTenNV(TenNVInput.getText());
-        nv.setNgaySinh(NSInput.getText());
-        try {
-            nv.setNgaySinh(dateFormat.format(dateFormat.parse(NSInput.getText())));
-            nv.setNgayVaolam(dateFormat.format(dateFormat.parse(NVLInput.getText())));
-        } catch (ParseException ex) {
-            Logger.getLogger(QuanLyNhanVien.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        nv.setNgaySinh(NSInput.getText());
-        nv.setNgayVaolam(NVLInput.getText());
-        nv.setSoChungMinh(CCCDInput.getText());
-        if(CVInput.getSelectedIndex()<10)
-        nv.setMaCV("CV0"+(CVInput.getSelectedIndex()+1));
-        else
-        nv.setMaCV("CV"+(CVInput.getSelectedIndex()+1));
-        nv.setSDT(SDTInput.getText());
-        nv.setEmail(EmailInput.getText());
-        int ret=JOptionPane.showConfirmDialog(null, "Bạn muốn chỉnh sửa nhân viên?", "xác nhận chỉnh sửa", JOptionPane.OK_CANCEL_OPTION);
+        NXB_Connect nv_conn = new NXB_Connect();
+        NXB nxb = new NXB();
+        nxb.setMaNXB(MaNXBInput.getText());
+        nxb.setTenNXB(TenNXBInput.getText());
+        nxb.setSDT(SDTInput.getText());
+        nxb.setDiaChi(DiachiInput.getText());
+        nxb.setEmail(EmailInput.getText());
+        int ret=JOptionPane.showConfirmDialog(null, "Bạn muốn chỉnh sửa nhà xuất bản?", "xác nhận chỉnh sửa", JOptionPane.OK_CANCEL_OPTION);
         if(ret==JOptionPane.OK_OPTION){
-            int activeUpdate = nv_conn.updateNhanVien(nv);
+            int activeUpdate = nv_conn.updateNXB(nxb);
             if(activeUpdate>0){
                 JOptionPane.showMessageDialog(null, "Chỉnh sửa thành công!");
-                hienThiToanBoNhanVien();
+                hienThiToanBoNhaXuatBan();
             }
-            else JOptionPane.showMessageDialog(null, "Chỉnh sửa thất bại!"+ nv.getNgaySinh()+" "+nv.getNgayVaolam());
         }
     }//GEN-LAST:event_UpdateBtnActionPerformed
-
+    private void xuLyThemMoi(String maNXB) throws ParseException {
+        NXB nxb = new NXB();
+        nxb.setMaNXB(MaNXBInput.getText());
+        nxb.setTenNXB(TenNXBInput.getText());
+        nxb.setSDT(SDTInput.getText());
+        nxb.setEmail(EmailInput.getText());
+        nxb.setDiaChi(DiachiInput.getText());
+        NXB_Connect nxb_conn = new NXB_Connect();
+        if(nxb_conn.kiemTraTonTai(maNXB)==true) JOptionPane.showMessageDialog(null, "Mã nhà xuất bản này đã tồn tại!");
+        else{
+            int activeLuu = nxb_conn.ThemMoiNXB(nxb);
+            if(activeLuu>0){
+                JOptionPane.showMessageDialog(null, "Thêm mới thành công!");
+                hienThiToanBoNhaXuatBan();
+            }
+            else JOptionPane.showMessageDialog(null, "Thêm mới thất bại!");
+        } 
+    }  
     private void AddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnActionPerformed
-        String maNV = MaNVInput.getText();
-        try {
-            xuLyThemMoi(maNV);
-        } catch (ParseException e1) {
-            e1.printStackTrace();
+        int ret=JOptionPane.showConfirmDialog(null, "Bạn muốn thêm nhà xuất bản này?", "xác nhận xác nhận để thêm", JOptionPane.OK_CANCEL_OPTION);
+        if(ret==JOptionPane.OK_OPTION){
+            if(MaNXBInput.getText().equals("") || TenNXBInput.getText().equals("") || SDTInput.getText().equals("") || DiachiInput.getText().equals("") || EmailInput.getText().equals("") )
+                JOptionPane.showMessageDialog(null, "Dữ liệu còn thiếu");
+            else {
+                String maNXB = MaNXBInput.getText();				
+                try {
+                    xuLyThemMoi(maNXB);
+                } catch (ParseException e1) {
+                    e1.printStackTrace();
+                }
+            }
         }
     }//GEN-LAST:event_AddBtnActionPerformed
 
-    private void CCCDInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CCCDInputActionPerformed
+    private void DiachiInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiachiInputActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_CCCDInputActionPerformed
+    }//GEN-LAST:event_DiachiInputActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+    public void showWindow(){
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -476,29 +509,29 @@ public class QuanLyNXB extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new QuanLyNXB().setVisible(true);
+                new QuanLyNXB("Quản lý nhà xuất bản").setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddBtn;
-    private javax.swing.JButton AllNVBtn;
-    private javax.swing.JTextField CCCDInput;
+    private javax.swing.JButton AllNXBBtn;
     private javax.swing.JLabel CCCDLabel;
     private javax.swing.JButton DeleteBtn;
+    private javax.swing.JTextField DiachiInput;
     private javax.swing.JTextField EmailInput;
     private javax.swing.JLabel EmailLabel;
-    private javax.swing.JTextField MaNVInput;
     private javax.swing.JLabel MaNVLabel;
-    private javax.swing.JTable NVTable;
+    private javax.swing.JTextField MaNXBInput;
+    private javax.swing.JTable NXBTable;
     private javax.swing.JLabel NhanTenLabel;
     private javax.swing.JButton ResetBtn;
     private javax.swing.JTextField SDTInput;
     private javax.swing.JLabel SDTLabel;
-    private javax.swing.JButton TKNVBtn;
-    private javax.swing.JTextField TenNVInput;
+    private javax.swing.JButton TKNXBBtn;
     private javax.swing.JLabel TenNVLabel;
+    private javax.swing.JTextField TenNXBInput;
     private javax.swing.JLabel ThongTinNhanVienLabel;
     private javax.swing.JTextField TimKiemInput;
     private javax.swing.JLabel TimNhanVienLabel;
