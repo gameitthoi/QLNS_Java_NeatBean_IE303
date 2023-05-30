@@ -12,6 +12,7 @@ import Model.CTHD;
 import Model.HoaDon;
 import Model.NXB;
 import Model.Sach;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
@@ -191,6 +192,7 @@ public class BanHang extends javax.swing.JFrame {
         QLHD = new javax.swing.JMenuItem();
         QL_NCCVPP = new javax.swing.JMenuItem();
         QL_VPP = new javax.swing.JMenuItem();
+        QLKH = new javax.swing.JMenu();
         TKMenu = new javax.swing.JMenu();
         TaiKhoanMenu = new javax.swing.JMenu();
         BarcodeMenu = new javax.swing.JMenu();
@@ -236,6 +238,9 @@ public class BanHang extends javax.swing.JFrame {
         ReceiveInput.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 ReceiveInputKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                ReceiveInputKeyTyped(evt);
             }
         });
 
@@ -356,6 +361,14 @@ public class BanHang extends javax.swing.JFrame {
         });
         QLMenu.add(QL_VPP);
 
+        QLKH.setText("Quản lý khách hàng");
+        QLKH.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                QLKHActionPerformed(evt);
+            }
+        });
+        QLMenu.add(QLKH);
+
         NavBar.add(QLMenu);
 
         TKMenu.setText("Báo cáo");
@@ -474,17 +487,17 @@ public class BanHang extends javax.swing.JFrame {
                         .addGap(28, 28, 28)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(ReceiveLabel)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ReceiveInput, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(TotalLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(TotalInput, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(ChangeLabel)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ChangeInput, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(ChangeInput, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(ReceiveLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ReceiveInput, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -643,7 +656,7 @@ public class BanHang extends javax.swing.JFrame {
     private void ReceiveInputKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ReceiveInputKeyReleased
         String text = ReceiveInput.getText();
         String total = TotalInput.getText();
-
+        
         //tính tiền thối lại cho khách
         if (!text.isEmpty() && !total.isEmpty()){
             double tienthua = Double.parseDouble(text)-Double.parseDouble(total);
@@ -679,6 +692,22 @@ public class BanHang extends javax.swing.JFrame {
         vpp.showWindow();
         
     }//GEN-LAST:event_QL_VPPActionPerformed
+
+    private void ReceiveInputKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ReceiveInputKeyTyped
+        //kiểm tra xem người dùng có nhập số vào không, nếu không phải số thì không nhận
+        char c = evt.getKeyChar();
+        if (!((c >= '0') && (c <= '9') ||
+            (c == KeyEvent.VK_BACK_SPACE) ||
+            (c == KeyEvent.VK_DELETE))) {
+        getToolkit().beep();
+        evt.consume();
+      }
+    }//GEN-LAST:event_ReceiveInputKeyTyped
+
+    private void QLKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QLKHActionPerformed
+        QuanLyKhachHang qlkh = new QuanLyKhachHang();
+        qlkh.showWindow();
+    }//GEN-LAST:event_QLKHActionPerformed
 
     /**
      * @param args the command line arguments
@@ -726,6 +755,7 @@ public class BanHang extends javax.swing.JFrame {
     private javax.swing.JMenuBar NavBar;
     private javax.swing.JButton PaymentBtn;
     private javax.swing.JMenuItem QLHD;
+    private javax.swing.JMenu QLKH;
     private javax.swing.JMenu QLMenu;
     private javax.swing.JMenuItem QLNV;
     private javax.swing.JMenuItem QLNXB;
