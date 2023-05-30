@@ -14,7 +14,7 @@ ALTER DATABASE [dbQLNS] SET COMPATIBILITY_LEVEL = 130
 GO
 IF (1 = FULLTEXTSERVICEPROPERTY('IsFullTextInstalled'))
 begin
-EXEC [dbQLNS].[dbo].[sp_fulltext_database] @action = 'enable'
+EXEC [dbQLNS].[dbo].[sp_fulltext_database] @action =N'enable'
 end
 GO
 ALTER DATABASE [dbQLNS] SET ANSI_NULL_DEFAULT OFF 
@@ -304,79 +304,79 @@ INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai]
 INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's19', N'Những con chữ ngoài trang sách', N'nxb03',  N'Trần Đình Ba', 132000.0000, N'Tự sự', 15, 20) --
 INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's20', N'Di Chúc Của Chủ Tịch Hồ Chí Minh (VHVN)', N'nxb03',  N'Chủ tịch Hồ Chí Minh', 24000.0000, N'Tự sự', 18, 20) --
 INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's21', N'Đảng Cho Ta Mùa Xuân', N'nxb03',  N'Võ Trường Sơn', 32000.0000, N'Tự sự', 37, 20) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's22', N'Danh nhân khoa học & lược sử khoa học thế giới (Quyển 1 từ thời cổ đại đến cuối thế kỷ thứ 18) SLK', N'nxb03',  'Lâm Thành Mỹ', 136000.0000, N'Tự sự', 27, 20) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's23', N'Quân sư & những "vụ án"', N'nxb03',  'Lê Đắc Hoàng Hựu', 60000.0000, N'Tự sự', 27, 20) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's24', N'CHUYỆN LÀNG TRÊN MẠNG', N'nxb03', 'Phạm Ngọc Hiền', 48000.0000, N'Tự sự', 21, 20) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's25', N'NGANG QUA VƯỜN CÂY DẦU', N'nxb03', 'Nguyễn Thiện Bản', 84000.0000,  N'Tự sự', 21, 20) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's26', N'Sống đẹp là sống đạo', N'nxb03', 'Huệ Khải', 76000.0000,  N'Tự sự', 10, 20) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's27', N'Tôi học Phật', N'nxb03', 'BS. Đỗ Hồng Ngọc', 320000.0000,  N'Tự sự', 17, 20) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's28', N'Dĩ bất biến - Ứng vạn biến', N'nxb03', 'Lê Hưng VKD', 72000.0000,  N'Tự sự', 27, 20) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's29', N'Bảo vệ môi trường qua góc nhìn của tôn giáo và triết học', N'nxb03', 'Thích Nhuận Đạt', 100000.0000,  N'Tự sự',57, 20) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's30', N'THẾ GIỚI CỦA PEPPA - THƯ VIỆN', N'nxb02', 'Nhiều tác giả', 21000.0000,  N'Truyện tranh',38, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's31', N'THẾ GIỚI CỦA PEPPA - NHỮNG CON SỐ', N'nxb02', 'Nhiều tác giả', 21000.0000,  N'Truyện tranh',38, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's32', N'THẾ GIỚI CỦA PEPPA - TỦ ĐỒ CHƠI', N'nxb02', 'Nhiều tác giả', 21000.0000,  N'Truyện tranh',29, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's33', N'THẾ GIỚI CỦA PEPPA - NÀNG TIÊN RĂNG', N'nxb02', 'Nhiều tác giả', 21000.0000,  N'Truyện tranh',19, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's34', N'BOXSET CÁ VOI ĐÊM BÃO VÀ NHỮNG CÂU CHUYỆN KHÁC (4 QUYỂN)', N'nxb02', 'Benji Davies', 140000.0000,  N'Truyện tranh',39, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's35', N'365 NGÀY KỂ CHUYỆN', N'nxb02', 'Benji Davies', 175000.0000,  N'Truyện tranh',49, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's36', N'THIỆN VÀ ÁC VÀ CỔ TÍCH', N'nxb02', 'Thủy Nguyên', 149000.0000,  N'Truyện tranh',21, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's37', N'THẾ GIỚI XE CÔNG TRÌNH - XE XÚC SIÊU PHÀM (2021)', N'nxb02', 'Mijika Liuzi', 18200.0000,  N'Truyện tranh',24, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's38', N'TÝ QUẬY - TẬP 2 (2021)', N'nxb02', 'Đào Hải', 36000.0000,  N'Truyện tranh',17, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's39', N'ĐI TÌM BỐ MẸ HOÀN HẢO - "DẠY DỖ" BỐ MẸ THẬT MỆT! (SAI CÁCH - ĐÚNG CÁCH)', N'nxb02', 'Katharina Grossmann-Hensel', 31500.0000,  N'Truyện tranh',17, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's40', N'SINH NHẬT CỦA CHUỘT TÍP (2020)', N'nxb02', 'Marco Campanella Anna Casalis', 14000.0000,  N'Truyện tranh',44, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's41', N'CÂY BÚT MÀU NHIỆM CỦA MALALA', N'nxb02', 'Malala Yousafzai Kerascoët', 40500.0000,  N'Truyện tranh',18, 10) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's42', N'THƠ Ở NHÀ TRẺ (2021)', N'nxb02', 'Nhiều tác giả', 31500.0000,  N'Truyện tranh',19, 10) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's43', N'CÂY KHẾ (2021)', N'nxb02', 'Hồng Hà', 10500.0000,  N'Truyện tranh',28, 10) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's44', N'SỰ TÍCH DƯA HẤU (2021)', N'nxb02', 'Hiếu Minh', 14000.0000,  N'Truyện tranh',38, 10) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's45', N'SINH CON RỒI MỚI SINH CHA (2021)', N'nxb02', 'Phạm Ngọc Tuấn', 10500.0000,  N'Truyện tranh',28, 10) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's46', N'CHIẾC DÉP THẤT LẠC - THE LOST SANDAL (2021)', N'nxb02', 'Geralda De Vos', 42000.0000,  N'Truyện tranh',11, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's47', N'SỰ TÍCH CON DÃ TRÀNG', N'nxb02', 'Phương Thúy', 14000.0000,  N'Truyện tranh',18, 10) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's48', N'KHỦNG HOẢNG TUỔI ĐẾN TRƯỜNG', N'nxb02', 'Kim Do-ah', 31500.0000,  N'Truyện tranh',18, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's49', N'TỪ THỨC GẶP TIÊN', N'nxb02', 'Kim Ngọc', 14000.0000,  N'Truyện tranh',18, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's50', N'SỰ TÍCH QUẠ VÀ CÔNG (2021)', N'nxb02', 'Nguyễn Công Hoan', 10500.0000,  N'Truyện tranh',18, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's51', N'BẢY ĐIỀU ƯỚC', N'nxb02', 'Phạm Ngọc Tuấn', 10500.0000,  N'Truyện tranh',18, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's52', N'ĐI Ở HỌC THÀNH TÀI (2021)', N'nxb02', 'Phạm Ngọc Tuấn', 10500.0000,  N'Truyện tranh',20, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's53', N'NGƯỜI CHA VÀ BA CON TRAI (2021)', N'nxb02', 'Hồng Hà', 10500.0000,  N'Truyện tranh',28, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's54', N'HỘT ĐIỀU CỦA SÓC (2021)', N'nxb02', 'Nguyên Trang', 9100.0000,  N'Truyện tranh',38, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's55', N'SỰ TÍCH CON MUỖI (2021)', N'nxb02', 'Phạm Ngọc Tân', 10500.0000,  N'Truyện tranh',30, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's56', N'THIỆN VÀ ÁC VÀ CỔ TÍCH', N'nxb02', 'Thủy Nguyên', 149500.0000,  N'Truyện tranh',38, 50) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's57', N'CON NGƯỜI (2021)', N'nxb02', 'Hiếu Minh', 21000.0000,  N'Truyện tranh',20, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's58', N'HÀNH TRÌNH TRỞ VỀ CỦA ODYSSEUS (2019)', N'nxb02', 'Thomas Bulfinch', 54000.0000,  N'Truyện tranh', 35, 10) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's59', N'MẠNG LƯỚI ẤM ÁP', N'nxb02', 'Patrice Karst', 22500.0000,  N'Truyện tranh',27, 50) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's60', N'SỰ TÍCH HỒ BA BỂ (2021)', N'nxb02', 'Phạm Ngọc Tuấn', 10500.0000,  N'Truyện tranh',25, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's61', N'NHÓC KÌ LÂN MỌC SỪNG BÚA ĐẼO', N'nxb02', 'Nguyễn Hoàng Vũ', 38500.0000,  N'Truyện tranh',50, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's62', N'SỰ RA ĐỜI CỦA CÁC VỊ THẦN', N'nxb02', 'Gấu Mèo', 30000.0000,  N'Truyện tranh',20, 50) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's63', N'CON ĐƯỜNG KHÔNG DẪN TỚI ĐÂU', N'nxb02', 'Gianni Rodari', 20000.0000,  N'Truyện tranh',25, 50) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's64', N'KIỆN NGÀNH ĐA', N'nxb02', 'Hồng Hà', 10500.0000,  N'Truyện tranh',25, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's65', N'CÔ BÉ MÁC-TIN VÀ NGƯỜI HÀNG XÓM KÌ LẠ', N'nxb02', 'Gilbert Delahaye', 21000.0000,  N'Truyện tranh',20, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's66', N'CÔ BÉ LỌ LEM', N'nxb02', 'Peter Holeinone', 42000.0000,  N'Truyện tranh',20, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's67', N'CÂU THẦN CHÚ DIỆU KÌ', N'nxb02', 'Ha Neul ddang', 34000.0000,  N'Truyện tranh',27, 10) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's68', N'TỐNG TRÂN CÚC HOA', N'nxb02', 'Phạm Ngọc Tuấn', 10500.0000,  N'Truyện tranh',38, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's69', N'CƯỜNG BẠO CHỐNG TRỜI', N'nxb02', 'Trương Hiếu', 10500.0000,  N'Truyện tranh',40, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's70', N'CÁI KIẾN MÀY KIỆN CỦ KHOAI', N'nxb02', 'Lê Minh Hải', 10500.0000,  N'Truyện tranh',20, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's71', N'NÀNG RỒNG KHÈ RA TRÀ SỮA', N'nxb02', 'Nguyễn Hoàng Vũ', 27500.0000,  N'Truyện tranh',28, 50) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's72', N'VOI NGÀ VÀNG (2021)', N'nxb02', 'Phạm Ngọc Tuấn', 10500.0000,  N'Truyện tranh',20, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's73', N'SỰ TÍCH NÚI NGŨ HÀNH', N'nxb02', 'Hồng Hà', 10500.0000,  N'Truyện tranh',45, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's74', N'CHÀNG HỌC TRÒ VÀ CON CHÓ ĐÁ (2021)', N'nxb02', 'Hồng Hà', 10500.0000,  N'Truyện tranh',45, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's75', N'CHUYỆN ÔNG GIÓNG (2021)', N'nxb02', 'Hồng Hà', 10500.0000,  N'Truyện tranh',45, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's76', N'VIÊN NGỌC ƯỚC (2021)', N'nxb02', 'Phạm Ngọc Tuấn', 10500.0000,  N'Truyện tranh',40, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's77', N'TẤM CÁM', N'nxb02', 'Mai Long', 10500.0000,  N'Truyện tranh',40, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's78', N'SỰ TÍCH CON KỀN KỀN (2020)', N'nxb02', 'Phạm Ngọc Tuấn', 10500.0000,  N'Truyện tranh',45, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's79', N'CHA MẸ NUÔI CON BẰNG TRỜI BẰNG BỂ (2021)', N'nxb02', 'Hồng Hà', 10500.0000,  N'Truyện tranh',47, 30) --
-INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's80', N'DŨNG SĨ ĐAM DÔNG (2021)', N'nxb02', 'Tạ Huy Long', 10500.0000,  N'Truyện tranh',40, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's22', N'Danh nhân khoa học & lược sử khoa học thế giới (Quyển 1 từ thời cổ đại đến cuối thế kỷ thứ 18) SLK', N'nxb03',  N'Lâm Thành Mỹ', 136000.0000, N'Tự sự', 27, 20) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's23', N'Quân sư & những "vụ án"', N'nxb03',  N'Lê Đắc Hoàng Hựu', 60000.0000, N'Tự sự', 27, 20) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's24', N'CHUYỆN LÀNG TRÊN MẠNG', N'nxb03', N'Phạm Ngọc Hiền', 48000.0000, N'Tự sự', 21, 20) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's25', N'NGANG QUA VƯỜN CÂY DẦU', N'nxb03', N'Nguyễn Thiện Bản', 84000.0000,  N'Tự sự', 21, 20) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's26', N'Sống đẹp là sống đạo', N'nxb03', N'Huệ Khải', 76000.0000,  N'Tự sự', 10, 20) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's27', N'Tôi học Phật', N'nxb03', N'BS. Đỗ Hồng Ngọc', 320000.0000,  N'Tự sự', 17, 20) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's28', N'Dĩ bất biến - Ứng vạn biến', N'nxb03', N'Lê Hưng VKD', 72000.0000,  N'Tự sự', 27, 20) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's29', N'Bảo vệ môi trường qua góc nhìn của tôn giáo và triết học', N'nxb03', N'Thích Nhuận Đạt', 100000.0000,  N'Tự sự',57, 20) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's30', N'THẾ GIỚI CỦA PEPPA - THƯ VIỆN', N'nxb02',N'Nhiều tác giả', 21000.0000,  N'Truyện tranh',38, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's31', N'THẾ GIỚI CỦA PEPPA - NHỮNG CON SỐ', N'nxb02',N'Nhiều tác giả', 21000.0000,  N'Truyện tranh',38, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's32', N'THẾ GIỚI CỦA PEPPA - TỦ ĐỒ CHƠI', N'nxb02',N'Nhiều tác giả', 21000.0000,  N'Truyện tranh',29, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's33', N'THẾ GIỚI CỦA PEPPA - NÀNG TIÊN RĂNG', N'nxb02',N'Nhiều tác giả', 21000.0000,  N'Truyện tranh',19, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's34', N'BOXSET CÁ VOI ĐÊM BÃO VÀ NHỮNG CÂU CHUYỆN KHÁC (4 QUYỂN)', N'nxb02',N'Benji Davies', 140000.0000,  N'Truyện tranh',39, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's35', N'365 NGÀY KỂ CHUYỆN', N'nxb02',N'Benji Davies', 175000.0000,  N'Truyện tranh',49, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's36', N'THIỆN VÀ ÁC VÀ CỔ TÍCH', N'nxb02',N'Thủy Nguyên', 149000.0000,  N'Truyện tranh',21, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's37', N'THẾ GIỚI XE CÔNG TRÌNH - XE XÚC SIÊU PHÀM (2021)', N'nxb02',N'Mijika Liuzi', 18200.0000,  N'Truyện tranh',24, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's38', N'TÝ QUẬY - TẬP 2 (2021)', N'nxb02',N'Đào Hải', 36000.0000,  N'Truyện tranh',17, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's39', N'ĐI TÌM BỐ MẸ HOÀN HẢO - "DẠY DỖ" BỐ MẸ THẬT MỆT! (SAI CÁCH - ĐÚNG CÁCH)', N'nxb02',N'Katharina Grossmann-Hensel', 31500.0000,  N'Truyện tranh',17, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's40', N'SINH NHẬT CỦA CHUỘT TÍP (2020)', N'nxb02',N'Marco Campanella Anna Casalis', 14000.0000,  N'Truyện tranh',44, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's41', N'CÂY BÚT MÀU NHIỆM CỦA MALALA', N'nxb02',N'Malala Yousafzai Kerascoët', 40500.0000,  N'Truyện tranh',18, 10) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's42', N'THƠ Ở NHÀ TRẺ (2021)', N'nxb02',N'Nhiều tác giả', 31500.0000,  N'Truyện tranh',19, 10) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's43', N'CÂY KHẾ (2021)', N'nxb02',N'Hồng Hà', 10500.0000,  N'Truyện tranh',28, 10) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's44', N'SỰ TÍCH DƯA HẤU (2021)', N'nxb02',N'Hiếu Minh', 14000.0000,  N'Truyện tranh',38, 10) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's45', N'SINH CON RỒI MỚI SINH CHA (2021)', N'nxb02',N'Phạm Ngọc Tuấn', 10500.0000,  N'Truyện tranh',28, 10) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's46', N'CHIẾC DÉP THẤT LẠC - THE LOST SANDAL (2021)', N'nxb02',N'Geralda De Vos', 42000.0000,  N'Truyện tranh',11, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's47', N'SỰ TÍCH CON DÃ TRÀNG', N'nxb02',N'Phương Thúy', 14000.0000,  N'Truyện tranh',18, 10) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's48', N'KHỦNG HOẢNG TUỔI ĐẾN TRƯỜNG', N'nxb02',N'Kim Do-ah', 31500.0000,  N'Truyện tranh',18, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's49', N'TỪ THỨC GẶP TIÊN', N'nxb02',N'Kim Ngọc', 14000.0000,  N'Truyện tranh',18, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's50', N'SỰ TÍCH QUẠ VÀ CÔNG (2021)', N'nxb02',N'Nguyễn Công Hoan', 10500.0000,  N'Truyện tranh',18, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's51', N'BẢY ĐIỀU ƯỚC', N'nxb02',N'Phạm Ngọc Tuấn', 10500.0000,  N'Truyện tranh',18, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's52', N'ĐI Ở HỌC THÀNH TÀI (2021)', N'nxb02',N'Phạm Ngọc Tuấn', 10500.0000,  N'Truyện tranh',20, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's53', N'NGƯỜI CHA VÀ BA CON TRAI (2021)', N'nxb02',N'Hồng Hà', 10500.0000,  N'Truyện tranh',28, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's54', N'HỘT ĐIỀU CỦA SÓC (2021)', N'nxb02',N'Nguyên Trang', 9100.0000,  N'Truyện tranh',38, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's55', N'SỰ TÍCH CON MUỖI (2021)', N'nxb02',N'Phạm Ngọc Tân', 10500.0000,  N'Truyện tranh',30, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's56', N'THIỆN VÀ ÁC VÀ CỔ TÍCH', N'nxb02',N'Thủy Nguyên', 149500.0000,  N'Truyện tranh',38, 50) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's57', N'CON NGƯỜI (2021)', N'nxb02',N'Hiếu Minh', 21000.0000,  N'Truyện tranh',20, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's58', N'HÀNH TRÌNH TRỞ VỀ CỦA ODYSSEUS (2019)', N'nxb02',N'Thomas Bulfinch', 54000.0000,  N'Truyện tranh', 35, 10) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's59', N'MẠNG LƯỚI ẤM ÁP', N'nxb02',N'Patrice Karst', 22500.0000,  N'Truyện tranh',27, 50) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's60', N'SỰ TÍCH HỒ BA BỂ (2021)', N'nxb02',N'Phạm Ngọc Tuấn', 10500.0000,  N'Truyện tranh',25, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's61', N'NHÓC KÌ LÂN MỌC SỪNG BÚA ĐẼO', N'nxb02',N'Nguyễn Hoàng Vũ', 38500.0000,  N'Truyện tranh',50, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's62', N'SỰ RA ĐỜI CỦA CÁC VỊ THẦN', N'nxb02',N'Gấu Mèo', 30000.0000,  N'Truyện tranh',20, 50) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's63', N'CON ĐƯỜNG KHÔNG DẪN TỚI ĐÂU', N'nxb02',N'Gianni Rodari', 20000.0000,  N'Truyện tranh',25, 50) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's64', N'KIỆN NGÀNH ĐA', N'nxb02',N'Hồng Hà', 10500.0000,  N'Truyện tranh',25, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's65', N'CÔ BÉ MÁC-TIN VÀ NGƯỜI HÀNG XÓM KÌ LẠ', N'nxb02',N'Gilbert Delahaye', 21000.0000,  N'Truyện tranh',20, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's66', N'CÔ BÉ LỌ LEM', N'nxb02',N'Peter Holeinone', 42000.0000,  N'Truyện tranh',20, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's67', N'CÂU THẦN CHÚ DIỆU KÌ', N'nxb02',N'Ha Neul ddang', 34000.0000,  N'Truyện tranh',27, 10) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's68', N'TỐNG TRÂN CÚC HOA', N'nxb02',N'Phạm Ngọc Tuấn', 10500.0000,  N'Truyện tranh',38, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's69', N'CƯỜNG BẠO CHỐNG TRỜI', N'nxb02',N'Trương Hiếu', 10500.0000,  N'Truyện tranh',40, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's70', N'CÁI KIẾN MÀY KIỆN CỦ KHOAI', N'nxb02',N'Lê Minh Hải', 10500.0000,  N'Truyện tranh',20, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's71', N'NÀNG RỒNG KHÈ RA TRÀ SỮA', N'nxb02',N'Nguyễn Hoàng Vũ', 27500.0000,  N'Truyện tranh',28, 50) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's72', N'VOI NGÀ VÀNG (2021)', N'nxb02',N'Phạm Ngọc Tuấn', 10500.0000,  N'Truyện tranh',20, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's73', N'SỰ TÍCH NÚI NGŨ HÀNH', N'nxb02',N'Hồng Hà', 10500.0000,  N'Truyện tranh',45, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's74', N'CHÀNG HỌC TRÒ VÀ CON CHÓ ĐÁ (2021)', N'nxb02',N'Hồng Hà', 10500.0000,  N'Truyện tranh',45, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's75', N'CHUYỆN ÔNG GIÓNG (2021)', N'nxb02',N'Hồng Hà', 10500.0000,  N'Truyện tranh',45, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's76', N'VIÊN NGỌC ƯỚC (2021)', N'nxb02',N'Phạm Ngọc Tuấn', 10500.0000,  N'Truyện tranh',40, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's77', N'TẤM CÁM', N'nxb02',N'Mai Long', 10500.0000,  N'Truyện tranh',40, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's78', N'SỰ TÍCH CON KỀN KỀN (2020)', N'nxb02',N'Phạm Ngọc Tuấn', 10500.0000,  N'Truyện tranh',45, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's79', N'CHA MẸ NUÔI CON BẰNG TRỜI BẰNG BỂ (2021)', N'nxb02',N'Hồng Hà', 10500.0000,  N'Truyện tranh',47, 30) --
+INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's80', N'DŨNG SĨ ĐAM DÔNG (2021)', N'nxb02',N'Tạ Huy Long', 10500.0000,  N'Truyện tranh',40, 30) --
 
 
-INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD01', 'NV01', '01/01/2023', 7500000.0000, 1, 1)
-INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD02', 'NV01', '01/01/2023', 150000.0000,1, 0)
-INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD03', 'NV01', '01/02/2023', 10000000.0000,1, 1)
-INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD04', 'NV01', '01/02/2023', 200000.0000, 1, 0)
-INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD05', 'NV01', '01/03/2023', 10000000.0000, 1, 1)
-INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD06', 'NV01', '01/03/2023', 200000.0000, 1, 0)
-INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD07', 'NV01', '01/04/2023', 2400000.0000, 1, 1)
-INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD08', 'NV01', '01/04/2023', 120000.0000, 1, 0)
-INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD09', 'NV01', '01/04/2023', 25000000.0000, 1, 1)
-INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD10', 'NV01', '01/04/2023', 250000.0000, 1, 0)
-INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD11', 'NV01', '01/04/2023', 1300000.0000, 1, 1)
-INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD12', 'NV01', '01/04/2023', 130000.0000, 1, 0)
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD01',N'NV01',N'01/01/2023', 7500000.0000, 1, 1)
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD02',N'NV01',N'01/01/2023', 150000.0000,1, 0)
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD03',N'NV01',N'01/02/2023', 10000000.0000,1, 1)
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD04',N'NV01',N'01/02/2023', 200000.0000, 1, 0)
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD05',N'NV01',N'01/03/2023', 10000000.0000, 1, 1)
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD06',N'NV01',N'01/03/2023', 200000.0000, 1, 0)
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD07',N'NV01',N'01/04/2023', 2400000.0000, 1, 1)
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD08',N'NV01',N'01/04/2023', 120000.0000, 1, 0)
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD09',N'NV01',N'01/04/2023', 25000000.0000, 1, 1)
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD10',N'NV01',N'01/04/2023', 250000.0000, 1, 0)
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD11',N'NV01',N'01/04/2023', 1300000.0000, 1, 1)
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD12',N'NV01',N'01/04/2023', 130000.0000, 1, 0)
 
 INSERT [dbo].[CTHD] ([MaHD], [MaSach], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD01', N's01', 150000.0000, 50, 7500000.0000)
 INSERT [dbo].[CTHD] ([MaHD], [MaSach], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD02', N's01', 150000.0000, 1, 150000.0000)
@@ -391,8 +391,8 @@ INSERT [dbo].[CTHD] ([MaHD], [MaSach], [DonGia], [SoLuong], [ThanhTien]) VALUES 
 INSERT [dbo].[CTHD] ([MaHD], [MaSach], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD11', N's06', 250000.0000, 10, 1300000.0000)
 INSERT [dbo].[CTHD] ([MaHD], [MaSach], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD12', N's06', 130000.0000, 1, 130000.0000)
 
-INSERT [dbo].[TAIKHOAN] ([MaTk], [username], [password], [MaNV]) VALUES (N'tk01', N'admin', N'admin', 'NV01')
-INSERT [dbo].[TAIKHOAN] ([MaTk], [username], [password], [MaNV]) VALUES (N'tk02', N'thungan', N'thungan', 'NV02')
+INSERT [dbo].[TAIKHOAN] ([MaTk], [username], [password], [MaNV]) VALUES (N'tk01', N'admin', N'admin',N'NV01')
+INSERT [dbo].[TAIKHOAN] ([MaTk], [username], [password], [MaNV]) VALUES (N'tk02', N'thungan', N'thungan',N'NV02')
 
 
 INSERT [dbo].CHUCVU ([MaCV], [ChucVu], [DinhDoanh]) VALUES ('CV01', N'Admin', N'Quản lý hệ thống')
@@ -403,16 +403,15 @@ INSERT [dbo].CHUCVU ([MaCV], [ChucVu], [DinhDoanh]) VALUES ('CV05', N'Nhân viê
 INSERT [dbo].CHUCVU ([MaCV], [ChucVu], [DinhDoanh]) VALUES ('CV06', N'Nhân viên an ninh', N'Bảo đảm an ninh')
 INSERT [dbo].CHUCVU ([MaCV], [ChucVu], [DinhDoanh]) VALUES ('CV07', N'Nhân viên kế toán', N'Chịu trách nhiệm về các vấn đề liên quan đến tài chính, dòng tiền')
 
-INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email], [Luong]) VALUES (N'NV01',N'Nguyên Văn A', '1/1/2002', '10/12/2021' ,N'012356789',N'CV01',N'012356789',N'anguyenvan@gmai.com', 10000000.000)
-INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email], [Luong]) VALUES (N'NV02',N'Nguyên Văn B', '1/2/2002', '21/12/2022' ,N'012356789',N'CV02',N'012356789',N'bnguyenvan@gmai.com', 10000000.000)
-INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email], [Luong]) VALUES (N'NV03',N'Nguyên Văn C', '1/3/2002', '31/12/2023' ,N'012356789',N'CV03',N'012356789',N'cnguyenvan@gmai.com', 10000000.000)
-INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email], [Luong]) VALUES (N'NV04',N'Nguyên Văn D', '1/4/2002', '20/01/2019' ,N'012356789',N'CV04',N'012356789',N'dnguyenvan@gmai.com', 10000000.000)
-INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email], [Luong]) VALUES (N'NV05',N'Nguyên Văn E', '1/5/2002', '11/08/2018' ,N'012356789',N'CV05',N'012356789',N'enguyenvan@gmai.com', 10000000.000)
-INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email], [Luong]) VALUES (N'NV06',N'Nguyên Văn F', '1/6/2002', '01/03/2017' ,N'012356789',N'CV06',N'012356789',N'fnguyenvan@gmai.com', 10000000.000)
-INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email], [Luong]) VALUES (N'NV07',N'Nguyên Văn G', '1/7/2002', '22/12/2020' ,N'012356789',N'CV07',N'012356789',N'gnguyenvan@gmai.com', 10000000.000)
-INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email], [Luong]) VALUES (N'NV08',N'Nguyên Văn H', '1/8/2002', '23/11/2021' ,N'012356789',N'CV02',N'012356789',N'hnguyenvan@gmai.com', 10000000.000)
-INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email], [Luong]) VALUES (N'NV09',N'Nguyên Văn J', '1/9/2002', '24/02/2022' ,N'012356789',N'CV03',N'012356789',N'jnguyenvan@gmai.com', 10000000.000)
-
+INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email], [Luong]) VALUES (N'NV01',N'Nguyên Văn A',N'1/1/2002',N'10/12/2021' ,N'012356789',N'CV01',N'012356789',N'anguyenvan@gmai.com', 10000000.000)
+INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email], [Luong]) VALUES (N'NV02',N'Nguyên Văn B',N'1/2/2002',N'21/12/2022' ,N'012356789',N'CV02',N'012356789',N'bnguyenvan@gmai.com', 10000000.000)
+INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email], [Luong]) VALUES (N'NV03',N'Nguyên Văn C',N'1/3/2002',N'31/12/2023' ,N'012356789',N'CV03',N'012356789',N'cnguyenvan@gmai.com', 10000000.000)
+INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email], [Luong]) VALUES (N'NV04',N'Nguyên Văn D',N'1/4/2002',N'20/01/2019' ,N'012356789',N'CV04',N'012356789',N'dnguyenvan@gmai.com', 10000000.000)
+INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email], [Luong]) VALUES (N'NV05',N'Nguyên Văn E',N'1/5/2002',N'11/08/2018' ,N'012356789',N'CV05',N'012356789',N'enguyenvan@gmai.com', 10000000.000)
+INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email], [Luong]) VALUES (N'NV06',N'Nguyên Văn F',N'1/6/2002',N'01/03/2017' ,N'012356789',N'CV06',N'012356789',N'fnguyenvan@gmai.com', 10000000.000)
+INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email], [Luong]) VALUES (N'NV07',N'Nguyên Văn G',N'1/7/2002',N'22/12/2020' ,N'012356789',N'CV07',N'012356789',N'gnguyenvan@gmai.com', 10000000.000)
+INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email], [Luong]) VALUES (N'NV08',N'Nguyên Văn H',N'1/8/2002',N'23/11/2021' ,N'012356789',N'CV02',N'012356789',N'hnguyenvan@gmai.com', 10000000.000)
+INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email], [Luong]) VALUES (N'NV09',N'Nguyên Văn J',N'1/9/2002',N'24/02/2022' ,N'012356789',N'CV03',N'012356789',N'jnguyenvan@gmai.com', 10000000.000)
 INSERT [dbo].[TONKHO]([MaTK], [MaSach], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK01', N's01', 0, 50, 1, 49, 1, 2023)
 
 INSERT [dbo].[TONKHO]([MaTK], [MaSach], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK02', N's01', 49, 0, 0, 49, 2, 2023)
@@ -581,7 +580,7 @@ BEGIN
 	FROM (
         SELECT DATEADD(month, number - 1, DATEFROMPARTS(YEAR(GETDATE()), 1, 1)) AS Thang
 		FROM master.dbo.spt_values
-		WHERE type = 'P' AND number BETWEEN 1 AND 12) AS months
+		WHERE type =N'P' AND number BETWEEN 1 AND 12) AS months
 	LEFT JOIN 
 		HOADON ON MONTH(HOADON.NgayLap) = MONTH(months.Thang) AND YEAR(HOADON.NgayLap) = YEAR(months.Thang) AND HOADON.NhapSach = 0
 	LEFT JOIN 
