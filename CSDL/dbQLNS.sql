@@ -279,6 +279,17 @@ CREATE TABLE [dbo].[TONKHO](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
+CREATE TABLE [dbo].KHACHHANG(
+	[MaKH] [nvarchar](50) NOT NULL,
+	[TenKH] [nvarchar](50) NOT NULL,
+	[Sdt] [nvarchar](50) NULL,
+	[Diem] [money] NULL,
+ CONSTRAINT [PK_KHACHHANG] PRIMARY KEY CLUSTERED 
+(
+	[MaKH] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
 INSERT [dbo].[NXB] ([MaNXB], [TenNXB], [SDT], [DiaChi], [Email]) VALUES (N'nxb01', N'Đại học quốc gia tp HCM', N'0197852545', N'Tp HCM', N'dhql@gmal.com')
 INSERT [dbo].[NXB] ([MaNXB], [TenNXB], [SDT], [DiaChi], [Email]) VALUES (N'nxb02', N'Kim Đồng', N'0197816153', N'TP HCm', N'kimdong@gmail.com')
 INSERT [dbo].[NXB] ([MaNXB], [TenNXB], [SDT], [DiaChi], [Email]) VALUES (N'nxb03', N'Nhà sách tổng hợp', N'02838256804', N'TP HCm', N'tonghop@nxbhcm.com.vn') --thêm
@@ -523,6 +534,14 @@ INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLu
 INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v87', N'Bút lông bảng Stabilo WM641', N'ncc04', 6000.0000, N'Bút lông', 10, 10)--
 INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v88', N'Bút lông dầu 2 đầu Queen PM-01', N'ncc04', 6000.0000, N'Bút lông', 10, 10)--
 INSERT [dbo].[VPP] ([MaVPP], [TenVPP], [MaNCCVPP], [GiaBanVPP], [DanhMuc], [SoLuong], [Discount]) VALUES (N'v89', N'Bút lông dầu sọc Horse H-110', N'ncc04', 6000.0000, N'Bút lông', 10, 10)--
+
+INSERT [dbo].[KHACHHANG] ([MaKH], [TenKH], [Sdt], [Diem]) VALUES (N'kh01', N'Lâm Quốc Đạt', N'0933754987', 21300.000)
+INSERT [dbo].[KHACHHANG] ([MaKH], [TenKH], [Sdt], [Diem]) VALUES (N'kh02', N'Lưu Thượng Vỹ', N'0123456789', 11100.000)
+INSERT [dbo].[KHACHHANG] ([MaKH], [TenKH], [Sdt], [Diem]) VALUES (N'kh03', N'Nguyễn Phước An Vũ', N'9876543210', 15000.000)
+INSERT [dbo].[KHACHHANG] ([MaKH], [TenKH], [Sdt], [Diem]) VALUES (N'kh04', N'Nguyễn Văn A', N'0707237806', 3200.000)
+INSERT [dbo].[KHACHHANG] ([MaKH], [TenKH], [Sdt], [Diem]) VALUES (N'kh05', N'Nguyễn Thị B', N'0362434969', 5600.000)
+INSERT [dbo].[KHACHHANG] ([MaKH], [TenKH], [Sdt], [Diem]) VALUES (N'kh06', N'Nguyễn Thị B', N'0362434969', 11500.000)
+INSERT [dbo].[KHACHHANG] ([MaKH], [TenKH], [Sdt], [Diem]) VALUES (N'kh07', N'Lệ Phi Vũ', N'0327209786', 0)
 
 
 ALTER TABLE [dbo].[CTHD]  WITH CHECK ADD  CONSTRAINT [fk_cthd_Sach] FOREIGN KEY([MaSach])

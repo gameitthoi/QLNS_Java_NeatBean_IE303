@@ -176,12 +176,10 @@ private ArrayList<ChucVu> dscv = null;
         AddFromExcelBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         NVTable = new javax.swing.JTable();
-        TimNhanVienLabel = new javax.swing.JLabel();
-        ThongTinNhanVienLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Tìm nhân viên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(255, 0, 0))); // NOI18N
 
         TKNVBtn.setText("Tìm kiếm");
         TKNVBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -209,13 +207,12 @@ private ArrayList<ChucVu> dscv = null;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TimKiemInput, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(NhanTenLabel)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(TKNVBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(AllNVBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(NhanTenLabel)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(TKNVBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(AllNVBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -232,7 +229,7 @@ private ArrayList<ChucVu> dscv = null;
                 .addGap(27, 27, 27))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Thông tin nhân viên", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 1, 12), new java.awt.Color(255, 0, 0))); // NOI18N
 
         MaNVLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         MaNVLabel.setText("Mã nhân viên");
@@ -358,7 +355,7 @@ private ArrayList<ChucVu> dscv = null;
                         .addComponent(LuongLabel)
                         .addGap(50, 50, 50)
                         .addComponent(LuongInput)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -493,14 +490,6 @@ private ArrayList<ChucVu> dscv = null;
         });
         jScrollPane1.setViewportView(NVTable);
 
-        TimNhanVienLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        TimNhanVienLabel.setForeground(new java.awt.Color(255, 0, 0));
-        TimNhanVienLabel.setText("Tìm nhân viên");
-
-        ThongTinNhanVienLabel.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        ThongTinNhanVienLabel.setForeground(new java.awt.Color(255, 0, 0));
-        ThongTinNhanVienLabel.setText("Thông tin nhân viên");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -510,25 +499,15 @@ private ArrayList<ChucVu> dscv = null;
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TimNhanVienLabel)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(ThongTinNhanVienLabel)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(ThongTinNhanVienLabel)
-                    .addComponent(TimNhanVienLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -585,7 +564,7 @@ private ArrayList<ChucVu> dscv = null;
     }//GEN-LAST:event_TKNVBtnActionPerformed
 
     private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
-        int ret=JOptionPane.showConfirmDialog(null, "Bạn muốn xóa nhân viên này?", "xác nhận xác nhận để thêm", JOptionPane.OK_CANCEL_OPTION);
+        int ret=JOptionPane.showConfirmDialog(null, "Bạn muốn xóa nhân viên này?", "xác nhận xác nhận để xóa", JOptionPane.OK_CANCEL_OPTION);
         if(ret==JOptionPane.OK_OPTION){
             if(MaNVInput.getText().equals(""))
                 JOptionPane.showMessageDialog(null, "Dữ liệu còn thiếu");
@@ -640,7 +619,7 @@ private ArrayList<ChucVu> dscv = null;
                     JOptionPane.showMessageDialog(null, "Chỉnh sửa thành công!");
                     hienThiToanBoNhanVien();
                 }
-                else JOptionPane.showMessageDialog(null, "Chỉnh sửa thất bại!"+ nv.getNgaySinh()+" "+nv.getNgayVaolam()); 
+                else JOptionPane.showMessageDialog(null, "Chỉnh sửa thất bại!"); 
             }
         }
     }//GEN-LAST:event_UpdateBtnActionPerformed
@@ -839,9 +818,7 @@ private ArrayList<ChucVu> dscv = null;
     private javax.swing.JButton TKNVBtn;
     private javax.swing.JTextField TenNVInput;
     private javax.swing.JLabel TenNVLabel;
-    private javax.swing.JLabel ThongTinNhanVienLabel;
     private javax.swing.JTextField TimKiemInput;
-    private javax.swing.JLabel TimNhanVienLabel;
     private javax.swing.JButton UpdateBtn;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
