@@ -490,7 +490,7 @@ private ArrayList<VPP> dsvpp = null;
 
             try {
                 //sửa đường dẫn lại cho phù hợp trong máy mình nha
-                PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("C:\\Users\\dat\\Downloads\\"+filename+".pdf"));
+                PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("C:\\Users\\Admin\\Downloads\\"+filename+".pdf"));
                 document.open();
 
                 PdfPTable table = new PdfPTable(barcodesPerRow);
@@ -545,7 +545,7 @@ private ArrayList<VPP> dsvpp = null;
                 document.close();
                 
                 //mở file pdf đó ra
-                File pdfFile = new File("C:\\Users\\dat\\Downloads\\"+filename+".pdf");
+                File pdfFile = new File("C:\\Users\\Admin\\Downloads\\"+filename+".pdf");
                 if (pdfFile.exists()) {
                     if (Desktop.isDesktopSupported()) {
                         Desktop.getDesktop().open(pdfFile);
@@ -659,7 +659,7 @@ private ArrayList<VPP> dsvpp = null;
 
             try {
                 //sửa đường dẫn lại cho phù hợp trong máy mình nha
-                PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("C:\\Users\\dat\\Downloads\\"+filename+".pdf"));
+                PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("C:\\Users\\Admin\\Downloads\\"+filename+".pdf"));
                 document.open();
 
                 PdfPTable table = new PdfPTable(barcodesPerRow);
@@ -714,7 +714,7 @@ private ArrayList<VPP> dsvpp = null;
                 document.close();
                 
                 //mở file pdf đó ra
-                File pdfFile = new File("C:\\Users\\dat\\Downloads\\"+filename+".pdf");
+                File pdfFile = new File("C:\\Users\\Admin\\Downloads\\"+filename+".pdf");
                 if (pdfFile.exists()) {
                     if (Desktop.isDesktopSupported()) {
                         Desktop.getDesktop().open(pdfFile);
