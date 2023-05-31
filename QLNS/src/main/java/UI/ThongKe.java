@@ -611,7 +611,7 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
     private void PrintNeedBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintNeedBookBtnActionPerformed
         int dialogResult = JOptionPane.showConfirmDialog (null, "Xuất file excel?","Warning",JOptionPane.YES_NO_OPTION);
         if(dialogResult == JOptionPane.YES_OPTION)
-            XuatFileExcel(dtmSach, "Sách cần nhập", "C:\\Users\\dat\\Downloads\\SachCanNhap.xls" );
+            XuatFileExcel(dtmSach, "Sách cần nhập", "C:\\Users\\Admin\\Downloads\\SachCanNhap.xls" );
     }//GEN-LAST:event_PrintNeedBookBtnActionPerformed
 
     private void BanChayBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BanChayBtnMouseClicked
@@ -632,13 +632,13 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
     private void PrintBanChayBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintBanChayBtnActionPerformed
         int dialogResult = JOptionPane.showConfirmDialog (null, "Xuất file excel?","Warning",JOptionPane.YES_NO_OPTION);
         if(dialogResult == JOptionPane.YES_OPTION)
-            XuatFileExcel(dtmBanChay, "Sách bán chạy", "C:\\Users\\dat\\Downloads\\BanChay.xls" );
+            XuatFileExcel(dtmBanChay, "Sách bán chạy", "C:\\Users\\Admin\\Downloads\\BanChay.xls" );
     }//GEN-LAST:event_PrintBanChayBtnActionPerformed
 
     private void PrintTonKhoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintTonKhoBtnActionPerformed
         int dialogResult = JOptionPane.showConfirmDialog (null, "Xuất file excel?","Warning",JOptionPane.YES_NO_OPTION);
         if(dialogResult == JOptionPane.YES_OPTION)
-            XuatFileExcel(dtmTonKho, "Tồn kho tháng này", "C:\\Users\\dat\\Downloads\\TonKho.xls" );
+            XuatFileExcel(dtmTonKho, "Tồn kho tháng này", "C:\\Users\\Admin\\Downloads\\TonKho.xls" );
     }//GEN-LAST:event_PrintTonKhoBtnActionPerformed
 
     private void NhapXuatBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NhapXuatBtnMouseClicked
@@ -663,7 +663,7 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
     private void PrintNhapXuatBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintNhapXuatBtnActionPerformed
         int dialogResult = JOptionPane.showConfirmDialog (null, "Xuất file excel?","Warning",JOptionPane.YES_NO_OPTION);
         if(dialogResult == JOptionPane.YES_OPTION)
-            XuatFileExcel(dtmNhapXuat, "Nhập xuất tháng "+(NhapXuatMonthInput.getSelectedIndex()+1)+" năm "+NhapXuatYearInput.getText(), "C:\\Users\\dat\\Downloads\\NhapXuat.xls" );
+            XuatFileExcel(dtmNhapXuat, "Nhập xuất tháng "+(NhapXuatMonthInput.getSelectedIndex()+1)+" năm "+NhapXuatYearInput.getText(), "C:\\Users\\Admin\\Downloads\\NhapXuat.xls" );
     }//GEN-LAST:event_PrintNhapXuatBtnActionPerformed
 
     private void SaveBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SaveBtnMouseClicked

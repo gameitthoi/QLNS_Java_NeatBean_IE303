@@ -8,10 +8,12 @@ import Connect.CTHD_Connect;
 import Connect.HoaDon_Connect;
 import Connect.NXB_Connect;
 import Connect.Sach_Connect;
+import Connect.TaiKhoan_Connect;
 import Model.CTHD;
 import Model.HoaDon;
 import Model.NXB;
 import Model.Sach;
+import Model.TaiKhoan;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,6 +32,7 @@ import javax.swing.text.NumberFormatter;
 public class BanHang extends javax.swing.JFrame {
     private String MaHD=null;
     private String MaNV= null;
+    private TaiKhoan tk = new TaiKhoan();
     private ArrayList<NXB> dsnxb = null;
     private ArrayList<CTHD> cthd = new ArrayList<CTHD>(); 
     private ArrayList<Sach> dssMaTen = null;
@@ -45,6 +48,8 @@ public class BanHang extends javax.swing.JFrame {
         this.setTitle(title);
         this.setLocationRelativeTo(null);
         MaNV=maNV;
+        TaiKhoan_Connect tk_conn = new TaiKhoan_Connect();
+        tk = tk_conn.timTaiKhoanBangMaNV(MaNV);
         hienThiToanBoSach();
         hienThiToanBoNhaXuatBan();
         TaoBangCTHD();
@@ -511,13 +516,20 @@ public class BanHang extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void QLNXBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QLNXBActionPerformed
-        QuanLyNXB_UI nxbUi = new QuanLyNXB_UI("Quản lý nhà xuất bản");
-        nxbUi.showWindow();
+        if(tk.getNXB()==1){
+            QuanLyNXB_UI nxbUi = new QuanLyNXB_UI("Quản lý nhà xuất bản");
+            nxbUi.showWindow();
+        }
+        else JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào trang này!");
+            
     }//GEN-LAST:event_QLNXBActionPerformed
 
     private void QLNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QLNVActionPerformed
-        QuanLyNhanVien nhanVienui = new QuanLyNhanVien("Quản lý nhân viên");
-        nhanVienui.showWindow();
+        if(tk.getNhanVien()==1){
+            QuanLyNhanVien nhanVienui = new QuanLyNhanVien("Quản lý nhân viên");
+            nhanVienui.showWindow();
+        }
+        else JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào trang này!");
     }//GEN-LAST:event_QLNVActionPerformed
 
     private void ThoatBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ThoatBtnMouseClicked
@@ -526,13 +538,19 @@ public class BanHang extends javax.swing.JFrame {
     }//GEN-LAST:event_ThoatBtnMouseClicked
 
     private void TKMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TKMenuMouseClicked
-        ThongKe thongkeui = new ThongKe("Thống kê");
-        thongkeui.showWindow();
+        if(tk.getBaoCao()==1) {
+            ThongKe thongkeui = new ThongKe("Thống kê");
+            thongkeui.showWindow();
+        }
+        else JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào trang này!");
     }//GEN-LAST:event_TKMenuMouseClicked
 
     private void QLSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QLSachActionPerformed
-        QuanLySach sachui = new QuanLySach("Quản lý sách");
-        sachui.showWindow();
+        if(tk.getSach()==1){
+            QuanLySach sachui = new QuanLySach("Quản lý sách");
+            sachui.showWindow();
+        }
+        else JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào trang này!");
     }//GEN-LAST:event_QLSachActionPerformed
 
     private void addHDBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addHDBtnActionPerformed
@@ -666,31 +684,43 @@ public class BanHang extends javax.swing.JFrame {
     }//GEN-LAST:event_ReceiveInputKeyReleased
 
     private void QLHDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QLHDActionPerformed
-        QuanLyHoaDon hdUI = new QuanLyHoaDon("Quản Lý Hóa Đơn");
-        hdUI.showWindow();
+        if(tk.getHoaDon()==1){
+            QuanLyHoaDon hdUI = new QuanLyHoaDon("Quản Lý Hóa Đơn");
+            hdUI.showWindow();
+        }
+        else JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào trang này!");
     }//GEN-LAST:event_QLHDActionPerformed
 
     private void TaiKhoanMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TaiKhoanMenuMouseClicked
-        QuanLyTaiKhoan tkUI = new QuanLyTaiKhoan("Tài khoản");
-        tkUI.showWindow();
+        if(tk.getTaiKhoan()==1){
+            QuanLyTaiKhoan tkUI = new QuanLyTaiKhoan("Tài khoản");
+            tkUI.showWindow();
+        }
+        else JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào trang này!");
     }//GEN-LAST:event_TaiKhoanMenuMouseClicked
 
     private void BarcodeMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BarcodeMenuMouseClicked
-        InMaVach mvUI = new InMaVach("In mã vạch");
-        mvUI.showWindow();
+        if(tk.getMaVach()==1){
+            InMaVach mvUI = new InMaVach("In mã vạch");
+            mvUI.showWindow();
+        }
+        else JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào trang này!");
     }//GEN-LAST:event_BarcodeMenuMouseClicked
 
     private void QL_NCCVPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QL_NCCVPPActionPerformed
-        // TODO add your handling code here:
-        QuanLyNCCVPP np = new QuanLyNCCVPP("Quản lý nhà cung cấp văn phòng mẫu");
-        np.showWindow();
+        if(tk.getNCCVPP()==1){
+            QuanLyNCCVPP np = new QuanLyNCCVPP("Quản lý nhà cung cấp văn phòng mẫu");
+            np.showWindow();
+        }
+        else JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào trang này!");
     }//GEN-LAST:event_QL_NCCVPPActionPerformed
 
     private void QL_VPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QL_VPPActionPerformed
-        // TODO add your handling code here:
-        QuanLyVPP vpp = new QuanLyVPP("Quản lý văn phòng phẩm");
-        vpp.showWindow();
-        
+        if(tk.getVPP()==1){
+            QuanLyVPP vpp = new QuanLyVPP("Quản lý văn phòng phẩm");
+            vpp.showWindow();
+        }
+        else JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào trang này!");
     }//GEN-LAST:event_QL_VPPActionPerformed
 
     private void ReceiveInputKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ReceiveInputKeyTyped
@@ -705,8 +735,11 @@ public class BanHang extends javax.swing.JFrame {
     }//GEN-LAST:event_ReceiveInputKeyTyped
 
     private void QLKHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QLKHActionPerformed
-        QuanLyKhachHang qlkh = new QuanLyKhachHang();
-        qlkh.showWindow();
+        if(tk.getKhachHang()==1){
+            QuanLyKhachHang qlkh = new QuanLyKhachHang();
+            qlkh.showWindow();
+        }
+        else JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào trang này!");
     }//GEN-LAST:event_QLKHActionPerformed
 
     /**

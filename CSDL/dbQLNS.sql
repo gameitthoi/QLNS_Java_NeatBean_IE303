@@ -254,6 +254,16 @@ CREATE TABLE [dbo].[TAIKHOAN](
 	[username] [nvarchar](50) NULL,
 	[password] [nvarchar](50) NULL,
 	[MaNV] [nvarchar](50) NULL,
+	[BaoCao] [TINYINT] DEFAULT 0,
+	[TaiKhoan] [TINYINT] DEFAULT 0,
+	[MaVach] [TINYINT] DEFAULT 0,
+	[Sach] [TINYINT] DEFAULT 0,
+	[NXB] [TINYINT] DEFAULT 0,
+	[NHanVien] [TINYINT] DEFAULT 0,
+	[HoaDon] [TINYINT] DEFAULT 0,
+	[NCCVPP] [TINYINT] DEFAULT 0,
+	[VPP] [TINYINT] DEFAULT 0,
+	[KhachHang] [TINYINT] DEFAULT 0,
  CONSTRAINT [PK_TAIKHOAN] PRIMARY KEY CLUSTERED 
 (
 	[MaTk] ASC
@@ -402,8 +412,8 @@ INSERT [dbo].[CTHD] ([MaHD], [MaSach], [DonGia], [SoLuong], [ThanhTien]) VALUES 
 INSERT [dbo].[CTHD] ([MaHD], [MaSach], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD11', N's06', 250000.0000, 10, 1300000.0000)
 INSERT [dbo].[CTHD] ([MaHD], [MaSach], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD12', N's06', 130000.0000, 1, 130000.0000)
 
-INSERT [dbo].[TAIKHOAN] ([MaTk], [username], [password], [MaNV]) VALUES (N'tk01', N'admin', N'admin',N'NV01')
-INSERT [dbo].[TAIKHOAN] ([MaTk], [username], [password], [MaNV]) VALUES (N'tk02', N'thungan', N'thungan',N'NV02')
+INSERT [dbo].[TAIKHOAN] ([MaTk], [username], [password], [MaNV], [BaoCao], [TaiKhoan], [MaVach], [Sach], [NXB], [NhanVien], [HoaDon], [NCCVPP], [VPP], [KhachHang]) VALUES (N'tk01', N'admin', N'admin',N'NV01', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+INSERT [dbo].[TAIKHOAN] ([MaTk], [username], [password], [MaNV], [BaoCao], [TaiKhoan], [MaVach], [Sach], [NXB], [NhanVien], [HoaDon], [NCCVPP], [VPP], [KhachHang]) VALUES (N'tk02', N'thungan', N'thungan',N'NV02', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 
 
 INSERT [dbo].CHUCVU ([MaCV], [ChucVu], [DinhDoanh]) VALUES ('CV01', N'Admin', N'Quản lý hệ thống')
@@ -612,3 +622,5 @@ USE [master]
 GO
 ALTER DATABASE [dbQLNS] SET  READ_WRITE 
 GO
+
+drop table TAIKHOAN
