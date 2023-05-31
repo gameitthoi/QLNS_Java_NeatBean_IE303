@@ -520,8 +520,7 @@ public class BanHang extends javax.swing.JFrame {
             QuanLyNXB_UI nxbUi = new QuanLyNXB_UI("Quản lý nhà xuất bản");
             nxbUi.showWindow();
         }
-        else JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào trang này!");
-            
+        else JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào trang này!");   
     }//GEN-LAST:event_QLNXBActionPerformed
 
     private void QLNVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QLNVActionPerformed

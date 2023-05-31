@@ -39,7 +39,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="268" max="32767" attributes="0"/>
+              <EmptySpace pref="260" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -71,9 +71,9 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="NVTable">
+        <Component class="javax.swing.JTable" name="NXBTable">
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="NVTableMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="NXBTableMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>
@@ -138,8 +138,8 @@
                       </Group>
                       <EmptySpace pref="27" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="MaNVInput" pref="142" max="32767" attributes="0"/>
-                          <Component id="TenNVInput" alignment="1" max="32767" attributes="0"/>
+                          <Component id="MaNXBInput" pref="142" max="32767" attributes="0"/>
+                          <Component id="TenNXBInput" alignment="1" max="32767" attributes="0"/>
                           <Component id="SDTInput" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
@@ -152,12 +152,12 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="MaNVLabel" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
-                          <Component id="MaNVInput" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="MaNXBInput" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="TenNVLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="TenNVInput" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="TenNXBInput" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
@@ -178,7 +178,7 @@
                 <Property name="text" type="java.lang.String" value="M&#xe3; nh&#xe0; xu&#x1ea5;t b&#x1ea3;n"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="MaNVInput">
+            <Component class="javax.swing.JTextField" name="MaNXBInput">
             </Component>
             <Component class="javax.swing.JLabel" name="TenNVLabel">
               <Properties>
@@ -188,7 +188,7 @@
                 <Property name="text" type="java.lang.String" value="T&#xea;n nh&#xe0; xu&#x1ea5;t b&#x1ea3;n"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="TenNVInput">
+            <Component class="javax.swing.JTextField" name="TenNXBInput">
             </Component>
             <Component class="javax.swing.JLabel" name="SDTLabel">
               <Properties>
@@ -208,38 +208,37 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="EmailLabel" min="-2" pref="53" max="-2" attributes="0"/>
                           <Component id="CCCDLabel" min="-2" pref="73" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                              <Component id="EmailLabel" min="-2" pref="53" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace pref="24" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="DiachiInput" pref="199" max="32767" attributes="0"/>
                           <Component id="EmailInput" max="32767" attributes="0"/>
-                          <Component id="CCCDInput" min="-2" pref="199" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace pref="28" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="CCCDInput" min="-2" pref="31" max="-2" attributes="0"/>
-                              <EmptySpace pref="18" max="32767" attributes="0"/>
-                              <Component id="EmailInput" min="-2" pref="30" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="46" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="CCCDLabel" min="-2" pref="31" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="EmailLabel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                          </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="CCCDLabel" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                          <Component id="DiachiInput" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="EmailInput" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="EmailLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="19" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -253,9 +252,9 @@
                 <Property name="text" type="java.lang.String" value="&#x110;&#x1ecb;a ch&#x1ec9;"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="CCCDInput">
+            <Component class="javax.swing.JTextField" name="DiachiInput">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CCCDInputActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="DiachiInputActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="EmailLabel">
@@ -384,9 +383,9 @@
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="TKNVBtn" min="-2" pref="100" max="-2" attributes="0"/>
+                          <Component id="TKNXBBtn" min="-2" pref="100" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="AllNVBtn" min="-2" pref="96" max="-2" attributes="0"/>
+                          <Component id="AllNXBBtn" min="-2" pref="96" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -403,8 +402,8 @@
                   <Component id="TimKiemInput" min="-2" pref="34" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="TKNVBtn" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="AllNVBtn" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="TKNXBBtn" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                      <Component id="AllNXBBtn" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               </Group>
@@ -412,20 +411,20 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="TKNVBtn">
+        <Component class="javax.swing.JButton" name="TKNXBBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TKNVBtnActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TKNXBBtnActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="AllNVBtn">
+        <Component class="javax.swing.JButton" name="AllNXBBtn">
           <Properties>
             <Property name="text" type="java.lang.String" value="T&#x1ea5;t c&#x1ea3;"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AllNVBtnActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AllNXBBtnActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="TimKiemInput">

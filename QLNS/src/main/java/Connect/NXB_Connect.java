@@ -76,6 +76,21 @@ public class NXB_Connect extends Connect_sqlServer
             }
             return -1 ;
 	}
+        public boolean kiemTraTonTai(String manv)
+        {
+        NXB nxb = new NXB();
+        try {
+            String sql ="select * from NXB where MaNXB=?" ;
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setString(1, manv);
+            ResultSet result = pre.executeQuery();
+            while (result.next()) return true ;
+        } catch (Exception e) {
+                e.printStackTrace();
+        }
+
+        return false ;
+        }
 	//hàm xóa 1 NXB
 	public int XoaNXB(String manxb)
 	{
@@ -108,21 +123,27 @@ public class NXB_Connect extends Connect_sqlServer
             return -1 ;
 	}
         
-         public NXB TimTenNXB(String tenNXB){
-        NXB nxb = new NXB();
-        try{
-            String sql ="select top 1 * from NXB where MaNXB=?" ;
-            PreparedStatement pre = conn.prepareStatement(sql);
-            pre.setString(1, tenNXB);
-            ResultSet result = pre.executeQuery();
-            while (result.next()) {
-                nxb.setMaNXB(result.getString(1));
-                nxb.setTenNXB(result.getString(2));
+        public ArrayList<NXB> TimTenNXB(String key){
+            ArrayList<NXB> dsnxb = new ArrayList<NXB>();
+            try{
+                String sql ="select * from NXB where MaNXB like ? or TenNXB like ?" ;
+                PreparedStatement pre = conn.prepareStatement(sql);
+                pre.setString(1, "%"+key+"%");                
+                pre.setString(2, "%"+key+"%");
+                ResultSet result = pre.executeQuery();
+                while (result.next()) {
+                    NXB nxb = new NXB();
+                    nxb.setMaNXB(result.getString(1));
+                    nxb.setTenNXB(result.getString(2));                    
+                    nxb.setSDT(result.getString(3));
+                    nxb.setDiaChi(result.getString(4));
+                    nxb.setEmail(result.getString(5));
+                    dsnxb.add(nxb);
+                }
+            }catch (Exception e){
+                e.printStackTrace();
             }
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return nxb;
+            return dsnxb;
     }
 }
 	
