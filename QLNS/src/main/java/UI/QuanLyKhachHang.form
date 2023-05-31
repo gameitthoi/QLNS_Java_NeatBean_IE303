@@ -298,6 +298,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="SdtInput">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="SdtInputKeyTyped"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -335,6 +338,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="DiemInput">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="DiemInputKeyTyped"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>

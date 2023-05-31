@@ -7,6 +7,8 @@ package UI;
 import Connect.KhachHang_Connect;
 import Model.KhachHang;
 import Model.KhachHang;
+import java.awt.event.KeyEvent;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -45,7 +47,7 @@ private ArrayList<KhachHang> dskh_tim = null;
             vec.add(kh.getMaKH());
             vec.add(kh.getTenKH());
             vec.add(kh.getSdt());
-            vec.add(String.format("%.0f", kh.getDiem()));
+            vec.add(formatCurrency(kh.getDiem()));
             dtmKH.addRow(vec);
         }
         KHTable.setModel(dtmKH);
@@ -74,6 +76,23 @@ private ArrayList<KhachHang> dskh_tim = null;
             }
             else JOptionPane.showMessageDialog(null, "Thêm mới thất bại!");
         } 
+    }
+    
+    //hàm định dạng tiền tệ
+    public String formatCurrency(double amount) {
+        // Định dạng số có dấu phân cách và đơn vị tiền tệ
+        DecimalFormat formatter = new DecimalFormat("#,###");
+        String formattedAmount = formatter.format(amount);
+
+        return formattedAmount;
+    }
+    
+    //hàm loại bỏ dấu phẩy và chữ đ trong tiền tệ
+    public String removeCurrencyFormatting(String formattedAmount) {
+        // Loại bỏ các ký tự không phải số và dấu phân cách
+        String amountWithoutFormatting = formattedAmount.replace(",", "");
+
+        return amountWithoutFormatting;
     }
 
     /**
@@ -213,6 +232,12 @@ private ArrayList<KhachHang> dskh_tim = null;
 
         SdtLabel.setText("Số điện thoại");
 
+        SdtInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                SdtInputKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -235,6 +260,12 @@ private ArrayList<KhachHang> dskh_tim = null;
         );
 
         DiemLabel.setText("Điểm tích lũy");
+
+        DiemInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                DiemInputKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -473,8 +504,30 @@ private ArrayList<KhachHang> dskh_tim = null;
         MaKHInput.setText(KHTable.getValueAt(select, 0)+"");
         TenKHInput.setText(KHTable.getValueAt(select, 1)+"");
         SdtInput.setText(KHTable.getValueAt(select, 2)+"");
-        DiemInput.setText(KHTable.getValueAt(select, 3)+"");
+        DiemInput.setText(removeCurrencyFormatting(KHTable.getValueAt(select, 3)+""));
     }//GEN-LAST:event_KHTableMouseClicked
+
+    private void SdtInputKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SdtInputKeyTyped
+        //kiểm tra xem người dùng có nhập số vào không, nếu không phải số thì không nhận
+        char c = evt.getKeyChar();
+        if (!((c >= '0') && (c <= '9') ||
+            (c == KeyEvent.VK_BACK_SPACE) ||
+            (c == KeyEvent.VK_DELETE))) {
+        getToolkit().beep();
+        evt.consume();
+      }
+    }//GEN-LAST:event_SdtInputKeyTyped
+
+    private void DiemInputKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DiemInputKeyTyped
+        //kiểm tra xem người dùng có nhập số vào không, nếu không phải số thì không nhận
+        char c = evt.getKeyChar();
+        if (!((c >= '0') && (c <= '9') ||
+            (c == KeyEvent.VK_BACK_SPACE) ||
+            (c == KeyEvent.VK_DELETE))) {
+        getToolkit().beep();
+        evt.consume();
+      }
+    }//GEN-LAST:event_DiemInputKeyTyped
 
     /**
      * @param args the command line arguments
