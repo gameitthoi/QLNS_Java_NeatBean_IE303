@@ -34,8 +34,8 @@
                       <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jPanel3" max="32767" attributes="0"/>
                           <Component id="jPanel2" max="32767" attributes="0"/>
+                          <Component id="jPanel3" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -443,12 +443,9 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jScrollPane2" max="32767" attributes="0"/>
+                      <Component id="jScrollPane2" pref="570" max="32767" attributes="0"/>
                       <Component id="DSNVLabel" alignment="0" max="32767" attributes="0"/>
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace min="6" max="32767" attributes="0"/>
-                          <Component id="TimKiemNhanVienPanel" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="TimKiemNhanVienPanel" alignment="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -584,18 +581,31 @@
                           <Component id="PhanQuyenLabel" max="32767" attributes="0"/>
                           <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="TaiKhoanCheckBox" min="-2" pref="85" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="ThongKeCheckBox" min="-2" pref="85" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="NhanVienCheckBox" min="-2" pref="85" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="SachCheckBox" min="-2" pref="85" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="NXBCheckBox" min="-2" pref="85" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="HoaDonCheckBox" min="-2" pref="85" max="-2" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="NhanVienCheckBox" min="-2" pref="85" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                  <Component id="HoaDonCheckBox" min="-2" pref="85" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="NCCVPPCheckBox" min="-2" pref="85" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="VPPCheckBox" min="-2" pref="85" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="KHCheckBox" min="-2" pref="85" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="BaoCaoCheckBox" min="-2" pref="85" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="TaiKhoanCheckBox" min="-2" pref="85" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="MaVachCheckBox" min="-2" pref="85" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="SachCheckBox" min="-2" pref="85" max="-2" attributes="0"/>
+                                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  <Component id="NXBCheckBox" min="-2" pref="85" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -610,13 +620,20 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="TaiKhoanCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="ThongKeCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="NhanVienCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="BaoCaoCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="MaVachCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="SachCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="NXBCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="VPPCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="KHCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="NCCVPPCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="NhanVienCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="HoaDonCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="51" max="32767" attributes="0"/>
+                  <EmptySpace pref="19" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -639,9 +656,9 @@
             <Property name="text" type="java.lang.String" value="T&#xe0;i kho&#x1ea3;n"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JCheckBox" name="ThongKeCheckBox">
+        <Component class="javax.swing.JCheckBox" name="BaoCaoCheckBox">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Th&#x1ed1;ng k&#xea;"/>
+            <Property name="text" type="java.lang.String" value="B&#xe1;o c&#xe1;o"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JCheckBox" name="NhanVienCheckBox">
@@ -662,6 +679,26 @@
         <Component class="javax.swing.JCheckBox" name="HoaDonCheckBox">
           <Properties>
             <Property name="text" type="java.lang.String" value="H&#xf3;a &#x111;&#x1a1;n"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="VPPCheckBox">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="VPP"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="KHCheckBox">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Kh&#xe1;ch h&#xe0;ng"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="MaVachCheckBox">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="M&#xe3; v&#x1ea1;ch"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="NCCVPPCheckBox">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="NCCVPP"/>
           </Properties>
         </Component>
       </SubComponents>
