@@ -8,17 +8,24 @@ import Connect.ChucVu_Connect;
 import Connect.NhanVien_Connect;
 import Model.ChucVu;
 import Model.NhanVien;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.SpinnerNumberModel;
@@ -91,7 +98,7 @@ private ArrayList<ChucVu> dscv = null;
             vec.add(nv.getMaCV());
             vec.add(nv.getSDT());
             vec.add(nv.getEmail());
-            vec.add(String.format("%.0f", nv.getLuong()));
+            vec.add(formatCurrency(nv.getLuong()));
             dtmNhanVien.addRow(vec);
         }
         NVTable.setModel(dtmNhanVien);
@@ -130,6 +137,45 @@ private ArrayList<ChucVu> dscv = null;
         } 
     }  
     
+    //hàm check ngày tháng năm
+    private boolean CheckDate(String dateString){
+        String dateFormatPattern = "dd/MM/yyyy"; // Định dạng ngày tháng dd/MM/yyyy
+    
+       try {
+        LocalDate.parse(dateString, DateTimeFormatter.ofPattern(dateFormatPattern));
+            return true; // Chuỗi hợp lệ với định dạng
+        } catch (DateTimeParseException e) {
+            return false; // Chuỗi không hợp lệ với định dạng
+        }
+    }
+    
+    //hàm check email
+    public boolean isValidEmail(String email) {
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+    
+    //hàm định dạng tiền tệ
+    public String formatCurrency(double amount) {
+        // Định dạng số có dấu phân cách và đơn vị tiền tệ
+        DecimalFormat formatter = new DecimalFormat("#,###");
+        String formattedAmount = formatter.format(amount);
+
+        // Thêm ký tự đơn vị tiền tệ
+        formattedAmount += " đ";
+
+        return formattedAmount;
+    }
+    
+    //hàm loại bỏ dấu phẩy và chữ đ trong tiền tệ
+    public String removeCurrencyFormatting(String formattedAmount) {
+        // Loại bỏ các ký tự không phải số và dấu phân cách
+        String amountWithoutFormatting = formattedAmount.replace(",", "").replace("đ", "");
+
+        return amountWithoutFormatting;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -195,6 +241,12 @@ private ArrayList<ChucVu> dscv = null;
             }
         });
 
+        TimKiemInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TimKiemInputKeyPressed(evt);
+            }
+        });
+
         NhanTenLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         NhanTenLabel.setText("Nhập tên hoặc mã nhân viên");
 
@@ -240,6 +292,12 @@ private ArrayList<ChucVu> dscv = null;
         SDTLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         SDTLabel.setText("Số điện thoại");
 
+        SDTInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                SDTInputKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -284,6 +342,12 @@ private ArrayList<ChucVu> dscv = null;
 
         CCCDLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         CCCDLabel.setText("CCCD");
+
+        CCCDInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                CCCDInputKeyTyped(evt);
+            }
+        });
 
         NSLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         NSLabel.setText("Ngày sinh");
@@ -335,6 +399,12 @@ private ArrayList<ChucVu> dscv = null;
 
         LuongLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         LuongLabel.setText("Lương");
+
+        LuongInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                LuongInputKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -525,6 +595,14 @@ private ArrayList<ChucVu> dscv = null;
     }//GEN-LAST:event_AllNVBtnActionPerformed
 
     private void AddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnActionPerformed
+        if(!CheckDate(NVLInput.getText()) || !CheckDate(NSInput.getText())) {
+            JOptionPane.showMessageDialog(null, "Ngày vào làm hoặc ngày sinh không hợp lệ");
+            return;
+        }
+        if(!isValidEmail(EmailInput.getText())){
+            JOptionPane.showMessageDialog(null, "Email không đúng định dạng!");
+            return;
+        }
         int ret=JOptionPane.showConfirmDialog(null, "Bạn muốn thêm nhân viên này?", "xác nhận xác nhận để thêm", JOptionPane.OK_CANCEL_OPTION);
         if(ret==JOptionPane.OK_OPTION){
             if(MaNVInput.getText().equals("") || TenNVInput.getText().equals("") || NSInput.getText().equals("") || NVLInput.getText().equals("") || CCCDInput.getText().equals("") || SDTInput.getText().equals("") || EmailInput.getText().equals("") || LuongInput.getText().equals("") )
@@ -586,6 +664,14 @@ private ArrayList<ChucVu> dscv = null;
     }//GEN-LAST:event_ResetBtnActionPerformed
 
     private void UpdateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateBtnActionPerformed
+        if(!CheckDate(NVLInput.getText()) || !CheckDate(NSInput.getText())) {
+            JOptionPane.showMessageDialog(null, "Ngày vào làm hoặc ngày sinh không hợp lệ");
+            return;
+        }
+        if(!isValidEmail(EmailInput.getText())){
+            JOptionPane.showMessageDialog(null, "Email không đúng định dạng!");
+            return;
+        }
         int ret=JOptionPane.showConfirmDialog(null, "Bạn muốn chỉnh sửa nhân viên này?", "xác nhận xác nhận để thêm", JOptionPane.OK_CANCEL_OPTION);
         if(ret==JOptionPane.OK_OPTION){
             if(MaNVInput.getText().equals("") || TenNVInput.getText().equals("") || NSInput.getText().equals("") || NVLInput.getText().equals("") || CCCDInput.getText().equals("") || SDTInput.getText().equals("") || EmailInput.getText().equals("") || LuongInput.getText().equals("") ){
@@ -636,7 +722,7 @@ private ArrayList<ChucVu> dscv = null;
         CVInput.setSelectedIndex(Integer.parseInt(cvconn.TimChucVu(NVTable.getValueAt(select, 5).toString()).getMaCV().substring(2))-1);
         SDTInput.setText(NVTable.getValueAt(select, 6)+"");
         EmailInput.setText(NVTable.getValueAt(select, 7)+"");
-        LuongInput.setText(NVTable.getValueAt(select, 8)+"");
+        LuongInput.setText(removeCurrencyFormatting(NVTable.getValueAt(select, 8)+""));
     }//GEN-LAST:event_NVTableMouseClicked
 
     private void ImportExcelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImportExcelBtnActionPerformed
@@ -754,6 +840,45 @@ private ArrayList<ChucVu> dscv = null;
             if(dem == NVTable.getRowCount()) hienThiToanBoNhanVien();
         }
     }//GEN-LAST:event_AddFromExcelBtnActionPerformed
+
+    private void SDTInputKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SDTInputKeyTyped
+        //kiểm tra xem người dùng có nhập số vào không, nếu không phải số thì không nhận
+        char c = evt.getKeyChar();
+        if (!((c >= '0') && (c <= '9') ||
+            (c == KeyEvent.VK_BACK_SPACE) ||
+            (c == KeyEvent.VK_DELETE))) {
+        getToolkit().beep();
+        evt.consume();
+      }
+    }//GEN-LAST:event_SDTInputKeyTyped
+
+    private void CCCDInputKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CCCDInputKeyTyped
+        //kiểm tra xem người dùng có nhập số vào không, nếu không phải số thì không nhận
+        char c = evt.getKeyChar();
+        if (!((c >= '0') && (c <= '9') ||
+            (c == KeyEvent.VK_BACK_SPACE) ||
+            (c == KeyEvent.VK_DELETE))) {
+        getToolkit().beep();
+        evt.consume();
+      }
+    }//GEN-LAST:event_CCCDInputKeyTyped
+
+    private void LuongInputKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LuongInputKeyTyped
+        //kiểm tra xem người dùng có nhập số vào không, nếu không phải số thì không nhận
+        char c = evt.getKeyChar();
+        if (!((c >= '0') && (c <= '9') ||
+            (c == KeyEvent.VK_BACK_SPACE) ||
+            (c == KeyEvent.VK_DELETE))) {
+        getToolkit().beep();
+        evt.consume();
+      }
+    }//GEN-LAST:event_LuongInputKeyTyped
+
+    private void TimKiemInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TimKiemInputKeyPressed
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER){
+            TKNVBtnActionPerformed(null);
+        }
+    }//GEN-LAST:event_TimKiemInputKeyPressed
 
     /**
      * @param args the command line arguments

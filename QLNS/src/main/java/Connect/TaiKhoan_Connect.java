@@ -23,9 +23,9 @@ public class TaiKhoan_Connect extends Connect_sqlServer{
             {
                 TaiKhoan tk = new TaiKhoan();
                 tk.setMaTK(result.getString(1));
-                tk.setMaNV(result.getString(2));
-                tk.setUserName(result.getString(3));
-                tk.setPassWord(result.getString(4));
+                tk.setUserName(result.getString(2));
+                tk.setPassWord(result.getString(3));
+                tk.setMaNV(result.getString(4));
                 tk.setBaoCao(result.getInt(5));
                 tk.setTaiKhoan(result.getInt(6));
                 tk.setMaVach(result.getInt(7));
@@ -57,9 +57,9 @@ public class TaiKhoan_Connect extends Connect_sqlServer{
             {
                 TaiKhoan tk = new TaiKhoan();
                 tk.setMaTK(result.getString(1));
-                tk.setMaNV(result.getString(2));
-                tk.setUserName(result.getString(3));
-                tk.setPassWord(result.getString(4));
+                tk.setUserName(result.getString(2));
+                tk.setPassWord(result.getString(3));
+                tk.setMaNV(result.getString(4));
                 tk.setBaoCao(result.getInt(5));
                 tk.setTaiKhoan(result.getInt(6));
                 tk.setMaVach(result.getInt(7));
@@ -88,9 +88,9 @@ public class TaiKhoan_Connect extends Connect_sqlServer{
             while(result.next())
             {
                 tk.setMaTK(result.getString(1));
-                tk.setMaNV(result.getString(2));
-                tk.setUserName(result.getString(3));
-                tk.setPassWord(result.getString(4));
+                tk.setUserName(result.getString(2));
+                tk.setPassWord(result.getString(3));
+                tk.setMaNV(result.getString(4));
                 tk.setBaoCao(result.getInt(5));
                 tk.setTaiKhoan(result.getInt(6));
                 tk.setMaVach(result.getInt(7));
@@ -117,9 +117,9 @@ public class TaiKhoan_Connect extends Connect_sqlServer{
             ResultSet result = pre.executeQuery();
             while(result.next()){
                 tk.setMaTK(result.getString(1));
-                tk.setMaNV(result.getString(2));
-                tk.setUserName(result.getString(3));
-                tk.setPassWord(result.getString(4));
+                tk.setUserName(result.getString(2));
+                tk.setPassWord(result.getString(3));
+                tk.setMaNV(result.getString(4));
                 tk.setBaoCao(result.getInt(5));
                 tk.setTaiKhoan(result.getInt(6));
                 tk.setMaVach(result.getInt(7));
@@ -140,11 +140,11 @@ public class TaiKhoan_Connect extends Connect_sqlServer{
     public boolean kiemTraTonTai(String matk, String username, String manv)
     {
         try {
-            String sql ="select * from TAIKHOAN where MaTK=? or username=? or MaNV = ?" ;
+            String sql ="select * from TAIKHOAN where MaTk=? or username=? or MaNV = ?" ;
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setString(1, matk);
             pre.setString(2, username);
-            pre.setString(2, manv);
+            pre.setString(3, manv);
             ResultSet result = pre.executeQuery();
             while (result.next()) return true ;
         } catch (Exception e) {
@@ -156,7 +156,7 @@ public class TaiKhoan_Connect extends Connect_sqlServer{
     
     public int themTaiKhoan( TaiKhoan tk){
         try{
-            String sql ="INSERT INTO TAIKHOAN (MaTK, MaNV, username, password, BaoCao, TaiKhoan, MaVach, Sach, NXB, NhanVien, HoaDon, NCCVPP, VPP, KhachHang) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
+            String sql ="INSERT INTO TAIKHOAN (MaTk, MaNV, username, password, BaoCao, TaiKhoan, MaVach, Sach, NXB, NhanVien, HoaDon, NCCVPP, VPP, KhachHang) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?) ";
             PreparedStatement pre  =  conn.prepareStatement(sql);
             pre.setString(1, tk.getMaTK());
             pre.setString(2, tk.getMaNV());
@@ -181,7 +181,7 @@ public class TaiKhoan_Connect extends Connect_sqlServer{
     
     public int updateTaiKhoan(TaiKhoan tk){
         try {
-            String sql ="update TAIKHOAN set MaNV=?, username=?, password=? , BaoCao=?, TaiKhoan=?, MaVach=?, Sach=?, NXB=?, NhanVien=?, HoaDon=?, NCCVPP=?, VPP=?, KhachHang=? where MaTK=?" ;
+            String sql ="update TAIKHOAN set MaNV=?, username=?, password=? , BaoCao=?, TaiKhoan=?, MaVach=?, Sach=?, NXB=?, NhanVien=?, HoaDon=?, NCCVPP=?, VPP=?, KhachHang=? where MaTk=?" ;
             PreparedStatement pre =conn.prepareStatement(sql);
             pre.setString(1, tk.getMaNV());
             pre.setString(2,  tk.getUserName());
@@ -206,7 +206,7 @@ public class TaiKhoan_Connect extends Connect_sqlServer{
     
     public int xoaTaiKhoan(String matk ){
         try {
-            String sql ="DELETE FROM TAIKHOAN where MaTK=? " ;
+            String sql ="DELETE FROM TAIKHOAN where MaTk=? " ;
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setString(1, matk);
             return pre.executeUpdate();

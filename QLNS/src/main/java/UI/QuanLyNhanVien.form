@@ -121,6 +121,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="TimKiemInput">
+          <Events>
+            <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TimKiemInputKeyPressed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="NhanTenLabel">
           <Properties>
@@ -263,6 +266,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="SDTInput">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="SDTInputKeyTyped"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -338,6 +344,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="CCCDInput">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="CCCDInputKeyTyped"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="NSLabel">
               <Properties>
@@ -437,6 +446,9 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="LuongInput">
+              <Events>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="LuongInputKeyTyped"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
