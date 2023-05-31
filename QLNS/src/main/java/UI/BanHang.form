@@ -163,10 +163,10 @@
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <Component id="PaymentBtn" min="-2" pref="116" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="DeleteBtn" min="-2" pref="117" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="PaymentBtn" min="-2" pref="116" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="CancleBtn" min="-2" pref="113" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="170" max="-2" attributes="0"/>
                           </Group>
@@ -239,17 +239,15 @@
                               <Component id="ReceiveInput" min="-2" pref="40" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="DeleteBtn" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
-                              <Component id="PaymentBtn" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
-                          </Group>
+                          <Component id="DeleteBtn" min="-2" pref="39" max="-2" attributes="0"/>
                           <Component id="CancleBtn" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
+                          <Component id="PaymentBtn" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="38" max="32767" attributes="0"/>
+              <EmptySpace pref="44" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
