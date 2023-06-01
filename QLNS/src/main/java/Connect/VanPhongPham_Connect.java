@@ -43,6 +43,21 @@ public class VanPhongPham_Connect extends Connect_sqlServer{
         }
         return dsVPP;
     }
+    public ArrayList<String> layTatCaDanhMuc(){
+            ArrayList<String> dsdm = new ArrayList<String>() ;
+            try{
+                String sql ="SELECT DISTINCT DanhMuc FROM VPP" ;
+                Statement statement = conn.createStatement();
+                ResultSet result = statement.executeQuery(sql);
+                while(result.next()){
+                    dsdm.add(result.getString(1));
+                }
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
+            return dsdm;
+    }
     public int  themMoi(VPP vpp)
     {
         try {
@@ -75,6 +90,23 @@ public class VanPhongPham_Connect extends Connect_sqlServer{
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        return -1;
+    }
+    
+    //Hàm update số lượng sách sau khi bán
+    public int updateSL(String MaSP, int SL){
+        try {
+            String sql ="update VPP set SoLuong=? where MaVPP=?" ;
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, SL);
+            pre.setString(2,MaSP);
+
+            return pre.executeUpdate();
+
+            } catch (Exception e) {
+                    e.printStackTrace();
+            }
 
         return -1;
     }

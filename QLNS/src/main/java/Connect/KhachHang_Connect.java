@@ -33,6 +33,25 @@ public class KhachHang_Connect extends Connect_sqlServer{
         }
         return dskh;
     }
+    
+    public KhachHang layKhachHangBangSDT(String sdt){
+        KhachHang kh = new KhachHang();
+        try {
+            String sql = "select top 1 MaKH, TenKH, Sdt, Diem from KHACHHANG where Sdt like ?" ;
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setString(1, "%"+sdt+"%");
+            ResultSet result  = pre.executeQuery();
+            while(result.next()){
+                kh.setMaKH(result.getString(1));
+                kh.setTenKH(result.getString(2));
+                kh.setSdt(result.getString(3));
+                kh.setDiem(result.getDouble(4));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return kh;
+    }
     public int themKhachHang(KhachHang kh){
         try {
             String sql ="INSERT INTO KhachHang (MaKH, TenKH, Sdt, Diem) values (?,?,?,?) ";

@@ -122,13 +122,13 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[CTHD](
 	[MaHD] [nvarchar](50) NOT NULL,
-	[MaSach] [nvarchar](50) NOT NULL,
+	[MaSP] [nvarchar](50) NOT NULL,
 	[DonGia] [money] NULL,
 	[SoLuong] [int] NULL,
 	[ThanhTien] [money] NULL,
  CONSTRAINT [PK_CTHD] PRIMARY KEY CLUSTERED 
 (
-	[MaHD],[MaSach] ASC
+	[MaHD],[MaSP] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -399,18 +399,18 @@ INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [Nhap
 INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD11',N'NV01',N'01/04/2023', 1300000.0000, 1, 1)
 INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD12',N'NV01',N'01/04/2023', 130000.0000, 1, 0)
 
-INSERT [dbo].[CTHD] ([MaHD], [MaSach], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD01', N's01', 150000.0000, 50, 7500000.0000)
-INSERT [dbo].[CTHD] ([MaHD], [MaSach], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD02', N's01', 150000.0000, 1, 150000.0000)
-INSERT [dbo].[CTHD] ([MaHD], [MaSach], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD03', N's02', 200000.0000, 50, 10000000.0000)
-INSERT [dbo].[CTHD] ([MaHD], [MaSach], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD04', N's02', 120000.0000, 1, 200000.0000)
-INSERT [dbo].[CTHD] ([MaHD], [MaSach], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD05', N's03', 250000.0000, 50, 10000000.0000)
-INSERT [dbo].[CTHD] ([MaHD], [MaSach], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD06', N's03', 130000.0000, 1, 200000.0000)
-INSERT [dbo].[CTHD] ([MaHD], [MaSach], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD07', N's04', 150000.0000, 20, 2400000.0000)
-INSERT [dbo].[CTHD] ([MaHD], [MaSach], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD08', N's04', 200000.0000, 1, 120000.0000)
-INSERT [dbo].[CTHD] ([MaHD], [MaSach], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD09', N's05', 200000.0000, 100, 25000000.0000)
-INSERT [dbo].[CTHD] ([MaHD], [MaSach], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD10', N's05', 120000.0000, 1, 250000.0000)
-INSERT [dbo].[CTHD] ([MaHD], [MaSach], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD11', N's06', 250000.0000, 10, 1300000.0000)
-INSERT [dbo].[CTHD] ([MaHD], [MaSach], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD12', N's06', 130000.0000, 1, 130000.0000)
+INSERT [dbo].[CTHD] ([MaHD], [MaSP], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD01', N's01', 150000.0000, 50, 7500000.0000)
+INSERT [dbo].[CTHD] ([MaHD], [MaSP], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD02', N's01', 150000.0000, 1, 150000.0000)
+INSERT [dbo].[CTHD] ([MaHD], [MaSP], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD03', N's02', 200000.0000, 50, 10000000.0000)
+INSERT [dbo].[CTHD] ([MaHD], [MaSP], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD04', N's02', 120000.0000, 1, 200000.0000)
+INSERT [dbo].[CTHD] ([MaHD], [MaSP], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD05', N's03', 250000.0000, 50, 10000000.0000)
+INSERT [dbo].[CTHD] ([MaHD], [MaSP], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD06', N's03', 130000.0000, 1, 200000.0000)
+INSERT [dbo].[CTHD] ([MaHD], [MaSP], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD07', N's04', 150000.0000, 20, 2400000.0000)
+INSERT [dbo].[CTHD] ([MaHD], [MaSP], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD08', N's04', 200000.0000, 1, 120000.0000)
+INSERT [dbo].[CTHD] ([MaHD], [MaSP], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD09', N's05', 200000.0000, 100, 25000000.0000)
+INSERT [dbo].[CTHD] ([MaHD], [MaSP], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD10', N's05', 120000.0000, 1, 250000.0000)
+INSERT [dbo].[CTHD] ([MaHD], [MaSP], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD11', N's06', 250000.0000, 10, 1300000.0000)
+INSERT [dbo].[CTHD] ([MaHD], [MaSP], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD12', N's06', 130000.0000, 1, 130000.0000)
 
 INSERT [dbo].[TAIKHOAN] ([MaTk], [username], [password], [MaNV], [BaoCao], [TaiKhoan], [MaVach], [Sach], [NXB], [NhanVien], [HoaDon], [NCCVPP], [VPP], [KhachHang]) VALUES (N'tk01', N'admin', N'admin',N'NV01', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
 INSERT [dbo].[TAIKHOAN] ([MaTk], [username], [password], [MaNV], [BaoCao], [TaiKhoan], [MaVach], [Sach], [NXB], [NhanVien], [HoaDon], [NCCVPP], [VPP], [KhachHang]) VALUES (N'tk02', N'thungan', N'thungan',N'NV02', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -623,5 +623,3 @@ USE [master]
 GO
 ALTER DATABASE [dbQLNS] SET  READ_WRITE 
 GO
-
-drop table TAIKHOAN
