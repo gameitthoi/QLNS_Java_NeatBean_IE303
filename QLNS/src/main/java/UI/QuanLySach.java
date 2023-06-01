@@ -85,6 +85,25 @@ public class QuanLySach extends javax.swing.JFrame {
         } 	
     }
 
+      //Functions for validations !!!
+      public static boolean isNumeric(String string) {
+    int intValue;
+		
+    //System.out.println(String.format("Parsing string: \"%s\"", string));
+		
+    if(string == null || string.equals("")) {
+        //System.out.println("String cannot be parsed, it is null or empty.");
+        return false;
+    }
+    
+    try {
+        intValue = Integer.parseInt(string);
+        return true;
+    } catch (NumberFormatException e) {
+        //System.out.println("Input String cannot be parsed to Integer.");
+    }
+    return false;
+}
       
 
     /**
@@ -618,16 +637,26 @@ public class QuanLySach extends javax.swing.JFrame {
     //Chỉnh sửa, cập nhật sách
     private void jButton_ChinhSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ChinhSuaActionPerformed
         // TODO add your handling code here:
-
-NXB manxb = (NXB) NXBInput.getSelectedItem();
+                                if(TKInput_MaSach.getText().length()==0 ||  
+						TKInput_TenSach.getText().length()==0 || TKInput_TacGia.getText().length()==0 || TKInput_GiaBan.getText().length()==0 ||
+						TKInput_TheLoai.getText().length()==0 || TKInput_SoLuong.getText().length()==0 || TKInput_Discount.getText().length()==0) 
+                                {
+                                    JOptionPane.showMessageDialog(this, "Nhập thiếu dữ liệu !","Error", JOptionPane.WARNING_MESSAGE);
+                                    return ;
+                                }
+                                NXB manxb = (NXB) NXBInput.getSelectedItem();
 				Sach s = new Sach();
 				s.setMaSach(TKInput_MaSach.getText());
 				s.setTenSach(TKInput_TenSach.getText());
 				s.setMaNXB(manxb.getMaNXB());
-                                
 				s.setTacGia(TKInput_TacGia.getText());
+                                s.setTheLoai(TKInput_TheLoai.getText());
+                                if (!isNumeric(TKInput_GiaBan.getText()) || !isNumeric(TKInput_SoLuong.getText()) || !isNumeric(TKInput_Discount.getText()))
+                                {
+                                    JOptionPane.showMessageDialog(this, "Giá bán, Số lượng hoặc Giảm giá đã nhập sai định dạng !\n Vui lòng thử lại !","Error", JOptionPane.WARNING_MESSAGE);
+                                    return ;
+                                }
 				s.setGiaBan(Double.parseDouble(TKInput_GiaBan.getText()));
-				s.setTheLoai(TKInput_TheLoai.getText());
 				s.setSoLuong(Integer.parseInt(TKInput_SoLuong.getText()));
                                 s.setDiscount(Integer.parseInt(TKInput_Discount.getText()));
 				Sach_Connect sachconnect = new Sach_Connect();
@@ -655,16 +684,32 @@ NXB manxb = (NXB) NXBInput.getSelectedItem();
                
 				if(TKInput_MaSach.getText().length()==0 ||  
 						TKInput_TenSach.getText().length()==0 || TKInput_TacGia.getText().length()==0 || TKInput_GiaBan.getText().length()==0 ||
-						TKInput_TheLoai.getText().length()==0 || TKInput_SoLuong.getText().length()==0 || TKInput_Discount.getText().length()==0) return ;
+						TKInput_TheLoai.getText().length()==0 || TKInput_SoLuong.getText().length()==0 || TKInput_Discount.getText().length()==0) 
+                                {
+                                    JOptionPane.showMessageDialog(this, "Nhập thiếu dữ liệu","Error", JOptionPane.WARNING_MESSAGE);
+                                    return ;
+                                }
 				
 				NXB nxb = (NXB) NXBInput.getSelectedItem();
 				Sach s = new Sach();
+                                for (Sach s_check : dss){
+          
+                                        if(s_check.getMaSach().equals(TKInput_MaSach.getText())){
+                                            JOptionPane.showMessageDialog(this, "Sách đã tồn tại","Error", JOptionPane.WARNING_MESSAGE);
+                                            return;
+                                        }
+                                } 
 				s.setMaSach(TKInput_MaSach.getText());
 				s.setTenSach(TKInput_TenSach.getText());
 				s.setMaNXB(nxb.getMaNXB());
 				s.setTacGia(TKInput_TacGia.getText());
+                                s.setTheLoai(TKInput_TheLoai.getText());
+                                if (!isNumeric(TKInput_GiaBan.getText()) || !isNumeric(TKInput_SoLuong.getText()) || !isNumeric(TKInput_Discount.getText())){
+                                    JOptionPane.showMessageDialog(this, "Giá bán, Số lượng hoặc Giảm giá đã nhập sai định dạng!\n Vui lòng thử lại!","Error", JOptionPane.WARNING_MESSAGE);
+                                    return ;
+                                }
 				s.setGiaBan(Double.parseDouble(TKInput_GiaBan.getText()));
-				s.setTheLoai(TKInput_TheLoai.getText());
+				
 				s.setSoLuong(Integer.parseInt(TKInput_SoLuong.getText()));
 				s.setDiscount(Integer.parseInt(TKInput_Discount.getText()));
                                 
@@ -772,7 +817,10 @@ NXB manxb = (NXB) NXBInput.getSelectedItem();
     private void jButton_XoaSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_XoaSachActionPerformed
         // TODO add your handling code here:
         int select = jTable_Books.getSelectedRow();
-				if(select==-1)  return ;
+				if(select==-1) {
+                                   JOptionPane.showMessageDialog(this, "Bạn chưa chọn sách muốn xoá","Error", JOptionPane.WARNING_MESSAGE);
+                                    return ;
+                                }
 				String maSach = (String) jTable_Books.getValueAt(select, 0);
 				//JOptionPane.showMessageDialog(null,jTable_Books.getValueAt(select, 0) );
 				int active = JOptionPane.showConfirmDialog(null, "Bạn chắc chắn muốn xóa", "Xác Nhận Xóa", JOptionPane.OK_CANCEL_OPTION);
@@ -850,9 +898,16 @@ NXB manxb = (NXB) NXBInput.getSelectedItem();
     }//GEN-LAST:event_jButton_Cancel1ActionPerformed
 
     private void jButton_Accpet1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Accpet1ActionPerformed
-        // TODO add your handling code here:
+        if (TKInput_UpdateAllPrice1.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập giá cần tăng","Error", JOptionPane.WARNING_MESSAGE);
+            return ;
+        }
+        if (!isNumeric(TKInput_UpdateAllPrice1.getText().trim())){
+            JOptionPane.showMessageDialog(this, "Nhập sai định dạng giá","Error", JOptionPane.WARNING_MESSAGE);
+            return ;
+        }
          double extraMoney = (Double.parseDouble(TKInput_UpdateAllPrice1.getText().trim()));
-        //System.out.println(extraMoney);
+    
        
         Sach_Connect sc = new Sach_Connect();
         for (Sach s: dss){
@@ -862,9 +917,16 @@ NXB manxb = (NXB) NXBInput.getSelectedItem();
     }//GEN-LAST:event_jButton_Accpet1ActionPerformed
 
     private void jButton_AccpetTangGiaNXBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AccpetTangGiaNXBActionPerformed
-        // TODO add your handling code here:
+        if (TKInput_UpdateAllPrice1.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập giá cần tăng","Error", JOptionPane.WARNING_MESSAGE);
+            return ;
+        }
+        if (!isNumeric(TKInput_UpdateAllPrice1.getText().trim())){
+            JOptionPane.showMessageDialog(this, "Nhập sai định dạng giá","Error", JOptionPane.WARNING_MESSAGE);
+            return ;
+        }
          double extraMoney = (Double.parseDouble(TKInput_UpdateAllPriceNXB.getText().trim()));
-        //System.out.println(extraMoney);
+     
          NXB nxb = (NXB) NXBInput_TangGia.getSelectedItem();
          Sach_Connect sc = new Sach_Connect();
          dssByNXB = sc.laySachTheoNXB(nxb.getMaNXB());
