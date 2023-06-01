@@ -2,7 +2,7 @@ package Model;
 
 public class CTHD {
 	private String maHD ;
-	private String maSach;
+	private String maSP;
 	private double donGia ;
 	private int soLuong ;
 	private double thanhTien;
@@ -15,11 +15,11 @@ public class CTHD {
 	public void setMaHD(String maHD) {
 		this.maHD = maHD;
 	}
-	public String getMaSach() {
-		return maSach;
+	public String getMaSP() {
+		return maSP;
 	}
-	public void setMaSach(String maSach) {
-		this.maSach = maSach;
+	public void setMaSP(String masp) {
+		this.maSP = masp;
 	}
 	public double getDonGia() {
 		return donGia;
