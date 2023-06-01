@@ -553,7 +553,7 @@ public class QuanLySach extends javax.swing.JFrame {
 
         TKInput1.setToolTipText("Tên Sách");
 
-        NhanTenLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        NhanTenLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         NhanTenLabel.setForeground(new java.awt.Color(0, 153, 153));
         NhanTenLabel.setText("Nhập tên sách và tên tác giả");
 
