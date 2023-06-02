@@ -145,6 +145,22 @@ public class NXB_Connect extends Connect_sqlServer
             }
             return dsnxb;
     }
+        public NXB TimTenNXBCheckBox(String tenNXB){
+        NXB nxb = new NXB();
+        try{
+            String sql ="select top 1 * from NXB where MaNXB=?" ;
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setString(1, tenNXB);
+            ResultSet result = pre.executeQuery();
+            while (result.next()) {
+                nxb.setMaNXB(result.getString(1));
+                nxb.setTenNXB(result.getString(2));
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return nxb;
+    }
 }
 	
 

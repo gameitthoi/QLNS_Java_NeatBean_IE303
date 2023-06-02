@@ -30,7 +30,7 @@ public class QuanLySach extends javax.swing.JFrame {
 	private ArrayList<Sach> dss = null;
 	private ArrayList<Sach> dssTacGia = null;
 	private ArrayList<Sach> dss_tensach = null;
-	
+	private ArrayList<Sach> dssByNXB = null;
     public QuanLySach(String title) {
         initComponents();
         this.setTitle(title);
@@ -74,13 +74,36 @@ public class QuanLySach extends javax.swing.JFrame {
         NXB_Connect nxbconn = new NXB_Connect();
         dsnxb=nxbconn.layToanBoNhaXuatBan();
         NXBInput.removeAllItems();
+        NXBInput_TangGia.removeAllItems();
         NXB nxb = new NXB();
         nxb.setMaNXB("0");
         nxb.setTenNXB("Tất cả");
         NXBInput.addItem(nxb);
-        for(NXB s : dsnxb) NXBInput.addItem(s); 	
+        for(NXB s : dsnxb) {
+            NXBInput.addItem(s);
+            NXBInput_TangGia.addItem(s);
+        } 	
     }
 
+      //Functions for validations !!!
+      public static boolean isNumeric(String string) {
+    int intValue;
+		
+    //System.out.println(String.format("Parsing string: \"%s\"", string));
+		
+    if(string == null || string.equals("")) {
+        //System.out.println("String cannot be parsed, it is null or empty.");
+        return false;
+    }
+    
+    try {
+        intValue = Integer.parseInt(string);
+        return true;
+    } catch (NumberFormatException e) {
+        //System.out.println("Input String cannot be parsed to Integer.");
+    }
+    return false;
+}
       
 
     /**
@@ -124,6 +147,12 @@ public class QuanLySach extends javax.swing.JFrame {
         TKInput_UpdateAllPrice1 = new javax.swing.JTextField();
         jButton_Accpet1 = new javax.swing.JButton();
         jButton_Cancel1 = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel_Discount3 = new javax.swing.JLabel();
+        TKInput_UpdateAllPriceNXB = new javax.swing.JTextField();
+        jButton_AccpetTangGiaNXB = new javax.swing.JButton();
+        jButton_CancelNXB = new javax.swing.JButton();
+        NXBInput_TangGia = new javax.swing.JComboBox<NXB>();
         jSeparator2 = new javax.swing.JSeparator();
         jButton_NhapLai = new javax.swing.JButton();
         jPanel_Center = new javax.swing.JPanel();
@@ -259,7 +288,7 @@ public class QuanLySach extends javax.swing.JFrame {
                         .addComponent(jButton_Accpet1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(jButton_Cancel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,6 +305,63 @@ public class QuanLySach extends javax.swing.JFrame {
 
         jLabel_Discount.setIcon(new ImageIcon("images/discount_28px.png"));
 
+        jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        jLabel_Discount3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel_Discount3.setText("Tăng giá theo NXB");
+
+        jButton_AccpetTangGiaNXB.setText("OK");
+        jButton_AccpetTangGiaNXB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_AccpetTangGiaNXBActionPerformed(evt);
+            }
+        });
+
+        jButton_CancelNXB.setText("X");
+        jButton_CancelNXB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_CancelNXBActionPerformed(evt);
+            }
+        });
+
+        NXBInput_TangGia.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(NXBInput_TangGia, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(TKInput_UpdateAllPriceNXB, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton_AccpetTangGiaNXB, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton_CancelNXB, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(252, 252, 252)
+                        .addComponent(jLabel_Discount3)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel_Discount3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TKInput_UpdateAllPriceNXB, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_AccpetTangGiaNXB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton_CancelNXB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(NXBInput_TangGia, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jLabel_Discount.setIcon(new ImageIcon("images/discount_28px.png"));
+
         javax.swing.GroupLayout jPanel_DataLayout = new javax.swing.GroupLayout(jPanel_Data);
         jPanel_Data.setLayout(jPanel_DataLayout);
         jPanel_DataLayout.setHorizontalGroup(
@@ -283,33 +369,41 @@ public class QuanLySach extends javax.swing.JFrame {
             .addGroup(jPanel_DataLayout.createSequentialGroup()
                 .addGap(58, 58, 58)
                 .addGroup(jPanel_DataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel_MaSach)
-                    .addComponent(jLabel_MaNXB)
-                    .addComponent(jLabel_TenSach))
-                .addGap(36, 36, 36)
-                .addGroup(jPanel_DataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_DataLayout.createSequentialGroup()
                         .addGroup(jPanel_DataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel_MaSach)
+                            .addComponent(jLabel_MaNXB)
+                            .addComponent(jLabel_TenSach))
+                        .addGap(36, 36, 36)
+                        .addGroup(jPanel_DataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel_DataLayout.createSequentialGroup()
-                                .addComponent(TKInput_MaSach, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(53, 53, 53)
-                                .addComponent(jLabel_TacGia)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE))
-                            .addGroup(jPanel_DataLayout.createSequentialGroup()
-                                .addComponent(TKInput_TenSach, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel_SoLuong)))
-                        .addGap(28, 28, 28))
+                                .addGroup(jPanel_DataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel_DataLayout.createSequentialGroup()
+                                        .addComponent(TKInput_MaSach, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(jPanel_DataLayout.createSequentialGroup()
+                                        .addComponent(TKInput_TenSach, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                                        .addComponent(jLabel_SoLuong)))
+                                .addGap(28, 28, 28))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel_DataLayout.createSequentialGroup()
+                                .addGroup(jPanel_DataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(jPanel_DataLayout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(jLabel_TacGia))
+                                    .addGroup(jPanel_DataLayout.createSequentialGroup()
+                                        .addComponent(NXBInput, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel_TheLoai)))
+                                .addGap(40, 40, 40)))
+                        .addGroup(jPanel_DataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TKInput_TacGia, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TKInput_SoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(TKInput_TheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE))
                     .addGroup(jPanel_DataLayout.createSequentialGroup()
-                        .addComponent(NXBInput, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel_TheLoai)
-                        .addGap(40, 40, 40)))
-                .addGroup(jPanel_DataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(TKInput_TacGia, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TKInput_SoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TKInput_TheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 87, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel_DataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel_DataLayout.createSequentialGroup()
                         .addGroup(jPanel_DataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -344,21 +438,21 @@ public class QuanLySach extends javax.swing.JFrame {
                     .addComponent(TKInput_TheLoai, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_Discount)
                     .addComponent(TKInput_Discount, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
                 .addGroup(jPanel_DataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel_DataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel_TenSach, javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(TKInput_TenSach, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel_DataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(TKInput_SoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel_SoLuong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel_DataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel_DataLayout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(jPanel_DataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel_DataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel_TenSach, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(TKInput_TenSach, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel_DataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(TKInput_SoLuong, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel_SoLuong, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(25, 25, 25))
-                    .addGroup(jPanel_DataLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         jLabel_MaSach.setIcon(new ImageIcon("images/repository_28px.png"));
@@ -478,7 +572,7 @@ public class QuanLySach extends javax.swing.JFrame {
 
         TKInput1.setToolTipText("Tên Sách");
 
-        NhanTenLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        NhanTenLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         NhanTenLabel.setForeground(new java.awt.Color(0, 153, 153));
         NhanTenLabel.setText("Nhập tên sách và tên tác giả");
 
@@ -543,16 +637,26 @@ public class QuanLySach extends javax.swing.JFrame {
     //Chỉnh sửa, cập nhật sách
     private void jButton_ChinhSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ChinhSuaActionPerformed
         // TODO add your handling code here:
-
-NXB manxb = (NXB) NXBInput.getSelectedItem();
+                                if(TKInput_MaSach.getText().length()==0 ||  
+						TKInput_TenSach.getText().length()==0 || TKInput_TacGia.getText().length()==0 || TKInput_GiaBan.getText().length()==0 ||
+						TKInput_TheLoai.getText().length()==0 || TKInput_SoLuong.getText().length()==0 || TKInput_Discount.getText().length()==0) 
+                                {
+                                    JOptionPane.showMessageDialog(this, "Nhập thiếu dữ liệu !","Error", JOptionPane.WARNING_MESSAGE);
+                                    return ;
+                                }
+                                NXB manxb = (NXB) NXBInput.getSelectedItem();
 				Sach s = new Sach();
 				s.setMaSach(TKInput_MaSach.getText());
 				s.setTenSach(TKInput_TenSach.getText());
 				s.setMaNXB(manxb.getMaNXB());
-                                
 				s.setTacGia(TKInput_TacGia.getText());
+                                s.setTheLoai(TKInput_TheLoai.getText());
+                                if (!isNumeric(TKInput_GiaBan.getText()) || !isNumeric(TKInput_SoLuong.getText()) || !isNumeric(TKInput_Discount.getText()))
+                                {
+                                    JOptionPane.showMessageDialog(this, "Giá bán, Số lượng hoặc Giảm giá đã nhập sai định dạng !\n Vui lòng thử lại !","Error", JOptionPane.WARNING_MESSAGE);
+                                    return ;
+                                }
 				s.setGiaBan(Double.parseDouble(TKInput_GiaBan.getText()));
-				s.setTheLoai(TKInput_TheLoai.getText());
 				s.setSoLuong(Integer.parseInt(TKInput_SoLuong.getText()));
                                 s.setDiscount(Integer.parseInt(TKInput_Discount.getText()));
 				Sach_Connect sachconnect = new Sach_Connect();
@@ -580,16 +684,32 @@ NXB manxb = (NXB) NXBInput.getSelectedItem();
                
 				if(TKInput_MaSach.getText().length()==0 ||  
 						TKInput_TenSach.getText().length()==0 || TKInput_TacGia.getText().length()==0 || TKInput_GiaBan.getText().length()==0 ||
-						TKInput_TheLoai.getText().length()==0 || TKInput_SoLuong.getText().length()==0 || TKInput_Discount.getText().length()==0) return ;
+						TKInput_TheLoai.getText().length()==0 || TKInput_SoLuong.getText().length()==0 || TKInput_Discount.getText().length()==0) 
+                                {
+                                    JOptionPane.showMessageDialog(this, "Nhập thiếu dữ liệu","Error", JOptionPane.WARNING_MESSAGE);
+                                    return ;
+                                }
 				
 				NXB nxb = (NXB) NXBInput.getSelectedItem();
 				Sach s = new Sach();
+                                for (Sach s_check : dss){
+          
+                                        if(s_check.getMaSach().equals(TKInput_MaSach.getText())){
+                                            JOptionPane.showMessageDialog(this, "Sách đã tồn tại","Error", JOptionPane.WARNING_MESSAGE);
+                                            return;
+                                        }
+                                } 
 				s.setMaSach(TKInput_MaSach.getText());
 				s.setTenSach(TKInput_TenSach.getText());
 				s.setMaNXB(nxb.getMaNXB());
 				s.setTacGia(TKInput_TacGia.getText());
+                                s.setTheLoai(TKInput_TheLoai.getText());
+                                if (!isNumeric(TKInput_GiaBan.getText()) || !isNumeric(TKInput_SoLuong.getText()) || !isNumeric(TKInput_Discount.getText())){
+                                    JOptionPane.showMessageDialog(this, "Giá bán, Số lượng hoặc Giảm giá đã nhập sai định dạng!\n Vui lòng thử lại!","Error", JOptionPane.WARNING_MESSAGE);
+                                    return ;
+                                }
 				s.setGiaBan(Double.parseDouble(TKInput_GiaBan.getText()));
-				s.setTheLoai(TKInput_TheLoai.getText());
+				
 				s.setSoLuong(Integer.parseInt(TKInput_SoLuong.getText()));
 				s.setDiscount(Integer.parseInt(TKInput_Discount.getText()));
                                 
@@ -697,7 +817,10 @@ NXB manxb = (NXB) NXBInput.getSelectedItem();
     private void jButton_XoaSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_XoaSachActionPerformed
         // TODO add your handling code here:
         int select = jTable_Books.getSelectedRow();
-				if(select==-1)  return ;
+				if(select==-1) {
+                                   JOptionPane.showMessageDialog(this, "Bạn chưa chọn sách muốn xoá","Error", JOptionPane.WARNING_MESSAGE);
+                                    return ;
+                                }
 				String maSach = (String) jTable_Books.getValueAt(select, 0);
 				//JOptionPane.showMessageDialog(null,jTable_Books.getValueAt(select, 0) );
 				int active = JOptionPane.showConfirmDialog(null, "Bạn chắc chắn muốn xóa", "Xác Nhận Xóa", JOptionPane.OK_CANCEL_OPTION);
@@ -758,7 +881,7 @@ NXB manxb = (NXB) NXBInput.getSelectedItem();
                                 TKInput_TheLoai.setText(s.getTheLoai());
                                 TKInput_SoLuong.setText(s.getSoLuong()+"");
                                 TKInput_Discount.setText(s.getDiscount()+"");
-                                NXBInput.setSelectedIndex(Integer.parseInt(nxb_con.TimTenNXB(jTable_Books.getValueAt(select, 1).toString()).getMaNXB().substring(3)) );
+                                NXBInput.setSelectedIndex(Integer.parseInt(nxb_con.TimTenNXBCheckBox(jTable_Books.getValueAt(select, 1).toString()).getMaNXB().substring(3)) );
     }//GEN-LAST:event_jTable_BooksMouseClicked
 
     private void TKInput_MaSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TKInput_MaSachActionPerformed
@@ -775,9 +898,16 @@ NXB manxb = (NXB) NXBInput.getSelectedItem();
     }//GEN-LAST:event_jButton_Cancel1ActionPerformed
 
     private void jButton_Accpet1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Accpet1ActionPerformed
-        // TODO add your handling code here:
+        if (TKInput_UpdateAllPrice1.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập giá cần tăng","Error", JOptionPane.WARNING_MESSAGE);
+            return ;
+        }
+        if (!isNumeric(TKInput_UpdateAllPrice1.getText().trim())){
+            JOptionPane.showMessageDialog(this, "Nhập sai định dạng giá","Error", JOptionPane.WARNING_MESSAGE);
+            return ;
+        }
          double extraMoney = (Double.parseDouble(TKInput_UpdateAllPrice1.getText().trim()));
-        //System.out.println(extraMoney);
+    
        
         Sach_Connect sc = new Sach_Connect();
         for (Sach s: dss){
@@ -785,6 +915,32 @@ NXB manxb = (NXB) NXBInput.getSelectedItem();
         }
        hienThiToanBoSach();
     }//GEN-LAST:event_jButton_Accpet1ActionPerformed
+
+    private void jButton_AccpetTangGiaNXBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AccpetTangGiaNXBActionPerformed
+        if (TKInput_UpdateAllPrice1.getText().equals("")){
+            JOptionPane.showMessageDialog(this, "Bạn chưa nhập giá cần tăng","Error", JOptionPane.WARNING_MESSAGE);
+            return ;
+        }
+        if (!isNumeric(TKInput_UpdateAllPrice1.getText().trim())){
+            JOptionPane.showMessageDialog(this, "Nhập sai định dạng giá","Error", JOptionPane.WARNING_MESSAGE);
+            return ;
+        }
+         double extraMoney = (Double.parseDouble(TKInput_UpdateAllPriceNXB.getText().trim()));
+     
+         NXB nxb = (NXB) NXBInput_TangGia.getSelectedItem();
+         Sach_Connect sc = new Sach_Connect();
+         dssByNXB = sc.laySachTheoNXB(nxb.getMaNXB());
+        
+        for (Sach s: dssByNXB){
+            sc.updateAllPrice(s.getMaSach(), (s.getGiaBan()+extraMoney));
+        }
+       hienThiToanBoSach();
+    }//GEN-LAST:event_jButton_AccpetTangGiaNXBActionPerformed
+
+    private void jButton_CancelNXBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CancelNXBActionPerformed
+        // TODO add your handling code here:
+        TKInput_UpdateAllPriceNXB.setText("");   
+    }//GEN-LAST:event_jButton_CancelNXBActionPerformed
 protected void xuLyXoa(String maSach) {
 		Sach_Connect sachXoa = new Sach_Connect();
 		int active= sachXoa.XoaSach(maSach);
@@ -810,6 +966,7 @@ protected void xuLyXoa(String maSach) {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<NXB> NXBInput;
+    private javax.swing.JComboBox<NXB> NXBInput_TangGia;
     private javax.swing.JLabel NhanTenLabel;
     private javax.swing.JTextField TKInput;
     private javax.swing.JTextField TKInput1;
@@ -822,10 +979,13 @@ protected void xuLyXoa(String maSach) {
     private javax.swing.JTextField TKInput_TheLoai;
     private javax.swing.JTextField TKInput_UpdateAllPrice;
     private javax.swing.JTextField TKInput_UpdateAllPrice1;
+    private javax.swing.JTextField TKInput_UpdateAllPriceNXB;
     private javax.swing.JButton jButton_Accpet;
     private javax.swing.JButton jButton_Accpet1;
+    private javax.swing.JButton jButton_AccpetTangGiaNXB;
     private javax.swing.JButton jButton_Cancel;
     private javax.swing.JButton jButton_Cancel1;
+    private javax.swing.JButton jButton_CancelNXB;
     private javax.swing.JButton jButton_ChinhSua;
     private javax.swing.JButton jButton_NhapLai;
     private javax.swing.JButton jButton_Search;
@@ -834,6 +994,7 @@ protected void xuLyXoa(String maSach) {
     private javax.swing.JLabel jLabel_Discount;
     private javax.swing.JLabel jLabel_Discount1;
     private javax.swing.JLabel jLabel_Discount2;
+    private javax.swing.JLabel jLabel_Discount3;
     private javax.swing.JLabel jLabel_GiaBan;
     private javax.swing.JLabel jLabel_Loc;
     private javax.swing.JLabel jLabel_Loc1;
@@ -845,6 +1006,7 @@ protected void xuLyXoa(String maSach) {
     private javax.swing.JLabel jLabel_TheLoai;
     private javax.swing.JLabel jLabel_Top;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel_Center;
     private javax.swing.JPanel jPanel_Data;
     private javax.swing.JPanel jPanel_Top;

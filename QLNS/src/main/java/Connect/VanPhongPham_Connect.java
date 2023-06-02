@@ -46,6 +46,33 @@ public class VanPhongPham_Connect extends Connect_sqlServer{
         }
         return dsVPP;
     }
+    public ArrayList<VPP> layVPPTheoNCC(String ma)
+    {
+        ArrayList<VPP> dsVPP = new ArrayList<VPP>() ;
+        try {
+            String sql ="select * from VPP where MaNCCVPP like ?" ;
+            PreparedStatement pre1 = conn.prepareStatement(sql);
+            pre1.setString(1, "%"+ma+"%");
+            ResultSet result = pre1.executeQuery();
+            while(result.next()){
+                VPP vpp = new VPP();
+                vpp.setMaVPP(result.getString(1));
+                vpp.setTenVPP(result.getString(2));
+                vpp.setMaNCC(result.getString(3));
+                vpp.setGiaBan(result.getDouble(4));
+
+                vpp.setDanhMuc(result.getString(5));
+                vpp.setSoLuong(result.getInt(6));
+                vpp.setDiscount(result.getInt(7));
+               
+                dsVPP.add(vpp);
+            }
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dsVPP;
+    }
     public ArrayList<String> layTatCaDanhMuc(){
             ArrayList<String> dsdm = new ArrayList<String>() ;
             try{
