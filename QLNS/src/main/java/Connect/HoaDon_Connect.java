@@ -9,6 +9,9 @@ import javax.swing.JOptionPane;
 
 import Model.HoaDon;
 import java.sql.CallableStatement;
+import java.util.Calendar;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 public class HoaDon_Connect extends Connect_sqlServer{
@@ -23,8 +26,9 @@ public class HoaDon_Connect extends Connect_sqlServer{
                 HoaDon hd = new HoaDon();
                 hd.setMaHD(result.getString(1));
                 hd.setMaNV(result.getString(2));
-                hd.setNgaylap(result.getDate(3)+"");
-                hd.setTongTien(result.getDouble(4));
+                hd.setMaKH(result.getString(3));
+                hd.setNgaylap(result.getDate(4)+"");
+                hd.setTongTien(result.getDouble(5));
                 dshd.add(hd);
             }
         } catch (Exception e) {
@@ -33,15 +37,21 @@ public class HoaDon_Connect extends Connect_sqlServer{
         return dshd ;
     }
 
-    public ArrayList<HoaDon> layToanBoHoaDonTheoThangNam(String month , String year)
+    public DefaultTableModel layToanBoHoaDonTheoThangNam(String month , String year)
     {
-        ArrayList<HoaDon> dshd = new ArrayList<HoaDon>();
+        DefaultTableModel dshd = new DefaultTableModel();
+        dshd.addColumn("Mã hóa Đơn");
+        dshd.addColumn("Nhân viên");
+        dshd.addColumn("Khách hàng");
+        dshd.addColumn("Ngày lập");
+        dshd.addColumn("Tổng tiền");
+        dshd.setRowCount(0);
         String sql = "";
         try {
             if("0".equals(month))
-                sql = "select * from HOADON where Year(NgayLap) = ? and ThanhCong = 1 and NhapSach=0" ;
+                sql = "select H.MaHD, N.TenNV, K.TenKH, NgayLap, TongTien from HOADON AS H LEFT JOIN NHANVIEN AS N ON H.MaNV=N.MaNV LEFT JOIN KHACHHANG AS K ON H.MaKH=K.MaKH where Year(NgayLap) = ? and ThanhCong = 1 and NhapSach=0" ;
             else
-                sql = "select * from HOADON where MONTH(NgayLap) = ? and Year(NgayLap) = ? and ThanhCong = 1 and NhapSach=0" ;
+                sql = "select H.MaHD, N.TenNV, K.TenKH, NgayLap, TongTien from HOADON AS H LEFT JOIN NHANVIEN AS N ON H.MaNV=N.MaNV LEFT JOIN KHACHHANG AS K ON H.MaKH=K.MaKH where MONTH(NgayLap) = ? and Year(NgayLap) = ? and ThanhCong = 1 and NhapSach=0" ;
 
             PreparedStatement pre = conn.prepareStatement(sql);
 
@@ -54,12 +64,50 @@ public class HoaDon_Connect extends Connect_sqlServer{
             ResultSet result  = pre.executeQuery();
             while(result.next())
             {
-                HoaDon hd = new HoaDon();
-                hd.setMaHD(result.getString(1));
-                hd.setMaNV(result.getString(2));
-                hd.setNgaylap(result.getDate(3)+"");
-                hd.setTongTien(result.getDouble(4));
-                dshd.add(hd);
+                Vector<Object> vec = new Vector<Object>();
+                vec.add(result.getString(1));
+                vec.add(result.getString(2));
+                vec.add(result.getString(3));
+                vec.add(result.getString(4));
+                vec.add(result.getString(5));
+                dshd.addRow(vec);
+            }
+
+        } catch (Exception e) {
+                e.printStackTrace();
+        }
+        return dshd ;
+    }
+    
+    public DefaultTableModel layToanBoHoaDonHomNay()
+    {
+        Calendar cal = Calendar.getInstance();
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        int month = cal.get(Calendar.MONTH) + 1; // Tháng bắt đầu từ 0 nên cần +1 để lấy tháng thực tế
+        int year =cal.get(Calendar.YEAR);
+        DefaultTableModel dshd = new DefaultTableModel();
+        dshd.addColumn("Mã hóa Đơn");
+        dshd.addColumn("Nhân viên");
+        dshd.addColumn("Khách hàng");
+        dshd.addColumn("Ngày lập");
+        dshd.addColumn("Tổng tiền");
+        dshd.setRowCount(0);
+        try {
+            String sql = "select H.MaHD, N.TenNV, K.TenKH, NgayLap, TongTien from HOADON AS H LEFT JOIN NHANVIEN AS N ON H.MaNV=N.MaNV LEFT JOIN KHACHHANG AS K ON H.MaKH=K.MaKH where Day(NgayLap)=? and MONTH(NgayLap)=? and Year(NgayLap) = ? and ThanhCong = 1 and NhapSach=0";
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, day);
+            pre.setInt(2, month);
+            pre.setInt(3, year);
+            ResultSet result  = pre.executeQuery();
+            while(result.next())
+            {
+                Vector<Object> vec = new Vector<Object>();
+                vec.add(result.getString(1));
+                vec.add(result.getString(2));
+                vec.add(result.getString(3));
+                vec.add(result.getString(4));
+                vec.add(result.getString(5));
+                dshd.addRow(vec);
             }
 
         } catch (Exception e) {
@@ -90,7 +138,7 @@ public class HoaDon_Connect extends Connect_sqlServer{
              CallableStatement  stmt  = conn.prepareCall(sql);		
             ResultSet result = stmt.executeQuery();
             while(result.next()){
-                dataset.addValue( Double.parseDouble(result.getString(2)),"Doanh thu bán sách",result.getString(1));
+                dataset.addValue( Double.parseDouble(result.getString(2)),"Doanh thu bán hàng",result.getString(1));
             }
         }
         catch (Exception e) {
@@ -101,14 +149,15 @@ public class HoaDon_Connect extends Connect_sqlServer{
 
     public int TaoHD(HoaDon hd) {
         try {
-            String sql="insert into hoadon values(?,?,?,?,?,?) " ;
+            String sql="insert into hoadon values(?,?,?,?,?,?,?) " ;
             PreparedStatement pre =conn.prepareStatement(sql);
             pre.setString(1, hd.getMaHD()+"");
             pre.setString(2, hd.getMaNV()+"");
-            pre.setString(3, hd.getNgaylap()+"");
-            pre.setString(4, hd.getTongTien()+"");
-            pre.setString(5, hd.getTrangThai()+"");
-            pre.setString(6, hd.getNhapSach()+"");
+            pre.setString(3, hd.getMaKH()+"");
+            pre.setString(4, hd.getNgaylap()+"");
+            pre.setString(5, hd.getTongTien()+"");
+            pre.setString(6, hd.getTrangThai()+"");
+            pre.setString(7, hd.getNhapSach()+"");
             return pre.executeUpdate();
         } catch (Exception e) {
                 e.printStackTrace();

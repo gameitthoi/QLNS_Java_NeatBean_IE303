@@ -13,6 +13,8 @@ import Model.Sach;
 import Model.TonKho;
 import java.sql.CallableStatement;
 import java.util.Calendar;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
 public class Sach_Connect extends Connect_sqlServer{
 	
@@ -189,9 +191,9 @@ public class Sach_Connect extends Connect_sqlServer{
         String sql = "";
         try {
             if ("0".equals(thang))  
-                sql ="SELECT TOP " +top +" A.MaSach,TenSach, SUM(A.SoLuong) as SL FROM (SELECT SACH.MaSach,TenSach,CTHD.SoLuong FROM SACH,HOADON,CTHD WHERE SACH.MaSach=CTHD.MaSach AND CTHD.MaHD=HOADON.MaHD AND YEAR(NgayLap)=? AND HOADON.ThanhCong=1 AND HOADON.NhapSach=0) AS A GROUP BY MaSach, TenSach ORDER BY SL DESC ";
+                sql ="SELECT TOP " +top +" A.MaSach,TenSach, SUM(A.SoLuong) as SL FROM (SELECT SACH.MaSach,TenSach,CTHD.SoLuong FROM SACH,HOADON,CTHD WHERE SACH.MaSach=CTHD.MaSP AND CTHD.MaHD=HOADON.MaHD AND YEAR(NgayLap)=? AND HOADON.ThanhCong=1 AND HOADON.NhapSach=0) AS A GROUP BY MaSach, TenSach ORDER BY SL DESC ";
             else 
-                sql ="SELECT TOP " +top +" A.MaSach,TenSach, SUM(A.SoLuong) as SL FROM (SELECT SACH.MaSach,TenSach,CTHD.SoLuong FROM SACH,HOADON,CTHD WHERE SACH.MaSach=CTHD.MaSach AND CTHD.MaHD=HOADON.MaHD AND MONTH(NgayLap)=? AND YEAR(NgayLap)=? AND HOADON.ThanhCong=1 AND HOADON.NhapSach=0 ) AS A GROUP BY MaSach, TenSach ORDER BY SL DESC";
+                sql ="SELECT TOP " +top +" A.MaSach,TenSach, SUM(A.SoLuong) as SL FROM (SELECT SACH.MaSach,TenSach,CTHD.SoLuong FROM SACH,HOADON,CTHD WHERE SACH.MaSach=CTHD.MaSP AND CTHD.MaHD=HOADON.MaHD AND MONTH(NgayLap)=? AND YEAR(NgayLap)=? AND HOADON.ThanhCong=1 AND HOADON.NhapSach=0 ) AS A GROUP BY MaSach, TenSach ORDER BY SL DESC";
 
             PreparedStatement pre = conn.prepareStatement(sql);
 
@@ -230,13 +232,24 @@ public class Sach_Connect extends Connect_sqlServer{
             ResultSet result = stmt.executeQuery();
             while(result.next()){
                 TonKho tk = new TonKho();
-                tk.setMaSach(result.getString(1));
-                tk.setTenSach(result.getString(2));
-                tk.setTonDau(result.getInt(3));
-                tk.setNhap(result.getInt(4));
-                tk.setXuat(result.getInt(5));
-                tk.setTonCuoi(result.getInt(6));
-
+                //khi dòng hiện tại là sách
+                if(result.getString(1)!=null){
+                    tk.setMaSP(result.getString(1));
+                    tk.setTenSP(result.getString(2));
+                    tk.setTonDau(result.getInt(5));
+                    tk.setNhap(result.getInt(7));
+                    tk.setXuat(result.getInt(8));
+                    tk.setTonCuoi(result.getInt(9));
+                }
+                //khi dòng hiện tại là văn phòng phẩm
+                else{
+                    tk.setMaSP(result.getString(3));
+                    tk.setTenSP(result.getString(4));
+                    tk.setTonDau(result.getInt(6));
+                    tk.setNhap(result.getInt(7));
+                    tk.setXuat(result.getInt(8));
+                    tk.setTonCuoi(result.getInt(10));
+                }
                 dsTK.add(tk);  
             }	
         } catch (Exception e) {
@@ -249,17 +262,21 @@ public class Sach_Connect extends Connect_sqlServer{
         ArrayList<TonKho> dsTK = new ArrayList<TonKho>();
         String sql = "";
         try {
-            sql ="select T.MaSach, S.TenSach, TonDau, Nhap, Xuat, TonCuoi from TONKHO as T, SACH as S where T.MaSach=S.MaSach and Thang="+thang+" and Nam="+nam+"";
+            sql ="select T.MaSP, S.TenSach, V.TenVPP, TonDau, Nhap, Xuat, TonCuoi from TONKHO as T left join SACH as S on T.MaSP = S.MaSach left join VPP as V on T.MaSP = V.MaVPP where Thang="+thang+" and Nam="+nam+"";
             PreparedStatement pre = conn.prepareStatement(sql);	
             ResultSet result = pre.executeQuery();
             while(result.next()){
                 TonKho tk = new TonKho();
-                tk.setMaSach(result.getString(1));
-                tk.setTenSach(result.getString(2));
-                tk.setTonDau(result.getInt(3));
-                tk.setNhap(result.getInt(4));
-                tk.setXuat(result.getInt(5));
-                tk.setTonCuoi(result.getInt(6));
+                
+                tk.setMaSP(result.getString(1));
+                if(result.getString(2)!=null)
+                    tk.setTenSP(result.getString(2));
+                if(result.getString(3)!=null)
+                    tk.setTenSP(result.getString(3));
+                tk.setTonDau(result.getInt(4));
+                tk.setNhap(result.getInt(5));
+                tk.setXuat(result.getInt(6));
+                tk.setTonCuoi(result.getInt(7));
                 dsTK.add(tk);  
             }	
         } catch (Exception e) {
@@ -277,7 +294,7 @@ public class Sach_Connect extends Connect_sqlServer{
             while(result.next()){
                 matk = Integer.parseInt(result.getString(1).substring(2))+1;
             }
-            sql = "INSERT INTO TONKHO(MaTK, MaSach, TonDau, Nhap, Xuat, TonCuoi, Thang, Nam) VALUES ( ?, ?, ?, ?, ?, ?, "+thang+", "+nam+")";
+            sql = "INSERT INTO TONKHO(MaTK, MaSP, TonDau, Nhap, Xuat, TonCuoi, Thang, Nam) VALUES ( ?, ?, ?, ?, ?, ?, "+thang+", "+nam+")";
             for (int row = 0; row < jTable1.getRowCount(); row++) {
                 PreparedStatement statement = conn.prepareStatement(sql);
                 statement.setString(1, "TK"+matk);
@@ -412,7 +429,7 @@ public class Sach_Connect extends Connect_sqlServer{
     {
         ArrayList<Sach> dssTon = new ArrayList<Sach>();
         try {
-            String sql ="select SACH.MaSach , SACH.TenSach , SACH.SoLuong , NXB.TenNXB from SACH,NXB where SACH.MaNXB = NXB.MaNXB and SACH.SoLuong<?" ;
+            String sql ="select SACH.MaSach , SACH.TenSach , SACH.SoLuong , NXB.TenNXB from SACH,NXB where SACH.MaNXB = NXB.MaNXB and SACH.SoLuong<=?" ;
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setInt(1, SL);
             ResultSet result = pre.executeQuery();
@@ -430,4 +447,20 @@ public class Sach_Connect extends Connect_sqlServer{
 
         return dssTon;
     }
+    
+   public DefaultPieDataset laySachTheoTheLoai(){
+       DefaultPieDataset dataset = new DefaultPieDataset();
+       try{
+            String sql = "SELECT TheLoai, COUNT(MaSach) AS SoLuongSach FROM SACH GROUP BY TheLoai";
+            PreparedStatement pre = conn.prepareStatement(sql);		
+            ResultSet result = pre.executeQuery();
+            while(result.next()){
+                dataset.setValue( result.getString(1), result.getInt(2));
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dataset;
+   } 
 }

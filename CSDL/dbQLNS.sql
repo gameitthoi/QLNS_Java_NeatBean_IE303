@@ -140,6 +140,7 @@ GO
 CREATE TABLE [dbo].[HOADON](
 	[MaHD] [nvarchar](50) NOT NULL,
 	[MaNV] [nvarchar](50) NULL,
+	[MaKH] [nvarchar](50) NULL,
 	[NgayLap] [date] NULL,
 	[TongTien] [money] NULL,
 	[ThanhCong] [int] NULL,
@@ -276,7 +277,7 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[TONKHO](
 	[MaTK] [nvarchar](50) NOT NULL,
-	[MaSach] [nvarchar](50) NOT NULL,
+	[MaSP] [nvarchar](50) NOT NULL,
 	[TonDau] [nvarchar](50) NULL,
 	[Nhap] [int] NULL,
 	[Xuat] [int] NULL,
@@ -386,18 +387,18 @@ INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai]
 INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's80', N'DŨNG SĨ ĐAM DÔNG (2021)', N'nxb02',N'Tạ Huy Long', 10500.0000,  N'Truyện tranh',40, 30) --
 
 
-INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD01',N'NV01',N'01/01/2023', 7500000.0000, 1, 1)
-INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD02',N'NV01',N'01/01/2023', 150000.0000,1, 0)
-INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD03',N'NV01',N'01/02/2023', 10000000.0000,1, 1)
-INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD04',N'NV01',N'01/02/2023', 200000.0000, 1, 0)
-INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD05',N'NV01',N'01/03/2023', 10000000.0000, 1, 1)
-INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD06',N'NV01',N'01/03/2023', 200000.0000, 1, 0)
-INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD07',N'NV01',N'01/04/2023', 2400000.0000, 1, 1)
-INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD08',N'NV01',N'01/04/2023', 120000.0000, 1, 0)
-INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD09',N'NV01',N'01/04/2023', 25000000.0000, 1, 1)
-INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD10',N'NV01',N'01/04/2023', 250000.0000, 1, 0)
-INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD11',N'NV01',N'01/04/2023', 1300000.0000, 1, 1)
-INSERT [dbo].[HOADON] ([MaHD], [MaNV], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD12',N'NV01',N'01/04/2023', 130000.0000, 1, 0)
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [MaKH], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD01',N'NV01', N'kh01', N'01/01/2023', 7500000.0000, 1, 1)
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [MaKH], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD02',N'NV01', N'kh02', N'01/01/2023', 150000.0000,1, 0)
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [MaKH], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD03',N'NV01', N'kh03', N'01/02/2023', 10000000.0000,1, 1)
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [MaKH], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD04',N'NV01', N'kh04', N'01/02/2023', 200000.0000, 1, 0)
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [MaKH], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD05',N'NV01', N'kh05', N'01/03/2023', 10000000.0000, 1, 1)
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [MaKH], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD06',N'NV01', N'kh06', N'01/03/2023', 200000.0000, 1, 0)
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [MaKH], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD07',N'NV01', N'kh03', N'01/04/2023', 2400000.0000, 1, 1)
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [MaKH], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD08',N'NV01', N'kh02', N'01/04/2023', 120000.0000, 1, 0)
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [MaKH], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD09',N'NV01', N'kh04', N'01/04/2023', 25000000.0000, 1, 1)
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [MaKH], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD10',N'NV01', N'kh05', N'01/04/2023', 250000.0000, 1, 0)
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [MaKH], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD11',N'NV01', N'kh07', N'01/04/2023', 1300000.0000, 1, 1)
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [MaKH], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD12',N'NV01', N'kh05', N'01/04/2023', 130000.0000, 1, 0)
 
 INSERT [dbo].[CTHD] ([MaHD], [MaSP], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD01', N's01', 150000.0000, 50, 7500000.0000)
 INSERT [dbo].[CTHD] ([MaHD], [MaSP], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD02', N's01', 150000.0000, 1, 150000.0000)
@@ -434,21 +435,21 @@ INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh]
 INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email], [Luong]) VALUES (N'NV08',N'Nguyên Văn H',N'1/8/2002',N'23/11/2021' ,N'012356789',N'CV02',N'012356789',N'hnguyenvan@gmai.com', 10000000.000)
 INSERT [dbo].[NHANVIEN]([MaNV], [TenNV], [NgaySinh], [NgayVaoLam], [SoChungMinh],[MaCV], [SDT], [Email], [Luong]) VALUES (N'NV09',N'Nguyên Văn J',N'1/9/2002',N'24/02/2022' ,N'012356789',N'CV03',N'012356789',N'jnguyenvan@gmai.com', 10000000.000)
 
-INSERT [dbo].[TONKHO]([MaTK], [MaSach], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK01', N's01', 0, 50, 1, 49, 1, 2023)
+INSERT [dbo].[TONKHO]([MaTK], [MaSP], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK01', N's01', 0, 50, 1, 49, 1, 2023)
 
-INSERT [dbo].[TONKHO]([MaTK], [MaSach], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK02', N's01', 49, 0, 0, 49, 2, 2023)
-INSERT [dbo].[TONKHO]([MaTK], [MaSach], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK03', N's02', 0, 50, 1, 49, 2, 2023)
+INSERT [dbo].[TONKHO]([MaTK], [MaSP], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK02', N's01', 49, 0, 0, 49, 2, 2023)
+INSERT [dbo].[TONKHO]([MaTK], [MaSP], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK03', N's02', 0, 50, 1, 49, 2, 2023)
 
-INSERT [dbo].[TONKHO]([MaTK], [MaSach], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK04', N's01', 49, 0, 0, 49, 3, 2023)
-INSERT [dbo].[TONKHO]([MaTK], [MaSach], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK05', N's02', 49, 0, 0, 49, 3, 2023)
-INSERT [dbo].[TONKHO]([MaTK], [MaSach], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK06', N's03', 0, 50, 1, 49, 3, 2023)
+INSERT [dbo].[TONKHO]([MaTK], [MaSP], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK04', N's01', 49, 0, 0, 49, 3, 2023)
+INSERT [dbo].[TONKHO]([MaTK], [MaSP], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK05', N's02', 49, 0, 0, 49, 3, 2023)
+INSERT [dbo].[TONKHO]([MaTK], [MaSP], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK06', N's03', 0, 50, 1, 49, 3, 2023)
 
-INSERT [dbo].[TONKHO]([MaTK], [MaSach], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK07', N's01', 49, 0, 0, 49, 4, 2023)
-INSERT [dbo].[TONKHO]([MaTK], [MaSach], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK08', N's02', 49, 0, 0, 49, 4, 2023)
-INSERT [dbo].[TONKHO]([MaTK], [MaSach], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK09', N's03', 49, 0, 0, 49, 4, 2023)
-INSERT [dbo].[TONKHO]([MaTK], [MaSach], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK10', N's04', 0, 20, 1, 19, 4, 2023)
-INSERT [dbo].[TONKHO]([MaTK], [MaSach], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK11', N's05', 0, 100, 1, 99, 4, 2023)
-INSERT [dbo].[TONKHO]([MaTK], [MaSach], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK12', N's06', 0, 10, 1, 9, 4, 2023)
+INSERT [dbo].[TONKHO]([MaTK], [MaSP], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK07', N's01', 49, 0, 0, 49, 4, 2023)
+INSERT [dbo].[TONKHO]([MaTK], [MaSP], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK08', N's02', 49, 0, 0, 49, 4, 2023)
+INSERT [dbo].[TONKHO]([MaTK], [MaSP], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK09', N's03', 49, 0, 0, 49, 4, 2023)
+INSERT [dbo].[TONKHO]([MaTK], [MaSP], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK10', N's04', 0, 20, 1, 19, 4, 2023)
+INSERT [dbo].[TONKHO]([MaTK], [MaSP], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK11', N's05', 0, 100, 1, 99, 4, 2023)
+INSERT [dbo].[TONKHO]([MaTK], [MaSP], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK12', N's06', 0, 10, 1, 9, 4, 2023)
 
 INSERT [dbo].[NCCVPP] ([MaNCCVPP], [TenNCCVPP], [SDT], [DiaChi], [Email]) VALUES (N'ncc01', N'Thiên Long', N'1900 866 819', N'Tp HCM', N'salesonline@thienlongvn.com')
 INSERT [dbo].[NCCVPP] ([MaNCCVPP], [TenNCCVPP], [SDT], [DiaChi], [Email]) VALUES (N'ncc02', N'Huyền Anh', N'0903317294', N'Tp HCM', N'vpphuyenanh2020@gmail.com')
@@ -593,14 +594,19 @@ CREATE PROCEDURE GetTonKhoThangHienTai
 	@nam nvarchar(4), @thang nvarchar(2)
 AS
 BEGIN
-	SELECT S.MaSach, S.TenSach,
-	S.SoLuong+SUM(CASE WHEN H.NhapSach=0 THEN C.SoLuong ELSE 0 END)-SUM(CASE WHEN H.NhapSach=1 THEN C.SoLuong ELSE 0 END) AS TonDau,
+	SELECT S.MaSach,  S.TenSach, V.MaVPP, V.TenVPP,
+	S.SoLuong+SUM(CASE WHEN H.NhapSach=0 THEN C.SoLuong ELSE 0 END)-SUM(CASE WHEN H.NhapSach=1 THEN C.SoLuong ELSE 0 END) AS TonDauS,
+	V.SoLuong+SUM(CASE WHEN H.NhapSach=0 THEN C.SoLuong ELSE 0 END)-SUM(CASE WHEN H.NhapSach=1 THEN C.SoLuong ELSE 0 END) AS TonDauVPP,
 	SUM(CASE WHEN H.NhapSach=1 THEN C.SoLuong ELSE 0 END) AS Nhap,
 	SUM(CASE WHEN H.NhapSach=0 THEN C.SoLuong ELSE 0 END) AS Xuat,
-	S.SoLuong AS TonCuoi
-	FROM SACH AS S,CTHD AS C,HOADON AS H
-	WHERE S.MaSach=C.MaSach AND C.MaHD=H.MaHD AND YEAR(H.NgayLap)=@nam AND MONTH(H.NgayLap)=@thang AND H.ThanhCong=1
-	GROUP BY S.MaSach, S.TenSach, S.SoLuong
+	S.SoLuong AS TonCuoiS,
+	V.SoLuong AS TonCuoiVPP
+	FROM CTHD AS C
+	LEFT JOIN SACH AS S ON C.MaSP=S.MaSach
+	LEFT JOIN VPP AS V ON C.MaSP=V.MaVPP
+	LEFT JOIN HOADON AS H ON C.MaHD=H.MaHD
+	WHERE YEAR(H.NgayLap)=@nam AND MONTH(H.NgayLap)=@thang AND H.ThanhCong=1
+	GROUP BY S.MaSach, S.TenSach, S.SoLuong, V.MaVPP, V.TenVPP, V.SoLuong
 END
 GO
 CREATE PROCEDURE DoanhThuCacThang

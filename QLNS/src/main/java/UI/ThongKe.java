@@ -6,33 +6,39 @@ package UI;
 
 import Connect.HoaDon_Connect;
 import Connect.Sach_Connect;
+import Connect.VanPhongPham_Connect;
 import Model.HoaDon;
 import Model.Sach;
 import Model.TonKho;
+import Model.VPP;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Desktop;
+import java.awt.Dimension;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.sql.PreparedStatement;
 import java.text.DecimalFormat;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Vector;
+import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
+import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import javax.swing.text.NumberFormatter;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.hssf.usermodel.*;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.labels.StandardPieSectionLabelGenerator;
 import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PiePlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -40,11 +46,15 @@ import org.jfree.data.category.DefaultCategoryDataset;
  */
 public class ThongKe extends javax.swing.JFrame {
 private DefaultTableModel dtmSach =null, dtmHoaDon =null, dtmBanChay = null, dtmTonKho = null, dtmNhapXuat=null;
+private DefaultTableModel dtmSP =null, dtmHoaDonSP =null, dtmBanChaySP = null, dtmTonKhoSP = null, dtmNhapXuatSP=null;
 private ArrayList<HoaDon> dshd_thongke =null;
+
 private ArrayList<Sach> dss ;
-private ArrayList<TonKho> dstk,dsnx ;
+private ArrayList<VPP> dssp;
+private ArrayList<TonKho> dstk, dstksp, dsnx, dsnxsp ;
 private double tongTien =0;
 private DecimalFormat df = new DecimalFormat("###,###,###");
+String filePath = "C:\\Users\\dat\\Downloads\\";
     /**
      * Creates new form ThongKe
      */
@@ -53,16 +63,29 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
         this.setTitle(title);
         this.setLocationRelativeTo(null);
         showThongKe();
-        hienThiSachTonKho();
+        hienThiCanNhap();
+        hienThiSPCanNhap();
         hienThiSachBanChay();
+        hienThiSPBanChay();
         hienThiTonKho();
         hienThiNhapXuat();
     }
     
+    //chart cho doanh thu
     private JFreeChart chart;
     private DefaultCategoryDataset dataset;
     private CategoryPlot categoryPlot;
     private ChartPanel chartPanel;
+    //pipe chart cho sách
+    private JFreeChart pipeChartSach;
+    private DefaultPieDataset pieDatasetSach;
+    private PiePlot piePlotSach;
+    private ChartPanel pieChartPanelSach;
+    //pipe chart cho văn phòng phẩm
+    private JFreeChart pipeChartSP;
+    private DefaultPieDataset pieDatasetSP;
+    private PiePlot piePlotSP;
+    private ChartPanel pieChartPanelSP;
     public void showThongKe(){
         //dữ liệu đổ vào bảng thông kê
         dataset = new DefaultCategoryDataset();
@@ -76,12 +99,43 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
         //thay đổi màu nền
         //categoryPlot.setBackgroundPaint(new Color(255,255,255));
         chartPanel = new ChartPanel(chart);
-        ThongKePane.removeAll();
-        ThongKePane.add(chartPanel, BorderLayout.CENTER);
-        ThongKePane.validate();
+        
+        //tạo biểu đồ tròn thể hiện số lượng các thể loại sách 
+        pieDatasetSach = new DefaultPieDataset();
+        Sach_Connect s_conn = new Sach_Connect();
+        pieDatasetSach = s_conn.laySachTheoTheLoai();
+        //tạo bảng pipe chart
+        pipeChartSach = ChartFactory.createPieChart3D("Các loại sách", pieDatasetSach, true, true, false);
+        piePlotSach =(PiePlot) pipeChartSach.getPlot();
+        piePlotSach.setLabelGenerator(new StandardPieSectionLabelGenerator("{0} ({1})"));
+        pieChartPanelSach = new ChartPanel(pipeChartSach);
+        
+        //tạo biểu đồ tròn thể hiện số lượng các danh mục sản phẩm
+        pieDatasetSP = new DefaultPieDataset();
+        VanPhongPham_Connect vpp_conn =  new VanPhongPham_Connect();
+        pieDatasetSP= vpp_conn.laySPTheoDanhMuc();
+        //tạo bảng pipe chart
+        pipeChartSP = ChartFactory.createPieChart3D("Các Danh mục của sản phẩm", pieDatasetSP, true, true, false);
+        piePlotSP =(PiePlot) pipeChartSP.getPlot();
+        // Thiết lập sectionLabelGenerator để hiển thị số lượng sản phẩm
+        piePlotSP.setLabelGenerator(new StandardPieSectionLabelGenerator("{0} ({1})"));
+        pieChartPanelSP = new ChartPanel(pipeChartSP);
+        
+        DoanhThuPanel.removeAll();
+        DoanhThuPanel.add(chartPanel,BorderLayout.CENTER);
+        DoanhThuPanel.setPreferredSize(new Dimension(300, 300)); // Đặt kích thước tùy chỉnh cho DoanhThuPanel
+        DoanhThuPanel.validate();
+        
+        TheLoaiPanel.removeAll();
+        TheLoaiPanel.add(pieChartPanelSach,BorderLayout.CENTER);
+        TheLoaiPanel.validate();
+        
+        DanhMucPanel.removeAll();
+        DanhMucPanel.add(pieChartPanelSP,BorderLayout.CENTER);
+        DanhMucPanel.validate();
     }
     
-    private void hienThiSachTonKho() {
+    private void hienThiCanNhap() {
         Sach_Connect sach_conn = new Sach_Connect();
         dss = sach_conn.laySachConDuoiTon((int)SLBaoDongInput.getValue());
         dtmSach = new DefaultTableModel();
@@ -102,6 +156,27 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
         NeedBookTable.setModel(dtmSach);
     }
     
+    private void hienThiSPCanNhap() {
+        VanPhongPham_Connect vpp_conn = new VanPhongPham_Connect();
+        dssp = vpp_conn.laySPConDuoiTon((int)SLSPBaoDongInput.getValue());
+        dtmSP = new DefaultTableModel();
+        dtmSP.addColumn("Mã sản phẩm");
+        dtmSP.addColumn("Tên sản phẩm");
+        dtmSP.addColumn("Danh mục");
+        dtmSP.addColumn("Số lượng tồn");
+        dtmSP.setRowCount(0);
+        for(VPP vpp : dssp){
+            Vector<Object> vec = new Vector<Object>();
+            vec.add(vpp.getMaVPP());
+            vec.add(vpp.getTenVPP());
+            vec.add(vpp.getDanhMuc());
+            vec.add(vpp.getSoLuong());
+
+            dtmSP.addRow(vec);
+        }
+        NeedSPTable.setModel(dtmSP);
+    }
+    
     private void hienThiSachBanChay() {
         Calendar cal = Calendar.getInstance();
         BanChayMonthInput.setSelectedIndex(cal.get(Calendar.MONTH) + 1); // Tháng bắt đầu từ 0 nên cần +1 để lấy tháng thực tế
@@ -109,8 +184,8 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
         Sach_Connect sach_conn = new Sach_Connect();
         dss = sach_conn.laySachBanChay(TopBanChayInput.getValue().toString(), Integer.toString(BanChayMonthInput.getSelectedIndex()), BanChayYearInput.getText());
         dtmBanChay = new DefaultTableModel();
-        dtmBanChay.addColumn("Mã sách");
-        dtmBanChay.addColumn("Tên sách");
+        dtmBanChay.addColumn("Mã sản phẩm");
+        dtmBanChay.addColumn("Tên sản phẩm");
         dtmBanChay.addColumn("Số lượng đã bán");
         dtmBanChay.setRowCount(0);
         for(Sach s : dss){
@@ -122,6 +197,28 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
             dtmBanChay.addRow(vec);
         }
         BanChayTable.setModel(dtmBanChay);
+    }
+    
+    private void hienThiSPBanChay() {
+        Calendar cal = Calendar.getInstance();
+        SPBanChayMonthInput.setSelectedIndex(cal.get(Calendar.MONTH) + 1); // Tháng bắt đầu từ 0 nên cần +1 để lấy tháng thực tế
+        SPBanChayYearInput.setText(Integer.toString(cal.get(Calendar.YEAR)) );
+        VanPhongPham_Connect vpp_conn = new VanPhongPham_Connect();
+        dssp = vpp_conn.laySPBanChay(TopSPBanChayInput.getValue().toString(), Integer.toString(SPBanChayMonthInput.getSelectedIndex()), SPBanChayYearInput.getText());
+        dtmBanChaySP = new DefaultTableModel();
+        dtmBanChaySP.addColumn("Mã sách");
+        dtmBanChaySP.addColumn("Tên sách");
+        dtmBanChaySP.addColumn("Số lượng đã bán");
+        dtmBanChaySP.setRowCount(0);
+        for(VPP vpp : dssp){
+            Vector<Object> vec = new Vector<Object>();
+            vec.add(vpp.getMaVPP());
+            vec.add(vpp.getTenVPP());
+            vec.add(vpp.getSoLuong());
+
+            dtmBanChaySP.addRow(vec);
+        }
+        SPBanChayTable.setModel(dtmBanChaySP);
     }
     
     private void hienThiTonKho(){
@@ -138,8 +235,8 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
         dtmTonKho.setRowCount(0);
         for(TonKho tk : dstk){
             Vector<Object> vec = new Vector<Object>();
-            vec.add(tk.getMaSach());
-            vec.add(tk.getTenSach());
+            vec.add(tk.getMaSP());
+            vec.add(tk.getTenSP());
             vec.add(tk.getTonDau());
             vec.add(tk.getNhap());
             vec.add(tk.getXuat());
@@ -149,7 +246,7 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
         }
         TonKhoTable.setModel(dtmTonKho);
     }
-    
+     
     private void hienThiNhapXuat(){
         Calendar cal = Calendar.getInstance();
         NhapXuatMonthInput.setSelectedIndex(cal.get(Calendar.MONTH)-1);
@@ -166,8 +263,8 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
         dtmNhapXuat.setRowCount(0);
         for(TonKho tk : dsnx){
             Vector<Object> vec = new Vector<Object>();
-            vec.add(tk.getMaSach());
-            vec.add(tk.getTenSach());
+            vec.add(tk.getMaSP());
+            vec.add(tk.getTenSP());
             vec.add(tk.getTonDau());
             vec.add(tk.getNhap());
             vec.add(tk.getXuat());
@@ -241,13 +338,17 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         ThongKePane = new javax.swing.JPanel();
-        TonKhoPane = new javax.swing.JPanel();
+        jTabbedPane2 = new javax.swing.JTabbedPane();
+        DoanhThuPanel = new javax.swing.JPanel();
+        TheLoaiPanel = new javax.swing.JPanel();
+        DanhMucPanel = new javax.swing.JPanel();
+        TonKhoSachPane = new javax.swing.JPanel();
         PrintTonKhoBtn = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         TonKhoTable = new javax.swing.JTable();
         TonKhoLabel = new javax.swing.JLabel();
         SaveBtn = new javax.swing.JButton();
-        NhapXuatPane = new javax.swing.JPanel();
+        NhapXuatSachPane = new javax.swing.JPanel();
         NhapXuatMonthLabel = new javax.swing.JLabel();
         NhapXuatMonthInput = new javax.swing.JComboBox<>();
         NhapXuatYearLabel = new javax.swing.JLabel();
@@ -263,7 +364,14 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
         SLBaoDongInput = new javax.swing.JSpinner(new SpinnerNumberModel(10, 10, 100, 10));
         TKNeedBookBtn = new javax.swing.JButton();
         PrintNeedBookBtn = new javax.swing.JButton();
-        BanChayPane = new javax.swing.JPanel();
+        NeedSPPanel = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        NeedSPTable = new javax.swing.JTable(dtmSach);
+        SLSPBaoDongLabel = new javax.swing.JLabel();
+        SLSPBaoDongInput = new javax.swing.JSpinner(new SpinnerNumberModel(10, 10, 100, 10));
+        TKNeedSPBtn = new javax.swing.JButton();
+        PrintNeedSPBtn = new javax.swing.JButton();
+        SachBanChayPane = new javax.swing.JPanel();
         BanChayMonthInput = new javax.swing.JComboBox<>();
         BanChayYearInput = new javax.swing.JTextField();
         BanChayYearLabel = new javax.swing.JLabel();
@@ -274,12 +382,44 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
         PrintBanChayBtn = new javax.swing.JButton();
         TopBanChayInput = new javax.swing.JSpinner(new SpinnerNumberModel(10, 0, 100, 1));
         BanChayTopLabel = new javax.swing.JLabel();
+        SPBanChayPanel = new javax.swing.JPanel();
+        SPBanChayMonthInput = new javax.swing.JComboBox<>();
+        SPBanChayYearInput = new javax.swing.JTextField();
+        SPBanChayYearLabel = new javax.swing.JLabel();
+        SPBanChayMonthLabel = new javax.swing.JLabel();
+        SPBanChayBtn = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        SPBanChayTable = new javax.swing.JTable();
+        SPPrintBanChayBtn = new javax.swing.JButton();
+        TopSPBanChayInput = new javax.swing.JSpinner(new SpinnerNumberModel(10, 0, 100, 1));
+        SPBanChayTopLabel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         TKLable = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        ThongKePane.setLayout(new java.awt.BorderLayout());
+        DoanhThuPanel.setLayout(new java.awt.BorderLayout());
+        jTabbedPane2.addTab("Doanh thu", DoanhThuPanel);
+
+        TheLoaiPanel.setLayout(new java.awt.BorderLayout());
+        jTabbedPane2.addTab("Sách", TheLoaiPanel);
+
+        DanhMucPanel.setLayout(new java.awt.BorderLayout());
+        jTabbedPane2.addTab("Văn phòng phẩm", DanhMucPanel);
+
+        javax.swing.GroupLayout ThongKePaneLayout = new javax.swing.GroupLayout(ThongKePane);
+        ThongKePane.setLayout(ThongKePaneLayout);
+        ThongKePaneLayout.setHorizontalGroup(
+            ThongKePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 1243, Short.MAX_VALUE)
+        );
+        ThongKePaneLayout.setVerticalGroup(
+            ThongKePaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(ThongKePaneLayout.createSequentialGroup()
+                .addComponent(jTabbedPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         jTabbedPane1.addTab("Thống kê", ThongKePane);
 
         PrintTonKhoBtn.setText("Xuất bảng báo cáo");
@@ -289,12 +429,20 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
             }
         });
 
+        TonKhoTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
         jScrollPane4.setViewportView(TonKhoTable);
 
         TonKhoLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         TonKhoLabel.setForeground(new java.awt.Color(0, 0, 255));
         TonKhoLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        TonKhoLabel.setText("SỐ LƯỢNG HÀNG TỒN TRONG THÁNG NÀY");
+        TonKhoLabel.setText("SỐ LƯỢNG SÁCH TỒN TRONG THÁNG NÀY");
 
         SaveBtn.setText("Lưu");
         SaveBtn.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -303,36 +451,36 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
             }
         });
 
-        javax.swing.GroupLayout TonKhoPaneLayout = new javax.swing.GroupLayout(TonKhoPane);
-        TonKhoPane.setLayout(TonKhoPaneLayout);
-        TonKhoPaneLayout.setHorizontalGroup(
-            TonKhoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 844, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TonKhoPaneLayout.createSequentialGroup()
+        javax.swing.GroupLayout TonKhoSachPaneLayout = new javax.swing.GroupLayout(TonKhoSachPane);
+        TonKhoSachPane.setLayout(TonKhoSachPaneLayout);
+        TonKhoSachPaneLayout.setHorizontalGroup(
+            TonKhoSachPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1243, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TonKhoSachPaneLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(SaveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addComponent(PrintTonKhoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TonKhoPaneLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TonKhoSachPaneLayout.createSequentialGroup()
                 .addComponent(TonKhoLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        TonKhoPaneLayout.setVerticalGroup(
-            TonKhoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TonKhoPaneLayout.createSequentialGroup()
+        TonKhoSachPaneLayout.setVerticalGroup(
+            TonKhoSachPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TonKhoSachPaneLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(TonKhoLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(TonKhoPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(TonKhoSachPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(PrintTonKhoBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
                     .addComponent(SaveBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(113, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Tồn kho tháng này", TonKhoPane);
+        jTabbedPane1.addTab("Tồn kho", TonKhoSachPane);
 
         NhapXuatMonthLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         NhapXuatMonthLabel.setText("Tháng");
@@ -341,6 +489,12 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
 
         NhapXuatYearLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         NhapXuatYearLabel.setText("Năm");
+
+        NhapXuatYearInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                NhapXuatYearInputKeyTyped(evt);
+            }
+        });
 
         NhapXuatBtn.setBackground(new java.awt.Color(51, 153, 255));
         NhapXuatBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -361,15 +515,15 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
 
         jScrollPane5.setViewportView(NhapXuatTable);
 
-        javax.swing.GroupLayout NhapXuatPaneLayout = new javax.swing.GroupLayout(NhapXuatPane);
-        NhapXuatPane.setLayout(NhapXuatPaneLayout);
-        NhapXuatPaneLayout.setHorizontalGroup(
-            NhapXuatPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 844, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NhapXuatPaneLayout.createSequentialGroup()
+        javax.swing.GroupLayout NhapXuatSachPaneLayout = new javax.swing.GroupLayout(NhapXuatSachPane);
+        NhapXuatSachPane.setLayout(NhapXuatSachPaneLayout);
+        NhapXuatSachPaneLayout.setHorizontalGroup(
+            NhapXuatSachPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1243, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NhapXuatSachPaneLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(NhapXuatPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NhapXuatPaneLayout.createSequentialGroup()
+                .addGroup(NhapXuatSachPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NhapXuatSachPaneLayout.createSequentialGroup()
                         .addComponent(NhapXuatMonthLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(NhapXuatMonthInput, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -380,15 +534,15 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
                         .addGap(18, 18, 18)
                         .addComponent(NhapXuatBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(16, 16, 16))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NhapXuatPaneLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NhapXuatSachPaneLayout.createSequentialGroup()
                         .addComponent(PrintNhapXuatBtn)
                         .addGap(14, 14, 14))))
         );
-        NhapXuatPaneLayout.setVerticalGroup(
-            NhapXuatPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(NhapXuatPaneLayout.createSequentialGroup()
+        NhapXuatSachPaneLayout.setVerticalGroup(
+            NhapXuatSachPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(NhapXuatSachPaneLayout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addGroup(NhapXuatPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(NhapXuatSachPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(NhapXuatMonthLabel)
                     .addComponent(NhapXuatMonthInput, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(NhapXuatYearLabel)
@@ -398,15 +552,18 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(PrintNhapXuatBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Nhập xuất kho", NhapXuatPane);
+        jTabbedPane1.addTab("Nhập xuất", NhapXuatSachPane);
 
         jScrollPane3.setViewportView(NeedBookTable);
 
         SLBaoDongLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         SLBaoDongLabel.setText("Số lượng của sách dưới :");
+
+        JFormattedTextField text0Field = ((JSpinner.DefaultEditor) SLBaoDongInput.getEditor()).getTextField();
+        ((NumberFormatter) text0Field.getFormatter()).setAllowsInvalid(false); // Chỉ cho phép giá trị hợp lệ là số
 
         TKNeedBookBtn.setBackground(new java.awt.Color(51, 153, 255));
         TKNeedBookBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -433,7 +590,7 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
                 .addContainerGap()
                 .addGroup(NeedBookPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NeedBookPaneLayout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 832, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1231, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NeedBookPaneLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -463,12 +620,86 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(PrintNeedBookBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Sách cần nhập", NeedBookPane);
 
+        jScrollPane6.setViewportView(NeedSPTable);
+
+        SLSPBaoDongLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        SLSPBaoDongLabel.setText("Số lượng của sản phẩm dưới :");
+
+        JFormattedTextField text1Field = ((JSpinner.DefaultEditor) SLSPBaoDongInput.getEditor()).getTextField();
+        ((NumberFormatter) text1Field.getFormatter()).setAllowsInvalid(false); // Chỉ cho phép giá trị hợp lệ là số
+
+        TKNeedSPBtn.setBackground(new java.awt.Color(51, 153, 255));
+        TKNeedSPBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        TKNeedSPBtn.setForeground(new java.awt.Color(255, 255, 255));
+        TKNeedSPBtn.setText("Thống kê");
+        TKNeedSPBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TKNeedSPBtnMouseClicked(evt);
+            }
+        });
+
+        PrintNeedSPBtn.setText("Xuất bảng báo cáo");
+        PrintNeedSPBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PrintNeedSPBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout NeedSPPanelLayout = new javax.swing.GroupLayout(NeedSPPanel);
+        NeedSPPanel.setLayout(NeedSPPanelLayout);
+        NeedSPPanelLayout.setHorizontalGroup(
+            NeedSPPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(NeedSPPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(NeedSPPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NeedSPPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 1231, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NeedSPPanelLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(SLSPBaoDongLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(SLSPBaoDongInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
+                        .addComponent(TKNeedSPBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NeedSPPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(PrintNeedSPBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
+        );
+        NeedSPPanelLayout.setVerticalGroup(
+            NeedSPPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(NeedSPPanelLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(NeedSPPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, NeedSPPanelLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(SLSPBaoDongLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(NeedSPPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(TKNeedSPBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(SLSPBaoDongInput, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(PrintNeedSPBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(111, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Sản phẩm cần nhập", NeedSPPanel);
+
         BanChayMonthInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+
+        BanChayYearInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                BanChayYearInputKeyTyped(evt);
+            }
+        });
 
         BanChayYearLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         BanChayYearLabel.setText("Năm");
@@ -495,18 +726,21 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
             }
         });
 
+        JFormattedTextField textField = ((JSpinner.DefaultEditor) TopBanChayInput.getEditor()).getTextField();
+        ((NumberFormatter) textField.getFormatter()).setAllowsInvalid(false); // Chỉ cho phép giá trị hợp lệ là số
+
         BanChayTopLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         BanChayTopLabel.setText("TOP");
 
-        javax.swing.GroupLayout BanChayPaneLayout = new javax.swing.GroupLayout(BanChayPane);
-        BanChayPane.setLayout(BanChayPaneLayout);
-        BanChayPaneLayout.setHorizontalGroup(
-            BanChayPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout SachBanChayPaneLayout = new javax.swing.GroupLayout(SachBanChayPane);
+        SachBanChayPane.setLayout(SachBanChayPaneLayout);
+        SachBanChayPaneLayout.setHorizontalGroup(
+            SachBanChayPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BanChayPaneLayout.createSequentialGroup()
-                .addContainerGap(261, Short.MAX_VALUE)
-                .addGroup(BanChayPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BanChayPaneLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SachBanChayPaneLayout.createSequentialGroup()
+                .addContainerGap(660, Short.MAX_VALUE)
+                .addGroup(SachBanChayPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SachBanChayPaneLayout.createSequentialGroup()
                         .addComponent(BanChayTopLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TopBanChayInput, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -521,17 +755,17 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
                         .addGap(38, 38, 38)
                         .addComponent(BanChayBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BanChayPaneLayout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SachBanChayPaneLayout.createSequentialGroup()
                         .addComponent(PrintBanChayBtn)
                         .addGap(17, 17, 17))))
         );
-        BanChayPaneLayout.setVerticalGroup(
-            BanChayPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(BanChayPaneLayout.createSequentialGroup()
+        SachBanChayPaneLayout.setVerticalGroup(
+            SachBanChayPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SachBanChayPaneLayout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(BanChayPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(SachBanChayPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TopBanChayInput, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(BanChayPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addGroup(SachBanChayPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(BanChayMonthInput, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(BanChayYearInput, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(BanChayYearLabel)
@@ -542,10 +776,98 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(PrintBanChayBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Bán chạy", BanChayPane);
+        jTabbedPane1.addTab("Sách bán chạy", SachBanChayPane);
+
+        SPBanChayMonthInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
+
+        SPBanChayYearInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                SPBanChayYearInputKeyTyped(evt);
+            }
+        });
+
+        SPBanChayYearLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        SPBanChayYearLabel.setText("Năm");
+
+        SPBanChayMonthLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        SPBanChayMonthLabel.setText("Tháng");
+
+        SPBanChayBtn.setBackground(new java.awt.Color(51, 153, 255));
+        SPBanChayBtn.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        SPBanChayBtn.setForeground(new java.awt.Color(255, 255, 255));
+        SPBanChayBtn.setText("Thống kê");
+        SPBanChayBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SPBanChayBtnMouseClicked(evt);
+            }
+        });
+
+        jScrollPane2.setViewportView(SPBanChayTable);
+
+        SPPrintBanChayBtn.setText("Xuất bảng báo cáo");
+        SPPrintBanChayBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SPPrintBanChayBtnActionPerformed(evt);
+            }
+        });
+
+        JFormattedTextField txtField = ((JSpinner.DefaultEditor) TopSPBanChayInput.getEditor()).getTextField();
+        ((NumberFormatter) txtField.getFormatter()).setAllowsInvalid(false); // Chỉ cho phép giá trị hợp lệ là số
+
+        SPBanChayTopLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        SPBanChayTopLabel.setText("TOP");
+
+        javax.swing.GroupLayout SPBanChayPanelLayout = new javax.swing.GroupLayout(SPBanChayPanel);
+        SPBanChayPanel.setLayout(SPBanChayPanelLayout);
+        SPBanChayPanelLayout.setHorizontalGroup(
+            SPBanChayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SPBanChayPanelLayout.createSequentialGroup()
+                .addContainerGap(660, Short.MAX_VALUE)
+                .addGroup(SPBanChayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SPBanChayPanelLayout.createSequentialGroup()
+                        .addComponent(SPBanChayTopLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(TopSPBanChayInput, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(SPBanChayMonthLabel)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(SPBanChayMonthInput, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(22, 22, 22)
+                        .addComponent(SPBanChayYearLabel)
+                        .addGap(18, 18, 18)
+                        .addComponent(SPBanChayYearInput, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(SPBanChayBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SPBanChayPanelLayout.createSequentialGroup()
+                        .addComponent(SPPrintBanChayBtn)
+                        .addGap(17, 17, 17))))
+        );
+        SPBanChayPanelLayout.setVerticalGroup(
+            SPBanChayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SPBanChayPanelLayout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(SPBanChayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TopSPBanChayInput, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(SPBanChayPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(SPBanChayMonthInput, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(SPBanChayYearInput, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(SPBanChayYearLabel)
+                        .addComponent(SPBanChayMonthLabel)
+                        .addComponent(SPBanChayBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(SPBanChayTopLabel)))
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(SPPrintBanChayBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Sản phẩm bán chạy", SPBanChayPanel);
 
         TKLable.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         TKLable.setForeground(new java.awt.Color(0, 0, 255));
@@ -586,7 +908,7 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jTabbedPane1)
-                .addGap(48, 48, 48))
+                .addContainerGap())
         );
 
         pack();
@@ -611,7 +933,7 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
     private void PrintNeedBookBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintNeedBookBtnActionPerformed
         int dialogResult = JOptionPane.showConfirmDialog (null, "Xuất file excel?","Warning",JOptionPane.YES_NO_OPTION);
         if(dialogResult == JOptionPane.YES_OPTION)
-            XuatFileExcel(dtmSach, "Sách cần nhập", "C:\\Users\\Admin\\Downloads\\SachCanNhap.xls" );
+            XuatFileExcel(dtmSach, "Sách cần nhập", filePath+"SachCanNhap.xls" );
     }//GEN-LAST:event_PrintNeedBookBtnActionPerformed
 
     private void BanChayBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BanChayBtnMouseClicked
@@ -632,13 +954,13 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
     private void PrintBanChayBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintBanChayBtnActionPerformed
         int dialogResult = JOptionPane.showConfirmDialog (null, "Xuất file excel?","Warning",JOptionPane.YES_NO_OPTION);
         if(dialogResult == JOptionPane.YES_OPTION)
-            XuatFileExcel(dtmBanChay, "Sách bán chạy", "C:\\Users\\Admin\\Downloads\\BanChay.xls" );
+            XuatFileExcel(dtmBanChay, "Sách bán chạy", filePath+"BanChay.xls" );
     }//GEN-LAST:event_PrintBanChayBtnActionPerformed
 
     private void PrintTonKhoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintTonKhoBtnActionPerformed
         int dialogResult = JOptionPane.showConfirmDialog (null, "Xuất file excel?","Warning",JOptionPane.YES_NO_OPTION);
         if(dialogResult == JOptionPane.YES_OPTION)
-            XuatFileExcel(dtmTonKho, "Tồn kho tháng này", "C:\\Users\\Admin\\Downloads\\TonKho.xls" );
+            XuatFileExcel(dtmTonKho, "Tồn kho tháng này", filePath+"TonKho.xls" );
     }//GEN-LAST:event_PrintTonKhoBtnActionPerformed
 
     private void NhapXuatBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NhapXuatBtnMouseClicked
@@ -648,8 +970,8 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
         dtmNhapXuat.setRowCount(0);
         for(TonKho tk : dsnx){
             Vector<Object> vec = new Vector<Object>();
-            vec.add(tk.getMaSach());
-            vec.add(tk.getTenSach());
+            vec.add(tk.getMaSP());
+            vec.add(tk.getTenSP());
             vec.add(tk.getTonDau());
             vec.add(tk.getNhap());
             vec.add(tk.getXuat());
@@ -663,7 +985,7 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
     private void PrintNhapXuatBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintNhapXuatBtnActionPerformed
         int dialogResult = JOptionPane.showConfirmDialog (null, "Xuất file excel?","Warning",JOptionPane.YES_NO_OPTION);
         if(dialogResult == JOptionPane.YES_OPTION)
-            XuatFileExcel(dtmNhapXuat, "Nhập xuất tháng "+(NhapXuatMonthInput.getSelectedIndex()+1)+" năm "+NhapXuatYearInput.getText(), "C:\\Users\\Admin\\Downloads\\NhapXuat.xls" );
+            XuatFileExcel(dtmNhapXuat, "Nhập xuất tháng "+(NhapXuatMonthInput.getSelectedIndex()+1)+" năm "+NhapXuatYearInput.getText(), filePath+"NhapXuat.xls" );
     }//GEN-LAST:event_PrintNhapXuatBtnActionPerformed
 
     private void SaveBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SaveBtnMouseClicked
@@ -673,13 +995,79 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
                 Sach_Connect sach_conn = new Sach_Connect();
                 Calendar cal = Calendar.getInstance();
                 int result = sach_conn.luuDuLieuVaoTonKho(TonKhoTable, cal.get(Calendar.MONTH)+1, cal.get(Calendar.YEAR));
-                if (result == 1) JOptionPane.showMessageDialog(null, "Thêm thành công!");
+                if (result == 1) JOptionPane.showMessageDialog(null, "Lưu thành công!");
+                else JOptionPane.showMessageDialog(null, "Lưu thất bại!");
             }
             else{
                 JOptionPane.showMessageDialog(null, "Bảng tồn kho rỗng!");
             }
         }
     }//GEN-LAST:event_SaveBtnMouseClicked
+
+    private void TKNeedSPBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TKNeedSPBtnMouseClicked
+       VanPhongPham_Connect vpp_conn = new VanPhongPham_Connect();
+        dssp = vpp_conn.laySPConDuoiTon((int)SLBaoDongInput.getValue());
+        dtmSP.setRowCount(0);
+        for(VPP s : dssp){
+            Vector<Object> vec = new Vector<Object>();
+            vec.add(s.getMaVPP());
+            vec.add(s.getTenVPP());
+            vec.add(s.getDanhMuc());
+            vec.add(s.getSoLuong());
+
+            dtmSP.addRow(vec);
+        }
+        NeedSPTable.setModel(dtmSP);
+
+    }//GEN-LAST:event_TKNeedSPBtnMouseClicked
+
+    private void PrintNeedSPBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintNeedSPBtnActionPerformed
+        int dialogResult = JOptionPane.showConfirmDialog (null, "Xuất file excel?","Warning",JOptionPane.YES_NO_OPTION);
+        if(dialogResult == JOptionPane.YES_OPTION)
+            XuatFileExcel(dtmSP, "Sản phẩm cần nhập", filePath+"SanPhamCanNhap.xls" );
+    }//GEN-LAST:event_PrintNeedSPBtnActionPerformed
+
+    private void SPBanChayBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SPBanChayBtnMouseClicked
+        VanPhongPham_Connect vpp_conn = new VanPhongPham_Connect();
+        dssp = vpp_conn.laySPBanChay(TopSPBanChayInput.getValue().toString(), Integer.toString(SPBanChayMonthInput.getSelectedIndex()), SPBanChayYearInput.getText());
+        dtmBanChaySP.setRowCount(0);
+        for(VPP s : dssp){
+            Vector<Object> vec = new Vector<Object>();
+            vec.add(s.getMaVPP());
+            vec.add(s.getTenVPP());
+            vec.add(s.getSoLuong());
+
+            dtmBanChaySP.addRow(vec);
+        }
+        SPBanChayTable.setModel(dtmBanChaySP);
+    }//GEN-LAST:event_SPBanChayBtnMouseClicked
+
+    private void SPPrintBanChayBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SPPrintBanChayBtnActionPerformed
+        int dialogResult = JOptionPane.showConfirmDialog (null, "Xuất file excel?","Warning",JOptionPane.YES_NO_OPTION);
+        if(dialogResult == JOptionPane.YES_OPTION)
+            XuatFileExcel(dtmBanChaySP, "Sản phẩm bán chạy", filePath+"SanPhamBanChay.xls" );
+    }//GEN-LAST:event_SPPrintBanChayBtnActionPerformed
+
+    private void NhapXuatYearInputKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NhapXuatYearInputKeyTyped
+       char c = evt.getKeyChar();
+        if (!Character.isDigit(c) || NhapXuatYearInput.getText().length() >= 4) {
+            evt.consume(); // Ngăn chặn ký tự không hợp lệ và ngăn chặn nhập quá 4 ký tự
+        }
+    }//GEN-LAST:event_NhapXuatYearInputKeyTyped
+
+    private void BanChayYearInputKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BanChayYearInputKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c) || BanChayYearInput.getText().length() >= 4) {
+            evt.consume(); // Ngăn chặn ký tự không hợp lệ và ngăn chặn nhập quá 4 ký tự
+        }
+    }//GEN-LAST:event_BanChayYearInputKeyTyped
+
+    private void SPBanChayYearInputKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SPBanChayYearInputKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c) || SPBanChayYearInput.getText().length() >= 4) {
+            evt.consume(); // Ngăn chặn ký tự không hợp lệ và ngăn chặn nhập quá 4 ký tự
+        }
+    }//GEN-LAST:event_SPBanChayYearInputKeyTyped
 
     /**
      * @param args the command line arguments
@@ -720,39 +1108,67 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
     private javax.swing.JButton BanChayBtn;
     private javax.swing.JComboBox<String> BanChayMonthInput;
     private javax.swing.JLabel BanChayMonthLabel;
-    private javax.swing.JPanel BanChayPane;
     private javax.swing.JTable BanChayTable;
     private javax.swing.JLabel BanChayTopLabel;
     private javax.swing.JTextField BanChayYearInput;
     private javax.swing.JLabel BanChayYearLabel;
+    private javax.swing.JPanel DanhMucPanel;
+    private javax.swing.JPanel DanhMucPanel1;
+    private javax.swing.JPanel DoanhThuPanel;
+    private javax.swing.JPanel DoanhThuPanel1;
     private javax.swing.JPanel NeedBookPane;
     private javax.swing.JTable NeedBookTable;
+    private javax.swing.JPanel NeedSPPanel;
+    private javax.swing.JTable NeedSPTable;
     private javax.swing.JButton NhapXuatBtn;
     private javax.swing.JComboBox<String> NhapXuatMonthInput;
     private javax.swing.JLabel NhapXuatMonthLabel;
-    private javax.swing.JPanel NhapXuatPane;
+    private javax.swing.JPanel NhapXuatSachPane;
     private javax.swing.JTable NhapXuatTable;
     private javax.swing.JTextField NhapXuatYearInput;
     private javax.swing.JLabel NhapXuatYearLabel;
     private javax.swing.JButton PrintBanChayBtn;
     private javax.swing.JButton PrintNeedBookBtn;
+    private javax.swing.JButton PrintNeedSPBtn;
     private javax.swing.JButton PrintNhapXuatBtn;
     private javax.swing.JButton PrintTonKhoBtn;
     private javax.swing.JSpinner SLBaoDongInput;
     private javax.swing.JLabel SLBaoDongLabel;
+    private javax.swing.JSpinner SLSPBaoDongInput;
+    private javax.swing.JLabel SLSPBaoDongLabel;
+    private javax.swing.JButton SPBanChayBtn;
+    private javax.swing.JComboBox<String> SPBanChayMonthInput;
+    private javax.swing.JLabel SPBanChayMonthLabel;
+    private javax.swing.JPanel SPBanChayPanel;
+    private javax.swing.JTable SPBanChayTable;
+    private javax.swing.JLabel SPBanChayTopLabel;
+    private javax.swing.JTextField SPBanChayYearInput;
+    private javax.swing.JLabel SPBanChayYearLabel;
+    private javax.swing.JButton SPPrintBanChayBtn;
+    private javax.swing.JPanel SachBanChayPane;
     private javax.swing.JButton SaveBtn;
     private javax.swing.JLabel TKLable;
     private javax.swing.JButton TKNeedBookBtn;
+    private javax.swing.JButton TKNeedSPBtn;
+    private javax.swing.JPanel TheLoaiPanel;
+    private javax.swing.JPanel TheLoaiPanel1;
     private javax.swing.JPanel ThongKePane;
+    private javax.swing.JPanel ThongKePane1;
     private javax.swing.JLabel TonKhoLabel;
-    private javax.swing.JPanel TonKhoPane;
+    private javax.swing.JPanel TonKhoSachPane;
     private javax.swing.JTable TonKhoTable;
     private javax.swing.JSpinner TopBanChayInput;
+    private javax.swing.JSpinner TopSPBanChayInput;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTabbedPane jTabbedPane3;
+    private javax.swing.JTabbedPane jTabbedPane4;
     // End of variables declaration//GEN-END:variables
 }
