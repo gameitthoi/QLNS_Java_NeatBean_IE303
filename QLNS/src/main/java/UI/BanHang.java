@@ -50,7 +50,7 @@ public class BanHang extends javax.swing.JFrame {
     private ArrayList<VPP> dssp_ten=null;
     private ArrayList<VPP> dssp_dm=null;
     private ArrayList<VPP> dssp_ten_dm=null;
-
+    private String makh = "";
     /**
      * Creates new form BanHang
      */
@@ -154,6 +154,7 @@ public class BanHang extends javax.swing.JFrame {
         HoaDon hd = new HoaDon();
         hd.setMaHD(MaHD);
         hd.setMaNV(MaNV);
+        hd.setMaKH(makh);
         Date date = new Date();
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String currentTime = sdf.format(date);
@@ -814,11 +815,11 @@ public class BanHang extends javax.swing.JFrame {
                                     .addGap(261, 261, 261))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(DeleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGap(18, 18, 18)
                                     .addComponent(PaymentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGap(18, 18, 18)
                                     .addComponent(CancleBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(170, 170, 170))
+                                    .addGap(158, 158, 158))
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 694, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addContainerGap()))
@@ -875,10 +876,10 @@ public class BanHang extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(ReceiveInput, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(PaymentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(DeleteBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(CancleBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(PaymentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(CancleBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -1058,12 +1059,13 @@ public class BanHang extends javax.swing.JFrame {
                 if(state != -1)
                     JOptionPane.showMessageDialog(null, "Thanh toán thành công!");
                 else JOptionPane.showMessageDialog(null, "Thanh toán thất bại!");
+            //điểm của khách sẽ bằng điểm hiện tại cộng thêm tổng hóa đơn  x 0.02
             KhachHang kh = new KhachHang();
             KhachHang_Connect kh_conn = new KhachHang_Connect();
             kh= kh_conn.layKhachHangBangSDT(SDTInput.getText());
-            kh.setDiem(0);
+            kh.setDiem(kh.getDiem()+Double.parseDouble(TotalInput.getText())*0.02);
             kh_conn.updateKhachHang(kh);
-            DiemOutput.setText("0");
+            DiemOutput.setText(Double.toString(kh.getDiem()));
             TotalInput.setText("0");
             ReceiveInput.setText("0");
             ChangeInput.setText("0");
@@ -1251,6 +1253,7 @@ public class BanHang extends javax.swing.JFrame {
         KhachHang_Connect kh_conn = new KhachHang_Connect();
         KhachHang kh = kh_conn.layKhachHangBangSDT(SDTInput.getText());
         KHOutput.setText(kh.getTenKH());
+        makh = kh.getMaKH();
         DiemOutput.setText(formatCurrency(kh.getDiem()));
         //lưu lại điểm của khách hàng này bằng biến toàn cục
         DiemOutput.setText(formatCurrency(kh.getDiem()));
@@ -1258,14 +1261,10 @@ public class BanHang extends javax.swing.JFrame {
     }//GEN-LAST:event_TimSDTButtonActionPerformed
 
     private void SDTInputKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SDTInputKeyTyped
-        //kiểm tra xem người dùng có nhập số vào không, nếu không phải số thì không nhận
         char c = evt.getKeyChar();
-        if (!((c >= '0') && (c <= '9') ||
-            (c == KeyEvent.VK_BACK_SPACE) ||
-            (c == KeyEvent.VK_DELETE))) {
-        getToolkit().beep();
-        evt.consume();
-      }
+        if (!Character.isDigit(c) || SDTInput.getText().length() >= 10) {
+            evt.consume(); // Ngăn chặn ký tự không hợp lệ và ngăn chặn nhập quá 4 ký tự
+        }
     }//GEN-LAST:event_SDTInputKeyTyped
 
     private void DiemCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiemCheckBoxActionPerformed

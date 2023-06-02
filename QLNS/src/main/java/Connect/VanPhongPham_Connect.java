@@ -6,11 +6,15 @@ package Connect;
 
 import Model.NhaCungCap_VPP;
 import Model.Sach;
+import Model.TonKho;
 import Model.VPP;
+import java.sql.CallableStatement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -30,7 +34,6 @@ public class VanPhongPham_Connect extends Connect_sqlServer{
                 vpp.setTenVPP(result.getString(2));
                 vpp.setMaNCC(result.getString(3));
                 vpp.setGiaBan(result.getDouble(4));
-
                 vpp.setDanhMuc(result.getString(5));
                 vpp.setSoLuong(result.getInt(6));
                 vpp.setDiscount(result.getInt(7));
@@ -85,6 +88,89 @@ public class VanPhongPham_Connect extends Connect_sqlServer{
             }
             return dsdm;
     }
+    
+    public ArrayList<TonKho> laySPTonKho(int thang, int nam ){
+        ArrayList<TonKho> dsTK = new ArrayList<TonKho>();
+        String sql = "";
+        Calendar cal = Calendar.getInstance();
+        try {
+            sql ="{call GetTonKhoThangHienTai("+nam+","+thang+")}";
+            CallableStatement  stmt  = conn.prepareCall(sql);		
+            ResultSet result = stmt.executeQuery();
+            while(result.next()){
+                TonKho tk = new TonKho();
+                tk.setMaSP(result.getString(1));
+                tk.setTenSP(result.getString(2));
+                tk.setTonDau(result.getInt(3));
+                tk.setNhap(result.getInt(4));
+                tk.setXuat(result.getInt(5));
+                tk.setTonCuoi(result.getInt(6));
+
+                dsTK.add(tk);  
+            }	
+        } catch (Exception e) {
+                e.printStackTrace();
+        }
+        return dsTK;
+    }
+    
+    public ArrayList<VPP> laySPBanChay(String top, String thang, String nam ){
+        ArrayList<VPP> dsSBC = new ArrayList<VPP>();
+        String sql = "";
+        try {
+            if ("0".equals(thang))  
+                sql ="SELECT TOP " +top +" A.MaVPP,TenVPP, SUM(A.SoLuong) as SL FROM (SELECT VPP.MaVPP,TenVPP,CTHD.SoLuong FROM VPP,HOADON,CTHD WHERE VPP.MaVPP=CTHD.MaSP AND CTHD.MaHD=HOADON.MaHD AND YEAR(NgayLap)=? AND HOADON.ThanhCong=1 AND HOADON.NhapSach=0) AS A GROUP BY MaVPP, TenVPP ORDER BY SL DESC ";
+            else 
+                sql ="SELECT TOP " +top +" A.MaVPP,TenVPP, SUM(A.SoLuong) as SL FROM (SELECT VPP.MaVPP,TenVPP,CTHD.SoLuong FROM VPP,HOADON,CTHD WHERE VPP.MaVPP=CTHD.MaSP AND CTHD.MaHD=HOADON.MaHD AND MONTH(NgayLap)=? AND YEAR(NgayLap)=? AND HOADON.ThanhCong=1 AND HOADON.NhapSach=0 ) AS A GROUP BY MaVPP, TenVPP ORDER BY SL DESC";
+
+            PreparedStatement pre = conn.prepareStatement(sql);
+
+            if ("0".equals(thang)) {
+                pre.setString(1, nam);
+            }
+            else {
+                pre.setString(1, thang);
+                pre.setString(2, nam);
+            }		
+            ResultSet result = pre.executeQuery();
+            while(result.next()){
+                VPP s = new VPP();
+                s.setMaVPP(result.getString(1));
+                s.setTenVPP(result.getString(2));
+                s.setSoLuong(result.getInt(3));
+                dsSBC.add(s);
+            }
+
+
+        } catch (Exception e) {
+                e.printStackTrace();
+        }
+        return dsSBC;
+    }
+    
+    public ArrayList<VPP> laySPConDuoiTon(int SL)
+    {
+        ArrayList<VPP> dssTon = new ArrayList<VPP>();
+        try {
+            String sql ="select VPP.MaVPP , VPP.TenVPP , VPP.SoLuong, VPP.DanhMuc from VPP where VPP.SoLuong<=?" ;
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, SL);
+            ResultSet result = pre.executeQuery();
+            while (result.next()){	
+                VPP s = new VPP();				
+                s.setMaVPP(result.getString(1));
+                s.setTenVPP(result.getString(2));
+                s.setDanhMuc(result.getString(4));
+                s.setSoLuong(result.getInt(3));				
+                dssTon.add(s);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return dssTon;
+    }
+    
     public int  themMoi(VPP vpp)
     {
         try {
@@ -257,4 +343,19 @@ public class VanPhongPham_Connect extends Connect_sqlServer{
         return dsvpp;
     }
     
+    public DefaultPieDataset laySPTheoDanhMuc(){
+       DefaultPieDataset dataset = new DefaultPieDataset();
+       try{
+            String sql = "SELECT DanhMuc, COUNT(MaVPP) AS SoLuongSanPham FROM VPP GROUP BY DanhMuc";
+            PreparedStatement pre = conn.prepareStatement(sql);		
+            ResultSet result = pre.executeQuery();
+            while(result.next()){
+                dataset.setValue( result.getString(1), result.getInt(2));
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dataset;
+   } 
 }

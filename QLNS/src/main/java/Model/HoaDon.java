@@ -5,6 +5,7 @@ import java.util.Date;
 public class HoaDon {
 	private String maHD ;
 	private String maNV ;
+        private String maKH;
 	private String ngaylap ;
 	private double tongTien;
 	private int ThanhCong ;
@@ -24,6 +25,12 @@ public class HoaDon {
 	public void setMaNV(String maNV) {
 		this.maNV = maNV;
 	}
+        public String getMaKH(){
+            return maKH;
+        }
+        public void setMaKH(String makh){
+            this.maKH = makh;
+        }
 	public String getNgaylap() {
 		return ngaylap;
 	}

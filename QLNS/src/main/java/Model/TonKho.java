@@ -9,8 +9,8 @@ package Model;
  * @author dat
  */
 public class TonKho {
-    private String maSach ;
-    private String tenSach;
+    private String maSP ;
+    private String tenSP;
     private int tonDau;
     private int nhap;
     private int xuat;
@@ -20,20 +20,20 @@ public class TonKho {
         super();
     }
     
-    public String getMaSach() {
-        return maSach;
+    public String getMaSP() {
+        return maSP;
     }
 
-    public void setMaSach(String maSach) {
-        this.maSach = maSach;
+    public void setMaSP(String maSP) {
+        this.maSP = maSP;
     }
 
-    public String getTenSach() {
-        return tenSach;
+    public String getTenSP() {
+        return tenSP;
     }
 
-    public void setTenSach(String tenSach) {
-        this.tenSach = tenSach;
+    public void setTenSP(String tenSP) {
+        this.tenSP = tenSP;
     }
     
      public int getTonDau() {

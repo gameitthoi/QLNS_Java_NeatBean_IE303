@@ -4,6 +4,7 @@
  */
 package UI;
 
+import Connect.CTHD_Connect;
 import Connect.HoaDon_Connect;
 import Model.HoaDon;
 import java.text.DecimalFormat;
@@ -19,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
  * @author dat
  */
 public class QuanLyHoaDon extends javax.swing.JFrame {
-private DefaultTableModel dtmHoaDon = null;
+private DefaultTableModel dtmHoaDon = null, dtmCTHD =null;
 private ArrayList<HoaDon> dshd_thongke =null;
 private double tongTien =0;
 private DecimalFormat df = new DecimalFormat("###,###,###");
@@ -31,35 +32,41 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
         initComponents();
         this.setLocationRelativeTo(null);
         hienThiHoaDon();
+        hienThiCTHD("0");
     }
     
     private void hienThiHoaDon() {
         Calendar cal = Calendar.getInstance();
         MonthInput.setSelectedIndex(cal.get(Calendar.MONTH) + 1); // Tháng bắt đầu từ 0 nên cần +1 để lấy tháng thực tế
         YearInput.setText(Integer.toString(cal.get(Calendar.YEAR)) );
-        
-        dtmHoaDon = new DefaultTableModel();
-        dtmHoaDon.addColumn("Mã hóa Đơn");
-        dtmHoaDon.addColumn("Mã nhân viên");
-        dtmHoaDon.addColumn("Ngày lập");
-        dtmHoaDon.addColumn("Tổng tiền");
-        dtmHoaDon.setRowCount(0);
+
         HoaDon_Connect hd_connect = new HoaDon_Connect();
-        dshd_thongke = hd_connect.layToanBoHoaDonTheoThangNam(Integer.toString(MonthInput.getSelectedIndex()), YearInput.getText());
+
+        HoaDonTable.setModel(hd_connect.layToanBoHoaDonTheoThangNam(Integer.toString(MonthInput.getSelectedIndex()), YearInput.getText()));
         tongTien = 0;
-        for(HoaDon hd : dshd_thongke){
-            tongTien = tongTien + hd.getTongTien();
-            Vector<Object> vec = new Vector<Object>();
-            vec.add(hd.getMaHD());
-            vec.add(hd.getMaNV());
-            vec.add(hd.getNgaylap());
-            vec.add(df.format(hd.getTongTien()));
-            dtmHoaDon.addRow(vec);
+        for (int i = 1; i< HoaDonTable.getRowCount();i++){
+            tongTien = tongTien + Double.parseDouble(HoaDonTable.getValueAt(i, 4).toString());
         }
-        HoaDonTable.setModel(dtmHoaDon);
         ToTalLabel.setText(df.format(tongTien) + " vnđ");
     }
+    
+    private void hienThiHoaDonHomNay(){
+        HoaDon_Connect hd_connect = new HoaDon_Connect();
 
+        HoaDonTable.setModel(hd_connect.layToanBoHoaDonHomNay());
+        tongTien = 0;
+        for (int i = 1; i< HoaDonTable.getRowCount();i++){
+            tongTien = tongTien + Double.parseDouble(HoaDonTable.getValueAt(i, 4).toString());
+        }
+
+        ToTalLabel.setText(df.format(tongTien) + " vnđ");
+    }
+    
+    private void hienThiCTHD(String mahd){
+        CTHD_Connect cthd_conn = new CTHD_Connect();
+        dtmCTHD = cthd_conn.layCTHDBangMaHD(mahd);
+        CTHDTable.setModel(dtmCTHD);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -78,13 +85,23 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
         YearLabel = new javax.swing.JLabel();
         YearInput = new javax.swing.JTextField();
         SearchBtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         PrintBtn = new javax.swing.JButton();
         ToTalLabel = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        TongTienLabel = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        CTHDTable = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
+        HoaDonTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                HoaDonTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(HoaDonTable);
 
         TitleLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
@@ -98,10 +115,23 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
 
         YearLabel.setText("Năm");
 
+        YearInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                YearInputKeyTyped(evt);
+            }
+        });
+
         SearchBtn.setText("Tìm");
         SearchBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 SearchBtnMouseClicked(evt);
+            }
+        });
+
+        jButton1.setText("Hôm nay");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
             }
         });
 
@@ -114,13 +144,15 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
                 .addComponent(MonthLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(MonthInput, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-                .addComponent(YearLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(YearLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(YearInput, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(SearchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,8 +164,9 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
                         .addComponent(MonthInput, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(YearLabel)
                         .addComponent(YearInput, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(SearchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addComponent(SearchBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         PrintBtn.setText("In");
@@ -147,8 +180,8 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
         ToTalLabel.setForeground(new java.awt.Color(0, 51, 255));
         ToTalLabel.setText("0 VNĐ");
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setText("Tổng tiền bán được tháng này: ");
+        TongTienLabel.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        TongTienLabel.setText("Tổng tiền bán được tháng này: ");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -156,9 +189,9 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
-                .addComponent(jLabel1)
+                .addComponent(TongTienLabel)
                 .addGap(18, 18, 18)
-                .addComponent(ToTalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
+                .addComponent(ToTalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(PrintBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -169,10 +202,16 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
                 .addGap(15, 15, 15)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ToTalLabel)
-                    .addComponent(jLabel1)
+                    .addComponent(TongTienLabel)
                     .addComponent(PrintBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(17, Short.MAX_VALUE))
         );
+
+        jScrollPane2.setViewportView(CTHDTable);
+
+        jLabel2.setText("Chi tiết hóa đơn");
+
+        jLabel3.setText("Danh sách hóa đơn");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -181,13 +220,21 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(TitleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19)))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -195,13 +242,19 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(TitleLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 351, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(116, 116, 116))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -211,19 +264,12 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
         HoaDon_Connect hd_connect = new HoaDon_Connect();
         String thang  = MonthInput.getSelectedItem().toString();
         String nam = YearInput.getText();
-        dshd_thongke = hd_connect.layToanBoHoaDonTheoThangNam(thang, nam);
+        HoaDonTable.setModel(hd_connect.layToanBoHoaDonTheoThangNam(thang, nam));
         tongTien = 0;
-        dtmHoaDon.setRowCount(0);
-        for(HoaDon hd : dshd_thongke){
-            tongTien = tongTien + hd.getTongTien();
-            Vector<Object> vec = new Vector<Object>();
-            vec.add(hd.getMaHD());
-            vec.add(hd.getMaNV());
-            vec.add(hd.getNgaylap());
-            vec.add(df.format(hd.getTongTien()));
-            dtmHoaDon.addRow(vec);
+        for (int i = 1; i< HoaDonTable.getRowCount();i++){
+            tongTien = tongTien + Double.parseDouble(HoaDonTable.getValueAt(i, 4).toString());
         }
-        HoaDonTable.setModel(dtmHoaDon);
+        TongTienLabel.setText("Tổng tiền bán được tháng này: ");
         ToTalLabel.setText(df.format(tongTien) + " vnđ");
     }//GEN-LAST:event_SearchBtnMouseClicked
 
@@ -236,6 +282,23 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
                 e2.printStackTrace();
         }
     }//GEN-LAST:event_PrintBtnActionPerformed
+
+    private void YearInputKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_YearInputKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c) || YearInput.getText().length() >= 4) {
+            evt.consume(); // Ngăn chặn ký tự không hợp lệ và ngăn chặn nhập quá 4 ký tự
+        }
+    }//GEN-LAST:event_YearInputKeyTyped
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        hienThiHoaDonHomNay();
+        TongTienLabel.setText("Tổng tiền bán được hôm nay: ");
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void HoaDonTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_HoaDonTableMouseClicked
+        int select = HoaDonTable.getSelectedRow();
+        hienThiCTHD(HoaDonTable.getValueAt(select, 0).toString());
+    }//GEN-LAST:event_HoaDonTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -273,6 +336,7 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable CTHDTable;
     private javax.swing.JTable HoaDonTable;
     private javax.swing.JComboBox<String> MonthInput;
     private javax.swing.JLabel MonthLabel;
@@ -280,11 +344,15 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
     private javax.swing.JButton SearchBtn;
     private javax.swing.JLabel TitleLabel;
     private javax.swing.JLabel ToTalLabel;
+    private javax.swing.JLabel TongTienLabel;
     private javax.swing.JTextField YearInput;
     private javax.swing.JLabel YearLabel;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }
