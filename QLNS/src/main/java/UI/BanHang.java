@@ -925,20 +925,35 @@ public class BanHang extends javax.swing.JFrame {
     }//GEN-LAST:event_QLSachActionPerformed
 
     private void addHDBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addHDBtnActionPerformed
-        if ((TableSach.getSelectedRow()<0))
+        if ((TableSach.getSelectedRow()<0)){
             JOptionPane.showMessageDialog(null, "Bạn chưa chọn loại sách muốn thêm vào hóa đơn");
+            return;
+        }
 //        nếu sách cần lấy có giá trị là 0 thì không cho lấy
         else if("0".equals(TableSach.getValueAt(TableSach.getSelectedRow(), TableSach.getSelectedColumn()).toString()) ){
             JOptionPane.showMessageDialog(null, "Sách bạn muốn chọn đã hết");
+            return;
+        }
+        else if(makh == "") {
+            int dialogResult = JOptionPane.showConfirmDialog (null, "Bạn chưa chọn khách hàng! Muốn tiếp tục tạo hóa đơn!","Warning",JOptionPane.YES_NO_OPTION);
+            if(dialogResult == JOptionPane.YES_OPTION){
+                if (MaHD==null) TaoHD();
+                ThemCTHD(true);
+                ReceiveInputKeyReleased(null);
+                DeleteBtn.setEnabled(true);
+                PaymentBtn.setEnabled(true);
+                CancleBtn.setEnabled(true);
+            }
+            else return;
         }
         else {
             if (MaHD==null) TaoHD();
             ThemCTHD(true);
+            ReceiveInputKeyReleased(null);
+            DeleteBtn.setEnabled(true);
+            PaymentBtn.setEnabled(true);
+            CancleBtn.setEnabled(true);
         }
-        ReceiveInputKeyReleased(null);
-        DeleteBtn.setEnabled(true);
-        PaymentBtn.setEnabled(true);
-        CancleBtn.setEnabled(true);
     }//GEN-LAST:event_addHDBtnActionPerformed
 
     private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
@@ -1233,20 +1248,35 @@ public class BanHang extends javax.swing.JFrame {
     }//GEN-LAST:event_TKSPBtnMouseClicked
 
     private void addSPHDBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addSPHDBtnActionPerformed
-        if ((SPTable.getSelectedRow()<0))
+        if ((SPTable.getSelectedRow()<0)){
             JOptionPane.showMessageDialog(null, "Bạn chưa chọn loại sản phẩm muốn thêm vào hóa đơn");
+            return;
+        }
 //        nếu sách cần lấy có giá trị là 0 thì không cho lấy
         else if("0".equals(SPTable.getValueAt(SPTable.getSelectedRow(), SPTable.getSelectedColumn()).toString()) ){
             JOptionPane.showMessageDialog(null, "Sản phẩm bạn muốn chọn đã hết");
+            return;
+        }
+        else if(makh == "") {
+            int dialogResult = JOptionPane.showConfirmDialog (null, "Bạn chưa chọn khách hàng! Muốn tiếp tục tạo hóa đơn!","Warning",JOptionPane.YES_NO_OPTION);
+            if(dialogResult == JOptionPane.YES_OPTION){
+                if (MaHD==null) TaoHD();
+                ThemCTHD(false);
+                ReceiveInputKeyReleased(null);
+                DeleteBtn.setEnabled(true);
+                PaymentBtn.setEnabled(true);
+                CancleBtn.setEnabled(true);
+            }
+            else return;
         }
         else {
             if (MaHD==null) TaoHD();
             ThemCTHD(false);
+            ReceiveInputKeyReleased(null);
+            DeleteBtn.setEnabled(true);
+            PaymentBtn.setEnabled(true);
+            CancleBtn.setEnabled(true);
         }
-        ReceiveInputKeyReleased(null);
-        DeleteBtn.setEnabled(true);
-        PaymentBtn.setEnabled(true);
-        CancleBtn.setEnabled(true);
     }//GEN-LAST:event_addSPHDBtnActionPerformed
 
     private void TimSDTButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TimSDTButtonActionPerformed

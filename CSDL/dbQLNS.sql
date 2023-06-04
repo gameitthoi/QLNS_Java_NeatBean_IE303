@@ -596,10 +596,6 @@ INSERT [dbo].[KHACHHANG] ([MaKH], [TenKH], [Sdt], [Diem]) VALUES (N'kh05', N'Ngu
 INSERT [dbo].[KHACHHANG] ([MaKH], [TenKH], [Sdt], [Diem]) VALUES (N'kh06', N'Nguyễn Thị B', N'0362434969', 11500.000)
 INSERT [dbo].[KHACHHANG] ([MaKH], [TenKH], [Sdt], [Diem]) VALUES (N'kh07', N'Lệ Phi Vũ', N'0327209786', 0)
 
-ALTER TABLE [dbo].[CTHD]  WITH CHECK ADD  CONSTRAINT [fk_cthd_Sach] FOREIGN KEY([MaSP)
-REFERENCES [dbo].[SACH] ([MaSach])
-GO
-ALTER TABLE [dbo].[CTHD] CHECK CONSTRAINT [fk_cthd_Sach]
 GO
 ALTER TABLE [dbo].[CTHD]  WITH CHECK ADD  CONSTRAINT [kh_HoaDon] FOREIGN KEY([MaHD])
 REFERENCES [dbo].[HOADON] ([MaHD])
