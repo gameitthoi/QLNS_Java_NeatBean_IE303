@@ -7,13 +7,23 @@ package UI;
 import Connect.CTHD_Connect;
 import Connect.HoaDon_Connect;
 import Model.HoaDon;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.text.DecimalFormat;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 
 /**
  *
@@ -24,6 +34,7 @@ private DefaultTableModel dtmHoaDon = null, dtmCTHD =null;
 private ArrayList<HoaDon> dshd_thongke =null;
 private double tongTien =0;
 private DecimalFormat df = new DecimalFormat("###,###,###");
+String filePath = "C:\\Users\\dat\\Downloads\\";
     /**
      * Creates new form QuanLyHoaDon
      */
@@ -67,6 +78,60 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
         dtmCTHD = cthd_conn.layCTHDBangMaHD(mahd);
         CTHDTable.setModel(dtmCTHD);
     }
+    
+    private void XuatFileExcel(DefaultTableModel dtm, String sheetName, String excelFilePath){
+        try{
+            TableModel model = dtm;
+            Workbook workbook = new HSSFWorkbook();
+            Sheet sheet = workbook.createSheet(sheetName);
+
+            // Ghi tiêu đề cột
+            Row headerRow = sheet.createRow(0);
+            for (int col = 0; col < model.getColumnCount(); col++) {
+                Cell cell = headerRow.createCell(col);
+                cell.setCellValue(model.getColumnName(col));
+            }
+
+            // Ghi dữ liệu từ JTable vào Sheet
+            for (int row = 0; row < model.getRowCount(); row++) {
+                Row sheetRow = sheet.createRow(row + 1);
+                for (int col = 0; col < model.getColumnCount(); col++) {
+                    Object value = model.getValueAt(row, col);
+                    Cell cell = sheetRow.createCell(col);
+
+                    // Xác định kiểu dữ liệu của ô dữ liệu
+                    if (value instanceof Number) cell.setCellValue(((Number) value).doubleValue());
+                    else cell.setCellValue(value.toString());
+                }
+            }
+
+            // Tự động điều chỉnh kích thước các cột trong Excel
+            for (int col = 0; col < model.getColumnCount(); col++) {
+                sheet.autoSizeColumn(col);
+            }
+
+            //tạo file .xls
+            FileOutputStream outputStream = new FileOutputStream(excelFilePath);
+            workbook.write(outputStream);
+            workbook.close();
+            outputStream.close();
+            //mở file pdf đó ra
+            File pdfFile = new File(excelFilePath);
+            if (pdfFile.exists()) {
+                if (Desktop.isDesktopSupported()) {
+                    Desktop.getDesktop().open(pdfFile);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Máy tính không hỗ trợ!");
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "File không tồn tại!");
+            }
+        }
+        catch (Exception e2) {
+                e2.printStackTrace();
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -169,7 +234,7 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        PrintBtn.setText("In");
+        PrintBtn.setText("Xuất Excel");
         PrintBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PrintBtnActionPerformed(evt);
@@ -271,16 +336,13 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
         }
         TongTienLabel.setText("Tổng tiền bán được tháng này: ");
         ToTalLabel.setText(df.format(tongTien) + " vnđ");
+        dtmCTHD.setColumnCount(0);
     }//GEN-LAST:event_SearchBtnMouseClicked
 
     private void PrintBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintBtnActionPerformed
-        try {
-            MessageFormat header = new MessageFormat("Danh sách hóa đơn tháng")  ;
-            MessageFormat footer = new MessageFormat("Page{1,number,interger} ")  ;
-            HoaDonTable.print(JTable.PrintMode.FIT_WIDTH, header, footer);
-        } catch (Exception e2) {
-                e2.printStackTrace();
-        }
+        int dialogResult = JOptionPane.showConfirmDialog (null, "Xuất file excel?","Warning",JOptionPane.YES_NO_OPTION);
+        if(dialogResult == JOptionPane.YES_OPTION)
+            XuatFileExcel((DefaultTableModel)HoaDonTable.getModel(), "Danh sách hóa đơn", filePath+"HoaDon.xls" );        
     }//GEN-LAST:event_PrintBtnActionPerformed
 
     private void YearInputKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_YearInputKeyTyped
@@ -292,6 +354,7 @@ private DecimalFormat df = new DecimalFormat("###,###,###");
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         hienThiHoaDonHomNay();
+        dtmCTHD.setColumnCount(0);
         TongTienLabel.setText("Tổng tiền bán được hôm nay: ");
     }//GEN-LAST:event_jButton1MouseClicked
 

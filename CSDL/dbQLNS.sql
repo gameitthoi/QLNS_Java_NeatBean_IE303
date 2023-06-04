@@ -249,7 +249,7 @@ CREATE TABLE [dbo].[VPP](
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
-GO
+GO 
 CREATE TABLE [dbo].[TAIKHOAN](
 	[MaTk] [nvarchar](50) NOT NULL,
 	[username] [nvarchar](50) NULL,
@@ -286,7 +286,7 @@ CREATE TABLE [dbo].[TONKHO](
 	[Nam] [int] NULL,
  CONSTRAINT [PK_TONKHO] PRIMARY KEY CLUSTERED 
 (
-	[MaTK],[MaSach] ASC
+	[MaTK],[MaSP] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -303,7 +303,15 @@ CREATE TABLE [dbo].KHACHHANG(
 GO
 INSERT [dbo].[NXB] ([MaNXB], [TenNXB], [SDT], [DiaChi], [Email]) VALUES (N'nxb01', N'Đại học quốc gia tp HCM', N'0197852545', N'Tp HCM', N'dhql@gmal.com')
 INSERT [dbo].[NXB] ([MaNXB], [TenNXB], [SDT], [DiaChi], [Email]) VALUES (N'nxb02', N'Kim Đồng', N'0197816153', N'TP HCm', N'kimdong@gmail.com')
-INSERT [dbo].[NXB] ([MaNXB], [TenNXB], [SDT], [DiaChi], [Email]) VALUES (N'nxb03', N'Nhà sách tổng hợp', N'02838256804', N'TP HCm', N'tonghop@nxbhcm.com.vn') --thêm
+INSERT [dbo].[NXB] ([MaNXB], [TenNXB], [SDT], [DiaChi], [Email]) VALUES (N'nxb03', N'Nhà sách tổng hợp', N'02838256804', N'TP HCM', N'tonghop@nxbhcm.com.vn') --thêm
+INSERT [dbo].[NXB] ([MaNXB], [TenNXB], [SDT], [DiaChi], [Email]) VALUES (N'nxb04', N'Nhà xuất bản Trẻ', N'02839316289', N'TP HCM', N'hopthubandoc@nxbtre.com.vn') --thêm
+INSERT [dbo].[NXB] ([MaNXB], [TenNXB], [SDT], [DiaChi], [Email]) VALUES (N'nxb05', N'Nhà xuất bản Hội Nhà văn', N'02438222135', N'Hà Nội', N'nhaxuatbanhnv@gmail.com') --thêm
+INSERT [dbo].[NXB] ([MaNXB], [TenNXB], [SDT], [DiaChi], [Email]) VALUES (N'nxb06', N'Nhà xuất bản Chính trị quốc gia Sự thật', N'02438221581', N'Hà Nội', N'phathanh@nxbctqg.vn') --thêm
+INSERT [dbo].[NXB] ([MaNXB], [TenNXB], [SDT], [DiaChi], [Email]) VALUES (N'nxb07', N'Nhà xuất bản Phụ nữ Việt Nam', N'02439710717', N'Hà Nội', N'truyenthongvaprnxbpn@gmail.com') --thêm
+INSERT [dbo].[NXB] ([MaNXB], [TenNXB], [SDT], [DiaChi], [Email]) VALUES (N'nxb08', N'Nhà xuất bản Lao Động', N'02439710717', N'Hà Nội', N'nxblaodong@yahoo.com') --thêm
+INSERT [dbo].[NXB] ([MaNXB], [TenNXB], [SDT], [DiaChi], [Email]) VALUES (N'nxb09', N'Nhã Nam', N'0903244248', N'Hà Nội', N'bookstore@nhanam.vn') --thêm
+INSERT [dbo].[NXB] ([MaNXB], [TenNXB], [SDT], [DiaChi], [Email]) VALUES (N'nxb10', N'Đinh Tị Books', N'02473093388', N'Hà Nội', N'contacts@dinhtibooks.vn') --thêm
+INSERT [dbo].[NXB] ([MaNXB], [TenNXB], [SDT], [DiaChi], [Email]) VALUES (N'nxb11', N'Đông A', N'02438569381', N'Hà Nội', N'dongabooks.vn@gmail.com') --thêm
 
 INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's01', N'SQL server', N'nxb01', N'thanh', 150000.0000, N'Giáo trình', 49, 50.0)
 INSERT [dbo].[SACH] ([MaSach], [TenSach], [MaNXB], [TacGia], [GiaBan], [TheLoai], [SoLuong], [Discount]) VALUES (N's02', N'OOP', N'nxb02', N'hiep', 200000.0000, N'Giáo trình', 49, 5)
@@ -399,6 +407,14 @@ INSERT [dbo].[HOADON] ([MaHD], [MaNV], [MaKH], [NgayLap], [TongTien], [ThanhCong
 INSERT [dbo].[HOADON] ([MaHD], [MaNV], [MaKH], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD10',N'NV01', N'kh05', N'01/04/2023', 250000.0000, 1, 0)
 INSERT [dbo].[HOADON] ([MaHD], [MaNV], [MaKH], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD11',N'NV01', N'kh07', N'01/04/2023', 1300000.0000, 1, 1)
 INSERT [dbo].[HOADON] ([MaHD], [MaNV], [MaKH], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD12',N'NV01', N'kh05', N'01/04/2023', 130000.0000, 1, 0)
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [MaKH], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD13',N'NV01', N'kh05', N'01/04/2023', 130000.0000, 1, 0)--
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [MaKH], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD14',N'NV01', N'kh05', N'01/04/2023', 130000.0000, 1, 0)--
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [MaKH], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD15',N'NV01', N'kh05', N'01/04/2023', 130000.0000, 1, 0)--
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [MaKH], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD16',N'NV01', N'kh05', N'01/04/2023', 130000.0000, 1, 0)--
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [MaKH], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD17',N'NV01', N'kh05', N'01/04/2023', 130000.0000, 1, 0)--
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [MaKH], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD18',N'NV01', N'kh05', N'01/04/2023', 130000.0000, 1, 0)--
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [MaKH], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD19',N'NV01', N'kh05', N'01/04/2023', 130000.0000, 1, 0)--
+INSERT [dbo].[HOADON] ([MaHD], [MaNV], [MaKH], [NgayLap], [TongTien], [ThanhCong], [NhapSach]) VALUES ('HD20',N'NV01', N'kh05', N'01/04/2023', 130000.0000, 1, 0)--
 
 INSERT [dbo].[CTHD] ([MaHD], [MaSP], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD01', N's01', 150000.0000, 50, 7500000.0000)
 INSERT [dbo].[CTHD] ([MaHD], [MaSP], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD02', N's01', 150000.0000, 1, 150000.0000)
@@ -412,6 +428,14 @@ INSERT [dbo].[CTHD] ([MaHD], [MaSP], [DonGia], [SoLuong], [ThanhTien]) VALUES ('
 INSERT [dbo].[CTHD] ([MaHD], [MaSP], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD10', N's05', 120000.0000, 1, 250000.0000)
 INSERT [dbo].[CTHD] ([MaHD], [MaSP], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD11', N's06', 250000.0000, 10, 1300000.0000)
 INSERT [dbo].[CTHD] ([MaHD], [MaSP], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD12', N's06', 130000.0000, 1, 130000.0000)
+INSERT [dbo].[CTHD] ([MaHD], [MaSP], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD13', N's06', 130000.0000, 1, 130000.0000)	--
+INSERT [dbo].[CTHD] ([MaHD], [MaSP], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD14', N's06', 130000.0000, 1, 130000.0000)	--
+INSERT [dbo].[CTHD] ([MaHD], [MaSP], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD15', N's06', 130000.0000, 1, 130000.0000)	--
+INSERT [dbo].[CTHD] ([MaHD], [MaSP], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD16', N's06', 130000.0000, 1, 130000.0000)	--
+INSERT [dbo].[CTHD] ([MaHD], [MaSP], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD17', N's06', 130000.0000, 1, 130000.0000)	--
+INSERT [dbo].[CTHD] ([MaHD], [MaSP], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD18', N's06', 130000.0000, 1, 130000.0000)	--
+INSERT [dbo].[CTHD] ([MaHD], [MaSP], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD19', N's06', 130000.0000, 1, 130000.0000)	--
+INSERT [dbo].[CTHD] ([MaHD], [MaSP], [DonGia], [SoLuong], [ThanhTien]) VALUES ('HD20', N's06', 130000.0000, 1, 130000.0000)	--
 
 INSERT [dbo].[TAIKHOAN] ([MaTk], [username], [password], [MaNV], [BaoCao], [TaiKhoan], [MaVach], [Sach], [NXB], [NhanVien], [HoaDon], [NCCVPP], [VPP], [KhachHang]) VALUES (N'tk01', N'admin', N'admin',N'NV01', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1)
 INSERT [dbo].[TAIKHOAN] ([MaTk], [username], [password], [MaNV], [BaoCao], [TaiKhoan], [MaVach], [Sach], [NXB], [NhanVien], [HoaDon], [NCCVPP], [VPP], [KhachHang]) VALUES (N'tk02', N'thungan', N'thungan',N'NV02', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -450,6 +474,23 @@ INSERT [dbo].[TONKHO]([MaTK], [MaSP], [TonDau], [Nhap], [Xuat], [TonCuoi], [Than
 INSERT [dbo].[TONKHO]([MaTK], [MaSP], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK10', N's04', 0, 20, 1, 19, 4, 2023)
 INSERT [dbo].[TONKHO]([MaTK], [MaSP], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK11', N's05', 0, 100, 1, 99, 4, 2023)
 INSERT [dbo].[TONKHO]([MaTK], [MaSP], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK12', N's06', 0, 10, 1, 9, 4, 2023)
+
+INSERT [dbo].[TONKHO]([MaTK], [MaSP], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK13', N's07', 0, 50, 1, 49, 1, 2023)
+
+INSERT [dbo].[TONKHO]([MaTK], [MaSP], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK14', N's07', 49, 0, 0, 49, 2, 2023)
+INSERT [dbo].[TONKHO]([MaTK], [MaSP], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK15', N's08', 0, 50, 1, 49, 2, 2023)
+
+INSERT [dbo].[TONKHO]([MaTK], [MaSP], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK16', N's07', 49, 0, 0, 49, 3, 2023)
+INSERT [dbo].[TONKHO]([MaTK], [MaSP], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK17', N's08', 49, 0, 0, 49, 3, 2023)
+INSERT [dbo].[TONKHO]([MaTK], [MaSP], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK18', N's09', 0, 50, 1, 49, 3, 2023)
+
+INSERT [dbo].[TONKHO]([MaTK], [MaSP], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK19', N's07', 49, 0, 0, 49, 4, 2023)
+INSERT [dbo].[TONKHO]([MaTK], [MaSP], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK20', N's08', 49, 0, 0, 49, 4, 2023)
+INSERT [dbo].[TONKHO]([MaTK], [MaSP], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK21', N's09', 49, 0, 0, 49, 4, 2023)
+INSERT [dbo].[TONKHO]([MaTK], [MaSP], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK22', N's10', 0, 20, 1, 19, 4, 2023)
+INSERT [dbo].[TONKHO]([MaTK], [MaSP], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK23', N's11', 0, 100, 1, 99, 4, 2023)
+INSERT [dbo].[TONKHO]([MaTK], [MaSP], [TonDau], [Nhap], [Xuat], [TonCuoi], [Thang], [Nam]) VALUES (N'TK24', N's12', 0, 10, 1, 9, 4, 2023)
+
 
 INSERT [dbo].[NCCVPP] ([MaNCCVPP], [TenNCCVPP], [SDT], [DiaChi], [Email]) VALUES (N'ncc01', N'Thiên Long', N'1900 866 819', N'Tp HCM', N'salesonline@thienlongvn.com')
 INSERT [dbo].[NCCVPP] ([MaNCCVPP], [TenNCCVPP], [SDT], [DiaChi], [Email]) VALUES (N'ncc02', N'Huyền Anh', N'0903317294', N'Tp HCM', N'vpphuyenanh2020@gmail.com')
@@ -555,11 +596,6 @@ INSERT [dbo].[KHACHHANG] ([MaKH], [TenKH], [Sdt], [Diem]) VALUES (N'kh05', N'Ngu
 INSERT [dbo].[KHACHHANG] ([MaKH], [TenKH], [Sdt], [Diem]) VALUES (N'kh06', N'Nguyễn Thị B', N'0362434969', 11500.000)
 INSERT [dbo].[KHACHHANG] ([MaKH], [TenKH], [Sdt], [Diem]) VALUES (N'kh07', N'Lệ Phi Vũ', N'0327209786', 0)
 
-
-ALTER TABLE [dbo].[CTHD]  WITH CHECK ADD  CONSTRAINT [fk_cthd_Sach] FOREIGN KEY([MaSach])
-REFERENCES [dbo].[SACH] ([MaSach])
-GO
-ALTER TABLE [dbo].[CTHD] CHECK CONSTRAINT [fk_cthd_Sach]
 GO
 ALTER TABLE [dbo].[CTHD]  WITH CHECK ADD  CONSTRAINT [kh_HoaDon] FOREIGN KEY([MaHD])
 REFERENCES [dbo].[HOADON] ([MaHD])
