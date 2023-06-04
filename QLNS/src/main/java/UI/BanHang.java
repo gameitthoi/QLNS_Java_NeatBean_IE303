@@ -89,6 +89,7 @@ public class BanHang extends javax.swing.JFrame {
         dtmSach.addColumn("Tác giả");
         dtmSach.addColumn("Số lượng");
         dtmSach.addColumn("Giá Bán");
+        dtmSach.addColumn("Giảm giá");
         dtmSach.setRowCount(0);
         for (Sach s : dss){
             Vector<Object> vec = new Vector<Object>();
@@ -98,6 +99,7 @@ public class BanHang extends javax.swing.JFrame {
             vec.add(s.getTacGia());
             vec.add(s.getSoLuong());
             vec.add(s.getGiaBan());
+            vec.add(s.getDiscount());
             dtmSach.addRow(vec);	
         }
         TableSach.setModel(dtmSach);
@@ -112,6 +114,7 @@ public class BanHang extends javax.swing.JFrame {
         dtmVPP.addColumn("Danh mục");
         dtmVPP.addColumn("Số lượng");
         dtmVPP.addColumn("Giá Bán");
+        dtmVPP.addColumn("Giảm giá");
         dtmVPP.setRowCount(0);
         for(VPP vpp: dsvpp){
             Vector<Object> vec = new Vector<Object>();
@@ -120,6 +123,7 @@ public class BanHang extends javax.swing.JFrame {
             vec.add(vpp.getDanhMuc());
             vec.add(vpp.getSoLuong());
             vec.add(vpp.getGiaBan());
+            vec.add(vpp.getDiscount());
             dtmVPP.addRow(vec);
         }
         SPTable.setModel(dtmVPP);
@@ -173,7 +177,10 @@ public class BanHang extends javax.swing.JFrame {
             vec1.setDonGia(Double.parseDouble(TableSach.getValueAt(TableSach.getSelectedRow(), 5).toString()));
             int vitriSach=-1;
     //        tính giá tiền
-            double tien = Long.parseLong(SLInput.getValue().toString())*Double.parseDouble(TableSach.getValueAt(TableSach.getSelectedRow(), 5).toString()); 
+            long soluong = Long.parseLong(SLInput.getValue().toString());
+            double giaban = Double.parseDouble(TableSach.getValueAt(TableSach.getSelectedRow(), 5).toString());
+            double phantramkm = Double.parseDouble(TableSach.getValueAt(TableSach.getSelectedRow(), 6).toString())/100;
+            double tien = soluong*giaban*(1-phantramkm); 
     //        kiểm tra xem sách đang được chọn có nằm trong hóa đơn chưa
             for (int i=0;i<dtmHoaDon.getRowCount();i++) {
                 if (dtmHoaDon.getValueAt(i, 0).equals(TableSach.getValueAt(TableSach.getSelectedRow(), 1))) vitriSach=i;
@@ -198,7 +205,7 @@ public class BanHang extends javax.swing.JFrame {
             }
 
             if (!TotalInput.getText().equals(""))
-            tien = Double.parseDouble(TotalInput.getText())+tien;
+                tien = Double.parseDouble(TotalInput.getText())+tien;
             TotalInput.setText(String.valueOf(tien));                                              
             SLInput.setValue(1);
         }
@@ -207,7 +214,10 @@ public class BanHang extends javax.swing.JFrame {
             vec1.setDonGia(Double.parseDouble(SPTable.getValueAt(SPTable.getSelectedRow(), 4).toString()));
             int vitriSP=-1;
     //        tính giá tiền
-            double tien = Long.parseLong(SLSPInput.getValue().toString())*Double.parseDouble(SPTable.getValueAt(SPTable.getSelectedRow(), 4).toString()); 
+            long soluong = Long.parseLong(SLSPInput.getValue().toString());
+            double giaban = Double.parseDouble(SPTable.getValueAt(SPTable.getSelectedRow(), 4).toString());
+            double phantramkm = Double.parseDouble(SPTable.getValueAt(SPTable.getSelectedRow(), 5).toString())/100;
+            double tien = soluong*giaban*(1-phantramkm); 
     //        kiểm tra xem sản phẩm đang được chọn có nằm trong hóa đơn chưa
             for (int i=0;i<dtmHoaDon.getRowCount();i++) {
                 if (dtmHoaDon.getValueAt(i, 0).equals(SPTable.getValueAt(SPTable.getSelectedRow(), 1))){
