@@ -69,7 +69,7 @@ public class NhaCungCapVPP_Connect extends Connect_sqlServer {
     public NhaCungCap_VPP TimTenNCC(String tenNCC){
         NhaCungCap_VPP ncc = new NhaCungCap_VPP();
         try{
-            String sql ="select top 1 * from NCCVPP where MaNCCVPP=?" ;
+            String sql ="select top 1 MaNCCVPP, TenNCCVPP from NCCVPP where TenNCCVPP=?" ;
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setString(1, tenNCC);
             ResultSet result = pre.executeQuery();
