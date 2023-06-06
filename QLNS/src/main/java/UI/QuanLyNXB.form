@@ -39,7 +39,7 @@
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="260" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -428,6 +428,9 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="TimKiemInput">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="TimKiemInputActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="NhanTenLabel">
           <Properties>

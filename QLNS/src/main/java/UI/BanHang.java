@@ -899,7 +899,7 @@ public class BanHang extends javax.swing.JFrame {
 
     private void QLNXBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QLNXBActionPerformed
         if(tk.getNXB()==1){
-            QuanLyNXB_UI nxbUi = new QuanLyNXB_UI("Quản lý nhà xuất bản");
+            QuanLyNXB nxbUi = new QuanLyNXB("Quản lý nhà xuất bản");
             nxbUi.showWindow();
         }
         else JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào trang này!");   
@@ -928,7 +928,7 @@ public class BanHang extends javax.swing.JFrame {
 
     private void QLSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QLSachActionPerformed
         if(tk.getSach()==1){
-            QuanLySach sachui = new QuanLySach("Quản lý sách");
+            QuanLySach sachui = new QuanLySach("Quản lý sách", MaNV);
             sachui.showWindow();
         }
         else JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào trang này!");
@@ -1176,7 +1176,7 @@ public class BanHang extends javax.swing.JFrame {
 
     private void QL_VPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_QL_VPPActionPerformed
         if(tk.getVPP()==1){
-            QuanLyVPP vpp = new QuanLyVPP("Quản lý văn phòng phẩm");
+            QuanLyVPP vpp = new QuanLyVPP("Quản lý văn phòng phẩm", MaNV);
             vpp.showWindow();
         }
         else JOptionPane.showMessageDialog(null, "Bạn không có quyền truy cập vào trang này!");

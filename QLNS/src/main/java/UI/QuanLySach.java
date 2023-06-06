@@ -4,8 +4,12 @@
  */
 package UI;
 
+import Connect.CTHD_Connect;
+import Connect.HoaDon_Connect;
 import Connect.NXB_Connect;
 import Connect.Sach_Connect;
+import Model.CTHD;
+import Model.HoaDon;
 import Model.NXB;
 import Model.Sach;
 import java.io.File;
@@ -38,6 +42,8 @@ public class QuanLySach extends javax.swing.JFrame {
     /**
      * Creates new form QuanLySach
      */
+        private String MaHD=null;
+        private String MaNV= null;
         private DefaultTableModel dtmSach ;
 	private ArrayList<NXB> dsnxb = null;
         private ArrayList<Sach> dsChung = null;
@@ -45,11 +51,12 @@ public class QuanLySach extends javax.swing.JFrame {
 	private ArrayList<Sach> dssTacGia = null;
 	private ArrayList<Sach> dss_tensach = null;
 	private ArrayList<Sach> dssByNXB = null;
-    public QuanLySach(String title) {
+    public QuanLySach(String title, String maNV) {
         initComponents();
         this.setTitle(title);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        MaNV=maNV;
         hienThiToanBoSach();
         hienThiToanBoNhaXuatBan();
  
@@ -102,7 +109,7 @@ public class QuanLySach extends javax.swing.JFrame {
       //Functions for validations !!!
       public static boolean isNumeric(String string) {
     int intValue;
-		
+	
     //System.out.println(String.format("Parsing string: \"%s\"", string));
 		
     if(string == null || string.equals("")) {
@@ -118,7 +125,24 @@ public class QuanLySach extends javax.swing.JFrame {
     }
     return false;
 }
-      
+    public static boolean isNumeric_Double(String string) {
+    double intValue;
+	
+    //System.out.println(String.format("Parsing string: \"%s\"", string));
+		
+    if(string == null || string.equals("")) {
+        //System.out.println("String cannot be parsed, it is null or empty.");
+        return false;
+    }
+    
+    try {
+        intValue = Double.parseDouble(string);
+        return true;
+    } catch (NumberFormatException e) {
+        //System.out.println("Input String cannot be parsed to Integer.");
+    }
+    return false;
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -167,6 +191,8 @@ public class QuanLySach extends javax.swing.JFrame {
         jButton_AccpetTangGiaNXB = new javax.swing.JButton();
         jButton_CancelNXB = new javax.swing.JButton();
         NXBInput_TangGia = new javax.swing.JComboBox<NXB>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jButton_NhapLai = new javax.swing.JButton();
         jButton_ThemSachTuExcel = new javax.swing.JButton();
@@ -341,6 +367,10 @@ public class QuanLySach extends javax.swing.JFrame {
 
         NXBInput_TangGia.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        jLabel1.setText("Giá:");
+
+        jLabel2.setText("NXB:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -348,11 +378,15 @@ public class QuanLySach extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(NXBInput_TangGia, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TKInput_UpdateAllPriceNXB, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton_AccpetTangGiaNXB, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton_CancelNXB, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -371,8 +405,10 @@ public class QuanLySach extends javax.swing.JFrame {
                     .addComponent(TKInput_UpdateAllPriceNXB, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_AccpetTangGiaNXB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton_CancelNXB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(NXBInput_TangGia, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(NXBInput_TangGia, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addContainerGap())
         );
 
         jLabel_Discount.setIcon(new ImageIcon("images/discount_28px.png"));
@@ -679,7 +715,7 @@ public class QuanLySach extends javax.swing.JFrame {
 				s.setMaNXB(manxb.getMaNXB());
 				s.setTacGia(TKInput_TacGia.getText());
                                 s.setTheLoai(TKInput_TheLoai.getText());
-                                if (!isNumeric(TKInput_GiaBan.getText()) || !isNumeric(TKInput_SoLuong.getText()) || !isNumeric(TKInput_Discount.getText()))
+                                if (!isNumeric_Double(TKInput_GiaBan.getText()) || !isNumeric(TKInput_SoLuong.getText()) || !isNumeric(TKInput_Discount.getText()))
                                 {
                                     JOptionPane.showMessageDialog(this, "Giá bán, Số lượng hoặc Giảm giá đã nhập sai định dạng !\n Vui lòng thử lại !","Error", JOptionPane.WARNING_MESSAGE);
                                     return ;
@@ -732,7 +768,7 @@ public class QuanLySach extends javax.swing.JFrame {
 				s.setMaNXB(nxb.getMaNXB());
 				s.setTacGia(TKInput_TacGia.getText());
                                 s.setTheLoai(TKInput_TheLoai.getText());
-                                if (!isNumeric(TKInput_GiaBan.getText()) || !isNumeric(TKInput_SoLuong.getText()) || !isNumeric(TKInput_Discount.getText())){
+                                if (!isNumeric_Double(TKInput_GiaBan.getText()) || !isNumeric(TKInput_SoLuong.getText()) || !isNumeric(TKInput_Discount.getText())){
                                     JOptionPane.showMessageDialog(this, "Giá bán, Số lượng hoặc Giảm giá đã nhập sai định dạng!\n Vui lòng thử lại!","Error", JOptionPane.WARNING_MESSAGE);
                                     return ;
                                 }
@@ -755,6 +791,7 @@ public class QuanLySach extends javax.swing.JFrame {
 		if(active > 0 )
 		{
 			JOptionPane.showMessageDialog(null, "Thêm mới thành công");
+                        TaoHDVaCTHD();
                                 TKInput_MaSach.setText("");
 				TKInput_TenSach.setText("");	
 				TKInput_TacGia.setText("");
@@ -771,9 +808,49 @@ public class QuanLySach extends javax.swing.JFrame {
 		{
 			JOptionPane.showMessageDialog(null, "Thêm mới thất bại");
 		}
-		
+		      
+                   
 	}
     
+    private void TaoHDVaCTHD(){
+        String HD = "HD";
+        //tạo hóa đơn với mã hóa đơn mới tính từ hóa đơn cuối cùng
+        HoaDon_Connect tHD = new HoaDon_Connect();
+        CTHD_Connect cthd = new CTHD_Connect();
+        String lastmahd = tHD.LastMaHD();
+        if (lastmahd==null) MaHD= "HD01";
+        else {
+            int sohd = Integer.parseInt(lastmahd.substring(2))+1; //bỏ đi hai chữ "HD" và công thêm 1 vào hai số phía sau
+            if (sohd<10) MaHD = HD+"0"+String.valueOf(sohd);
+            else MaHD = HD+String.valueOf(sohd);
+        }    
+        System.out.println(MaHD);
+        System.out.println(MaNV);
+        HoaDon hd = new HoaDon();
+        hd.setMaHD(MaHD);
+        hd.setMaNV(MaNV);
+        
+        Date date = new Date();
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String currentTime = sdf.format(date);
+        hd.setNgaylap(currentTime);
+        hd.setTongTien(Double.parseDouble(TKInput_GiaBan.getText())*Double.parseDouble(TKInput_SoLuong.getText()) );
+        hd.setTrangThai(0);
+        hd.setNhapSach(1);
+        tHD.TaoHD(hd); 
+//        
+        CTHD ct = new CTHD();
+        ct.setMaHD(MaHD);
+        ct.setMaSP(TKInput_MaSach.getText());
+        ct.setDonGia(Double.parseDouble(TKInput_GiaBan.getText()));
+        ct.setSoLuong(Integer.parseInt(TKInput_SoLuong.getText()));
+        ct.setThanhTien(Double.parseDouble(TKInput_GiaBan.getText())*Double.parseDouble(TKInput_SoLuong.getText()) );
+        CTHD_Connect ctCon = new CTHD_Connect();
+        ctCon.ThemCT(ct);
+   }
+    
+   
+
     
     //Tìm kiếm sách
     private void jButton_SearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_SearchMouseClicked
@@ -1101,6 +1178,8 @@ protected void xuLyXoa(String maSach) {
     private javax.swing.JButton jButton_ThemSach;
     private javax.swing.JButton jButton_ThemSachTuExcel;
     private javax.swing.JButton jButton_XoaSach;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel_Discount;
     private javax.swing.JLabel jLabel_Discount1;
     private javax.swing.JLabel jLabel_Discount2;
@@ -1131,7 +1210,7 @@ protected void xuLyXoa(String maSach) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new QuanLySach("Qu\u1ea3n l\u00fd s\u00e1ch").setVisible(true);
+                new QuanLySach("Qu\u1ea3n l\u00fd s\u00e1ch", MaNV).setVisible(true);
             }
         });
     }

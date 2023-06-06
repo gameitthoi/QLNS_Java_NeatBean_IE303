@@ -165,6 +165,24 @@ public class HoaDon_Connect extends Connect_sqlServer{
         return -1 ;
     }
     
+    public int TaoHDTuSach(HoaDon hd) {
+       try {
+            String sql="insert into hoadon values(?,?,?,?,?,?,?) " ;
+            PreparedStatement pre =conn.prepareStatement(sql);
+            pre.setString(1, hd.getMaHD()+"");
+            pre.setString(2, hd.getMaNV()+"");
+            pre.setString(3, hd.getMaKH()+"");
+            pre.setString(4, hd.getNgaylap()+"");
+            pre.setString(5, hd.getTongTien()+"");
+            pre.setString(6, hd.getTrangThai()+"");
+            pre.setString(7, hd.getNhapSach()+"");
+            return pre.executeUpdate();
+        } catch (Exception e) {
+                e.printStackTrace();
+        }
+        return -1 ;
+    }
+    
     public int ThanhToan(String MaHD, String total){
         try{
             String sql="update hoadon set ThanhCong = 1, TongTien = ? where MaHD=? and NhapSach=0" ;

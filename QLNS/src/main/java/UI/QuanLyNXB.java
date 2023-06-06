@@ -295,6 +295,12 @@ public class QuanLyNXB extends javax.swing.JFrame {
             }
         });
 
+        TimKiemInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TimKiemInputActionPerformed(evt);
+            }
+        });
+
         NhanTenLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         NhanTenLabel.setText("Nhập tên hoặc mã nhà xuất bản");
 
@@ -347,7 +353,7 @@ public class QuanLyNXB extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ThongTinNhanVienLabel)
                             .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(260, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -478,6 +484,10 @@ public class QuanLyNXB extends javax.swing.JFrame {
     private void DiachiInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiachiInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_DiachiInputActionPerformed
+
+    private void TimKiemInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TimKiemInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TimKiemInputActionPerformed
 
     /**
      * @param args the command line arguments

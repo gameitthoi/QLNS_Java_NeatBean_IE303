@@ -4,10 +4,14 @@
  */
 package UI;
 
+import Connect.CTHD_Connect;
+import Connect.HoaDon_Connect;
 import Connect.NXB_Connect;
 import Connect.NhaCungCapVPP_Connect;
 import Connect.Sach_Connect;
 import Connect.VanPhongPham_Connect;
+import Model.CTHD;
+import Model.HoaDon;
 import Model.NhaCungCap_VPP;
 import Model.VPP;
 import java.io.File;
@@ -40,6 +44,8 @@ public class QuanLyVPP extends javax.swing.JFrame {
     /**
      * Creates new form QuanLySach
      */
+        private String MaHD=null;
+        private String MaNV= null;
         private DefaultTableModel dtmVPP ;
 	private ArrayList<NhaCungCap_VPP> dsncc = null;
         private ArrayList<VPP> dsChung = null;
@@ -48,11 +54,12 @@ public class QuanLyVPP extends javax.swing.JFrame {
 	private ArrayList<VPP> dssDanhMuc = null;
 	private ArrayList<VPP> dss_tenVPP = null;
 	
-    public QuanLyVPP(String title) {
+    public QuanLyVPP(String title, String maNV) {
         initComponents();
         this.setTitle(title);
         this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE); 
+        MaNV=maNV;
         hienThiToanBoVPP();
         hienThiToanBoNhaCungCap();
  
@@ -125,6 +132,25 @@ public class QuanLyVPP extends javax.swing.JFrame {
     }
     return false;
 }
+         
+    public static boolean isNumeric_Double(String string) {
+    double intValue;
+	
+    //System.out.println(String.format("Parsing string: \"%s\"", string));
+		
+    if(string == null || string.equals("")) {
+        //System.out.println("String cannot be parsed, it is null or empty.");
+        return false;
+    }
+    
+    try {
+        intValue = Double.parseDouble(string);
+        return true;
+    } catch (NumberFormatException e) {
+        //System.out.println("Input String cannot be parsed to Integer.");
+    }
+    return false;
+}
 
       
 
@@ -169,6 +195,8 @@ public class QuanLyVPP extends javax.swing.JFrame {
         jButton_Accpet_TangGiaByNCC = new javax.swing.JButton();
         jButton_CancelNCC = new javax.swing.JButton();
         NCCInput_TangGia = new javax.swing.JComboBox<NhaCungCap_VPP>();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel_Discount3 = new javax.swing.JLabel();
         TKInput_UpdateAllPriceDoanhMuc = new javax.swing.JTextField();
@@ -176,6 +204,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
         jButton_CancelDoanhMuc = new javax.swing.JButton();
         TK_DanhMucInput_TangGia = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jButton_NhapLai = new javax.swing.JButton();
         jButton_ThemTuExcel = new javax.swing.JButton();
@@ -335,6 +364,12 @@ public class QuanLyVPP extends javax.swing.JFrame {
 
         NCCInput_TangGia.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel3.setText("Giá:");
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel4.setText("NCC:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -343,7 +378,11 @@ public class QuanLyVPP extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(NCCInput_TangGia, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(TKInput_UpdateAllPriceNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -353,7 +392,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(213, 213, 213)
                         .addComponent(jLabel_Discount2)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,8 +404,10 @@ public class QuanLyVPP extends javax.swing.JFrame {
                     .addComponent(TKInput_UpdateAllPriceNCC, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_Accpet_TangGiaByNCC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton_CancelNCC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(NCCInput_TangGia, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(NCCInput_TangGia, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addContainerGap())
         );
 
         jLabel_Discount.setIcon(new ImageIcon("images/discount_28px.png"));
@@ -395,6 +436,9 @@ public class QuanLyVPP extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("Tên danh mục :");
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel2.setText("Giá:");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -408,7 +452,9 @@ public class QuanLyVPP extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TK_DanhMucInput_TangGia, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(TKInput_UpdateAllPriceDoanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton_Accpet_TangGiaDoanhMuc, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -427,8 +473,9 @@ public class QuanLyVPP extends javax.swing.JFrame {
                     .addComponent(jButton_Accpet_TangGiaDoanhMuc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton_CancelDoanhMuc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(TK_DanhMucInput_TangGia, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         jLabel_Discount.setIcon(new ImageIcon("images/discount_28px.png"));
@@ -676,7 +723,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
                         .addComponent(TK_DanhMucInput, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 195, Short.MAX_VALUE)))
+                        .addGap(0, 275, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel_CenterLayout.createSequentialGroup()
                 .addGap(516, 516, 516)
@@ -690,7 +737,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 24, Short.MAX_VALUE)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(NhanTenLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel_CenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -727,7 +774,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
 				vp.setTenVPP(TKInput_TenVPP.getText());
 				vp.setMaNCC(ncc.getMaNCCVPP());
                                 vp.setDanhMuc(TKInput_DoanhMuc.getText());
-                                if (!isNumeric(TKInput_GiaBan.getText()) || !isNumeric(TKInput_SoLuong.getText()) || !isNumeric(TKInput_Discount.getText()))
+                                if (!isNumeric_Double(TKInput_GiaBan.getText()) || !isNumeric(TKInput_SoLuong.getText()) || !isNumeric(TKInput_Discount.getText()))
                                 {
                                     JOptionPane.showMessageDialog(this, "Giá bán, Số lượng hoặc Giảm giá đã nhập sai định dạng !\n Vui lòng thử lại !","Error", JOptionPane.WARNING_MESSAGE);
                                     return ;
@@ -776,7 +823,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
 				vp.setTenVPP(TKInput_TenVPP.getText());
 				vp.setMaNCC(np.getMaNCCVPP());
                                 vp.setDanhMuc(TKInput_DoanhMuc.getText());
-                                if (!isNumeric(TKInput_GiaBan.getText()) || !isNumeric(TKInput_SoLuong.getText()) || !isNumeric(TKInput_Discount.getText()))
+                                if (!isNumeric_Double(TKInput_GiaBan.getText()) || !isNumeric(TKInput_SoLuong.getText()) || !isNumeric(TKInput_Discount.getText()))
                                 {
                                     JOptionPane.showMessageDialog(this, "Giá bán, Số lượng hoặc Giảm giá đã nhập sai định dạng !\n Vui lòng thử lại !","Error", JOptionPane.WARNING_MESSAGE);
                                     return ;
@@ -800,6 +847,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
 		if(active > 0 )
 		{
 			JOptionPane.showMessageDialog(null, "Thêm mới thành công");
+                        TaoHDVaCTHD();
                                 TKInput_MaVPP.setText("");
 				TKInput_TenVPP.setText("");	
 			
@@ -818,6 +866,43 @@ public class QuanLyVPP extends javax.swing.JFrame {
 		}
 		
 	}
+    
+        private void TaoHDVaCTHD(){
+        String HD = "HD";
+        //tạo hóa đơn với mã hóa đơn mới tính từ hóa đơn cuối cùng
+        HoaDon_Connect tHD = new HoaDon_Connect();
+        CTHD_Connect cthd = new CTHD_Connect();
+        String lastmahd = tHD.LastMaHD();
+        if (lastmahd==null) MaHD= "HD01";
+        else {
+            int sohd = Integer.parseInt(lastmahd.substring(2))+1; //bỏ đi hai chữ "HD" và công thêm 1 vào hai số phía sau
+            if (sohd<10) MaHD = HD+"0"+String.valueOf(sohd);
+            else MaHD = HD+String.valueOf(sohd);
+        }    
+        System.out.println(MaHD);
+        System.out.println(MaNV);
+        HoaDon hd = new HoaDon();
+        hd.setMaHD(MaHD);
+        hd.setMaNV(MaNV);
+        
+        Date date = new Date();
+        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String currentTime = sdf.format(date);
+        hd.setNgaylap(currentTime);
+        hd.setTongTien(Double.parseDouble(TKInput_GiaBan.getText())*Double.parseDouble(TKInput_SoLuong.getText()) );
+        hd.setTrangThai(0);
+        hd.setNhapSach(1);
+        tHD.TaoHD(hd); 
+//        
+        CTHD ct = new CTHD();
+        ct.setMaHD(MaHD);
+        ct.setMaSP(TKInput_MaVPP.getText());
+        ct.setDonGia(Double.parseDouble(TKInput_GiaBan.getText()));
+        ct.setSoLuong(Integer.parseInt(TKInput_SoLuong.getText()));
+        ct.setThanhTien(Double.parseDouble(TKInput_GiaBan.getText())*Double.parseDouble(TKInput_SoLuong.getText()) );
+        CTHD_Connect ctCon = new CTHD_Connect();
+        ctCon.ThemCT(ct);
+   }
     
     
     //Tìm kiếm sách
@@ -1175,6 +1260,9 @@ protected void xuLyXoa(String maVPP) {
     private javax.swing.JButton jButton_ThemVPP;
     private javax.swing.JButton jButton_XoaVPP;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel_Discount;
     private javax.swing.JLabel jLabel_Discount1;
     private javax.swing.JLabel jLabel_Discount2;
@@ -1205,7 +1293,7 @@ protected void xuLyXoa(String maVPP) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new QuanLyVPP("Quản lý văn phòng phẩm").setVisible(true);
+                new QuanLyVPP("Quản lý văn phòng phẩm", MaNV).setVisible(true);
             }
         });
     }
