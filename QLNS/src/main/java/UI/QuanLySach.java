@@ -61,6 +61,7 @@ public class QuanLySach extends javax.swing.JFrame {
         hienThiToanBoNhaXuatBan();
  
     }
+
     
     private void hienThiToanBoSach() {
         Sach_Connect sachConn = new Sach_Connect();
@@ -183,7 +184,7 @@ public class QuanLySach extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel_Discount2 = new javax.swing.JLabel();
         TKInput_UpdateAllPrice1 = new javax.swing.JTextField();
-        jButton_Accpet1 = new javax.swing.JButton();
+        jButton_Accpet_Search = new javax.swing.JButton();
         jButton_Cancel1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel_Discount3 = new javax.swing.JLabel();
@@ -299,12 +300,12 @@ public class QuanLySach extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel_Discount2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel_Discount2.setText("Tăng giá đồng loạt");
+        jLabel_Discount2.setText("Tăng giá theo tìm kiếm");
 
-        jButton_Accpet1.setText("OK");
-        jButton_Accpet1.addActionListener(new java.awt.event.ActionListener() {
+        jButton_Accpet_Search.setText("OK");
+        jButton_Accpet_Search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_Accpet1ActionPerformed(evt);
+                jButton_Accpet_SearchActionPerformed(evt);
             }
         });
 
@@ -321,15 +322,16 @@ public class QuanLySach extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel_Discount2)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(TKInput_UpdateAllPrice1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton_Accpet1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(TKInput_UpdateAllPrice1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton_Accpet_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton_Cancel1, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(22, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel_Discount2)
+                .addGap(64, 64, 64))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,7 +341,7 @@ public class QuanLySach extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TKInput_UpdateAllPrice1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_Accpet1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton_Accpet_Search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton_Cancel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -401,13 +403,14 @@ public class QuanLySach extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel_Discount3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(TKInput_UpdateAllPriceNXB, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_AccpetTangGiaNXB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton_CancelNXB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(NXBInput_TangGia, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(NXBInput_TangGia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(TKInput_UpdateAllPriceNXB, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton_AccpetTangGiaNXB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton_CancelNXB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel1)
+                        .addComponent(jLabel2)))
                 .addContainerGap())
         );
 
@@ -1002,8 +1005,80 @@ public class QuanLySach extends javax.swing.JFrame {
         TKInput_UpdateAllPrice1.setText("");
     }//GEN-LAST:event_jButton_Cancel1ActionPerformed
 
-    private void jButton_Accpet1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Accpet1ActionPerformed
-        if (TKInput_UpdateAllPrice1.getText().equals("")){
+    private void jButton_Accpet_SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Accpet_SearchActionPerformed
+        //tìm kiếm
+        int active = JOptionPane.showConfirmDialog(null, "Bạn có muốn tăng giá với sách được tìm kiếm ?", "Xác Nhận Tăng", JOptionPane.OK_CANCEL_OPTION);
+				if(active==JOptionPane.OK_OPTION)
+				{
+	
+        String ten = TKInput.getText();
+        String tenTacGia = TKInput1.getText();
+        Sach_Connect sachnxb1 = new Sach_Connect();
+        dss_tensach = sachnxb1.laySachTheoMaTen(ten);
+        dssTacGia = sachnxb1.laySachTheoTenTacGia(tenTacGia);
+        dsChung = sachnxb1.laySachTheoMaTenVaTenTacGia(ten, tenTacGia);
+        //show all data
+        if (TKInput.getText().length()==0 && TKInput1.getText().length()==0)
+            hienThiToanBoSach();
+        //tìm kiếm theo tên sách
+        if (TKInput.getText().length()!= 0 && TKInput1.getText().length()==0){
+            dtmSach.setRowCount(0);
+            for(Sach s : dss_tensach){
+                Vector<Object> vec = new Vector<Object>();
+                vec.add(s.getMaSach());
+                vec.add(s.getMaNXB());
+                vec.add(s.getTenSach());
+                vec.add(s.getTheLoai());
+                vec.add(s.getTacGia());
+                vec.add(s.getSoLuong());
+                vec.add(s.getGiaBan());
+                vec.add(s.getDiscount());
+                dtmSach.addRow(vec);
+            }
+            thucHienTangGiaVoiSachDuocTimKiem(dss_tensach);
+        }
+        //Tìm kiếm theo tên sách và tên tác giả
+        else if (TKInput.getText().length()!= 0 && TKInput1.getText().length()!=0){
+            
+            dtmSach.setRowCount(0);
+            for(Sach s : dsChung){
+                Vector<Object> vec = new Vector<Object>();
+                vec.add(s.getMaSach());
+                vec.add(s.getMaNXB());
+                vec.add(s.getTenSach());
+                vec.add(s.getTheLoai());
+                vec.add(s.getTacGia());
+                vec.add(s.getSoLuong());
+                vec.add(s.getGiaBan());	
+                vec.add(s.getDiscount());
+                dtmSach.addRow(vec);
+            }
+            thucHienTangGiaVoiSachDuocTimKiem(dsChung);
+            
+        }
+        //tìm kiếm theo tên tác giả
+        else if (TKInput.getText().length()== 0 && TKInput1.getText().length()!=0){
+            dtmSach.setRowCount(0);
+            for(Sach s : dssTacGia){
+            Vector<Object> vec = new Vector<Object>();			
+            vec.add(s.getMaSach());
+            vec.add(s.getMaNXB());
+            vec.add(s.getTenSach());
+            vec.add(s.getTheLoai());
+            vec.add(s.getTacGia());
+            vec.add(s.getSoLuong());
+            vec.add(s.getGiaBan());	
+            vec.add(s.getDiscount());
+            dtmSach.addRow(vec);
+            }
+            thucHienTangGiaVoiSachDuocTimKiem(dssTacGia);
+	}
+        
+        //tăng giá
+        }
+    }//GEN-LAST:event_jButton_Accpet_SearchActionPerformed
+ protected void thucHienTangGiaVoiSachDuocTimKiem(ArrayList<Sach> dsSach){
+     if (TKInput_UpdateAllPrice1.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Bạn chưa nhập giá cần tăng","Error", JOptionPane.WARNING_MESSAGE);
             return ;
         }
@@ -1015,12 +1090,11 @@ public class QuanLySach extends javax.swing.JFrame {
     
        
         Sach_Connect sc = new Sach_Connect();
-        for (Sach s: dss){
+        for (Sach s: dsSach){
             sc.updateAllPrice(s.getMaSach(), (s.getGiaBan()+extraMoney));
         }
        hienThiToanBoSach();
-    }//GEN-LAST:event_jButton_Accpet1ActionPerformed
-
+ }
     private void jButton_AccpetTangGiaNXBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AccpetTangGiaNXBActionPerformed
         if (TKInput_UpdateAllPrice1.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Bạn chưa nhập giá cần tăng","Error", JOptionPane.WARNING_MESSAGE);
@@ -1167,8 +1241,8 @@ protected void xuLyXoa(String maSach) {
     private javax.swing.JTextField TKInput_UpdateAllPrice1;
     private javax.swing.JTextField TKInput_UpdateAllPriceNXB;
     private javax.swing.JButton jButton_Accpet;
-    private javax.swing.JButton jButton_Accpet1;
     private javax.swing.JButton jButton_AccpetTangGiaNXB;
+    private javax.swing.JButton jButton_Accpet_Search;
     private javax.swing.JButton jButton_Cancel;
     private javax.swing.JButton jButton_Cancel1;
     private javax.swing.JButton jButton_CancelNXB;

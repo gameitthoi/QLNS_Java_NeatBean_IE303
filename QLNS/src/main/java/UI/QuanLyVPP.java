@@ -187,7 +187,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel_Discount1 = new javax.swing.JLabel();
         TKInput_UpdateAllPrice = new javax.swing.JTextField();
-        jButton_Accpet = new javax.swing.JButton();
+        jButton_Accpet_Search = new javax.swing.JButton();
         jButton_Cancel = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel_Discount2 = new javax.swing.JLabel();
@@ -296,12 +296,12 @@ public class QuanLyVPP extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel_Discount1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel_Discount1.setText("Tăng giá đồng loạt");
+        jLabel_Discount1.setText("Tăng giá theo tìm kiếm");
 
-        jButton_Accpet.setText("OK");
-        jButton_Accpet.addActionListener(new java.awt.event.ActionListener() {
+        jButton_Accpet_Search.setText("OK");
+        jButton_Accpet_Search.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_AccpetActionPerformed(evt);
+                jButton_Accpet_SearchActionPerformed(evt);
             }
         });
 
@@ -318,15 +318,16 @@ public class QuanLyVPP extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel_Discount1)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(TKInput_UpdateAllPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton_Accpet, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(TKInput_UpdateAllPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton_Accpet_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jButton_Cancel, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(22, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel_Discount1)
+                .addGap(65, 65, 65))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -336,7 +337,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(TKInput_UpdateAllPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_Accpet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton_Accpet_Search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton_Cancel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -562,7 +563,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
                 .addGroup(jPanel_DataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(23, 23, 23))
+                .addGap(10, 10, 10))
         );
 
         jLabel_MaSach.setIcon(new ImageIcon("images/Code_28px.png"));
@@ -737,7 +738,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(NhanTenLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel_CenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -905,7 +906,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
    }
     
     
-    //Tìm kiếm sách
+    //Tìm kiếm VPP
     private void jButton_SearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_SearchMouseClicked
         // TODO add your handling code here:
         String ten = TK_TenVPPInput.getText();
@@ -1051,9 +1052,80 @@ public class QuanLyVPP extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_CancelActionPerformed
 
     //tăng giá all VPP
-    private void jButton_AccpetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AccpetActionPerformed
+    private void jButton_Accpet_SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Accpet_SearchActionPerformed
         // TODO add your handling code here:
-        if (TKInput_UpdateAllPrice.getText().equals("")){
+        int active = JOptionPane.showConfirmDialog(null, "Bạn có muốn tăng giá theo tìm kiếm ?", "Xác Nhận Tăng", JOptionPane.OK_CANCEL_OPTION);
+				if(active==JOptionPane.OK_OPTION)
+				{
+        String ten = TK_TenVPPInput.getText();
+        String dm = TK_DanhMucInput.getText();
+        VanPhongPham_Connect vpc = new VanPhongPham_Connect();
+        dss_tenVPP = vpc.laySachTheoTenVPP(ten);
+        dssDanhMuc = vpc.laySachTheoDanhMuc(dm);
+        dsChung = vpc.laySachTheoDanhMucVaTenVPP(dm, ten);
+        //show all data
+        if (TK_TenVPPInput.getText().length()==0 && TK_DanhMucInput.getText().length()==0)
+            hienThiToanBoVPP();
+        //tìm kiếm theo tên VPP
+        if (TK_TenVPPInput.getText().length()!= 0 && TK_DanhMucInput.getText().length()==0){
+            dtmVPP.setRowCount(0);
+            for(VPP vpp : dss_tenVPP){
+                Vector<Object> vec = new Vector<Object>();
+                vec.add(vpp.getMaVPP());          
+                vec.add(vpp.getTenVPP());
+                vec.add(vpp.getMaNCC());
+                vec.add(vpp.getDanhMuc());
+                vec.add(vpp.getSoLuong());
+                vec.add(vpp.getGiaBan());
+
+                vec.add(vpp.getDiscount());
+            dtmVPP.addRow(vec);	
+            }
+            thucHienTangGiaVoiVPPDuocTimKiem(dss_tenVPP);
+        }
+        //Tìm kiếm theo tên VPP và danh mục
+        else if (TK_TenVPPInput.getText().length()!= 0 && TK_DanhMucInput.getText().length()!=0){
+            
+            dtmVPP.setRowCount(0);
+            for(VPP vpp : dsChung){
+                Vector<Object> vec = new Vector<Object>();
+                vec.add(vpp.getMaVPP());          
+                vec.add(vpp.getTenVPP());
+                vec.add(vpp.getMaNCC());
+                vec.add(vpp.getDanhMuc());
+                vec.add(vpp.getSoLuong());
+                vec.add(vpp.getGiaBan());
+
+                vec.add(vpp.getDiscount());
+                dtmVPP.addRow(vec);	
+            }
+            thucHienTangGiaVoiVPPDuocTimKiem(dsChung);
+
+            
+        }
+        //tìm kiếm theo danh mục
+        else if (TK_TenVPPInput.getText().length()== 0 && TK_DanhMucInput.getText().length()!=0){
+            dtmVPP.setRowCount(0);
+            for(VPP vpp : dssDanhMuc){
+                Vector<Object> vec = new Vector<Object>();
+                vec.add(vpp.getMaVPP());          
+                vec.add(vpp.getTenVPP());
+                vec.add(vpp.getMaNCC());
+                vec.add(vpp.getDanhMuc());
+                vec.add(vpp.getSoLuong());
+                vec.add(vpp.getGiaBan());
+
+                vec.add(vpp.getDiscount());
+                dtmVPP.addRow(vec);	
+            }
+            thucHienTangGiaVoiVPPDuocTimKiem(dssDanhMuc);
+	}
+                                }
+    }//GEN-LAST:event_jButton_Accpet_SearchActionPerformed
+
+    
+    protected void thucHienTangGiaVoiVPPDuocTimKiem(ArrayList<VPP> dsVPP_Search){
+     if (TKInput_UpdateAllPrice.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Bạn chưa nhập giá cần tăng","Error", JOptionPane.WARNING_MESSAGE);
             return ;
         }
@@ -1064,12 +1136,11 @@ public class QuanLyVPP extends javax.swing.JFrame {
         double extraMoney = (Double.parseDouble(TKInput_UpdateAllPrice.getText().trim()));
         //System.out.println(extraMoney);
         VanPhongPham_Connect vpc = new VanPhongPham_Connect();
-        for (VPP vp: dsVPP){
+        for (VPP vp: dsVPP_Search){
             vpc.updatePrice(vp.getMaVPP(), (vp.getGiaBan()+extraMoney));
         }
        hienThiToanBoVPP();
-    }//GEN-LAST:event_jButton_AccpetActionPerformed
-
+ }
     private void jButton_ThemTuExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ThemTuExcelActionPerformed
         // TODO add your handling code here:
         JFileChooser fileChooser = new JFileChooser();
@@ -1247,7 +1318,7 @@ protected void xuLyXoa(String maVPP) {
     private javax.swing.JTextField TK_DanhMucInput;
     private javax.swing.JTextField TK_DanhMucInput_TangGia;
     private javax.swing.JTextField TK_TenVPPInput;
-    private javax.swing.JButton jButton_Accpet;
+    private javax.swing.JButton jButton_Accpet_Search;
     private javax.swing.JButton jButton_Accpet_TangGiaByNCC;
     private javax.swing.JButton jButton_Accpet_TangGiaDoanhMuc;
     private javax.swing.JButton jButton_Cancel;
