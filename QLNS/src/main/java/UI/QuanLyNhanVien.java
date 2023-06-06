@@ -8,6 +8,7 @@ import Connect.ChucVu_Connect;
 import Connect.NhanVien_Connect;
 import Model.ChucVu;
 import Model.NhanVien;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileInputStream;
@@ -48,6 +49,7 @@ private ArrayList<ChucVu> dscv = null;
      */
     public QuanLyNhanVien(String title) {
         initComponents();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("images/books_30px.png"));
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setTitle(title);

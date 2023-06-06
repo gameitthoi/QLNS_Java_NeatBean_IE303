@@ -8,6 +8,7 @@ import Connect.NhanVien_Connect;
 import Connect.TaiKhoan_Connect;
 import Model.NhanVien;
 import Model.TaiKhoan;
+import java.awt.Toolkit;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -28,6 +29,7 @@ private ArrayList<TaiKhoan> dstk_tim=null;
 
     public QuanLyTaiKhoan(String title) {
         initComponents();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("images/books_30px.png"));
         this.setLocationRelativeTo(null);
         this.setTitle(title);
         hienThiToanBoTaiKhoan();

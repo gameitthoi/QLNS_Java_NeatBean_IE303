@@ -6,6 +6,7 @@ package UI;
 
 import Connect.NXB_Connect;
 import Model.NXB;
+import java.awt.Toolkit;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Vector;
@@ -24,6 +25,7 @@ public class QuanLyNXB extends javax.swing.JFrame {
      */
     public QuanLyNXB(String title) {
         initComponents();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("images/books_30px.png"));
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.setTitle("Quản lý nhà xuất bản");

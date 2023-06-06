@@ -7,6 +7,7 @@ package UI;
 import Connect.KhachHang_Connect;
 import Model.KhachHang;
 import Model.KhachHang;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
 import java.text.ParseException;
@@ -28,6 +29,7 @@ private ArrayList<KhachHang> dskh_tim = null;
      */
     public QuanLyKhachHang() {
         initComponents();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("images/books_30px.png"));
         this.setTitle("Quản lý khách hàng");
         this.setLocationRelativeTo(null);
         hienThiTatCaKH();

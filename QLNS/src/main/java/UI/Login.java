@@ -7,6 +7,7 @@ package UI;
 import Connect.login_sql;
 import Model.TaiKhoan;
 import java.awt.Font;
+import java.awt.Toolkit;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,6 +23,7 @@ public class Login extends javax.swing.JFrame {
         this.setTitle(title);
         this.setLocationRelativeTo(null);
         initComponents(); 
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("images/books_30px.png"));
     }
 
     /**

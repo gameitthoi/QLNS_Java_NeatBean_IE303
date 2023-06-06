@@ -3,12 +3,6 @@
  */
 
 package com.mycompany.QLNS;
-import UI.LoginUI;
-import UI.QuanLyNXB_UI;
-import UI.QuanLyNhanVienUI;
-import UI.QuanLySachUI;
-import UI.ThongKeUI;
-import UI.BanHangUI;
 import UI.Login;
 /**
  *
