@@ -22,7 +22,7 @@ public class Sach_Connect extends Connect_sqlServer{
     {
         ArrayList<Sach> dss = new ArrayList<Sach>() ;
         try {
-            String sql ="select * from SACH" ;
+            String sql ="select MaSach, TenSach, TenNXB, TacGia, GiaBan, TheLoai, SoLuong, Discount  from SACH,NXB where SACH.MaNXB = NXB.MaNXB" ;
             Statement statement = conn.createStatement();
             ResultSet result = statement.executeQuery(sql);
             while(result.next()){
@@ -49,7 +49,7 @@ public class Sach_Connect extends Connect_sqlServer{
     {
         ArrayList<Sach> dss2 = new ArrayList<Sach>();
         try {
-            String sql ="select * from SACH where MaNXB=? and TenSach like ? " ;
+            String sql ="select MaSach, TenSach, TenNXB, TacGia, GiaBan, TheLoai, SoLuong, Discount from SACH,NXB where SACH.MaNXB = NXB.MaNXB and MaNXB=? and TenSach like ? " ;
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setString(1, manxb);
             pre.setString(2, "%"+ten+"%");
@@ -81,7 +81,7 @@ public class Sach_Connect extends Connect_sqlServer{
         ArrayList<Sach> dss3 = new ArrayList<Sach>();
 
         try {
-            String sql = "select * from SACH where TenSach like ? " ;
+            String sql = "select MaSach, TenSach, TenNXB, TacGia, GiaBan, TheLoai, SoLuong, Discount from SACH,NXB where SACH.MaNXB = NXB.MaNXB and TenSach like ? " ;
             PreparedStatement pre1 = conn.prepareStatement(sql);
             pre1.setString(1, "%"+maten+"%");
             ResultSet result = pre1.executeQuery();
@@ -108,7 +108,7 @@ public class Sach_Connect extends Connect_sqlServer{
         ArrayList<Sach> dss2 = new ArrayList<Sach>();
 
         try {
-            String sql = "select * from SACH where TacGia like ? " ;
+            String sql = "select MaSach, TenSach, TenNXB, TacGia, GiaBan, TheLoai, SoLuong, Discount from SACH,NXB where SACH.MaNXB = NXB.MaNXB and TacGia like ? " ;
             PreparedStatement pre1 = conn.prepareStatement(sql);
             pre1.setString(1, "%"+tenTacGia+"%");
             ResultSet result = pre1.executeQuery();
@@ -135,7 +135,7 @@ public class Sach_Connect extends Connect_sqlServer{
         ArrayList<Sach> dss4 = new ArrayList<Sach>();
 
         try {
-            String sql = "select * from SACH where TenSach like ? and TacGia like ?" ;
+            String sql = "select MaSach, TenSach, TenNXB, TacGia, GiaBan, TheLoai, SoLuong, Discount from SACH,NXB where SACH.MaNXB = NXB.MaNXB and TenSach like ? and TacGia like ?" ;
             PreparedStatement pre1 = conn.prepareStatement(sql);
             pre1.setString(1, "%"+maten+"%");
             pre1.setString(2, "%"+tenTacGia+"%");

@@ -70,7 +70,7 @@ public class QuanLySach extends javax.swing.JFrame {
         dss = sachConn.layToanBoSach();
         dtmSach = new DefaultTableModel();
         dtmSach.addColumn("Mã sách");
-        dtmSach.addColumn("Mã NXB");
+        dtmSach.addColumn("Tên NXB");
         dtmSach.addColumn("Tên Sách");
         dtmSach.addColumn("Thể loại");
         dtmSach.addColumn("Tác giả");
@@ -1098,11 +1098,11 @@ public class QuanLySach extends javax.swing.JFrame {
        hienThiToanBoSach();
  }
     private void jButton_AccpetTangGiaNXBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AccpetTangGiaNXBActionPerformed
-        if (TKInput_UpdateAllPrice1.getText().equals("")){
+        if (TKInput_UpdateAllPriceNXB.getText().equals("")){
             JOptionPane.showMessageDialog(this, "Bạn chưa nhập giá cần tăng","Error", JOptionPane.WARNING_MESSAGE);
             return ;
         }
-        if (!isNumeric(TKInput_UpdateAllPrice1.getText().trim())){
+        if (!isNumeric(TKInput_UpdateAllPriceNXB.getText().trim())){
             JOptionPane.showMessageDialog(this, "Nhập sai định dạng giá","Error", JOptionPane.WARNING_MESSAGE);
             return ;
         }

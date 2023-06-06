@@ -148,7 +148,7 @@ public class NXB_Connect extends Connect_sqlServer
         public NXB TimTenNXBCheckBox(String tenNXB){
         NXB nxb = new NXB();
         try{
-            String sql ="select top 1 * from NXB where MaNXB=?" ;
+            String sql ="select top 1 MaNXB, TenNXB from NXB where TenNXB=?" ;
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setString(1, tenNXB);
             ResultSet result = pre.executeQuery();
