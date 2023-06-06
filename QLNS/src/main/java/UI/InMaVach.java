@@ -18,6 +18,7 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import java.awt.Desktop;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -43,6 +44,7 @@ private ArrayList<VPP> dsvpp = null;
      */
     public InMaVach(String title) {
         initComponents();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("images/books_30px.png"));
         this.setTitle(title);
         this.setLocationRelativeTo(null);
         hienThiToanBoSach();

@@ -8,6 +8,7 @@ import Connect.CTHD_Connect;
 import Connect.HoaDon_Connect;
 import Model.HoaDon;
 import java.awt.Desktop;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.text.DecimalFormat;
@@ -40,6 +41,7 @@ String filePath = "C:\\Users\\dat\\Downloads\\";
      */
     public QuanLyHoaDon(String title) {
         this.setTitle(title);
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("images/books_30px.png"));
         initComponents();
         this.setLocationRelativeTo(null);
         hienThiHoaDon();

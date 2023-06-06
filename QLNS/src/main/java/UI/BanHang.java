@@ -18,6 +18,7 @@ import Model.NXB;
 import Model.Sach;
 import Model.TaiKhoan;
 import Model.VPP;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -56,6 +57,7 @@ public class BanHang extends javax.swing.JFrame {
      */
     public BanHang(String title,String maNV) {
         initComponents();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("images/books_30px.png"));
         this.setTitle(title);
         this.setLocationRelativeTo(null);
         MaNV=maNV;

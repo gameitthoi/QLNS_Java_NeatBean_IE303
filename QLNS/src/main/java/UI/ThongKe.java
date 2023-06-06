@@ -14,6 +14,7 @@ import Model.VPP;
 import java.awt.BorderLayout;
 import java.awt.Desktop;
 import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -60,6 +61,7 @@ String filePath = "C:\\Users\\dat\\Downloads\\";
      */
     public ThongKe(String title) {
         initComponents();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("images/books_30px.png"));
         this.setTitle(title);
         this.setLocationRelativeTo(null);
         showThongKe();
