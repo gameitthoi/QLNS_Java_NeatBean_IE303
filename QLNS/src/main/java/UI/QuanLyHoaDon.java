@@ -55,7 +55,7 @@ String filePath = "C:\\Users\\dat\\Downloads\\";
 
         HoaDonTable.setModel(hd_connect.layToanBoHoaDonTheoThangNam(Integer.toString(MonthInput.getSelectedIndex()), YearInput.getText()));
         tongTien = 0;
-        for (int i = 1; i< HoaDonTable.getRowCount();i++){
+        for (int i = 0; i< HoaDonTable.getRowCount();i++){
             tongTien = tongTien + Double.parseDouble(HoaDonTable.getValueAt(i, 4).toString());
         }
         ToTalLabel.setText(df.format(tongTien) + " vnđ");
@@ -66,7 +66,7 @@ String filePath = "C:\\Users\\dat\\Downloads\\";
 
         HoaDonTable.setModel(hd_connect.layToanBoHoaDonHomNay());
         tongTien = 0;
-        for (int i = 1; i< HoaDonTable.getRowCount();i++){
+        for (int i = 0; i< HoaDonTable.getRowCount();i++){
             tongTien = tongTien + Double.parseDouble(HoaDonTable.getValueAt(i, 4).toString());
         }
 
@@ -331,7 +331,7 @@ String filePath = "C:\\Users\\dat\\Downloads\\";
         String nam = YearInput.getText();
         HoaDonTable.setModel(hd_connect.layToanBoHoaDonTheoThangNam(thang, nam));
         tongTien = 0;
-        for (int i = 1; i< HoaDonTable.getRowCount();i++){
+        for (int i = 0; i< HoaDonTable.getRowCount();i++){
             tongTien = tongTien + Double.parseDouble(HoaDonTable.getValueAt(i, 4).toString());
         }
         TongTienLabel.setText("Tổng tiền bán được tháng này: ");

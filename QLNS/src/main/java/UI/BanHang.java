@@ -1013,6 +1013,7 @@ public class BanHang extends javax.swing.JFrame {
                 vec.add(s.getTacGia());
                 vec.add(s.getSoLuong());
                 vec.add(s.getGiaBan());
+                vec.add(s.getDiscount());
                 dtmSach.addRow(vec);
             }
         }
@@ -1062,18 +1063,21 @@ public class BanHang extends javax.swing.JFrame {
                 CTHD_Connect taoCT = new CTHD_Connect();
                 taoCT.ThemCT(ct);
                 //kiểm tra xem mã sản phẩm phải sách hay không
+                int thanhcong = -1;
                 if(ct.getMaSP().substring(0, 1).equals("s")){ //nếu chữ đầu của masp la "s" thì là sách
                     //giảm số lượng sách sau khi bán cho khách
                     for (Sach s : dss){
-                        if (s.getMaSach()==ct.getMaSP())
-                            sach.updateSL(s.getMaSach(), s.getSoLuong()-ct.getSoLuong());
+                        if (s.getMaSach()==ct.getMaSP()){
+                            thanhcong = sach.updateSL(s.getMaSach(), s.getSoLuong()-ct.getSoLuong());
+                        }
                     }
                 }
                 else{
                     //giảm số lượng sản phẩm sau khi bán cho khách
                     for (VPP vpp : dsvpp){
-                        if (vpp.getMaVPP()==ct.getMaSP())
-                            vpp_conn.updateSL(vpp.getMaVPP(), vpp.getSoLuong()-ct.getSoLuong());
+                        if (vpp.getMaVPP()==ct.getMaSP()){
+                            thanhcong = vpp_conn.updateSL(vpp.getMaVPP(), vpp.getSoLuong()-ct.getSoLuong());
+                        }
                     }
                 }
             }
@@ -1096,6 +1100,9 @@ public class BanHang extends javax.swing.JFrame {
             ChangeInput.setText("0");
             MaHD = null;
             hienThiToanBoSach();
+            hienThiTatCaVPP();
+            TKInput.setText("");
+            TKSPInput.setText("");
             DeleteBtn.setEnabled(false);
             PaymentBtn.setEnabled(false);
             CancleBtn.setEnabled(false);
@@ -1224,6 +1231,7 @@ public class BanHang extends javax.swing.JFrame {
                 vec.add(vpp.getDanhMuc());
                 vec.add(vpp.getSoLuong());
                 vec.add(vpp.getGiaBan());
+                vec.add(vpp.getDiscount());
                 dtmVPP.addRow(vec);
             }
         }
