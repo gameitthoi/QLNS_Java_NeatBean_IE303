@@ -8,12 +8,26 @@ import Connect.NXB_Connect;
 import Connect.Sach_Connect;
 import Model.NXB;
 import Model.Sach;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Vector;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import javax.swing.table.DefaultTableModel;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 
 /**
  *
@@ -155,6 +169,7 @@ public class QuanLySach extends javax.swing.JFrame {
         NXBInput_TangGia = new javax.swing.JComboBox<NXB>();
         jSeparator2 = new javax.swing.JSeparator();
         jButton_NhapLai = new javax.swing.JButton();
+        jButton_ThemSachTuExcel = new javax.swing.JButton();
         jPanel_Center = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -476,6 +491,18 @@ public class QuanLySach extends javax.swing.JFrame {
             }
         });
 
+        jButton_ThemSachTuExcel.setBackground(new java.awt.Color(0, 204, 51));
+        jButton_ThemSachTuExcel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton_ThemSachTuExcel.setForeground(new java.awt.Color(255, 255, 255));
+        jButton_ThemSachTuExcel.setText("Excel +");
+        jButton_ThemSachTuExcel.setMaximumSize(new java.awt.Dimension(150, 40));
+        jButton_ThemSachTuExcel.setMinimumSize(new java.awt.Dimension(150, 40));
+        jButton_ThemSachTuExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_ThemSachTuExcelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel_TopFunctionLayout = new javax.swing.GroupLayout(jPanel_TopFunction);
         jPanel_TopFunction.setLayout(jPanel_TopFunctionLayout);
         jPanel_TopFunctionLayout.setHorizontalGroup(
@@ -484,6 +511,8 @@ public class QuanLySach extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addComponent(jLabel_Top)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton_ThemSachTuExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(69, 69, 69)
                 .addComponent(jButton_ThemSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(69, 69, 69)
                 .addComponent(jButton_ChinhSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -507,7 +536,8 @@ public class QuanLySach extends javax.swing.JFrame {
                     .addComponent(jButton_ChinhSua, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_XoaSach, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_Top, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_NhapLai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton_NhapLai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_ThemSachTuExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -939,6 +969,87 @@ public class QuanLySach extends javax.swing.JFrame {
         // TODO add your handling code here:
         TKInput_UpdateAllPriceNXB.setText("");   
     }//GEN-LAST:event_jButton_CancelNXBActionPerformed
+
+    private void jButton_ThemSachTuExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ThemSachTuExcelActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+
+        // Chỉ định bộ lọc để chỉ cho phép chọn các tệp Excel
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("Excel Files", "xls");
+        fileChooser.setFileFilter(filter);
+
+        // Hiển thị cửa sổ Explorer và lấy tệp được chọn
+        int result = fileChooser.showOpenDialog(null);
+        if (result == JFileChooser.APPROVE_OPTION) {
+            File selectedFile = fileChooser.getSelectedFile();
+            String filePath = selectedFile.getAbsolutePath();
+            //đọc file excel đó
+            try {
+                // Tạo đối tượng File từ đường dẫn
+                File file = new File(filePath);
+
+                // Đọc tệp Excel
+                FileInputStream fis = new FileInputStream(file);
+                Workbook workbook = new HSSFWorkbook(fis);
+
+                // Lấy ra sheet đầu tiên từ workbook
+                Sheet sheet = workbook.getSheetAt(0);
+
+                //Xóa tất cả các dòng trong bảng nhân viên
+                dtmSach.setRowCount(0);
+
+                // Duyệt qua các dòng trong sheet
+                for (int rowIndex = 0; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
+                    if (rowIndex == 0) {
+                        continue; // Bỏ qua dòng đầu tiên
+                    }
+
+                    Row row = sheet.getRow(rowIndex);
+
+                    String[] rowData = new String[dtmSach.getColumnCount()];
+
+                    // Duyệt qua các ô trong dòng
+                    for (int columnIndex = 0; columnIndex < dtmSach.getColumnCount(); columnIndex++) {
+                        Cell cell = row.getCell(columnIndex);
+
+                        // Chuyển đổi giá trị của ô thành kiểu String và lưu vào mảng rowData
+                        String cellValue = "";
+                        if (cell != null) {
+                            if (cell.getCellType() == CellType.STRING) {
+                                cellValue = cell.getStringCellValue();
+                            } else if (cell.getCellType() == CellType.NUMERIC) {
+                                if (DateUtil.isCellDateFormatted(cell)) {
+                                    // Kiểm tra nếu là giá trị ngày tháng
+                                    Date dateValue = cell.getDateCellValue();
+                                    SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+                                    cellValue = dateFormat.format(dateValue);
+                                } else {
+                                    cellValue = String.format("%.0f",cell.getNumericCellValue());
+                                }
+                            } else if (cell.getCellType() == CellType.BLANK) {
+                                cellValue = "";
+                            }
+                        }
+
+                        rowData[columnIndex] = cellValue;
+                    }
+
+                    // Thêm dòng dữ liệu vào mô hình dtmNhanVien
+                    dtmSach.addRow(rowData);
+                }
+
+                // Đóng FileInputStream và workbook
+                fis.close();
+                workbook.close();
+
+                // Cập nhật bảng NVTable với mô hình dtmNhanVien
+                jTable_Books.setModel(dtmSach);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        jButton_ThemSachTuExcel.setEnabled(true);
+    }//GEN-LAST:event_jButton_ThemSachTuExcelActionPerformed
 protected void xuLyXoa(String maSach) {
 		Sach_Connect sachXoa = new Sach_Connect();
 		int active= sachXoa.XoaSach(maSach);
@@ -988,6 +1099,7 @@ protected void xuLyXoa(String maSach) {
     private javax.swing.JButton jButton_NhapLai;
     private javax.swing.JButton jButton_Search;
     private javax.swing.JButton jButton_ThemSach;
+    private javax.swing.JButton jButton_ThemSachTuExcel;
     private javax.swing.JButton jButton_XoaSach;
     private javax.swing.JLabel jLabel_Discount;
     private javax.swing.JLabel jLabel_Discount1;
