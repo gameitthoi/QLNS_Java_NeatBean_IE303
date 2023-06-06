@@ -74,7 +74,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
         dtmVPP = new DefaultTableModel();
         dtmVPP.addColumn("Mã VPP");     
         dtmVPP.addColumn("Tên VPP");
-        dtmVPP.addColumn("Mã NCCVPP");
+        dtmVPP.addColumn("Tên NCCVPP");
         dtmVPP.addColumn("Danh Mục");      
         dtmVPP.addColumn("Số lượng");
         dtmVPP.addColumn("Giá Bán (VNĐ)");
@@ -418,7 +418,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
         jLabel_Discount3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel_Discount3.setText("Tăng giá theo Doanh Mục");
+        jLabel_Discount3.setText("Tăng giá theo Danh Mục");
 
         jButton_Accpet_TangGiaDoanhMuc.setText("OK");
         jButton_Accpet_TangGiaDoanhMuc.addActionListener(new java.awt.event.ActionListener() {

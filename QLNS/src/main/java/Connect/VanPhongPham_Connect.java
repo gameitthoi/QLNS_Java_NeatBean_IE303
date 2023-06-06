@@ -25,7 +25,7 @@ public class VanPhongPham_Connect extends Connect_sqlServer{
     {
         ArrayList<VPP> dsVPP = new ArrayList<VPP>() ;
         try {
-            String sql ="select * from VPP" ;
+            String sql ="select MaVPP, TenVPP, TenNCCVPP, GiaBanVPP, DanhMuc, SoLuong, Discount from VPP,NCCVPP where VPP.MaNCCVPP = NCCVPP.MaNCCVPP" ;
             Statement statement = conn.createStatement();
             ResultSet result = statement.executeQuery(sql);
             while(result.next()){
@@ -50,7 +50,7 @@ public class VanPhongPham_Connect extends Connect_sqlServer{
     {
         ArrayList<VPP> dsVPP = new ArrayList<VPP>() ;
         try {
-            String sql ="select * from VPP where MaNCCVPP like ?" ;
+            String sql ="select MaVPP, TenVPP, TenNCCVPP, GiaBanVPP, DanhMuc, SoLuong, Discount from VPP,NCCVPP  where VPP.MaNCCVPP = NCCVPP.MaNCCVPP and VPP.MaNCCVPP like ?" ;
             PreparedStatement pre1 = conn.prepareStatement(sql);
             pre1.setString(1, "%"+ma+"%");
             ResultSet result = pre1.executeQuery();
@@ -266,7 +266,7 @@ public class VanPhongPham_Connect extends Connect_sqlServer{
         ArrayList<VPP> dsvpp = new ArrayList<VPP>();
 
         try {
-            String sql = "select * from VPP where TenVPP like ? " ;
+            String sql = "select MaVPP, TenVPP, TenNCCVPP, GiaBanVPP, DanhMuc, SoLuong, Discount from VPP, NCCVPP where VPP.MaNCCVPP = NCCVPP.MaNCCVPP and TenVPP like ? " ;
             PreparedStatement pre1 = conn.prepareStatement(sql);
             pre1.setString(1, "%"+maten+"%");
             ResultSet result = pre1.executeQuery();
@@ -293,7 +293,7 @@ public class VanPhongPham_Connect extends Connect_sqlServer{
         ArrayList<VPP> dsvpp = new ArrayList<VPP>();
 
         try {
-            String sql = "select * from VPP where DanhMuc like ? " ;
+            String sql = "select MaVPP, TenVPP, TenNCCVPP, GiaBanVPP, DanhMuc, SoLuong, Discount from VPP, NCCVPP where VPP.MaNCCVPP = NCCVPP.MaNCCVPP and DanhMuc like ? " ;
             PreparedStatement pre1 = conn.prepareStatement(sql);
             pre1.setString(1, "%"+dm+"%");
             ResultSet result = pre1.executeQuery();
@@ -320,7 +320,7 @@ public class VanPhongPham_Connect extends Connect_sqlServer{
         ArrayList<VPP> dsvpp = new ArrayList<VPP>();
 
         try {
-            String sql = "select * from VPP where DanhMuc like ? and TenVPP like ? " ;
+            String sql = "select MaVPP, TenVPP, TenNCCVPP, GiaBanVPP, DanhMuc, SoLuong, Discount from VPP, NCCVPP where VPP.MaNCCVPP = NCCVPP.MaNCCVPP and DanhMuc like ? and TenVPP like ? " ;
             PreparedStatement pre1 = conn.prepareStatement(sql);
             pre1.setString(1, "%"+dm+"%");
             pre1.setString(2, "%"+maten+"%");
