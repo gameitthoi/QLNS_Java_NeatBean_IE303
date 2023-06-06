@@ -14,6 +14,7 @@ import Model.CTHD;
 import Model.HoaDon;
 import Model.NhaCungCap_VPP;
 import Model.VPP;
+import java.awt.Toolkit;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -56,6 +57,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
 	
     public QuanLyVPP(String title, String maNV) {
         initComponents();
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("images/books_30px.png"));
         this.setTitle(title);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE); 

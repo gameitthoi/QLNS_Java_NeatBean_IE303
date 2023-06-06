@@ -9,6 +9,7 @@ package UI;
 import Connect.NhaCungCapVPP_Connect;
 
 import Model.NhaCungCap_VPP;
+import java.awt.Toolkit;
 
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ public class QuanLyNCCVPP extends javax.swing.JFrame {
     public QuanLyNCCVPP( String title) {
         initComponents();
         this.setTitle(title);
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("images/books_30px.png"));
         hienThiToanBoThongTin();
     }
 private void hienThiToanBoThongTin() {
