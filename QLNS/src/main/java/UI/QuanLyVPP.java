@@ -93,6 +93,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
             dtmVPP.addRow(vec);	
         }
         jTable_VPP.setModel(dtmVPP);
+        jButton_ThemTuExcel.setEnabled(false);
     }
     
     
@@ -209,6 +210,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jButton_NhapLai = new javax.swing.JButton();
+        jButton_importExcel = new javax.swing.JButton();
         jButton_ThemTuExcel = new javax.swing.JButton();
         jPanel_Center = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -395,7 +397,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(213, 213, 213)
                         .addComponent(jLabel_Discount2)))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -590,10 +592,22 @@ public class QuanLyVPP extends javax.swing.JFrame {
             }
         });
 
+        jButton_importExcel.setBackground(new java.awt.Color(0, 204, 51));
+        jButton_importExcel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton_importExcel.setForeground(new java.awt.Color(255, 255, 255));
+        jButton_importExcel.setText("Excel +");
+        jButton_importExcel.setMaximumSize(new java.awt.Dimension(150, 40));
+        jButton_importExcel.setMinimumSize(new java.awt.Dimension(150, 40));
+        jButton_importExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_importExcelActionPerformed(evt);
+            }
+        });
+
         jButton_ThemTuExcel.setBackground(new java.awt.Color(0, 204, 51));
         jButton_ThemTuExcel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton_ThemTuExcel.setForeground(new java.awt.Color(255, 255, 255));
-        jButton_ThemTuExcel.setText("Excel +");
+        jButton_ThemTuExcel.setText("Thêm");
         jButton_ThemTuExcel.setMaximumSize(new java.awt.Dimension(150, 40));
         jButton_ThemTuExcel.setMinimumSize(new java.awt.Dimension(150, 40));
         jButton_ThemTuExcel.addActionListener(new java.awt.event.ActionListener() {
@@ -611,6 +625,8 @@ public class QuanLyVPP extends javax.swing.JFrame {
                 .addComponent(jLabel_Top)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton_ThemTuExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton_importExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(37, 37, 37)
                 .addComponent(jButton_ThemVPP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(69, 69, 69)
@@ -636,6 +652,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
                     .addComponent(jButton_XoaVPP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_Top, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_NhapLai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton_importExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton_ThemTuExcel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -649,6 +666,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
         jButton_ThemVPP.setIcon(new ImageIcon("images/add_25px.png"));
         jLabel_Top.setIcon(new ImageIcon("images/feather_emoji_40px.png"));
         jButton_ChinhSua.setIcon(new ImageIcon("images/hand_with_pen_25px.png"));
+        jButton_ThemVPP.setIcon(new ImageIcon("images/add_book_25px.png"));
         jButton_ThemVPP.setIcon(new ImageIcon("images/add_book_25px.png"));
 
         jPanel_Top.add(jPanel_TopFunction);
@@ -703,7 +721,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
 
         NhanTenLabel.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         NhanTenLabel.setForeground(new java.awt.Color(0, 153, 153));
-        NhanTenLabel.setText("Nhập tên VPP và tên doanh mục");
+        NhanTenLabel.setText("Nhập tên VPP và tên danh mục");
 
         javax.swing.GroupLayout jPanel_CenterLayout = new javax.swing.GroupLayout(jPanel_Center);
         jPanel_Center.setLayout(jPanel_CenterLayout);
@@ -1019,16 +1037,16 @@ public class QuanLyVPP extends javax.swing.JFrame {
 				
                                 //lấy thông tin trong table
                         VPP vp = new VPP();
-				vp.setMaVPP((String) jTable_VPP.getValueAt(select, 0));
+				vp.setMaVPP((String) jTable_VPP.getValueAt(select, 0)+"");
                                 //s.setMaNXB((String) jTable_Books.getValueAt(select, 1));
                                 //nxb.setMaNXB((String) jTable_Books.getValueAt(select, 1));
                                 
-				vp.setTenVPP((String) jTable_VPP.getValueAt(select, 1));
-				vp.setDanhMuc((String) jTable_VPP.getValueAt(select, 3));
+				vp.setTenVPP((String) jTable_VPP.getValueAt(select, 1)+"");
+				vp.setDanhMuc((String) jTable_VPP.getValueAt(select, 3)+"");
 				
-                                vp.setSoLuong( (int) jTable_VPP.getValueAt(select, 4));
-				vp.setGiaBan( Double.parseDouble(jTable_VPP.getValueAt(select, 5)+"") );
-				vp.setDiscount((int) jTable_VPP.getValueAt(select, 6));
+                                vp.setSoLuong( Integer.parseInt(jTable_VPP.getValueAt(select, 4)+""));
+				vp.setGiaBan( Double.parseDouble(jTable_VPP.getValueAt(select, 5)+""));
+				vp.setDiscount(Integer.parseInt(jTable_VPP.getValueAt(select, 6)+""));
 				    //System.out.println(vp.getGiaBan());
 				
 				//đưa thông tin lên panelTop
@@ -1143,7 +1161,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
         }
        hienThiToanBoVPP();
  }
-    private void jButton_ThemTuExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ThemTuExcelActionPerformed
+    private void jButton_importExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_importExcelActionPerformed
         // TODO add your handling code here:
         JFileChooser fileChooser = new JFileChooser();
 
@@ -1221,8 +1239,9 @@ public class QuanLyVPP extends javax.swing.JFrame {
                 e.printStackTrace();
             }
         }
+        
         jButton_ThemTuExcel.setEnabled(true);
-    }//GEN-LAST:event_jButton_ThemTuExcelActionPerformed
+    }//GEN-LAST:event_jButton_importExcelActionPerformed
 
     private void jButton_Accpet_TangGiaByNCCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Accpet_TangGiaByNCCActionPerformed
         // TODO add your handling code here:
@@ -1281,6 +1300,40 @@ public class QuanLyVPP extends javax.swing.JFrame {
         TK_DanhMucInput_TangGia.setText("");
         TKInput_UpdateAllPriceDoanhMuc.setText("");
     }//GEN-LAST:event_jButton_CancelDoanhMucActionPerformed
+
+    private void jButton_ThemTuExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ThemTuExcelActionPerformed
+        // TODO add your handling code here:
+        int ret=JOptionPane.showConfirmDialog(null, "Bạn muốn thêm tất cả văn phòng phẩm có trong bảng?", "xác nhận xác nhận để thêm", JOptionPane.OK_CANCEL_OPTION);
+        if(ret==JOptionPane.OK_OPTION){
+            int dem = 0;
+           
+            VanPhongPham_Connect vc = new VanPhongPham_Connect();
+            NhaCungCapVPP_Connect nc = new NhaCungCapVPP_Connect();
+            //lặp qua tất cả các dòng của bảng
+            for (int i=0; i< jTable_VPP.getRowCount(); i++){
+                
+                VPP vp = new VPP ();
+                
+                vp.setMaVPP(jTable_VPP.getValueAt(i, 0).toString());
+                vp.setTenVPP(jTable_VPP.getValueAt(i, 1).toString());
+             
+                
+                NhaCungCap_VPP cv = nc.TimTenNCC(jTable_VPP.getValueAt(i, 2).toString());
+                vp.setMaNCC(cv.getMaNCCVPP());
+                vp.setDanhMuc((String) jTable_VPP.getValueAt(i, 3));
+                vp.setSoLuong( Integer.parseInt(jTable_VPP.getValueAt(i, 4)+""));
+                vp.setGiaBan( Double.parseDouble(jTable_VPP.getValueAt(i, 5)+"") );
+		vp.setDiscount(Integer.parseInt(jTable_VPP.getValueAt(i, 6)+""));
+                if(vc.kiemTraTonTai(vp.getMaVPP())==true) JOptionPane.showMessageDialog(null, "Mã văn phòng phẩm "+vp.getMaVPP()+" đã tồn tại!");
+                else{
+                    int active = vc.themMoi(vp);
+                    if(active<=0) JOptionPane.showMessageDialog(null, "Thêm mới "+vp.getMaVPP()+" thất bại!");
+                    else dem++;
+                }
+            }
+            if(dem == jTable_VPP.getRowCount()) hienThiToanBoVPP();
+        }
+    }//GEN-LAST:event_jButton_ThemTuExcelActionPerformed
 protected void xuLyXoa(String maVPP) {
 		VanPhongPham_Connect sachXoa = new VanPhongPham_Connect();
 		int active= sachXoa.Xoa(maVPP);
@@ -1332,6 +1385,7 @@ protected void xuLyXoa(String maVPP) {
     private javax.swing.JButton jButton_ThemTuExcel;
     private javax.swing.JButton jButton_ThemVPP;
     private javax.swing.JButton jButton_XoaVPP;
+    private javax.swing.JButton jButton_importExcel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
