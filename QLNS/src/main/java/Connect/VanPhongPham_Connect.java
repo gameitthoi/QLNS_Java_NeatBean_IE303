@@ -358,4 +358,20 @@ public class VanPhongPham_Connect extends Connect_sqlServer{
         }
         return dataset;
    } 
+    
+    public boolean kiemTraTonTai(String maVPP)
+    {
+        
+        try {
+            String sql ="select * from VPP where MaVPP=?" ;
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setString(1, maVPP);
+            ResultSet result = pre.executeQuery();
+            while (result.next()) return true ;
+        } catch (Exception e) {
+                e.printStackTrace();
+        }
+
+        return false ;
+    }
 }
