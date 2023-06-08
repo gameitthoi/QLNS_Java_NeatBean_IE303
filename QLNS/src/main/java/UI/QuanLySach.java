@@ -994,9 +994,9 @@ public class QuanLySach extends javax.swing.JFrame {
 				s.setTenSach((String) jTable_Books.getValueAt(select, 2));
 				s.setTheLoai((String) jTable_Books.getValueAt(select, 3));
 				s.setTacGia((String) jTable_Books.getValueAt(select, 4));
-                                s.setSoLuong( (int) jTable_Books.getValueAt(select, 5));
+                                s.setSoLuong( Integer.parseInt(jTable_Books.getValueAt(select, 5)+""));
 				s.setGiaBan( Double.parseDouble(jTable_Books.getValueAt(select, 6)+"") );
-				s.setDiscount((int) jTable_Books.getValueAt(select, 7));
+				s.setDiscount(Integer.parseInt(jTable_Books.getValueAt(select, 7)+""));
 				
 				
 				//đưa thông tin lên panelTop
@@ -1238,7 +1238,7 @@ public class QuanLySach extends javax.swing.JFrame {
                 
                 vp.setMaSach(jTable_Books.getValueAt(i, 0).toString());
                 NXB cv = nc.TimTenNXB(jTable_Books.getValueAt(i, 1).toString());
-                vp.setMaNXB(cv.getTenNXB());
+                vp.setMaNXB(cv.getMaNXB());
                 vp.setTenSach(jTable_Books.getValueAt(i, 2).toString());
                 vp.setTheLoai((String) jTable_Books.getValueAt(i, 3).toString());
                 vp.setTacGia((String) jTable_Books.getValueAt(i, 4).toString());
