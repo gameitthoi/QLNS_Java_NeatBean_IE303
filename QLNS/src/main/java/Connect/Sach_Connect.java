@@ -237,8 +237,12 @@ public class Sach_Connect extends Connect_sqlServer{
                     tk.setMaSP(result.getString(1));
                     tk.setTenSP(result.getString(2));
                     tk.setTonDau(result.getInt(5));
-                    tk.setNhap(result.getInt(7));
-                    tk.setXuat(result.getInt(8));
+                    if(Integer.toString(result.getInt(7))!=null)
+                        tk.setNhap(result.getInt(7));
+                    else tk.setNhap(0);
+                    if(Integer.toString(result.getInt(8))!=null)
+                        tk.setXuat(result.getInt(8));
+                    else tk.setXuat(0);
                     tk.setTonCuoi(result.getInt(9));
                 }
                 //khi dòng hiện tại là văn phòng phẩm
@@ -246,8 +250,12 @@ public class Sach_Connect extends Connect_sqlServer{
                     tk.setMaSP(result.getString(3));
                     tk.setTenSP(result.getString(4));
                     tk.setTonDau(result.getInt(6));
-                    tk.setNhap(result.getInt(7));
-                    tk.setXuat(result.getInt(8));
+                    if(Integer.toString(result.getInt(7))!=null)
+                        tk.setNhap(result.getInt(7));
+                    else tk.setNhap(0);
+                    if(Integer.toString(result.getInt(8))!=null)
+                        tk.setXuat(result.getInt(8));
+                    else tk.setXuat(0);
                     tk.setTonCuoi(result.getInt(10));
                 }
                 dsTK.add(tk);  
