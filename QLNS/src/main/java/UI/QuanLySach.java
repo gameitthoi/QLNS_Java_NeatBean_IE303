@@ -1238,7 +1238,7 @@ public class QuanLySach extends javax.swing.JFrame {
                 
                 vp.setMaSach(jTable_Books.getValueAt(i, 0).toString());
                 NXB cv = nc.TimTenNXB(jTable_Books.getValueAt(i, 1).toString());
-                vp.setMaNXB(cv.getTenNXB());
+                vp.setMaNXB(cv.getMaNXB());
                 vp.setTenSach(jTable_Books.getValueAt(i, 2).toString());
                 vp.setTheLoai((String) jTable_Books.getValueAt(i, 3).toString());
                 vp.setTacGia((String) jTable_Books.getValueAt(i, 4).toString());
