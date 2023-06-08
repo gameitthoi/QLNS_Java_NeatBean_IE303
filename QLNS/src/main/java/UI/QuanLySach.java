@@ -794,71 +794,71 @@ public class QuanLySach extends javax.swing.JFrame {
 //                                
 
                
-				if(TKInput_MaSach.getText().length()==0 ||  
-						TKInput_TenSach.getText().length()==0 || TKInput_TacGia.getText().length()==0 || TKInput_GiaBan.getText().length()==0 ||
-						TKInput_TheLoai.getText().length()==0 || TKInput_SoLuong.getText().length()==0 || TKInput_Discount.getText().length()==0) 
-                                {
-                                    JOptionPane.showMessageDialog(this, "Nhập thiếu dữ liệu","Error", JOptionPane.WARNING_MESSAGE);
-                                    return ;
-                                }
-				
-				NXB nxb = (NXB) NXBInput.getSelectedItem();
-				Sach s = new Sach();
-                                for (Sach s_check : dss){
-          
-                                        if(s_check.getMaSach().equals(TKInput_MaSach.getText())){
-                                            JOptionPane.showMessageDialog(this, "Sách đã tồn tại","Error", JOptionPane.WARNING_MESSAGE);
-                                            return;
-                                        }
-                                } 
-				s.setMaSach(TKInput_MaSach.getText());
-				s.setTenSach(TKInput_TenSach.getText());
-				s.setMaNXB(nxb.getMaNXB());
-				s.setTacGia(TKInput_TacGia.getText());
-                                s.setTheLoai(TKInput_TheLoai.getText());
-                                if (!isNumeric_Double(TKInput_GiaBan.getText()) || !isNumeric(TKInput_SoLuong.getText()) || !isNumeric(TKInput_Discount.getText())){
-                                    JOptionPane.showMessageDialog(this, "Giá bán, Số lượng hoặc Giảm giá đã nhập sai định dạng!\n Vui lòng thử lại!","Error", JOptionPane.WARNING_MESSAGE);
-                                    return ;
-                                }
-				s.setGiaBan(Double.parseDouble(TKInput_GiaBan.getText()));
-				
-				s.setSoLuong(Integer.parseInt(TKInput_SoLuong.getText()));
-				s.setDiscount(Integer.parseInt(TKInput_Discount.getText()));
-                                
-				int x =JOptionPane.showConfirmDialog(null, "Bạn chắc chắn muôn thêm sách", "Xác nhận thêm",JOptionPane.OK_CANCEL_OPTION);
-				if(x==JOptionPane.OK_OPTION)
-				{
-					xuLyThemMoi(s);	
-				}
-				else return;
+        if(TKInput_MaSach.getText().length()==0 ||  
+                        TKInput_TenSach.getText().length()==0 || TKInput_TacGia.getText().length()==0 || TKInput_GiaBan.getText().length()==0 ||
+                        TKInput_TheLoai.getText().length()==0 || TKInput_SoLuong.getText().length()==0 || TKInput_Discount.getText().length()==0) 
+        {
+            JOptionPane.showMessageDialog(this, "Nhập thiếu dữ liệu","Error", JOptionPane.WARNING_MESSAGE);
+            return ;
+        }
+
+        NXB nxb = (NXB) NXBInput.getSelectedItem();
+        Sach s = new Sach();
+        for (Sach s_check : dss){
+
+                if(s_check.getMaSach().equals(TKInput_MaSach.getText())){
+                    JOptionPane.showMessageDialog(this, "Sách đã tồn tại","Error", JOptionPane.WARNING_MESSAGE);
+                    return;
+                }
+        } 
+        s.setMaSach(TKInput_MaSach.getText());
+        s.setTenSach(TKInput_TenSach.getText());
+        s.setMaNXB(nxb.getMaNXB());
+        s.setTacGia(TKInput_TacGia.getText());
+        s.setTheLoai(TKInput_TheLoai.getText());
+        if (!isNumeric_Double(TKInput_GiaBan.getText()) || !isNumeric(TKInput_SoLuong.getText()) || !isNumeric(TKInput_Discount.getText())){
+            JOptionPane.showMessageDialog(this, "Giá bán, Số lượng hoặc Giảm giá đã nhập sai định dạng!\n Vui lòng thử lại!","Error", JOptionPane.WARNING_MESSAGE);
+            return ;
+        }
+        s.setGiaBan(Double.parseDouble(TKInput_GiaBan.getText()));
+
+        s.setSoLuong(Integer.parseInt(TKInput_SoLuong.getText()));
+        s.setDiscount(Integer.parseInt(TKInput_Discount.getText()));
+
+        int x =JOptionPane.showConfirmDialog(null, "Bạn chắc chắn muôn thêm sách", "Xác nhận thêm",JOptionPane.OK_CANCEL_OPTION);
+        if(x==JOptionPane.OK_OPTION)
+        {
+            xuLyThemMoi(s);	
+        }
+        else return;
     }//GEN-LAST:event_jButton_ThemSachActionPerformed
 
     protected void xuLyThemMoi(Sach s) {
-		Sach_Connect themsach = new Sach_Connect();
-		int active = themsach.themSachMoi(s);
+        Sach_Connect themsach = new Sach_Connect();
+        int active = themsach.themSachMoi(s);
 		if(active > 0 )
 		{
-			JOptionPane.showMessageDialog(null, "Thêm mới thành công");
-                        TaoHDVaCTHD();
-                                TKInput_MaSach.setText("");
-				TKInput_TenSach.setText("");	
-				TKInput_TacGia.setText("");
-				TKInput_GiaBan.setText("");
-				TKInput_TheLoai.setText("");
-				TKInput_SoLuong.setText("");
-                                TKInput_Discount.setText("");
-				TKInput_MaSach.requestFocus();
-                                hienThiToanBoSach();
+            JOptionPane.showMessageDialog(null, "Thêm mới thành công");
+            TaoHDVaCTHD();
+            TKInput_MaSach.setText("");
+            TKInput_TenSach.setText("");	
+            TKInput_TacGia.setText("");
+            TKInput_GiaBan.setText("");
+            TKInput_TheLoai.setText("");
+            TKInput_SoLuong.setText("");
+            TKInput_Discount.setText("");
+            TKInput_MaSach.requestFocus();
+            hienThiToanBoSach();
 //                      
 			
-		}
+        }
 		else
 		{
-			JOptionPane.showMessageDialog(null, "Thêm mới thất bại");
-		}
+            JOptionPane.showMessageDialog(null, "Thêm mới thất bại");
+        }     
 		      
                    
-	}
+    }
     
     private void TaoHDVaCTHD(){
         String HD = "HD";
