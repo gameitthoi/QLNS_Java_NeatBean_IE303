@@ -79,8 +79,8 @@ public class Sach {
             return this.discount;
         }
         
-	public void setDiscount(int dis){
-            this.discount = dis;
+	public void setDiscount(int discount){
+            this.discount = discount;
         }
         
 	

@@ -413,9 +413,11 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                              <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="TKInput_UpdateAllPrice" min="-2" pref="151" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="TKInput_UpdateAllPrice" min="-2" pref="142" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="jButton_Accpet_Search" min="-2" pref="54" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jButton_Cancel" min="-2" pref="54" max="-2" attributes="0"/>
@@ -438,6 +440,7 @@
                                   <Component id="TKInput_UpdateAllPrice" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                                   <Component id="jButton_Accpet_Search" alignment="3" max="32767" attributes="0"/>
                                   <Component id="jButton_Cancel" alignment="3" max="32767" attributes="0"/>
+                                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
@@ -473,6 +476,11 @@
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton_CancelActionPerformed"/>
                       </Events>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jLabel5">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Gi&#xe1;:"/>
+                      </Properties>
                     </Component>
                   </SubComponents>
                 </Container>
@@ -840,13 +848,15 @@
                   <EmptySpace pref="10" max="32767" attributes="0"/>
                   <Component id="NhanTenLabel" min="-2" pref="37" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel_Loc" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
-                      <Component id="TK_TenVPPInput" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="jLabel_Loc1" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                      <Component id="TK_DanhMucInput" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="jButton_Search" alignment="3" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jButton_RefreshSearch" alignment="1" min="-2" pref="38" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel_Loc" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                          <Component id="TK_TenVPPInput" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="jLabel_Loc1" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="TK_DanhMucInput" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
+                          <Component id="jButton_Search" alignment="3" max="32767" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
               </Group>
