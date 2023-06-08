@@ -67,7 +67,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
  
     }
     
-    private void hienThiToanBoVPP() {
+   private void hienThiToanBoVPP() {
         
         VanPhongPham_Connect vppConn = new VanPhongPham_Connect();
         dsVPP = vppConn.layToanBoVPP();
@@ -99,7 +99,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
     
      
       
-      private void hienThiToanBoNhaCungCap() {
+       private void hienThiToanBoNhaCungCap() {
  
         NhaCungCapVPP_Connect nccconn = new NhaCungCapVPP_Connect();
 

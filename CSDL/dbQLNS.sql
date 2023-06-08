@@ -1,5 +1,5 @@
 USE [master]
-GO
+GO 
 /****** Object:  Database [dbQLNS]    Script Date: 09-Dec-17 9:46:27 AM ******/
 CREATE DATABASE [dbQLNS]
  CONTAINMENT = NONE

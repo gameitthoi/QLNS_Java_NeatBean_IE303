@@ -1220,11 +1220,40 @@ public class QuanLySach extends javax.swing.JFrame {
                 e.printStackTrace();
             }
         }
-        jButton_ThemSachTuExcel.setEnabled(true);
+        jButton_ThemSachTuExcel1.setEnabled(true);
     }//GEN-LAST:event_jButton_ThemSachTuExcelActionPerformed
 
     private void jButton_ThemSachTuExcel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ThemSachTuExcel1ActionPerformed
         // TODO add your handling code here:
+        int ret=JOptionPane.showConfirmDialog(null, "Bạn muốn thêm tất cả văn phòng phẩm có trong bảng?", "xác nhận xác nhận để thêm", JOptionPane.OK_CANCEL_OPTION);
+        if(ret==JOptionPane.OK_OPTION){
+            int dem = 0;
+           
+            Sach_Connect vc = new Sach_Connect();
+            NXB_Connect nc = new NXB_Connect();
+            //lặp qua tất cả các dòng của bảng
+            for (int i=0; i< jTable_Books.getRowCount(); i++){
+                
+                Sach vp = new Sach ();
+                
+                vp.setMaSach(jTable_Books.getValueAt(i, 0).toString());
+                NXB cv = nc.TimTenNXB(jTable_Books.getValueAt(i, 1).toString());
+                vp.setMaNXB(cv.getTenNXB());
+                vp.setTenSach(jTable_Books.getValueAt(i, 2).toString());
+                vp.setTheLoai((String) jTable_Books.getValueAt(i, 3).toString());
+                vp.setTacGia((String) jTable_Books.getValueAt(i, 4).toString());
+                vp.setSoLuong( Integer.parseInt(jTable_Books.getValueAt(i, 5)+""));
+                vp.setGiaBan( Double.parseDouble(jTable_Books.getValueAt(i, 6)+"") );
+		vp.setDiscount(Integer.parseInt(jTable_Books.getValueAt(i, 7)+""));
+                if(vc.kiemTraTonTai(vp.getMaSach())==true) JOptionPane.showMessageDialog(null, "Mã sách "+vp.getMaSach()+" đã tồn tại!");
+                else{
+                    int active = vc.themSachMoi(vp);
+                    if(active<=0) JOptionPane.showMessageDialog(null, "Thêm mới "+vp.getMaSach()+" thất bại!");
+                    else dem++;
+                }
+            }
+            if(dem == jTable_Books.getRowCount()) hienThiToanBoSach();
+        }
     }//GEN-LAST:event_jButton_ThemSachTuExcel1ActionPerformed
 protected void xuLyXoa(String maSach) {
 		Sach_Connect sachXoa = new Sach_Connect();

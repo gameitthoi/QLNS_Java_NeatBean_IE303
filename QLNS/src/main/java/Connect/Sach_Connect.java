@@ -463,4 +463,19 @@ public class Sach_Connect extends Connect_sqlServer{
         }
         return dataset;
    } 
+    public boolean kiemTraTonTai(String maSach)
+    {
+        
+        try {
+            String sql ="select * from SACH where MaSach=?" ;
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setString(1, maSach);
+            ResultSet result = pre.executeQuery();
+            while (result.next()) return true ;
+        } catch (Exception e) {
+                e.printStackTrace();
+        }
+
+        return false ;
+    }
 }

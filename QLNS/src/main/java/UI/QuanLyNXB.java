@@ -64,6 +64,7 @@ public class QuanLyNXB extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         NXBTable = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -91,6 +92,8 @@ public class QuanLyNXB extends javax.swing.JFrame {
         AllNXBBtn = new javax.swing.JButton();
         TimKiemInput = new javax.swing.JTextField();
         NhanTenLabel = new javax.swing.JLabel();
+
+        jLabel1.setText("jLabel1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -392,7 +395,7 @@ public class QuanLyNXB extends javax.swing.JFrame {
         if(TimKiemInput.getText()==null ) return ;
         String key = TimKiemInput.getText();
         NXB_Connect nxbconn = new NXB_Connect();
-        dsnxb_tim = nxbconn.TimTenNXB(key);
+        dsnxb_tim = nxbconn.TimTenNXBmacdinh(key);
         dtmNXB.setRowCount(0);
         for(NXB nxb : dsnxb_tim){
             Vector<Object> vec = new Vector<Object>();
@@ -483,13 +486,13 @@ public class QuanLyNXB extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_AddBtnActionPerformed
 
-    private void DiachiInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiachiInputActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DiachiInputActionPerformed
-
     private void TimKiemInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TimKiemInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TimKiemInputActionPerformed
+
+    private void DiachiInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiachiInputActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DiachiInputActionPerformed
 
     /**
      * @param args the command line arguments
@@ -548,6 +551,7 @@ public class QuanLyNXB extends javax.swing.JFrame {
     private javax.swing.JTextField TimKiemInput;
     private javax.swing.JLabel TimNhanVienLabel;
     private javax.swing.JButton UpdateBtn;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

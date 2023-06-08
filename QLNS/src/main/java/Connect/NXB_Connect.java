@@ -122,8 +122,7 @@ public class NXB_Connect extends Connect_sqlServer
             }
             return -1 ;
 	}
-        
-        public ArrayList<NXB> TimTenNXB(String key){
+        public ArrayList<NXB> TimTenNXBmacdinh(String key){
             ArrayList<NXB> dsnxb = new ArrayList<NXB>();
             try{
                 String sql ="select * from NXB where MaNXB like ? or TenNXB like ?" ;
@@ -145,6 +144,26 @@ public class NXB_Connect extends Connect_sqlServer
             }
             return dsnxb;
     }
+        public NXB TimTenNXB(String key){
+            NXB nxb = new NXB();
+            try{
+                String sql ="select * from NXB where MaNXB like ? or TenNXB like ?" ;
+                PreparedStatement pre = conn.prepareStatement(sql);
+                pre.setString(1, "%"+key+"%");                
+                pre.setString(2, "%"+key+"%");
+                ResultSet result = pre.executeQuery();
+                while (result.next()) {
+                    nxb.setMaNXB(result.getString(1));
+                    nxb.setTenNXB(result.getString(2));                    
+                    nxb.setSDT(result.getString(3));
+                    nxb.setDiaChi(result.getString(4));
+                    nxb.setEmail(result.getString(5));
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            return nxb;
+    }
         public NXB TimTenNXBCheckBox(String tenNXB){
         NXB nxb = new NXB();
         try{
@@ -161,6 +180,7 @@ public class NXB_Connect extends Connect_sqlServer
         }
         return nxb;
     }
+        
 }
 	
 
