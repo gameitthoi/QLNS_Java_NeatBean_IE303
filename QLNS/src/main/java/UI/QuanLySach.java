@@ -210,6 +210,7 @@ public class QuanLySach extends javax.swing.JFrame {
         jLabel_Loc1 = new javax.swing.JLabel();
         TKInput1 = new javax.swing.JTextField();
         NhanTenLabel = new javax.swing.JLabel();
+        jButton_RefreshSearch = new javax.swing.JButton();
 
         jLabel_Discount1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel_Discount1.setText("Tăng giá đồng loạt");
@@ -664,6 +665,18 @@ public class QuanLySach extends javax.swing.JFrame {
         NhanTenLabel.setForeground(new java.awt.Color(0, 153, 153));
         NhanTenLabel.setText("Nhập tên sách và tên tác giả");
 
+        jButton_RefreshSearch.setBackground(new java.awt.Color(255, 204, 204));
+        jButton_RefreshSearch.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton_RefreshSearch.setForeground(new java.awt.Color(255, 255, 255));
+        jButton_RefreshSearch.setText("!");
+        jButton_RefreshSearch.setMaximumSize(new java.awt.Dimension(150, 40));
+        jButton_RefreshSearch.setMinimumSize(new java.awt.Dimension(150, 40));
+        jButton_RefreshSearch.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton_RefreshSearchMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel_CenterLayout = new javax.swing.GroupLayout(jPanel_Center);
         jPanel_Center.setLayout(jPanel_CenterLayout);
         jPanel_CenterLayout.setHorizontalGroup(
@@ -677,6 +690,9 @@ public class QuanLySach extends javax.swing.JFrame {
                     .addGroup(jPanel_CenterLayout.createSequentialGroup()
                         .addGroup(jPanel_CenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel_CenterLayout.createSequentialGroup()
+                                .addGap(514, 514, 514)
+                                .addComponent(NhanTenLabel))
+                            .addGroup(jPanel_CenterLayout.createSequentialGroup()
                                 .addGap(78, 78, 78)
                                 .addComponent(jLabel_Loc)
                                 .addGap(18, 18, 18)
@@ -686,11 +702,10 @@ public class QuanLySach extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(TKInput1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel_CenterLayout.createSequentialGroup()
-                                .addGap(514, 514, 514)
-                                .addComponent(NhanTenLabel)))
-                        .addGap(0, 138, Short.MAX_VALUE)))
+                                .addComponent(jButton_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButton_RefreshSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 56, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel_CenterLayout.setVerticalGroup(
@@ -708,13 +723,15 @@ public class QuanLySach extends javax.swing.JFrame {
                     .addComponent(TKInput, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_Loc1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TKInput1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_Search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton_Search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton_RefreshSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27))
         );
 
         jLabel_Loc.setIcon(new ImageIcon("images/filter_48px.png"));
         jButton_Search.setIcon(new ImageIcon("images/search_25px.png"));
         jLabel_Loc.setIcon(new ImageIcon("images/filter_48px.png"));
+        jButton_RefreshSearch.setIcon(new ImageIcon("images/refresh_30px.png"));
 
         getContentPane().add(jPanel_Center, java.awt.BorderLayout.CENTER);
 
@@ -1226,6 +1243,11 @@ public class QuanLySach extends javax.swing.JFrame {
     private void jButton_ThemSachTuExcel1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ThemSachTuExcel1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_ThemSachTuExcel1ActionPerformed
+
+    private void jButton_RefreshSearchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton_RefreshSearchMouseClicked
+        // TODO add your handling code here:
+        hienThiToanBoSach();
+    }//GEN-LAST:event_jButton_RefreshSearchMouseClicked
 protected void xuLyXoa(String maSach) {
 		Sach_Connect sachXoa = new Sach_Connect();
 		int active= sachXoa.XoaSach(maSach);
@@ -1273,6 +1295,7 @@ protected void xuLyXoa(String maSach) {
     private javax.swing.JButton jButton_CancelNXB;
     private javax.swing.JButton jButton_ChinhSua;
     private javax.swing.JButton jButton_NhapLai;
+    private javax.swing.JButton jButton_RefreshSearch;
     private javax.swing.JButton jButton_Search;
     private javax.swing.JButton jButton_ThemSach;
     private javax.swing.JButton jButton_ThemSachTuExcel;

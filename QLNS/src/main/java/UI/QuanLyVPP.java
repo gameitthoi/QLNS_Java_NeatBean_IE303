@@ -222,6 +222,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
         jLabel_Loc1 = new javax.swing.JLabel();
         TK_DanhMucInput = new javax.swing.JTextField();
         NhanTenLabel = new javax.swing.JLabel();
+        jButton_RefreshSearch = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -723,6 +724,18 @@ public class QuanLyVPP extends javax.swing.JFrame {
         NhanTenLabel.setForeground(new java.awt.Color(0, 153, 153));
         NhanTenLabel.setText("Nhập tên VPP và tên danh mục");
 
+        jButton_RefreshSearch.setBackground(new java.awt.Color(255, 204, 204));
+        jButton_RefreshSearch.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton_RefreshSearch.setForeground(new java.awt.Color(255, 255, 255));
+        jButton_RefreshSearch.setText("!");
+        jButton_RefreshSearch.setMaximumSize(new java.awt.Dimension(150, 40));
+        jButton_RefreshSearch.setMinimumSize(new java.awt.Dimension(150, 40));
+        jButton_RefreshSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_RefreshSearchActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel_CenterLayout = new javax.swing.GroupLayout(jPanel_Center);
         jPanel_Center.setLayout(jPanel_CenterLayout);
         jPanel_CenterLayout.setHorizontalGroup(
@@ -744,7 +757,9 @@ public class QuanLyVPP extends javax.swing.JFrame {
                         .addComponent(TK_DanhMucInput, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jButton_Search, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 275, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton_RefreshSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 197, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(jPanel_CenterLayout.createSequentialGroup()
                 .addGap(516, 516, 516)
@@ -766,13 +781,15 @@ public class QuanLyVPP extends javax.swing.JFrame {
                     .addComponent(TK_TenVPPInput, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_Loc1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(TK_DanhMucInput, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_Search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButton_Search, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton_RefreshSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5))
         );
 
         jLabel_Loc.setIcon(new ImageIcon("images/filter_48px.png"));
         jButton_Search.setIcon(new ImageIcon("images/search_25px.png"));
         jLabel_Loc.setIcon(new ImageIcon("images/filter_48px.png"));
+        jButton_RefreshSearch.setIcon(new ImageIcon("images/refresh_30px.png"));
 
         getContentPane().add(jPanel_Center, java.awt.BorderLayout.CENTER);
 
@@ -1334,6 +1351,11 @@ public class QuanLyVPP extends javax.swing.JFrame {
             if(dem == jTable_VPP.getRowCount()) hienThiToanBoVPP();
         }
     }//GEN-LAST:event_jButton_ThemTuExcelActionPerformed
+
+    private void jButton_RefreshSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RefreshSearchActionPerformed
+        // TODO add your handling code here:
+        hienThiToanBoVPP();
+    }//GEN-LAST:event_jButton_RefreshSearchActionPerformed
 protected void xuLyXoa(String maVPP) {
 		VanPhongPham_Connect sachXoa = new VanPhongPham_Connect();
 		int active= sachXoa.Xoa(maVPP);
@@ -1381,6 +1403,7 @@ protected void xuLyXoa(String maVPP) {
     private javax.swing.JButton jButton_CancelNCC;
     private javax.swing.JButton jButton_ChinhSua;
     private javax.swing.JButton jButton_NhapLai;
+    private javax.swing.JButton jButton_RefreshSearch;
     private javax.swing.JButton jButton_Search;
     private javax.swing.JButton jButton_ThemTuExcel;
     private javax.swing.JButton jButton_ThemVPP;
