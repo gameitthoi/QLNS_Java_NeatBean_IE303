@@ -14,6 +14,8 @@ import java.awt.Toolkit;
 
 import java.util.ArrayList;
 import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -35,7 +37,8 @@ public class QuanLyNCCVPP extends javax.swing.JFrame {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         hienThiToanBoThongTin();
     }
-private void hienThiToanBoThongTin() {
+    
+    private void hienThiToanBoThongTin() {
         NhaCungCapVPP_Connect nccConn = new NhaCungCapVPP_Connect();
         dsNCC = nccConn.layToanBoNhaCungCap_VPP();
         dtmNCC = new DefaultTableModel();
@@ -57,6 +60,14 @@ private void hienThiToanBoThongTin() {
             dtmNCC.addRow(vec);	
         }
         NCCTable.setModel(dtmNCC);
+    }
+
+    //hàm check email
+    public boolean isValidEmail(String email) {
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -93,6 +104,7 @@ private void hienThiToanBoThongTin() {
         TKNCCBtn = new javax.swing.JButton();
         TimKiemInput = new javax.swing.JTextField();
         NhanTenLabel = new javax.swing.JLabel();
+        TKNCCBtn1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -113,6 +125,12 @@ private void hienThiToanBoThongTin() {
 
         SDTLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         SDTLabel.setText("Số điện thoại");
+
+        SDTInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                SDTInputKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -263,7 +281,7 @@ private void hienThiToanBoThongTin() {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 19, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -293,8 +311,21 @@ private void hienThiToanBoThongTin() {
             }
         });
 
+        TimKiemInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TimKiemInputKeyPressed(evt);
+            }
+        });
+
         NhanTenLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         NhanTenLabel.setText("Nhập tên nhà cung cấp");
+
+        TKNCCBtn1.setText("Tất cả");
+        TKNCCBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TKNCCBtn1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -307,12 +338,12 @@ private void hienThiToanBoThongTin() {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(NhanTenLabel)
-                        .addGap(0, 30, Short.MAX_VALUE)))
+                        .addGap(0, 30, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(TKNCCBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(TKNCCBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addComponent(TKNCCBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,8 +353,10 @@ private void hienThiToanBoThongTin() {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(TimKiemInput, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
-                .addComponent(TKNCCBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TKNCCBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TKNCCBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -331,8 +364,7 @@ private void hienThiToanBoThongTin() {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -340,9 +372,12 @@ private void hienThiToanBoThongTin() {
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ThongTinNhanVienLabel)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(11, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(ThongTinNhanVienLabel)
+                                .addGap(0, 476, Short.MAX_VALUE))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -366,24 +401,24 @@ private void hienThiToanBoThongTin() {
     private void NCCTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NCCTableMouseClicked
         int select = NCCTable.getSelectedRow();
             
-				if(select==-1) return ;
-				
-                                //lấy thông tin trong table
-				NhaCungCap_VPP ncc = new NhaCungCap_VPP();
-				ncc.setMaNCCVPP((String) NCCTable.getValueAt(select, 0));
-                            
-                                ncc.setTenNCCVPP((String) NCCTable.getValueAt(select, 1));
-				ncc.setSDT((String) NCCTable.getValueAt(select, 2));
-				ncc.setDiaChi((String) NCCTable.getValueAt(select, 3));
-				ncc.setEmail((String) NCCTable.getValueAt(select, 4));
-                           
-				
-				//đưa thông tin lên panelTop
-				MaNCCInput.setText(ncc.getMaNCCVPP());                    
-                                TenNCCInput.setText(ncc.getTenNCCVPP());
-                                SDTInput.setText(ncc.getSDT());
-                                DCInput.setText(ncc.getDiaChi());
-                                EmailInput.setText(ncc.getEmail());
+        if(select==-1) return ;
+
+        //lấy thông tin trong table
+        NhaCungCap_VPP ncc = new NhaCungCap_VPP();
+        ncc.setMaNCCVPP((String) NCCTable.getValueAt(select, 0));
+
+        ncc.setTenNCCVPP((String) NCCTable.getValueAt(select, 1));
+        ncc.setSDT((String) NCCTable.getValueAt(select, 2));
+        ncc.setDiaChi((String) NCCTable.getValueAt(select, 3));
+        ncc.setEmail((String) NCCTable.getValueAt(select, 4));
+
+
+        //đưa thông tin lên panelTop
+        MaNCCInput.setText(ncc.getMaNCCVPP());                    
+        TenNCCInput.setText(ncc.getTenNCCVPP());
+        SDTInput.setText(ncc.getSDT());
+        DCInput.setText(ncc.getDiaChi());
+        EmailInput.setText(ncc.getEmail());
                           
     }//GEN-LAST:event_NCCTableMouseClicked
 
@@ -415,108 +450,120 @@ private void hienThiToanBoThongTin() {
     }//GEN-LAST:event_TKNCCBtnActionPerformed
 
     private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
-            int select = NCCTable.getSelectedRow();
-				if(select==-1)  return ;
-				String maNCC = (String) NCCTable.getValueAt(select, 0);
-				//JOptionPane.showMessageDialog(null,jTable_Books.getValueAt(select, 0) );
-				int active = JOptionPane.showConfirmDialog(null, "Bạn chắc chắn muốn xóa", "Xác Nhận Xóa", JOptionPane.OK_CANCEL_OPTION);
-				if(active==JOptionPane.OK_OPTION)
-				{
-					xuLyXoa(maNCC);
-					//JOptionPane.showMessageDialog(null,maSach );
-				}
+        int select = NCCTable.getSelectedRow();
+        if(select==-1)  return ;
+        String maNCC = (String) NCCTable.getValueAt(select, 0);
+        //JOptionPane.showMessageDialog(null,jTable_Books.getValueAt(select, 0) );
+        int active = JOptionPane.showConfirmDialog(null, "Bạn chắc chắn muốn xóa", "Xác Nhận Xóa", JOptionPane.OK_CANCEL_OPTION);
+        if(active==JOptionPane.OK_OPTION)
+        {
+                xuLyXoa(maNCC);
+                //JOptionPane.showMessageDialog(null,maSach );
+        }
     }//GEN-LAST:event_DeleteBtnActionPerformed
-protected void xuLyXoa(String maNCC) {
-		 NhaCungCapVPP_Connect nccConn = new NhaCungCapVPP_Connect();
-		int active= nccConn.Xoa(maNCC);
-		if(active > 0)
-		{
-			JOptionPane.showMessageDialog(null, "Xóa thành công!");
-			hienThiToanBoThongTin();
-		}
-		else
-		{
-			JOptionPane.showMessageDialog(null, "Xóa thất bại");	
-		}
-		
-	}
+    protected void xuLyXoa(String maNCC) {
+        NhaCungCapVPP_Connect nccConn = new NhaCungCapVPP_Connect();
+       int active= nccConn.Xoa(maNCC);
+       if(active > 0){
+            JOptionPane.showMessageDialog(null, "Xóa thành công!");
+            hienThiToanBoThongTin();
+       }
+       else{
+           JOptionPane.showMessageDialog(null, "Xóa thất bại");	
+       }
+    }
     private void ResetBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ResetBtnActionPerformed
-            MaNCCInput.setText("");
-            TenNCCInput.setText("");
-				
-            DCInput.setText("");
-            EmailInput.setText("");
-            SDTInput.setText("");
+        MaNCCInput.setText("");
+        TenNCCInput.setText("");
+        DCInput.setText("");
+        EmailInput.setText("");
+        SDTInput.setText("");
     }//GEN-LAST:event_ResetBtnActionPerformed
 
     private void UpdateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateBtnActionPerformed
-            
-				NhaCungCap_VPP ncc = new NhaCungCap_VPP();
-				ncc.setMaNCCVPP(MaNCCInput.getText());
-				ncc.setTenNCCVPP(TenNCCInput.getText());
-                                ncc.setSDT(SDTInput.getText());
-				
-				ncc.setDiaChi(DCInput.getText());
-				ncc.setEmail(EmailInput.getText());
-				NhaCungCapVPP_Connect nccConn = new NhaCungCapVPP_Connect();
-				int active = nccConn.update(ncc);
-				if (active>0)
-				{
-					JOptionPane.showMessageDialog(null, "Chỉnh sửa thông tin thành công");
-				}
-				else 
-				{
-					JOptionPane.showMessageDialog(null, "Chỉnh sửa thất bại");
-				}
-                                hienThiToanBoThongTin();
+        if(!isValidEmail(EmailInput.getText())){
+            JOptionPane.showMessageDialog(null, "Email không đúng định dạng!");
+            return;
+        }
+        NhaCungCap_VPP ncc = new NhaCungCap_VPP();
+        ncc.setMaNCCVPP(MaNCCInput.getText());
+        ncc.setTenNCCVPP(TenNCCInput.getText());
+        ncc.setSDT(SDTInput.getText());
+
+        ncc.setDiaChi(DCInput.getText());
+        ncc.setEmail(EmailInput.getText());
+        NhaCungCapVPP_Connect nccConn = new NhaCungCapVPP_Connect();
+        int active = nccConn.update(ncc);
+        if (active>0){
+            JOptionPane.showMessageDialog(null, "Chỉnh sửa thông tin thành công");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Chỉnh sửa thất bại");
+        }
+        hienThiToanBoThongTin();
     }//GEN-LAST:event_UpdateBtnActionPerformed
 
     private void AddBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBtnActionPerformed
         if(MaNCCInput.getText().length()==0 ||  
-						TenNCCInput.getText().length()==0 || DCInput.getText().length()==0 || EmailInput.getText().length()==0 ||
-						SDTInput.getText().length()==0) return ;
-				
-				//NXB nxb = (NXB) NXBInput.getSelectedItem();
-				NhaCungCap_VPP ncc = new NhaCungCap_VPP();
-				ncc.setMaNCCVPP(MaNCCInput.getText());
-				ncc.setTenNCCVPP(TenNCCInput.getText());
-                                ncc.setSDT(SDTInput.getText());
-				
-				ncc.setDiaChi(DCInput.getText());
-				ncc.setEmail(EmailInput.getText());
-				
-				int x =JOptionPane.showConfirmDialog(null, "Bạn chắc chắn muôn thêm nhà cung cấp", "Xác nhận thêm",JOptionPane.OK_CANCEL_OPTION);
-				if(x==JOptionPane.OK_OPTION)
-				{
-					xuLyThemMoi(ncc);	
-				}
-				else return;
+            TenNCCInput.getText().length()==0 || DCInput.getText().length()==0 || EmailInput.getText().length()==0 ||
+            SDTInput.getText().length()==0) {
+                JOptionPane.showMessageDialog(null, "Thiếu thông tin!");
+                return ;
+        }
+	if(!isValidEmail(EmailInput.getText())){
+            JOptionPane.showMessageDialog(null, "Email không đúng định dạng!");
+            return;
+        }	
+        //NXB nxb = (NXB) NXBInput.getSelectedItem();
+        NhaCungCap_VPP ncc = new NhaCungCap_VPP();
+        ncc.setMaNCCVPP(MaNCCInput.getText());
+        ncc.setTenNCCVPP(TenNCCInput.getText());
+        ncc.setSDT(SDTInput.getText());
+
+        ncc.setDiaChi(DCInput.getText());
+        ncc.setEmail(EmailInput.getText());
+
+        int x =JOptionPane.showConfirmDialog(null, "Bạn chắc chắn muôn thêm nhà cung cấp", "Xác nhận thêm",JOptionPane.OK_CANCEL_OPTION);
+        if(x==JOptionPane.OK_OPTION)
+        {
+            xuLyThemMoi(ncc);	
+        }
+        else return;
     }//GEN-LAST:event_AddBtnActionPerformed
-protected void xuLyThemMoi(NhaCungCap_VPP ncc) {
-		
-                NhaCungCapVPP_Connect nccConnAdd = new NhaCungCapVPP_Connect();
-		int active = nccConnAdd.themMoi(ncc);
-		if(active > 0 )
-		{
-			JOptionPane.showMessageDialog(null, "Thêm mới thành công");
-                                MaNCCInput.setText("");
-                                TenNCCInput.setText("");
-                                DCInput.setText("");
-                                EmailInput.setText("");
-                                SDTInput.setText("");
-                                hienThiToanBoThongTin();
-//                      
-			
-		}
-		else
-		{
-			JOptionPane.showMessageDialog(null, "Thêm mới thất bại");
-		}
-		
-	}
+    protected void xuLyThemMoi(NhaCungCap_VPP ncc) {
+        NhaCungCapVPP_Connect nccConnAdd = new NhaCungCapVPP_Connect();
+        int active = nccConnAdd.themMoi(ncc);
+        if(active > 0 ){
+            JOptionPane.showMessageDialog(null, "Thêm mới thành công");
+            MaNCCInput.setText("");
+            TenNCCInput.setText("");
+            DCInput.setText("");
+            EmailInput.setText("");
+            SDTInput.setText("");
+            hienThiToanBoThongTin();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Thêm mới thất bại");
+        }
+    }
     private void DCInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DCInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_DCInputActionPerformed
+
+    private void TimKiemInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TimKiemInputKeyPressed
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) TKNCCBtnActionPerformed(null);
+    }//GEN-LAST:event_TimKiemInputKeyPressed
+
+    private void TKNCCBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TKNCCBtn1ActionPerformed
+        hienThiToanBoThongTin();
+    }//GEN-LAST:event_TKNCCBtn1ActionPerformed
+
+    private void SDTInputKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SDTInputKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c) || SDTInput.getText().length() >= 10) {
+            evt.consume(); // Ngăn chặn ký tự không hợp lệ và ngăn chặn nhập quá 4 ký tự
+        }
+    }//GEN-LAST:event_SDTInputKeyTyped
 
     /**
      * @param args the command line arguments
@@ -572,6 +619,7 @@ protected void xuLyThemMoi(NhaCungCap_VPP ncc) {
     private javax.swing.JTextField SDTInput;
     private javax.swing.JLabel SDTLabel;
     private javax.swing.JButton TKNCCBtn;
+    private javax.swing.JButton TKNCCBtn1;
     private javax.swing.JTextField TenNCCInput;
     private javax.swing.JLabel TenNVLabel;
     private javax.swing.JLabel ThongTinNhanVienLabel;

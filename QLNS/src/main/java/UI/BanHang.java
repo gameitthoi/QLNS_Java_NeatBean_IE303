@@ -1087,20 +1087,31 @@ public class BanHang extends javax.swing.JFrame {
             while(dtmHoaDon.getRowCount() > 0) dtmHoaDon.removeRow(0);
             HoaDon_Connect HD = new HoaDon_Connect();
             int state = HD.ThanhToan(MaHD, TotalInput.getText());
-                if(state != -1)
-                    JOptionPane.showMessageDialog(null, "Thanh toán thành công!");
-                else JOptionPane.showMessageDialog(null, "Thanh toán thất bại!");
-            //điểm của khách sẽ bằng điểm hiện tại cộng thêm tổng hóa đơn  x 0.02
-            KhachHang kh = new KhachHang();
-            KhachHang_Connect kh_conn = new KhachHang_Connect();
-            kh= kh_conn.layKhachHangBangSDT(SDTInput.getText());
-            kh.setDiem(kh.getDiem()+Double.parseDouble(TotalInput.getText())*0.02);
-            kh_conn.updateKhachHang(kh);
-            DiemOutput.setText(Double.toString(kh.getDiem()));
+            if(state != -1)
+                JOptionPane.showMessageDialog(null, "Thanh toán thành công!");
+            else JOptionPane.showMessageDialog(null, "Thanh toán thất bại!");
+            //khi có mã khách hàng thì mới cập nhật
+            if(!"".equals(makh)){
+                //điểm của khách sẽ bằng điểm hiện tại cộng thêm tổng hóa đơn  x 0.02
+                HD.capNhatMaKH(makh, MaHD); //cập nhật lại mã khách hàng nếu đã chọn khách hàng
+                KhachHang kh = new KhachHang();
+                KhachHang_Connect kh_conn = new KhachHang_Connect();
+                kh= kh_conn.layKhachHangBangSDT(SDTInput.getText());
+                if(DiemCheckBox.isSelected()) // khi khach dung diem
+                    kh.setDiem(0+Double.parseDouble(TotalInput.getText())*0.02);
+                else 
+                    kh.setDiem(kh.getDiem()+Double.parseDouble(TotalInput.getText())*0.02);
+                kh_conn.updateKhachHang(kh);
+                DiemOutput.setText(Double.toString(kh.getDiem()));
+            }
             TotalInput.setText("0");
             ReceiveInput.setText("0");
             ChangeInput.setText("0");
             MaHD = null;
+            makh= "";
+            SDTInput.setText("");
+            KHOutput.setText("");
+            DiemOutput.setText("0");
             hienThiToanBoSach();
             hienThiTatCaVPP();
             TKInput.setText("");
@@ -1108,6 +1119,7 @@ public class BanHang extends javax.swing.JFrame {
             DeleteBtn.setEnabled(false);
             PaymentBtn.setEnabled(false);
             CancleBtn.setEnabled(false);
+            DiemCheckBox.setEnabled(false);
         }
     }//GEN-LAST:event_PaymentBtnActionPerformed
 
@@ -1122,10 +1134,15 @@ public class BanHang extends javax.swing.JFrame {
             HoaDon_Connect HD = new HoaDon_Connect();
             HD.HuyHoaDon(MaHD);
             MaHD = null;
+            makh="";
             JOptionPane.showMessageDialog(null, "Hủy hóa đơn thành công!");
+            SDTInput.setText("");
+            KHOutput.setText("");
+            DiemOutput.setText("0");
             DeleteBtn.setEnabled(false);
             PaymentBtn.setEnabled(false);
             CancleBtn.setEnabled(false);
+            DiemCheckBox.setEnabled(false);
         }
     }//GEN-LAST:event_CancleBtnActionPerformed
 

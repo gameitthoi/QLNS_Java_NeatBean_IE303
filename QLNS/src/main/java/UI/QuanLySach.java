@@ -52,6 +52,7 @@ public class QuanLySach extends javax.swing.JFrame {
 	private ArrayList<Sach> dssTacGia = null;
 	private ArrayList<Sach> dss_tensach = null;
 	private ArrayList<Sach> dssByNXB = null;
+        
     public QuanLySach(String title, String maNV) {
         initComponents();
         this.setIconImage(Toolkit.getDefaultToolkit().getImage("images/books_30px.png"));
@@ -61,7 +62,7 @@ public class QuanLySach extends javax.swing.JFrame {
         MaNV=maNV;
         hienThiToanBoSach();
         hienThiToanBoNhaXuatBan();
- jButton_AddFromExcel.setEnabled(false);
+        jButton_AddFromExcel.setEnabled(false);
     }
 
     
@@ -292,12 +293,6 @@ public class QuanLySach extends javax.swing.JFrame {
         jLabel_SoLuong.setText("Số Lượng");
 
         NXBInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-
-        TKInput_MaSach.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                TKInput_MaSachActionPerformed(evt);
-            }
-        });
 
         jLabel_Discount.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel_Discount.setText("Giảm Giá");
@@ -749,55 +744,48 @@ public class QuanLySach extends javax.swing.JFrame {
     //Chỉnh sửa, cập nhật sách
     private void jButton_ChinhSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ChinhSuaActionPerformed
         // TODO add your handling code here:
-                                if(TKInput_MaSach.getText().length()==0 ||  
-						TKInput_TenSach.getText().length()==0 || TKInput_TacGia.getText().length()==0 || TKInput_GiaBan.getText().length()==0 ||
-						TKInput_TheLoai.getText().length()==0 || TKInput_SoLuong.getText().length()==0 || TKInput_Discount.getText().length()==0) 
-                                {
-                                    JOptionPane.showMessageDialog(this, "Nhập thiếu dữ liệu !","Error", JOptionPane.WARNING_MESSAGE);
-                                    return ;
-                                }
-                                NXB manxb = (NXB) NXBInput.getSelectedItem();
-				Sach s = new Sach();
-				s.setMaSach(TKInput_MaSach.getText());
-				s.setTenSach(TKInput_TenSach.getText());
-				s.setMaNXB(manxb.getMaNXB());
-				s.setTacGia(TKInput_TacGia.getText());
-                                s.setTheLoai(TKInput_TheLoai.getText());
-                                if (!isNumeric_Double(TKInput_GiaBan.getText()) || !isNumeric(TKInput_SoLuong.getText()) || !isNumeric(TKInput_Discount.getText()))
-                                {
-                                    JOptionPane.showMessageDialog(this, "Giá bán, Số lượng hoặc Giảm giá đã nhập sai định dạng !\n Vui lòng thử lại !","Error", JOptionPane.WARNING_MESSAGE);
-                                    return ;
-                                }
-				s.setGiaBan(Double.parseDouble(TKInput_GiaBan.getText()));
-				s.setSoLuong(Integer.parseInt(TKInput_SoLuong.getText()));
-                                s.setDiscount(Integer.parseInt(TKInput_Discount.getText()));
-				Sach_Connect sachconnect = new Sach_Connect();
-				int active = sachconnect.update(s);
-				if (active>0)
-				{
-					JOptionPane.showMessageDialog(null, "Chỉnh sửa thông tin sách thành công");
-				}
-				else 
-				{
-					JOptionPane.showMessageDialog(null, "Chỉnh sửa sách thất bại");
-				}
-                                hienThiToanBoSach();
+        if(TKInput_MaSach.getText().length()==0 ||  
+                        TKInput_TenSach.getText().length()==0 || TKInput_TacGia.getText().length()==0 || TKInput_GiaBan.getText().length()==0 ||
+                        TKInput_TheLoai.getText().length()==0 || TKInput_SoLuong.getText().length()==0 || TKInput_Discount.getText().length()==0) 
+        {
+            JOptionPane.showMessageDialog(this, "Nhập thiếu dữ liệu !","Error", JOptionPane.WARNING_MESSAGE);
+            return ;
+        }
+        NXB manxb = (NXB) NXBInput.getSelectedItem();
+        Sach s = new Sach();
+        s.setMaSach(TKInput_MaSach.getText());
+        s.setTenSach(TKInput_TenSach.getText());
+        s.setMaNXB(manxb.getMaNXB());
+        s.setTacGia(TKInput_TacGia.getText());
+        s.setTheLoai(TKInput_TheLoai.getText());
+        if (!isNumeric_Double(TKInput_GiaBan.getText()) || !isNumeric(TKInput_SoLuong.getText()) || !isNumeric(TKInput_Discount.getText()))
+        {
+            JOptionPane.showMessageDialog(this, "Giá bán, Số lượng hoặc Giảm giá đã nhập sai định dạng !\n Vui lòng thử lại !","Error", JOptionPane.WARNING_MESSAGE);
+            return ;
+        }
+        s.setGiaBan(Double.parseDouble(TKInput_GiaBan.getText()));
+        s.setSoLuong(Integer.parseInt(TKInput_SoLuong.getText()));
+        s.setDiscount(Integer.parseInt(TKInput_Discount.getText()));
+        Sach_Connect sachconnect = new Sach_Connect();
+        int active = sachconnect.update(s);
+        if (active>0)
+        {
+                JOptionPane.showMessageDialog(null, "Chỉnh sửa thông tin sách thành công");
+        }
+        else 
+        {
+                JOptionPane.showMessageDialog(null, "Chỉnh sửa sách thất bại");
+        }
+        hienThiToanBoSach();
     }//GEN-LAST:event_jButton_ChinhSuaActionPerformed
 
     
     //Thêm sách
     private void jButton_ThemSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ThemSachActionPerformed
         // TODO add your handling code here:
-//        ThemMoiSach themmoi = new ThemMoiSach("Thêm mới sản phẩm");
-//				themmoi.showWindow();
-//				hienThiToanBoSach();
-//                                
-
-               
         if(TKInput_MaSach.getText().length()==0 ||  
-                        TKInput_TenSach.getText().length()==0 || TKInput_TacGia.getText().length()==0 || TKInput_GiaBan.getText().length()==0 ||
-                        TKInput_TheLoai.getText().length()==0 || TKInput_SoLuong.getText().length()==0 || TKInput_Discount.getText().length()==0) 
-        {
+            TKInput_TenSach.getText().length()==0 || TKInput_TacGia.getText().length()==0 || TKInput_GiaBan.getText().length()==0 ||
+            TKInput_TheLoai.getText().length()==0 || TKInput_SoLuong.getText().length()==0 || TKInput_Discount.getText().length()==0){
             JOptionPane.showMessageDialog(this, "Nhập thiếu dữ liệu","Error", JOptionPane.WARNING_MESSAGE);
             return ;
         }
@@ -805,11 +793,10 @@ public class QuanLySach extends javax.swing.JFrame {
         NXB nxb = (NXB) NXBInput.getSelectedItem();
         Sach s = new Sach();
         for (Sach s_check : dss){
-
-                if(s_check.getMaSach().equals(TKInput_MaSach.getText())){
-                    JOptionPane.showMessageDialog(this, "Sách đã tồn tại","Error", JOptionPane.WARNING_MESSAGE);
-                    return;
-                }
+            if(s_check.getMaSach().equals(TKInput_MaSach.getText())){
+                JOptionPane.showMessageDialog(this, "Sách đã tồn tại","Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
         } 
         s.setMaSach(TKInput_MaSach.getText());
         s.setTenSach(TKInput_TenSach.getText());
@@ -826,8 +813,7 @@ public class QuanLySach extends javax.swing.JFrame {
         s.setDiscount(Integer.parseInt(TKInput_Discount.getText()));
 
         int x =JOptionPane.showConfirmDialog(null, "Bạn chắc chắn muôn thêm sách", "Xác nhận thêm",JOptionPane.OK_CANCEL_OPTION);
-        if(x==JOptionPane.OK_OPTION)
-        {
+        if(x==JOptionPane.OK_OPTION){
             xuLyThemMoi(s);	
         }
         else return;
@@ -836,8 +822,7 @@ public class QuanLySach extends javax.swing.JFrame {
     protected void xuLyThemMoi(Sach s) {
         Sach_Connect themsach = new Sach_Connect();
         int active = themsach.themSachMoi(s);
-		if(active > 0 )
-		{
+        if(active > 0 ){
             JOptionPane.showMessageDialog(null, "Thêm mới thành công");
             TaoHDVaCTHD();
             TKInput_MaSach.setText("");
@@ -848,16 +833,11 @@ public class QuanLySach extends javax.swing.JFrame {
             TKInput_SoLuong.setText("");
             TKInput_Discount.setText("");
             TKInput_MaSach.requestFocus();
-            hienThiToanBoSach();
-//                      
-			
+            hienThiToanBoSach();		
         }
-		else
-		{
+        else{
             JOptionPane.showMessageDialog(null, "Thêm mới thất bại");
-        }     
-		      
-                   
+        }           
     }
     
     private void TaoHDVaCTHD(){
@@ -930,7 +910,6 @@ public class QuanLySach extends javax.swing.JFrame {
         }
         //Tìm kiếm theo tên sách và tên tác giả
         else if (TKInput.getText().length()!= 0 && TKInput1.getText().length()!=0){
-            
             dtmSach.setRowCount(0);
             for(Sach s : dsChung){
                 Vector<Object> vec = new Vector<Object>();
@@ -943,9 +922,7 @@ public class QuanLySach extends javax.swing.JFrame {
                 vec.add(s.getGiaBan());	
                 vec.add(s.getDiscount());
                 dtmSach.addRow(vec);
-            }
-
-            
+            } 
         }
         //tìm kiếm theo tên tác giả
         else if (TKInput.getText().length()== 0 && TKInput1.getText().length()!=0){
@@ -970,18 +947,17 @@ public class QuanLySach extends javax.swing.JFrame {
     private void jButton_XoaSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_XoaSachActionPerformed
         // TODO add your handling code here:
         int select = jTable_Books.getSelectedRow();
-				if(select==-1) {
-                                   JOptionPane.showMessageDialog(this, "Bạn chưa chọn sách muốn xoá","Error", JOptionPane.WARNING_MESSAGE);
-                                    return ;
-                                }
-				String maSach = (String) jTable_Books.getValueAt(select, 0);
-				//JOptionPane.showMessageDialog(null,jTable_Books.getValueAt(select, 0) );
-				int active = JOptionPane.showConfirmDialog(null, "Bạn chắc chắn muốn xóa", "Xác Nhận Xóa", JOptionPane.OK_CANCEL_OPTION);
-				if(active==JOptionPane.OK_OPTION)
-				{
-					xuLyXoa(maSach);
-					//JOptionPane.showMessageDialog(null,maSach );
-				}
+        if(select==-1) {
+           JOptionPane.showMessageDialog(this, "Bạn chưa chọn sách muốn xoá","Error", JOptionPane.WARNING_MESSAGE);
+            return ;
+        }
+        String maSach = (String) jTable_Books.getValueAt(select, 0);
+        //JOptionPane.showMessageDialog(null,jTable_Books.getValueAt(select, 0) );
+        int active = JOptionPane.showConfirmDialog(null, "Bạn chắc chắn muốn xóa", "Xác Nhận Xóa", JOptionPane.OK_CANCEL_OPTION);
+        if(active==JOptionPane.OK_OPTION){
+            xuLyXoa(maSach);
+            //JOptionPane.showMessageDialog(null,maSach );
+        }
     }//GEN-LAST:event_jButton_XoaSachActionPerformed
 
     
@@ -989,14 +965,14 @@ public class QuanLySach extends javax.swing.JFrame {
     private void jButton_NhapLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_NhapLaiActionPerformed
         // TODO add your handling code here:
         TKInput_MaSach.setText("");
-				TKInput_TenSach.setText("");
-				NXBInput.setSelectedIndex(0);
-				TKInput_TacGia.setText("");
-				TKInput_GiaBan.setText("");
-				TKInput_TheLoai.setText("");
-				TKInput_SoLuong.setText("");
-				TKInput_Discount.setText("");
-				TKInput_MaSach.requestFocus();
+        TKInput_TenSach.setText("");
+        NXBInput.setSelectedIndex(0);
+        TKInput_TacGia.setText("");
+        TKInput_GiaBan.setText("");
+        TKInput_TheLoai.setText("");
+        TKInput_SoLuong.setText("");
+        TKInput_Discount.setText("");
+        TKInput_MaSach.requestFocus();
     }//GEN-LAST:event_jButton_NhapLaiActionPerformed
 
     
@@ -1005,36 +981,32 @@ public class QuanLySach extends javax.swing.JFrame {
     private void jTable_BooksMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_BooksMouseClicked
         // TODO add your handling code here:
 
-            int select = jTable_Books.getSelectedRow();
-            NXB_Connect nxb_con = new NXB_Connect();
-				if(select==-1) return ;
-				
-                                //lấy thông tin trong table
-				Sach s = new Sach();
-				s.setMaSach((String) jTable_Books.getValueAt(select, 0));
-                                //s.setMaNXB((String) jTable_Books.getValueAt(select, 1));
-                                //nxb.setMaNXB((String) jTable_Books.getValueAt(select, 1));
-                                
-				s.setTenSach((String) jTable_Books.getValueAt(select, 2));
-				s.setTheLoai((String) jTable_Books.getValueAt(select, 3));
-				s.setTacGia((String) jTable_Books.getValueAt(select, 4));
-                                s.setSoLuong( Integer.parseInt(jTable_Books.getValueAt(select, 5)+""));
-				s.setGiaBan( Double.parseDouble(jTable_Books.getValueAt(select, 6)+"") );
-				s.setDiscount(Integer.parseInt(jTable_Books.getValueAt(select, 7)+""));
-					
-				TKInput_MaSach.setText(s.getMaSach());                               
-                                TKInput_TenSach.setText(s.getTenSach());
-                                TKInput_TacGia.setText(s.getTacGia());
-                                TKInput_GiaBan.setText(s.getGiaBan()+"");
-                                TKInput_TheLoai.setText(s.getTheLoai());
-                                TKInput_SoLuong.setText(s.getSoLuong()+"");
-                                TKInput_Discount.setText(s.getDiscount()+"");
-                                NXBInput.setSelectedIndex(Integer.parseInt(nxb_con.TimTenNXBCheckBox(jTable_Books.getValueAt(select, 1).toString()).getMaNXB().substring(3)) );
-    }//GEN-LAST:event_jTable_BooksMouseClicked
+        int select = jTable_Books.getSelectedRow();
+        NXB_Connect nxb_con = new NXB_Connect();
+        if(select==-1) return ;
 
-    private void TKInput_MaSachActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TKInput_MaSachActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_TKInput_MaSachActionPerformed
+        //lấy thông tin trong table
+        Sach s = new Sach();
+        s.setMaSach((String) jTable_Books.getValueAt(select, 0));
+        //s.setMaNXB((String) jTable_Books.getValueAt(select, 1));
+        //nxb.setMaNXB((String) jTable_Books.getValueAt(select, 1));
+
+        s.setTenSach((String) jTable_Books.getValueAt(select, 2));
+        s.setTheLoai((String) jTable_Books.getValueAt(select, 3));
+        s.setTacGia((String) jTable_Books.getValueAt(select, 4));
+        s.setSoLuong( Integer.parseInt(jTable_Books.getValueAt(select, 5)+""));
+        s.setGiaBan( Double.parseDouble(jTable_Books.getValueAt(select, 6)+"") );
+        s.setDiscount(Integer.parseInt(jTable_Books.getValueAt(select, 7)+""));
+
+        TKInput_MaSach.setText(s.getMaSach());                               
+        TKInput_TenSach.setText(s.getTenSach());
+        TKInput_TacGia.setText(s.getTacGia());
+        TKInput_GiaBan.setText(s.getGiaBan()+"");
+        TKInput_TheLoai.setText(s.getTheLoai());
+        TKInput_SoLuong.setText(s.getSoLuong()+"");
+        TKInput_Discount.setText(s.getDiscount()+"");
+        NXBInput.setSelectedIndex(Integer.parseInt(nxb_con.TimTenNXBCheckBox(jTable_Books.getValueAt(select, 1).toString()).getMaNXB().substring(3)) );
+    }//GEN-LAST:event_jTable_BooksMouseClicked
 
     private void jButton_CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_CancelActionPerformed
         // TODO add your handling code here:
@@ -1048,93 +1020,90 @@ public class QuanLySach extends javax.swing.JFrame {
     private void jButton_Accpet_SearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Accpet_SearchActionPerformed
         //tìm kiếm
         int active = JOptionPane.showConfirmDialog(null, "Bạn có muốn tăng giá với sách được tìm kiếm ?", "Xác Nhận Tăng", JOptionPane.OK_CANCEL_OPTION);
-				if(active==JOptionPane.OK_OPTION)
-				{
-	
-        String ten = TKInput.getText();
-        String tenTacGia = TKInput1.getText();
-        Sach_Connect sachnxb1 = new Sach_Connect();
-        dss_tensach = sachnxb1.laySachTheoMaTen(ten);
-        dssTacGia = sachnxb1.laySachTheoTenTacGia(tenTacGia);
-        dsChung = sachnxb1.laySachTheoMaTenVaTenTacGia(ten, tenTacGia);
-        //show all data
-        if (TKInput.getText().length()==0 && TKInput1.getText().length()==0)
-            hienThiToanBoSach();
-            thucHienTangGiaVoiSachDuocTimKiem(dss);
-        //tìm kiếm theo tên sách
-        if (TKInput.getText().length()!= 0 && TKInput1.getText().length()==0){
-            dtmSach.setRowCount(0);
-            for(Sach s : dss_tensach){
-                Vector<Object> vec = new Vector<Object>();
-                vec.add(s.getMaSach());
-                vec.add(s.getMaNXB());
-                vec.add(s.getTenSach());
-                vec.add(s.getTheLoai());
-                vec.add(s.getTacGia());
-                vec.add(s.getSoLuong());
-                vec.add(s.getGiaBan());
-                vec.add(s.getDiscount());
-                dtmSach.addRow(vec);
+        if(active==JOptionPane.OK_OPTION){
+            String ten = TKInput.getText();
+            String tenTacGia = TKInput1.getText();
+            Sach_Connect sachnxb1 = new Sach_Connect();
+            dss_tensach = sachnxb1.laySachTheoMaTen(ten);
+            dssTacGia = sachnxb1.laySachTheoTenTacGia(tenTacGia);
+            dsChung = sachnxb1.laySachTheoMaTenVaTenTacGia(ten, tenTacGia);
+            //show all data
+            if (TKInput.getText().length()==0 && TKInput1.getText().length()==0)
+                hienThiToanBoSach();
+                thucHienTangGiaVoiSachDuocTimKiem(dss);
+            //tìm kiếm theo tên sách
+            if (TKInput.getText().length()!= 0 && TKInput1.getText().length()==0){
+                dtmSach.setRowCount(0);
+                for(Sach s : dss_tensach){
+                    Vector<Object> vec = new Vector<Object>();
+                    vec.add(s.getMaSach());
+                    vec.add(s.getMaNXB());
+                    vec.add(s.getTenSach());
+                    vec.add(s.getTheLoai());
+                    vec.add(s.getTacGia());
+                    vec.add(s.getSoLuong());
+                    vec.add(s.getGiaBan());
+                    vec.add(s.getDiscount());
+                    dtmSach.addRow(vec);
+                }
+                thucHienTangGiaVoiSachDuocTimKiem(dss_tensach);
             }
-            thucHienTangGiaVoiSachDuocTimKiem(dss_tensach);
-        }
-        //Tìm kiếm theo tên sách và tên tác giả
-        else if (TKInput.getText().length()!= 0 && TKInput1.getText().length()!=0){
-            
-            dtmSach.setRowCount(0);
-            for(Sach s : dsChung){
-                Vector<Object> vec = new Vector<Object>();
-                vec.add(s.getMaSach());
-                vec.add(s.getMaNXB());
-                vec.add(s.getTenSach());
-                vec.add(s.getTheLoai());
-                vec.add(s.getTacGia());
-                vec.add(s.getSoLuong());
-                vec.add(s.getGiaBan());	
-                vec.add(s.getDiscount());
-                dtmSach.addRow(vec);
+            //Tìm kiếm theo tên sách và tên tác giả
+            else if (TKInput.getText().length()!= 0 && TKInput1.getText().length()!=0){
+                dtmSach.setRowCount(0);
+                for(Sach s : dsChung){
+                    Vector<Object> vec = new Vector<Object>();
+                    vec.add(s.getMaSach());
+                    vec.add(s.getMaNXB());
+                    vec.add(s.getTenSach());
+                    vec.add(s.getTheLoai());
+                    vec.add(s.getTacGia());
+                    vec.add(s.getSoLuong());
+                    vec.add(s.getGiaBan());	
+                    vec.add(s.getDiscount());
+                    dtmSach.addRow(vec);
+                }
+                thucHienTangGiaVoiSachDuocTimKiem(dsChung);
+
             }
-            thucHienTangGiaVoiSachDuocTimKiem(dsChung);
-            
-        }
-        //tìm kiếm theo tên tác giả
-        else if (TKInput.getText().length()== 0 && TKInput1.getText().length()!=0){
-            dtmSach.setRowCount(0);
-            for(Sach s : dssTacGia){
-            Vector<Object> vec = new Vector<Object>();			
-            vec.add(s.getMaSach());
-            vec.add(s.getMaNXB());
-            vec.add(s.getTenSach());
-            vec.add(s.getTheLoai());
-            vec.add(s.getTacGia());
-            vec.add(s.getSoLuong());
-            vec.add(s.getGiaBan());	
-            vec.add(s.getDiscount());
-            dtmSach.addRow(vec);
+            //tìm kiếm theo tên tác giả
+            else if (TKInput.getText().length()== 0 && TKInput1.getText().length()!=0){
+                dtmSach.setRowCount(0);
+                for(Sach s : dssTacGia){
+                    Vector<Object> vec = new Vector<Object>();			
+                    vec.add(s.getMaSach());
+                    vec.add(s.getMaNXB());
+                    vec.add(s.getTenSach());
+                    vec.add(s.getTheLoai());
+                    vec.add(s.getTacGia());
+                    vec.add(s.getSoLuong());
+                    vec.add(s.getGiaBan());	
+                    vec.add(s.getDiscount());
+                    dtmSach.addRow(vec);
+                }
+                thucHienTangGiaVoiSachDuocTimKiem(dssTacGia);
             }
-            thucHienTangGiaVoiSachDuocTimKiem(dssTacGia);
-	}
-        
-        //tăng giá
+
+            //tăng giá
         }
     }//GEN-LAST:event_jButton_Accpet_SearchActionPerformed
  protected void thucHienTangGiaVoiSachDuocTimKiem(ArrayList<Sach> dsSach){
      if (TKInput_UpdateAllPrice1.getText().equals("")){
-            JOptionPane.showMessageDialog(this, "Bạn chưa nhập giá cần tăng","Error", JOptionPane.WARNING_MESSAGE);
-            return ;
-        }
-        if (!isNumeric(TKInput_UpdateAllPrice1.getText().trim())){
-            JOptionPane.showMessageDialog(this, "Nhập sai định dạng giá","Error", JOptionPane.WARNING_MESSAGE);
-            return ;
-        }
-         double extraMoney = (Double.parseDouble(TKInput_UpdateAllPrice1.getText().trim()));
-    
-       
-        Sach_Connect sc = new Sach_Connect();
-        for (Sach s: dsSach){
-            sc.updateAllPrice(s.getMaSach(), (s.getGiaBan()+extraMoney));
-        }
-       hienThiToanBoSach();
+        JOptionPane.showMessageDialog(this, "Bạn chưa nhập giá cần tăng","Error", JOptionPane.WARNING_MESSAGE);
+        return ;
+    }
+    if (!isNumeric(TKInput_UpdateAllPrice1.getText().trim())){
+        JOptionPane.showMessageDialog(this, "Nhập sai định dạng giá","Error", JOptionPane.WARNING_MESSAGE);
+        return ;
+    }
+    double extraMoney = (Double.parseDouble(TKInput_UpdateAllPrice1.getText().trim()));
+
+
+    Sach_Connect sc = new Sach_Connect();
+    for (Sach s: dsSach){
+        sc.updateAllPrice(s.getMaSach(), (s.getGiaBan()+extraMoney));
+    }
+   hienThiToanBoSach();
  }
     private void jButton_AccpetTangGiaNXBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AccpetTangGiaNXBActionPerformed
         if (TKInput_UpdateAllPriceNXB.getText().equals("")){
@@ -1273,6 +1242,7 @@ public class QuanLySach extends javax.swing.JFrame {
                 }
             }
             if(dem == jTable_Books.getRowCount()) hienThiToanBoSach();
+            jButton_AddFromExcel.setEnabled(false);
         }
     }//GEN-LAST:event_jButton_AddFromExcelActionPerformed
 
@@ -1280,20 +1250,17 @@ public class QuanLySach extends javax.swing.JFrame {
         // TODO add your handling code here:
         hienThiToanBoSach();
     }//GEN-LAST:event_jButton_RefreshSearchMouseClicked
-protected void xuLyXoa(String maSach) {
-		Sach_Connect sachXoa = new Sach_Connect();
-		int active= sachXoa.XoaSach(maSach);
-		if(active > 0)
-		{
-			JOptionPane.showMessageDialog(null, "Xóa thành công sách!");
-			hienThiToanBoSach();
-		}
-		else
-		{
-			JOptionPane.showMessageDialog(null, "Xóa thất bại");	
-		}
-		
-	}
+    protected void xuLyXoa(String maSach) {
+        Sach_Connect sachXoa = new Sach_Connect();
+        int active= sachXoa.XoaSach(maSach);
+        if(active > 0){
+            JOptionPane.showMessageDialog(null, "Xóa thành công sách!");
+            hienThiToanBoSach();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Xóa thất bại");	
+        }
+    }
 
 
 //Chỉnh Sửa
