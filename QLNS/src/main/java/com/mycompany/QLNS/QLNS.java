@@ -4,16 +4,12 @@
 
 package com.mycompany.QLNS;
 
-
-
-
 import UI.Login;
 /**
  *
  * @author dat
  */
 public class QLNS {
-
     public static void main(String[] args) {
         Login ui = new Login("Đăng Nhập");
             ui.showWindow();

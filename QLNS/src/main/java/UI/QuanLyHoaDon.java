@@ -103,7 +103,8 @@ String filePath = "C:\\Users\\dat\\Downloads\\";
 
                     // Xác định kiểu dữ liệu của ô dữ liệu
                     if (value instanceof Number) cell.setCellValue(((Number) value).doubleValue());
-                    else cell.setCellValue(value.toString());
+                    else if(value instanceof String) cell.setCellValue(value.toString());
+                    else cell.setCellValue(""); //dữ liệu là null
                 }
             }
 

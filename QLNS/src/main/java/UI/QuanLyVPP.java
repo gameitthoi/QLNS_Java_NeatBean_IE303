@@ -64,11 +64,9 @@ public class QuanLyVPP extends javax.swing.JFrame {
         MaNV=maNV;
         hienThiToanBoVPP();
         hienThiToanBoNhaCungCap();
- 
     }
     
    private void hienThiToanBoVPP() {
-        
         VanPhongPham_Connect vppConn = new VanPhongPham_Connect();
         dsVPP = vppConn.layToanBoVPP();
         dtmVPP = new DefaultTableModel();
@@ -95,12 +93,9 @@ public class QuanLyVPP extends javax.swing.JFrame {
         jTable_VPP.setModel(dtmVPP);
         jButton_ThemTuExcel.setEnabled(false);
     }
-    
-    
-     
-      
-       private void hienThiToanBoNhaCungCap() {
  
+      
+    private void hienThiToanBoNhaCungCap() {
         NhaCungCapVPP_Connect nccconn = new NhaCungCapVPP_Connect();
 
         dsncc = nccconn.layToanBoNhaCungCap_VPP();
@@ -109,32 +104,32 @@ public class QuanLyVPP extends javax.swing.JFrame {
         NhaCungCap_VPP ncc_vpp = new NhaCungCap_VPP();
         ncc_vpp.setMaNCCVPP("0");
         ncc_vpp.setTenNCCVPP("Tất cả");
-    
+
         NCCInput.addItem(ncc_vpp);
         for(NhaCungCap_VPP s : dsncc) {
             NCCInput.addItem(s);
             NCCInput_TangGia.addItem(s);
-        } 	
+        }      
     }
       
-         public static boolean isNumeric(String string) {
-    int intValue;
-		
-    //System.out.println(String.format("Parsing string: \"%s\"", string));
-		
-    if(string == null || string.equals("")) {
-        //System.out.println("String cannot be parsed, it is null or empty.");
+    public static boolean isNumeric(String string) {
+        int intValue;
+
+        //System.out.println(String.format("Parsing string: \"%s\"", string));
+
+        if(string == null || string.equals("")) {
+            //System.out.println("String cannot be parsed, it is null or empty.");
+            return false;
+        }
+
+        try {
+            intValue = Integer.parseInt(string);
+            return true;
+        } catch (NumberFormatException e) {
+            //System.out.println("Input String cannot be parsed to Integer.");
+        }
         return false;
     }
-    
-    try {
-        intValue = Integer.parseInt(string);
-        return true;
-    } catch (NumberFormatException e) {
-        //System.out.println("Input String cannot be parsed to Integer.");
-    }
-    return false;
-}
          
     public static boolean isNumeric_Double(String string) {
     double intValue;
@@ -154,8 +149,6 @@ public class QuanLyVPP extends javax.swing.JFrame {
     }
     return false;
 }
-
-      
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -807,112 +800,101 @@ public class QuanLyVPP extends javax.swing.JFrame {
     //Chỉnh sửa, cập nhật sách
     private void jButton_ChinhSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ChinhSuaActionPerformed
         // TODO add your handling code here:
-                                if(TKInput_MaVPP.getText().length()==0 ||  
-                                    TKInput_TenVPP.getText().length()==0  || TKInput_GiaBan.getText().length()==0 ||
-                                    TKInput_DoanhMuc.getText().length()==0 || TKInput_SoLuong.getText().length()==0 || TKInput_Discount.getText().length()==0) {
-                                    JOptionPane.showMessageDialog(this, "Nhập thiếu dữ liệu !","Error", JOptionPane.WARNING_MESSAGE);
-                                    return ;
-                                }
-                                NhaCungCap_VPP ncc = (NhaCungCap_VPP) NCCInput.getSelectedItem();
-                                VPP vp = new VPP();
-				vp.setMaVPP(TKInput_MaVPP.getText());
-				vp.setTenVPP(TKInput_TenVPP.getText());
-				vp.setMaNCC(ncc.getMaNCCVPP());
-                                vp.setDanhMuc(TKInput_DoanhMuc.getText());
-                                if (!isNumeric_Double(TKInput_GiaBan.getText()) || !isNumeric(TKInput_SoLuong.getText()) || !isNumeric(TKInput_Discount.getText()))
-                                {
-                                    JOptionPane.showMessageDialog(this, "Giá bán, Số lượng hoặc Giảm giá đã nhập sai định dạng !\n Vui lòng thử lại !","Error", JOptionPane.WARNING_MESSAGE);
-                                    return ;
-                                }
-				vp.setGiaBan(Double.parseDouble(TKInput_GiaBan.getText()));				
-				vp.setSoLuong(Integer.parseInt(TKInput_SoLuong.getText()));
-				vp.setDiscount(Integer.parseInt(TKInput_Discount.getText()));
-                                VanPhongPham_Connect vpc = new VanPhongPham_Connect();
-				int active = vpc.Update(vp);
-				if (active>0)
-				{
-					JOptionPane.showMessageDialog(null, "Chỉnh sửa thông tin thành công");
-				}
-				else 
-				{
-					JOptionPane.showMessageDialog(null, "Chỉnh sửa thất bại");
-				}
-                                hienThiToanBoVPP();
+        if(TKInput_MaVPP.getText().length()==0 ||  
+            TKInput_TenVPP.getText().length()==0  || TKInput_GiaBan.getText().length()==0 ||
+            TKInput_DoanhMuc.getText().length()==0 || TKInput_SoLuong.getText().length()==0 || TKInput_Discount.getText().length()==0) {
+            JOptionPane.showMessageDialog(this, "Nhập thiếu dữ liệu !","Error", JOptionPane.WARNING_MESSAGE);
+            return ;
+        }
+        NhaCungCap_VPP ncc = (NhaCungCap_VPP) NCCInput.getSelectedItem();
+        VPP vp = new VPP();
+        vp.setMaVPP(TKInput_MaVPP.getText());
+        vp.setTenVPP(TKInput_TenVPP.getText());
+        vp.setMaNCC(ncc.getMaNCCVPP());
+        vp.setDanhMuc(TKInput_DoanhMuc.getText());
+        if (!isNumeric_Double(TKInput_GiaBan.getText()) || !isNumeric(TKInput_SoLuong.getText()) || !isNumeric(TKInput_Discount.getText()))
+        {
+            JOptionPane.showMessageDialog(this, "Giá bán, Số lượng hoặc Giảm giá đã nhập sai định dạng !\n Vui lòng thử lại !","Error", JOptionPane.WARNING_MESSAGE);
+            return ;
+        }
+        vp.setGiaBan(Double.parseDouble(TKInput_GiaBan.getText()));				
+        vp.setSoLuong(Integer.parseInt(TKInput_SoLuong.getText()));
+        vp.setDiscount(Integer.parseInt(TKInput_Discount.getText()));
+        VanPhongPham_Connect vpc = new VanPhongPham_Connect();
+        int active = vpc.Update(vp);
+        if (active>0)
+        {
+                JOptionPane.showMessageDialog(null, "Chỉnh sửa thông tin thành công");
+        }
+        else 
+        {
+                JOptionPane.showMessageDialog(null, "Chỉnh sửa thất bại");
+        }
+        hienThiToanBoVPP();
     }//GEN-LAST:event_jButton_ChinhSuaActionPerformed
 
     
     //Thêm
     private void jButton_ThemVPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ThemVPPActionPerformed
-        // TODO add your handling code here:
-     
-                                
+        // TODO add your handling code here: 
+        if(TKInput_MaVPP.getText().length()==0 ||  
+            TKInput_TenVPP.getText().length()==0  || TKInput_GiaBan.getText().length()==0 ||
+            TKInput_DoanhMuc.getText().length()==0 || TKInput_SoLuong.getText().length()==0 || TKInput_Discount.getText().length()==0) {
+            JOptionPane.showMessageDialog(this, "Nhập thiếu dữ liệu !","Error", JOptionPane.WARNING_MESSAGE);
+            return ;
+        }
 
-               
-				if(TKInput_MaVPP.getText().length()==0 ||  
-						TKInput_TenVPP.getText().length()==0  || TKInput_GiaBan.getText().length()==0 ||
-						TKInput_DoanhMuc.getText().length()==0 || TKInput_SoLuong.getText().length()==0 || TKInput_Discount.getText().length()==0) {
-                                    JOptionPane.showMessageDialog(this, "Nhập thiếu dữ liệu !","Error", JOptionPane.WARNING_MESSAGE);
-                                    return ;
-                                }
-				
-				NhaCungCap_VPP np = (NhaCungCap_VPP) NCCInput.getSelectedItem();
-				VPP vp = new VPP();
-                                for (VPP vpp_check : dsVPP){
-          
-                                        if(vpp_check.getMaVPP().equals(TKInput_MaVPP.getText())){
-                                            JOptionPane.showMessageDialog(this, "Văn phòng phẩm đã tồn tại","Error", JOptionPane.WARNING_MESSAGE);
-                                            return;
-                                        }
-                                } 
-				vp.setMaVPP(TKInput_MaVPP.getText());
-				vp.setTenVPP(TKInput_TenVPP.getText());
-				vp.setMaNCC(np.getMaNCCVPP());
-                                vp.setDanhMuc(TKInput_DoanhMuc.getText());
-                                if (!isNumeric_Double(TKInput_GiaBan.getText()) || !isNumeric(TKInput_SoLuong.getText()) || !isNumeric(TKInput_Discount.getText()))
-                                {
-                                    JOptionPane.showMessageDialog(this, "Giá bán, Số lượng hoặc Giảm giá đã nhập sai định dạng !\n Vui lòng thử lại !","Error", JOptionPane.WARNING_MESSAGE);
-                                    return ;
-                                }
-				vp.setGiaBan(Double.parseDouble(TKInput_GiaBan.getText()));
-				
-				vp.setSoLuong(Integer.parseInt(TKInput_SoLuong.getText()));
-				vp.setDiscount(Integer.parseInt(TKInput_Discount.getText()));
-                                
-				int x =JOptionPane.showConfirmDialog(null, "Bạn chắc chắn muốn thêm văn phòng phẩm này ?", "Xác nhận thêm",JOptionPane.OK_CANCEL_OPTION);
-				if(x==JOptionPane.OK_OPTION)
-			{
-					xuLyThemMoi(vp);	
-				}
-				else return;
+        NhaCungCap_VPP np = (NhaCungCap_VPP) NCCInput.getSelectedItem();
+        VPP vp = new VPP();
+        for (VPP vpp_check : dsVPP){
+            if(vpp_check.getMaVPP().equals(TKInput_MaVPP.getText())){
+                JOptionPane.showMessageDialog(this, "Văn phòng phẩm đã tồn tại","Error", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+        } 
+        vp.setMaVPP(TKInput_MaVPP.getText());
+        vp.setTenVPP(TKInput_TenVPP.getText());
+        vp.setMaNCC(np.getMaNCCVPP());
+        vp.setDanhMuc(TKInput_DoanhMuc.getText());
+        if (!isNumeric_Double(TKInput_GiaBan.getText()) || !isNumeric(TKInput_SoLuong.getText()) || !isNumeric(TKInput_Discount.getText())){
+            JOptionPane.showMessageDialog(this, "Giá bán, Số lượng hoặc Giảm giá đã nhập sai định dạng !\n Vui lòng thử lại !","Error", JOptionPane.WARNING_MESSAGE);
+            return ;
+        }
+        vp.setGiaBan(Double.parseDouble(TKInput_GiaBan.getText()));
+
+        vp.setSoLuong(Integer.parseInt(TKInput_SoLuong.getText()));
+        vp.setDiscount(Integer.parseInt(TKInput_Discount.getText()));
+
+        int x =JOptionPane.showConfirmDialog(null, "Bạn chắc chắn muốn thêm văn phòng phẩm này ?", "Xác nhận thêm",JOptionPane.OK_CANCEL_OPTION);
+        if(x==JOptionPane.OK_OPTION){
+            xuLyThemMoi(vp);	
+        }
+        else return;
     }//GEN-LAST:event_jButton_ThemVPPActionPerformed
 
     protected void xuLyThemMoi(VPP vp) {
-		VanPhongPham_Connect themvpp = new VanPhongPham_Connect();
-		int active = themvpp.themMoi(vp);
-		if(active > 0 )
-		{
-			JOptionPane.showMessageDialog(null, "Thêm mới thành công");
-                        TaoHDVaCTHD();
-                                TKInput_MaVPP.setText("");
-				TKInput_TenVPP.setText("");	
-			
-				TKInput_GiaBan.setText("");
-				TKInput_DoanhMuc.setText("");
-				TKInput_SoLuong.setText("");
-                                TKInput_Discount.setText("");
-				TKInput_MaVPP.requestFocus();
-                                hienThiToanBoVPP();
-//                      
-			
-		}
-		else
-		{
-			JOptionPane.showMessageDialog(null, "Thêm mới thất bại");
-		}
+        VanPhongPham_Connect themvpp = new VanPhongPham_Connect();
+        int active = themvpp.themMoi(vp);
+        if(active > 0 ){
+            JOptionPane.showMessageDialog(null, "Thêm mới thành công");
+            TaoHDVaCTHD();
+            TKInput_MaVPP.setText("");
+            TKInput_TenVPP.setText("");	
+
+            TKInput_GiaBan.setText("");
+            TKInput_DoanhMuc.setText("");
+            TKInput_SoLuong.setText("");
+            TKInput_Discount.setText("");
+            TKInput_MaVPP.requestFocus();
+            hienThiToanBoVPP();
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Thêm mới thất bại");
+        }
 		
-	}
+    }
     
-        private void TaoHDVaCTHD(){
+    private void TaoHDVaCTHD(){
         String HD = "HD";
         //tạo hóa đơn với mã hóa đơn mới tính từ hóa đơn cuối cùng
         HoaDon_Connect tHD = new HoaDon_Connect();
@@ -929,7 +911,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
         HoaDon hd = new HoaDon();
         hd.setMaHD(MaHD);
         hd.setMaNV(MaNV);
-        
+
         Date date = new Date();
         java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String currentTime = sdf.format(date);
@@ -938,7 +920,7 @@ public class QuanLyVPP extends javax.swing.JFrame {
         hd.setTrangThai(0);
         hd.setNhapSach(1);
         tHD.TaoHD(hd); 
-//        
+    //        
         CTHD ct = new CTHD();
         ct.setMaHD(MaHD);
         ct.setMaSP(TKInput_MaVPP.getText());
@@ -1020,70 +1002,68 @@ public class QuanLyVPP extends javax.swing.JFrame {
     private void jButton_XoaVPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_XoaVPPActionPerformed
          //TODO add your handling code here:
         int select = jTable_VPP.getSelectedRow();
-				if(select==-1)  {
-                                    JOptionPane.showMessageDialog(this, "Bạn chưa chọn văn phòng phẩm muốn xoá","Error", JOptionPane.WARNING_MESSAGE);
-                                    return ;
-                                }
-				String maVPP = (String) jTable_VPP.getValueAt(select, 0);
-				//JOptionPane.showMessageDialog(null,jTable_Books.getValueAt(select, 0) );
-				int active = JOptionPane.showConfirmDialog(null, "Bạn chắc chắn muốn xóa ?", "Xác Nhận Xóa", JOptionPane.OK_CANCEL_OPTION);
-				if(active==JOptionPane.OK_OPTION)
-				{
-					xuLyXoa(maVPP);
-					//JOptionPane.showMessageDialog(null,maSach );
-				}
+        if(select==-1)  {
+            JOptionPane.showMessageDialog(this, "Bạn chưa chọn văn phòng phẩm muốn xoá","Error", JOptionPane.WARNING_MESSAGE);
+            return ;
+        }
+        String maVPP = (String) jTable_VPP.getValueAt(select, 0);
+        //JOptionPane.showMessageDialog(null,jTable_Books.getValueAt(select, 0) );
+        int active = JOptionPane.showConfirmDialog(null, "Bạn chắc chắn muốn xóa ?", "Xác Nhận Xóa", JOptionPane.OK_CANCEL_OPTION);
+        if(active==JOptionPane.OK_OPTION)
+        {
+                xuLyXoa(maVPP);
+                //JOptionPane.showMessageDialog(null,maSach );
+        }
     }//GEN-LAST:event_jButton_XoaVPPActionPerformed
 
     
     //Nhập lại
     private void jButton_NhapLaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_NhapLaiActionPerformed
-//        // TODO add your handling code here:
+        // TODO add your handling code here:
         TKInput_MaVPP.setText("");
-				TKInput_TenVPP.setText("");
-				//txtMaNXB.setText("");
-                                NCCInput.setSelectedIndex(0);
-				TKInput_GiaBan.setText("");
-				TKInput_DoanhMuc.setText("");
-				TKInput_SoLuong.setText("");
-				TKInput_Discount.setText("");
-				TKInput_MaVPP.requestFocus();
+        TKInput_TenVPP.setText("");
+        //txtMaNXB.setText("");
+        NCCInput.setSelectedIndex(0);
+        TKInput_GiaBan.setText("");
+        TKInput_DoanhMuc.setText("");
+        TKInput_SoLuong.setText("");
+        TKInput_Discount.setText("");
+        TKInput_MaVPP.requestFocus();
     }//GEN-LAST:event_jButton_NhapLaiActionPerformed
-
-    
     
     //Get selected row
     private void jTable_VPPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_VPPMouseClicked
         // TODO add your handling code here:
 
-            int select = jTable_VPP.getSelectedRow();
-            NhaCungCapVPP_Connect ncc_con = new NhaCungCapVPP_Connect();
-				if(select==-1) return ;
-				
-                                //lấy thông tin trong table
-                        VPP vp = new VPP();
-				vp.setMaVPP((String) jTable_VPP.getValueAt(select, 0)+"");
-                                //s.setMaNXB((String) jTable_Books.getValueAt(select, 1));
-                                //nxb.setMaNXB((String) jTable_Books.getValueAt(select, 1));
-                                
-				vp.setTenVPP((String) jTable_VPP.getValueAt(select, 1)+"");
-				vp.setDanhMuc((String) jTable_VPP.getValueAt(select, 3)+"");
-				
-                                vp.setSoLuong( Integer.parseInt(jTable_VPP.getValueAt(select, 4)+""));
-				vp.setGiaBan( Double.parseDouble(jTable_VPP.getValueAt(select, 5)+""));
-				vp.setDiscount(Integer.parseInt(jTable_VPP.getValueAt(select, 6)+""));
-				    //System.out.println(vp.getGiaBan());
-				
-				//đưa thông tin lên panelTop
-				TKInput_MaVPP.setText(vp.getMaVPP());
-                         
-                                
-                                TKInput_TenVPP.setText(vp.getTenVPP());
-                      
-                                TKInput_GiaBan.setText(vp.getGiaBan()+"");
-                                TKInput_DoanhMuc.setText(vp.getDanhMuc());
-                                TKInput_SoLuong.setText(vp.getSoLuong()+"");
-                                TKInput_Discount.setText(vp.getDiscount()+"");
-                               NCCInput.setSelectedIndex(Integer.parseInt(ncc_con.TimTenNCC(jTable_VPP.getValueAt(select, 2).toString()).getMaNCCVPP().substring(3)) );
+        int select = jTable_VPP.getSelectedRow();
+        NhaCungCapVPP_Connect ncc_con = new NhaCungCapVPP_Connect();
+        if(select==-1) return ;
+
+        //lấy thông tin trong table
+        VPP vp = new VPP();
+        vp.setMaVPP((String) jTable_VPP.getValueAt(select, 0)+"");
+        //s.setMaNXB((String) jTable_Books.getValueAt(select, 1));
+        //nxb.setMaNXB((String) jTable_Books.getValueAt(select, 1));
+
+        vp.setTenVPP((String) jTable_VPP.getValueAt(select, 1)+"");
+        vp.setDanhMuc((String) jTable_VPP.getValueAt(select, 3)+"");
+
+        vp.setSoLuong( Integer.parseInt(jTable_VPP.getValueAt(select, 4)+""));
+        vp.setGiaBan( Double.parseDouble(jTable_VPP.getValueAt(select, 5)+""));
+        vp.setDiscount(Integer.parseInt(jTable_VPP.getValueAt(select, 6)+""));
+            //System.out.println(vp.getGiaBan());
+
+        //đưa thông tin lên panelTop
+        TKInput_MaVPP.setText(vp.getMaVPP());
+
+
+        TKInput_TenVPP.setText(vp.getTenVPP());
+
+        TKInput_GiaBan.setText(vp.getGiaBan()+"");
+        TKInput_DoanhMuc.setText(vp.getDanhMuc());
+        TKInput_SoLuong.setText(vp.getSoLuong()+"");
+        TKInput_Discount.setText(vp.getDiscount()+"");
+       NCCInput.setSelectedIndex(Integer.parseInt(ncc_con.TimTenNCC(jTable_VPP.getValueAt(select, 2).toString()).getMaNCCVPP().substring(3)) );
     }//GEN-LAST:event_jTable_VPPMouseClicked
 
     private void TKInput_MaVPPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TKInput_MaVPPActionPerformed
@@ -1365,19 +1345,19 @@ public class QuanLyVPP extends javax.swing.JFrame {
         hienThiToanBoVPP();
     }//GEN-LAST:event_jButton_RefreshSearchActionPerformed
 protected void xuLyXoa(String maVPP) {
-		VanPhongPham_Connect sachXoa = new VanPhongPham_Connect();
-		int active= sachXoa.Xoa(maVPP);
-		if(active > 0)
-		{
-			JOptionPane.showMessageDialog(null, "Xóa thành công!");
-			hienThiToanBoVPP();
-		}
-		else
-		{
-			JOptionPane.showMessageDialog(null, "Xóa thất bại");	
-		}
-		
-	}
+    VanPhongPham_Connect sachXoa = new VanPhongPham_Connect();
+    int active= sachXoa.Xoa(maVPP);
+    if(active > 0)
+    {
+            JOptionPane.showMessageDialog(null, "Xóa thành công!");
+            hienThiToanBoVPP();
+    }
+    else
+    {
+            JOptionPane.showMessageDialog(null, "Xóa thất bại");	
+    }
+
+}
 
 
 //Chỉnh Sửa

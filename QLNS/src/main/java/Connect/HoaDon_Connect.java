@@ -183,6 +183,19 @@ public class HoaDon_Connect extends Connect_sqlServer{
         return -1 ;
     }
     
+    public int capNhatMaKH(String makh, String mahd){
+        try {
+            String sql="update hoadon set makh = ? where mahd=?" ;
+            PreparedStatement pre =conn.prepareStatement(sql);
+            pre.setString(1, makh);
+            pre.setString(2, mahd);
+            return pre.executeUpdate();
+        } catch (Exception e) {
+                e.printStackTrace();
+        }
+        return -1;
+    }
+    
     public int ThanhToan(String MaHD, String total){
         try{
             String sql="update hoadon set ThanhCong = 1, TongTien = ? where MaHD=? and NhapSach=0" ;

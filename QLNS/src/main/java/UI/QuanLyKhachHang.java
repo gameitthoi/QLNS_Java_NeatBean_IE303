@@ -139,6 +139,12 @@ private ArrayList<KhachHang> dskh_tim = null;
         TKKHLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         TKKHLabel.setText("Nhập tên hoặc mã khách hàng");
 
+        TKKHInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TKKHInputKeyPressed(evt);
+            }
+        });
+
         TKBtn.setText("Tìm kiếm");
         TKBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -510,14 +516,10 @@ private ArrayList<KhachHang> dskh_tim = null;
     }//GEN-LAST:event_KHTableMouseClicked
 
     private void SdtInputKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SdtInputKeyTyped
-        //kiểm tra xem người dùng có nhập số vào không, nếu không phải số thì không nhận
         char c = evt.getKeyChar();
-        if (!((c >= '0') && (c <= '9') ||
-            (c == KeyEvent.VK_BACK_SPACE) ||
-            (c == KeyEvent.VK_DELETE))) {
-        getToolkit().beep();
-        evt.consume();
-      }
+        if (!Character.isDigit(c) || SdtInput.getText().length() >= 10) {
+            evt.consume(); // Ngăn chặn ký tự không hợp lệ và ngăn chặn nhập quá 4 ký tự
+        }
     }//GEN-LAST:event_SdtInputKeyTyped
 
     private void DiemInputKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DiemInputKeyTyped
@@ -530,6 +532,10 @@ private ArrayList<KhachHang> dskh_tim = null;
         evt.consume();
       }
     }//GEN-LAST:event_DiemInputKeyTyped
+
+    private void TKKHInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKKHInputKeyPressed
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) TKBtnMouseClicked(null);
+    }//GEN-LAST:event_TKKHInputKeyPressed
 
     /**
      * @param args the command line arguments

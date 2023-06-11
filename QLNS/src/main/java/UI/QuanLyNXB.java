@@ -10,6 +10,8 @@ import java.awt.Toolkit;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -31,30 +33,39 @@ public class QuanLyNXB extends javax.swing.JFrame {
         this.setTitle("Quản lý nhà xuất bản");
         hienThiToanBoNhaXuatBan();
     }
+    
     private void hienThiToanBoNhaXuatBan() {
-                    NXB_Connect nxb_conn = new NXB_Connect();
-                    dsnxbs = nxb_conn.layToanBoNhaXuatBan();
-                    dtmNXB = new DefaultTableModel();
-                    dtmNXB.addColumn("Mã nhà xuất bản");
-                    dtmNXB.addColumn("Tên nhà xuất bản");
-                    dtmNXB.addColumn("Số điện thoại");
-                    dtmNXB.addColumn("Địa chỉ");
-                    dtmNXB.addColumn("Email");
-                    dsnxbs = nxb_conn.layToanBoNhaXuatBan();
-                    dtmNXB.setRowCount(0);
-                    for(NXB nxb : dsnxbs)
-                    {
-                            Vector<Object> vec = new Vector<Object>();
-                            vec.add(nxb.getMaNXB());
-                            vec.add(nxb.getTenNXB());
-                            vec.add(nxb.getSDT());
-                            vec.add(nxb.getDiaChi());
-                            vec.add(nxb.getEmail());
-                            dtmNXB.addRow(vec);
-                    }
-                NXBTable.setModel(dtmNXB);
-
-            }
+        NXB_Connect nxb_conn = new NXB_Connect();
+        dsnxbs = nxb_conn.layToanBoNhaXuatBan();
+        dtmNXB = new DefaultTableModel();
+        dtmNXB.addColumn("Mã nhà xuất bản");
+        dtmNXB.addColumn("Tên nhà xuất bản");
+        dtmNXB.addColumn("Số điện thoại");
+        dtmNXB.addColumn("Địa chỉ");
+        dtmNXB.addColumn("Email");
+        dsnxbs = nxb_conn.layToanBoNhaXuatBan();
+        dtmNXB.setRowCount(0);
+        for(NXB nxb : dsnxbs)
+        {
+                Vector<Object> vec = new Vector<Object>();
+                vec.add(nxb.getMaNXB());
+                vec.add(nxb.getTenNXB());
+                vec.add(nxb.getSDT());
+                vec.add(nxb.getDiaChi());
+                vec.add(nxb.getEmail());
+                dtmNXB.addRow(vec);
+        }
+        NXBTable.setModel(dtmNXB);
+    }
+    
+    //hàm check email
+    public boolean isValidEmail(String email) {
+        String emailRegex = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        Matcher matcher = pattern.matcher(email);
+        return matcher.matches();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -114,6 +125,12 @@ public class QuanLyNXB extends javax.swing.JFrame {
 
         SDTLabel.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         SDTLabel.setText("Số điện thoại");
+
+        SDTInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                SDTInputKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -263,7 +280,7 @@ public class QuanLyNXB extends javax.swing.JFrame {
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 19, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -303,6 +320,11 @@ public class QuanLyNXB extends javax.swing.JFrame {
         TimKiemInput.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TimKiemInputActionPerformed(evt);
+            }
+        });
+        TimKiemInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TimKiemInputKeyPressed(evt);
             }
         });
 
@@ -346,19 +368,21 @@ public class QuanLyNXB extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TimNhanVienLabel)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TimNhanVienLabel)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ThongTinNhanVienLabel)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(ThongTinNhanVienLabel)
+                        .addGap(561, 572, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(6, 6, 6))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -445,6 +469,10 @@ public class QuanLyNXB extends javax.swing.JFrame {
         nxb.setEmail(EmailInput.getText());
         int ret=JOptionPane.showConfirmDialog(null, "Bạn muốn chỉnh sửa nhà xuất bản?", "xác nhận chỉnh sửa", JOptionPane.OK_CANCEL_OPTION);
         if(ret==JOptionPane.OK_OPTION){
+            if(!isValidEmail(EmailInput.getText())){
+                JOptionPane.showMessageDialog(null, "Email không đúng định dạng!");
+                return;
+            }
             int activeUpdate = nv_conn.updateNXB(nxb);
             if(activeUpdate>0){
                 JOptionPane.showMessageDialog(null, "Chỉnh sửa thành công!");
@@ -476,6 +504,10 @@ public class QuanLyNXB extends javax.swing.JFrame {
             if(MaNXBInput.getText().equals("") || TenNXBInput.getText().equals("") || SDTInput.getText().equals("") || DiachiInput.getText().equals("") || EmailInput.getText().equals("") )
                 JOptionPane.showMessageDialog(null, "Dữ liệu còn thiếu");
             else {
+                if(!isValidEmail(EmailInput.getText())){
+                    JOptionPane.showMessageDialog(null, "Email không đúng định dạng!");
+                    return;
+                }
                 String maNXB = MaNXBInput.getText();				
                 try {
                     xuLyThemMoi(maNXB);
@@ -493,6 +525,17 @@ public class QuanLyNXB extends javax.swing.JFrame {
     private void DiachiInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DiachiInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_DiachiInputActionPerformed
+
+    private void SDTInputKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SDTInputKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c) || SDTInput.getText().length() >= 10) {
+            evt.consume(); // Ngăn chặn ký tự không hợp lệ và ngăn chặn nhập quá 4 ký tự
+        }
+    }//GEN-LAST:event_SDTInputKeyTyped
+
+    private void TimKiemInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TimKiemInputKeyPressed
+        if(evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) TKNXBBtnActionPerformed(null);
+    }//GEN-LAST:event_TimKiemInputKeyPressed
 
     /**
      * @param args the command line arguments
