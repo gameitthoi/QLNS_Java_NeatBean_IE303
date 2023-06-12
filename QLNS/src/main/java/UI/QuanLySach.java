@@ -1214,7 +1214,7 @@ public class QuanLySach extends javax.swing.JFrame {
 
     private void jButton_AddFromExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_AddFromExcelActionPerformed
         // TODO add your handling code here:
-        int ret=JOptionPane.showConfirmDialog(null, "Bạn muốn thêm tất cả văn phòng phẩm có trong bảng?", "xác nhận xác nhận để thêm", JOptionPane.OK_CANCEL_OPTION);
+        int ret=JOptionPane.showConfirmDialog(null, "Bạn muốn thêm tất cả sách có trong bảng?", "xác nhận xác nhận để thêm", JOptionPane.OK_CANCEL_OPTION);
         if(ret==JOptionPane.OK_OPTION){
             int dem = 0;
            
