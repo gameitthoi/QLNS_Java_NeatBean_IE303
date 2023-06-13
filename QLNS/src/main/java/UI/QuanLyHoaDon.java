@@ -35,6 +35,7 @@ private DefaultTableModel dtmHoaDon = null, dtmCTHD =null;
 private ArrayList<HoaDon> dshd_thongke =null;
 private double tongTien =0;
 private DecimalFormat df = new DecimalFormat("###,###,###");
+//sửa lại đường dẫn này cho phù hợp với đường dẫn trong máy
 String filePath = "C:\\Users\\dat\\Downloads\\";
     /**
      * Creates new form QuanLyHoaDon
