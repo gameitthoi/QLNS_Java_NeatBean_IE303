@@ -39,6 +39,8 @@ public class InMaVach extends javax.swing.JFrame {
 private DefaultTableModel dtmSach, dtmInSach, dtmSanPham, dtmInSanPham ;
 private ArrayList<Sach> dss = null;
 private ArrayList<VPP> dsvpp = null;
+//sửa lại đường dẫn này cho phù hợp với đường dẫn trong máy
+String filePath = "C:\\Users\\dat\\Downloads\\";
     /**
      * Creates new form InMaVach_UI
      */
@@ -536,7 +538,7 @@ private ArrayList<VPP> dsvpp = null;
 
             try {
                 //sửa đường dẫn lại cho phù hợp trong máy mình nha
-                PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("C:\\Users\\dat\\Downloads\\"+filename+".pdf"));
+                PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(filePath+filename+".pdf"));
                 document.open();
 
                 PdfPTable table = new PdfPTable(barcodesPerRow);
@@ -591,7 +593,7 @@ private ArrayList<VPP> dsvpp = null;
                 document.close();
                 
                 //mở file pdf đó ra
-                File pdfFile = new File("C:\\Users\\dat\\Downloads\\"+filename+".pdf");
+                File pdfFile = new File(filePath+filename+".pdf");
                 if (pdfFile.exists()) {
                     if (Desktop.isDesktopSupported()) {
                         Desktop.getDesktop().open(pdfFile);
@@ -678,7 +680,7 @@ private ArrayList<VPP> dsvpp = null;
 
             try {
                 //sửa đường dẫn lại cho phù hợp trong máy mình nha
-                PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("C:\\Users\\dat\\Downloads\\"+filename+".pdf"));
+                PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream(filePath+filename+".pdf"));
                 document.open();
 
                 PdfPTable table = new PdfPTable(barcodesPerRow);
@@ -733,7 +735,7 @@ private ArrayList<VPP> dsvpp = null;
                 document.close();
                 
                 //mở file pdf đó ra
-                File pdfFile = new File("C:\\Users\\dat\\Downloads\\"+filename+".pdf");
+                File pdfFile = new File(filePath+filename+".pdf");
                 if (pdfFile.exists()) {
                     if (Desktop.isDesktopSupported()) {
                         Desktop.getDesktop().open(pdfFile);

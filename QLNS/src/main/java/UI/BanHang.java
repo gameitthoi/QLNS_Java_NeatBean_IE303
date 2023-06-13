@@ -1181,7 +1181,7 @@ public class BanHang extends javax.swing.JFrame {
     }//GEN-LAST:event_QLHDActionPerformed
 
     private void TaiKhoanMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TaiKhoanMenuMouseClicked
-        if(tk.getTaiKhoan()==1){
+        if(tk.getTaiKhoan()==1 || tk.getUserName().equals("admin")){
             QuanLyTaiKhoan tkUI = new QuanLyTaiKhoan("Tài khoản");
             tkUI.showWindow();
         }
