@@ -92,6 +92,7 @@ public class BanHang extends javax.swing.JFrame {
         dtmSach.addColumn("Số lượng");
         dtmSach.addColumn("Giá Bán");
         dtmSach.addColumn("Giảm giá");
+	dtmSach.addColumn("Thành tiền");
         dtmSach.setRowCount(0);
         for (Sach s : dss){
             Vector<Object> vec = new Vector<Object>();
@@ -102,6 +103,7 @@ public class BanHang extends javax.swing.JFrame {
             vec.add(s.getSoLuong());
             vec.add(s.getGiaBan());
             vec.add(s.getDiscount());
+            vec.add(s.getGiaBan()*(100-s.getDiscount())/100);
             dtmSach.addRow(vec);	
         }
         TableSach.setModel(dtmSach);
@@ -117,6 +119,7 @@ public class BanHang extends javax.swing.JFrame {
         dtmVPP.addColumn("Số lượng");
         dtmVPP.addColumn("Giá Bán");
         dtmVPP.addColumn("Giảm giá");
+	dtmVPP.addColumn("Thành tiền");
         dtmVPP.setRowCount(0);
         for(VPP vpp: dsvpp){
             Vector<Object> vec = new Vector<Object>();
@@ -126,6 +129,7 @@ public class BanHang extends javax.swing.JFrame {
             vec.add(vpp.getSoLuong());
             vec.add(vpp.getGiaBan());
             vec.add(vpp.getDiscount());
+	    vec.add(vpp.getGiaBan()*(100-vpp.getDiscount())/100);
             dtmVPP.addRow(vec);
         }
         SPTable.setModel(dtmVPP);
